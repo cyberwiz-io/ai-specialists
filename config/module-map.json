@@ -1,0 +1,157 @@
+{
+  "modules": [
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [
+        "maintenance"
+      ],
+      "dependencies": [],
+      "fingerprints": {
+        "AGENTS.md": {
+          "sha256": "29bbd212c7371ad348c13129773b74e5bc74545aecff2242f74a84e4ba1f49cf"
+        },
+        "CHANGELOG.md": {
+          "sha256": "199a11bc80d16dcc542f034f64936329d47b4ca12b83300ecac6a24bf736617f"
+        },
+        "CONTRIBUTING.md": {
+          "sha256": "7e601125cd59a1f5f481676d3aa586e1df0e7ea006d8bae7a88c672b57eee056"
+        },
+        "LICENSE.md": {
+          "sha256": "fb9761c4cae14c44f4815931168d9b9adb3d15d8771f7eb700252f64b7d224e7"
+        },
+        "NOTICE.md": {
+          "sha256": "ccb07b306173f1582a1412f1481c1900349eb83f72c2f88206199d1a6ad88b53"
+        },
+        "README.md": {
+          "sha256": "9a9842fc2f2d8bbdd457cbee8d2741605dc6d56db61f71d069f0f721e467d92d"
+        },
+        "docs/ROADMAP.md": {
+          "sha256": "88d11405044a4e0e0f1b1b88cdbbe71679ea95099d4db7e80dccb9f9bd7a186e"
+        },
+        "docs/VALIDATION.md": {
+          "sha256": "ce228486cbb44ba1c231c3d84f9bb19f483a7b10579de1c4dfe336261533b4de"
+        },
+        "pack/BUSINESS-PROFILE.md": {
+          "sha256": "63d50580794dc03f1b4e86862e6d6274b0580b0ad41a26f4c1d858e98a5c91c3"
+        },
+        "pack/COORDINATOR.md": {
+          "sha256": "e8081ec9d7f5a249167cac4f194b171d80975517540de7876e7e7dd1e4d3a976"
+        },
+        "pack/CUSTOM-SPECIALISTS.md": {
+          "sha256": "d04a600748ee10ebb0f28c138c859af200d00948f2e320490f3a8aca66eda552"
+        },
+        "pack/MARKETING-WORKFLOW.md": {
+          "sha256": "e8273ab57f03de003a796c70fad4221d26eec96edc8de1adf47f5d35eb9e9192"
+        },
+        "pack/START-HERE.md": {
+          "sha256": "0fab158ebd72c0418fd2d78359af85de9d851c5ad2c9832df5591371bce9a086"
+        },
+        "pack/specialists/copywriter.md": {
+          "sha256": "558f3da5a9dd8d7f6ca02ac77d0d02be61547e425ad2c2af26ac873e5d62bbab"
+        },
+        "pack/specialists/graphic-designer.md": {
+          "sha256": "4fbef7040afbc960cfc40b1494e8fce7588132cea05d0cac4e8a2ee66ad96aa8"
+        },
+        "pack/specialists/marketing-strategist.md": {
+          "sha256": "73ddd8cf49ce8dae98332e3bd8b161de2e078985a560224f0f2539bd1606edab"
+        },
+        "pack/specialists/quality-reviewer.md": {
+          "sha256": "8ff66f834cd3bdc1772f97f2d4c540fecd4ea8a2376afeb1086bf8f340a201f8"
+        }
+      },
+      "guide": "pack/START-HERE.md",
+      "id": "instructions",
+      "interfaces": [
+        "pack/COORDINATOR.md",
+        "pack/MARKETING-WORKFLOW.md"
+      ],
+      "invariants": [
+        "Keep private data out of public sources; preserve advisory materials-only boundaries."
+      ],
+      "paths": [
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "LICENSE.md",
+        "NOTICE.md",
+        "README.md",
+        "docs/ROADMAP.md",
+        "docs/VALIDATION.md",
+        "pack/BUSINESS-PROFILE.md",
+        "pack/COORDINATOR.md",
+        "pack/CUSTOM-SPECIALISTS.md",
+        "pack/MARKETING-WORKFLOW.md",
+        "pack/START-HERE.md",
+        "pack/specialists/copywriter.md",
+        "pack/specialists/graphic-designer.md",
+        "pack/specialists/marketing-strategist.md",
+        "pack/specialists/quality-reviewer.md"
+      ],
+      "purpose": "Portable materials-only marketing instructions and public documentation."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "fingerprints": {
+        "CONTRIBUTING.md": {
+          "sha256": "7e601125cd59a1f5f481676d3aa586e1df0e7ea006d8bae7a88c672b57eee056"
+        },
+        "scripts/pack.py": {
+          "sha256": "231f357a5def3efb586beee2d89b5de8e161ee0ac01a92853686306d7665d72c"
+        },
+        "tests/test_pack.py": {
+          "sha256": "a2646983f3f5bdd56cada5a2a0330ea9f5cdeef53594ab6ad2f689ac83a74329"
+        }
+      },
+      "guide": "CONTRIBUTING.md",
+      "id": "maintenance",
+      "interfaces": [
+        "scripts/pack.py"
+      ],
+      "invariants": [
+        "Keep private data out of public sources; preserve advisory materials-only boundaries."
+      ],
+      "paths": [
+        "scripts/pack.py",
+        "tests/test_pack.py"
+      ],
+      "purpose": "Standard-library pack assembly, archive checks and failure-path tests."
+    }
+  ],
+  "schema": 1
+}
