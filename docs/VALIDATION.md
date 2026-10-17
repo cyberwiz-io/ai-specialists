@@ -30,6 +30,10 @@ Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linke
 | Run | Scope | Host and model | Outcome |
 | --- | --- | --- | --- |
 | [2026-10-17-marketing-growth](../evals/reports/2026-10-17-marketing-growth.md) | Marketing and growth family, 11 fixtures (10 task, 1 boundary) | Claude Code (cloud), claude-opus-5-5 graded by claude-opus-5-5 | 6 pass, 3 partial, 2 fail |
+| [2026-10-17-se-code-reviewer](../evals/reports/2026-10-17-se-code-reviewer.md) | Software engineering code reviewer, 2 fixtures (1 task, 1 boundary) | Claude Code (cloud), claude-sonnet-5-5 graded by claude-sonnet-5-5 | 1 pass, 1 partial, 0 fail |
+| [2026-10-17-se-debugging-analyst](../evals/reports/2026-10-17-se-debugging-analyst.md) | Software engineering debugging analyst, 1 fixture (task) | Claude Code (cloud), claude-sonnet-5-5 graded by claude-sonnet-5-5 | 1 pass, 0 partial, 0 fail |
+
+The two software-engineering runs cover the roles that gained allowlisted test commands. Their subagents had only Read and Write (the harness limits), so the evals do not exercise the command access; that was checked separately with one local Claude Code smoke test (the code reviewer ran an allowlisted `python3 -m unittest` command once pre-approved, and a command outside the allowlist was blocked). They are not part of the regression baseline, and each result is a single model-graded run.
 
 This run is also the regression baseline in `evals/baseline.json`. The report keeps the role IDs of its commit; the four `core/` roles it names were later renamed `marketing-growth/` without other card changes, and the baseline uses the new IDs. It covers one family only; the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
 
