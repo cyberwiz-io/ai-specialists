@@ -39,7 +39,7 @@ def measure(path):
     hidden = _field(front, "disable-model-invocation") == "true"
     preamble = None
     if "/agents/" in path.as_posix() and not path.stem.endswith("-orchestrator") and "\n---\n\n# " in body:
-        preamble = len(re.sub(r"<!--.*?-->", "", body.split("\n---\n\n# ", 1)[0]).strip())
+        preamble = len(re.sub(r"<!--.*?-->", "", body.split("\n---\n\n# ", 1)[0], flags=re.S).strip())
     return (0 if hidden else len(_field(front, "description"))), len(body), preamble
 
 
