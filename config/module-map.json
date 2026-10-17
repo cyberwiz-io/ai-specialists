@@ -35,7 +35,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "73dd52bdc36d6e216fe8768604bc7d0da130aecbca96b62903116fb359deca00",
+      "digest": "dc46ddc02885b86850a7c7ff807fa11714b993eef5f9f6e30eb242ea4ec73e99",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -89,7 +89,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "fd5893651e7365158fa4e11ed2e75e939b93c4a85b1337ba3293eb770be991e2",
+      "digest": "7e238aa1c41a6cd0eda2971c6a93eba27a08b56738951d3c3fca06787bdc2e3d",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -127,7 +127,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "04810da77099b4a1f39f7a2ba7b44cb56dba6ca2680333296fffb2f20e9370ba",
+      "digest": "e8a5f76c72d8caa8c50cef815b4186a826a26cca23f7276d37c143158c6d31a9",
       "files": 25,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -219,7 +219,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "660da5ae111ef2192a5f69632194ba092ad75b4970118799b2eebfd519194530",
+      "digest": "4b9dd3519bd45e61094fa0df14ced3ac737e61828bd9440c020fdc8fcf5f89e1",
       "files": 286,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -261,7 +261,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "b7d8c92c1d9eb9c7ef8bb8213dd4d51577f4a061a3b601166577b80db717df87",
+      "digest": "cd7a1c788330974236b284931931593b2b0333d0d40f044be1c3803090ed5f96",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -594,7 +594,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "5f44e96bc191194d30ab505994c0766e6bcd66d832a504c08ad3b1be210b3f8a",
+      "digest": "bac52abf7aa07dc4635f14e604d2601faabccd9431e8ba401af4989026b86b2d",
       "files": 9,
       "guide": "catalog/finance/INDEX.md",
       "id": "family-finance",
@@ -668,7 +668,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "696241aeca42401e8b0a212fb2f685771a7335952ccb7454aabfb4a28dded2f9",
+      "digest": "f8447a2bcb1f98bc9a03e00c013e17f8a579681734483a557f947b6b75aac244",
       "files": 6,
       "guide": "catalog/people-hr/INDEX.md",
       "id": "family-people-hr",
@@ -705,7 +705,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "adfb1d99d405c06f3a7589ae79e4b44367d2b6e8bc35af0d32be9cc81f778ecf",
+      "digest": "57e0832b5c7950e3a14c1511e0a78c4872e5c9b19f879c7daac5100d74efac55",
       "files": 9,
       "guide": "catalog/legal-compliance/INDEX.md",
       "id": "family-legal-compliance",

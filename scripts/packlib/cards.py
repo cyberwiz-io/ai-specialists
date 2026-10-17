@@ -70,6 +70,9 @@ def check(role, text, version, known_ids):
     present = [label for label in card["order"] if label in wanted]
     if all(label in card["order"] for label in wanted) and present != wanted:
         failures.append(f"{name}: labels must appear in the order {', '.join(wanted)}")
+    for paragraph in card["raw"][2:]:
+        if len(LABEL.findall(paragraph)) > 1:
+            failures.append(f"{name}: a paragraph holds more than one label ('{paragraph[:24]}...'); put each on its own paragraph")
     if "Coordinator boundaries apply" not in card["paragraphs"].get("Handoff", ""):
         failures.append(f"{name}: Handoff must state that all Coordinator boundaries apply")
     if "Safeguards" in card["paragraphs"]:

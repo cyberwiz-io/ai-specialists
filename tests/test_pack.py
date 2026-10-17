@@ -135,6 +135,10 @@ class CardRuleTests(FixtureCase):
         self.edit(self.CARD, swap)
         self.rebuild_and_fail("labels must appear in the order")
 
+    def test_repeated_label_fails(self):
+        self.edit(self.SENSITIVE, lambda text: text.replace("**Safeguards:**", "**Safeguards:** **Safeguards:**"))
+        self.rebuild_and_fail("more than one label")
+
     def test_wrong_card_version_and_id_fail(self):
         self.edit(self.CARD, lambda text: text.replace("Version: 1.0.", "Version: 0.9."))
         self.rebuild_and_fail("expected one Version 1.0")
