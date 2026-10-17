@@ -25,7 +25,13 @@ The [card evaluation harness](../evals/README.md) produces the reports this page
 
 ## Recorded evaluations
 
-None yet. The harness is built, but no run has been recorded, so the fresh-host evidence below is still pending. Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linked here.
+Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linked here.
+
+| Run | Scope | Host and model | Outcome |
+| --- | --- | --- | --- |
+| [2026-10-17-marketing-growth](../evals/reports/2026-10-17-marketing-growth.md) | Marketing and growth family, 11 fixtures (10 task, 1 boundary) | Claude Code (cloud), claude-opus-5-5 graded by claude-opus-5-5 | 6 pass, 3 partial, 2 fail |
+
+This run is also the regression baseline in `evals/baseline.json`. It covers one family only; the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
 
 ## Paper review
 

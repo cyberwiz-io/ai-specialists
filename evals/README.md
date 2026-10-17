@@ -2,7 +2,7 @@
 
 This folder holds the fixture tasks for an evaluation harness that runs each specialist card in a fresh AI context and grades the output against that card's own **Acceptance** line. The harness produces the reports that [Validation](../docs/VALIDATION.md) asks for: tested version, host and tools, inputs, observed outcomes and limits. It is maintenance tooling and is not part of the shipped pack.
 
-No run has been recorded yet. A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
+One run has been recorded so far, for the marketing and growth family. A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
 
 ## Layout
 
@@ -81,7 +81,7 @@ A fixture **passes** when every criterion and trait passes and nothing is violat
 
 ## Regression check
 
-`evals/baseline.json` holds each card's pass count from one reviewed run. It starts empty. After you review a full run, save it and rebuild (the module map digests the file):
+`evals/baseline.json` holds each card's pass count from one reviewed run. It currently holds the `2026-10-17-marketing-growth` run, so only the marketing and growth cards are compared; the weekly run lists every other card as not in the baseline. After you review a fuller run, save it and rebuild (the module map digests the file):
 
 ```sh
 python3 -B scripts/evals.py baseline --run <run>

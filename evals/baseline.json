@@ -1,5 +1,51 @@
 {
   "schema": 1,
-  "run": null,
-  "roles": {}
+  "run": "2026-10-17-marketing-growth",
+  "version": "1.0",
+  "commit": "e3114cf3946be0d555c76c30fdf94f4c092c69da",
+  "model": "claude-opus-5-5",
+  "grader": "claude-opus-5-5",
+  "date": "2026-10-17",
+  "roles": {
+    "core/copywriter": {
+      "passed": 0,
+      "total": 1
+    },
+    "core/graphic-designer": {
+      "passed": 0,
+      "total": 1
+    },
+    "core/marketing-strategist": {
+      "passed": 0,
+      "total": 1
+    },
+    "core/quality-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "marketing-growth/brand-voice-guide": {
+      "passed": 1,
+      "total": 1
+    },
+    "marketing-growth/email-campaign-planner": {
+      "passed": 2,
+      "total": 2
+    },
+    "marketing-growth/growth-experiment-designer": {
+      "passed": 0,
+      "total": 1
+    },
+    "marketing-growth/landing-page-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "marketing-growth/market-researcher": {
+      "passed": 1,
+      "total": 1
+    },
+    "marketing-growth/seo-strategist": {
+      "passed": 0,
+      "total": 1
+    }
+  }
 }
