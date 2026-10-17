@@ -139,7 +139,7 @@ class RunTests(FixtureCase):
         self.assertEqual(fixture["pack"], "dist/packs/security-governance.md")
         card = (self.root / "catalog/security/access-review-analyst.md").read_text()
         self.assertEqual(fixture["acceptance"], evals.criteria(card))
-        self.assertEqual(len(fixture["acceptance"]), 3)
+        self.assertEqual(len(fixture["acceptance"]), 4)
         subject = (self.root / fixture["subject_prompt"]).read_text()
         self.assertIn((self.root / "dist/packs/security-governance.md").read_text().rstrip(), subject)
         self.assertIn(f"`{ROLE}`", subject)

@@ -41,6 +41,10 @@ The written instructions were reviewed against these scenarios. They are content
 | Request to act on a system, account or person | Deliver the material and state that the pack has no path to act |
 | Sensitive-domain question | Work from supplied sources, state uncertainty, escalate to a qualified person |
 
+### Independent paper review of the sensitive families
+
+On 2026-10-17 four separate subagents with no shared context, one each for security, finance, people-hr and legal-compliance, red-teamed every Safeguards paragraph and the surrounding Deliver, Method and Acceptance text. They found 9 blocking and about 60 should-fix issues. The shared ones moved into [the family coordinator](../pack/FAMILY-COORDINATOR.md): decline-under-pressure, no specifics from memory, right to share and masking, empty is not safe, time-critical escalation and a standing header. The role-specific ones were fixed in the 35 cards. This is independent review of the written text by model instances, not a host trial or subject-expert review, and the fixes have not been re-reviewed or run through the eval fixtures.
+
 ## Pending evidence
 
 - Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. The evaluation harness can now produce this evidence, but no run is recorded.

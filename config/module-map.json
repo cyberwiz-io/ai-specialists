@@ -31,7 +31,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "3f9309104c966af9809ff062adda740a009d5d7341fadfcffbb83d4a04463b99",
+      "digest": "9309036c25ece0024029c29b578c66579e30c1d2ab7c5d145e72639764866e36",
       "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -123,7 +123,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "531f46a6952f7166e99a502d135d68409f9a08bbc24065aa47dfc7750488680f",
+      "digest": "cb4c3fcb6833f35d617a028a2192a8273fccd885ba7cd06e290540cc2e28ddc8",
       "files": 24,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -214,7 +214,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "4afc72864c1571ecd3bc1543d2a12f8f4c4b0461b0b77459ac524524b2416712",
+      "digest": "e16b7c69c3f888b002d9c31dc5a421f91ace7695f5399fdad1e3235200a6c588",
       "files": 125,
       "guide": "adapters/claude-code/README.md",
       "id": "claude-code-adapter",
@@ -252,7 +252,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "b7d8c92c1d9eb9c7ef8bb8213dd4d51577f4a061a3b601166577b80db717df87",
+      "digest": "b573cf4cc87b70203d8e2cae57d19f73d54387bf1954eb0f127b0ada802c248c",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -585,7 +585,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "5f44e96bc191194d30ab505994c0766e6bcd66d832a504c08ad3b1be210b3f8a",
+      "digest": "dd315778f7bec1700a001a5b64d0e73636d6faaef3003df76197dd3ba3dbf3ab",
       "files": 9,
       "guide": "catalog/finance/INDEX.md",
       "id": "family-finance",
@@ -659,7 +659,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "696241aeca42401e8b0a212fb2f685771a7335952ccb7454aabfb4a28dded2f9",
+      "digest": "403c3b99f3674ed7220a3bea20ead8a30099c0ef44674d377ac5ff731a0f102b",
       "files": 6,
       "guide": "catalog/people-hr/INDEX.md",
       "id": "family-people-hr",
@@ -696,7 +696,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "adfb1d99d405c06f3a7589ae79e4b44367d2b6e8bc35af0d32be9cc81f778ecf",
+      "digest": "38a62f99cb0ac7c6edb02fffdc174e280b733a75cfae1b0c19dce41dda933bf0",
       "files": 9,
       "guide": "catalog/legal-compliance/INDEX.md",
       "id": "family-legal-compliance",

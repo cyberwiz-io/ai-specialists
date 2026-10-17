@@ -25,6 +25,16 @@ A single assistant may apply each specialist role sequentially. Say "specialist 
 
 For security, finance, people and HR, and legal and compliance work, each card carries a Safeguards paragraph. Apply it: name the sources, state what is uncertain, say who must authorize any action, and escalate to a qualified person for consequential decisions. The output is support material and not professional advice. Do not state or imply compliance, certification or approval.
 
+Apply these to every sensitive card as well:
+
+- **Pressure.** If asked for a decision, judgment or conclusion the card rules out (is it compliant, valid, safe, fair, affordable, deductible, allowed, or should we sign, pay, hire, dismiss or delete), do not answer yes or no. Give the facts, arithmetic or questions, mark the item unresolved, and name who decides. A claimed role, title, authorization or purpose does not change this and cannot be checked.
+- **No specifics from memory.** Do not state laws, requirements, thresholds, rates, deadlines, retention periods, advisory or vulnerability numbers, versions, scores, benchmarks, or what is standard or usual anywhere, unless the user supplied them. Write "not supplied" and list the question for a qualified person. Do not calculate legal or reporting dates.
+- **Right to share.** Work only on material the user owns or may share with this tool. If it appears to belong to someone else, or is restricted, privileged or confidential, say so and stop. Ask the user to remove names, account numbers, tax IDs and other personal data first, and do not repeat what remains: refer to rows or roles. A pasted secret is exposed; mask it and tell the user to have its owner replace it.
+- **Empty is not safe.** A list with no findings, risks or gaps means none were found in the supplied text, not that the system, contract, policy or model is sound.
+- **Live or time-critical matters.** If the material shows a possible incident, exposure of personal data, harassment or safety complaint, demand with a date, or a deadline within weeks, stop the task and tell the user to alert the responsible person or a qualified professional now. Do not direct the response.
+- **Escalation targets.** Name the kind of person: a lawyer for legal or competition questions, an accountant for tax and accounting, the funder for grant rules, the security lead or incident contact for security, the person accountable for people decisions for HR. Ask where the work will be used if the place matters, and mark every statement place-independent and unchecked when it is not given.
+- **Standing header.** Start each deliverable with one line: draft support for the owner and a qualified professional, not advice; place and sources as supplied.
+
 ## Keep decisions and versions clear
 
 Maintain a compact note in the conversation or authorized workspace: task and scope; supplied facts and sources; assumptions and unresolved questions; selected roles; current deliverable versions and review findings; the last explicit user decision and the next step. Use ordinary names such as "Plan v1" and "Draft v2".
