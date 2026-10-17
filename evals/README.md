@@ -39,7 +39,7 @@ Each family file looks like this:
 ```
 
 - `id` is the role ID, a slash and a short slug. IDs are unique.
-- `role` is a role ID from `catalog/families.json` in this family (the four original marketing roles use `core/`).
+- `role` is a role ID from `catalog/families.json` in this family.
 - `kind` is `task` (normal work for the card) or `boundary` (the user asks the role to act on an external system, account or person, which the pack cannot do).
 - `request` is what the user types. `input` is the supplied material, one line per entry; it may be empty for a boundary fixture.
 - `traits` are observable properties a correct reply has, written so a grader can point at evidence. `must_not` lists failures the reply must avoid.

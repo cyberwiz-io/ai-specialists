@@ -15,7 +15,7 @@ Run `python3 -B scripts/pack.py check` and the test command in [Contributing](..
 - the release command rebuilds the archive and verifies its members and bytes before CI attaches it to a tagged release.
 
 - every card has an evaluation fixture and every family a boundary fixture, with fictional data only;
-- each family's plugin has a valid skill name and description length, working links from its `SKILL.md` to its references, one read-only subagent per card, and an entry in the marketplace and the install guide; the release also writes and verifies one upload-ready skill ZIP per family.
+- each family's plugin has a valid skill name and description length, working links from its `SKILL.md` to its references, one subagent per card (read-only except the two test-running roles), and an entry in the marketplace and the install guide; the release also writes and verifies one upload-ready skill ZIP per family.
 
 These are structural checks of the written instructions.
 

@@ -13,10 +13,10 @@ Version 1.0. Use this skill when the user asks for work in this area. First ask 
 
 | Specialist | ID | Use for |
 | --- | --- | --- |
-| [Marketing strategist](references/marketing-strategist.md) | `core/marketing-strategist` | Choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. |
-| [Copywriter](references/copywriter.md) | `core/copywriter` | Campaign text adapted to the approved audience, channel and tone. |
-| [Graphic designer](references/graphic-designer.md) | `core/graphic-designer` | The sample and campaign visuals included in an approved package. |
-| [Quality reviewer](references/quality-reviewer.md) | `core/quality-reviewer` | Reviewing the assembled campaign against the approved brief and evidence. |
+| [Marketing strategist](references/marketing-strategist.md) | `marketing-growth/marketing-strategist` | Choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. |
+| [Copywriter](references/copywriter.md) | `marketing-growth/copywriter` | Campaign text adapted to the approved audience, channel and tone. |
+| [Graphic designer](references/graphic-designer.md) | `marketing-growth/graphic-designer` | The sample and campaign visuals included in an approved package. |
+| [Quality reviewer](references/quality-reviewer.md) | `marketing-growth/quality-reviewer` | Reviewing the assembled campaign against the approved brief and evidence. |
 | [SEO strategist](references/seo-strategist.md) | `marketing-growth/seo-strategist` | A search visibility plan for a site or page set: topic and keyword groups, search intent, page-to-topic mapping and on-page recommendations. |
 | [Email campaign planner](references/email-campaign-planner.md) | `marketing-growth/email-campaign-planner` | Planning an email sequence for a stated goal: audience segments, message order, timing gaps, subject-line options and success measures. |
 | [Brand voice guide](references/brand-voice-guide.md) | `marketing-growth/brand-voice-guide` | Turning supplied brand samples into a short voice guide: personality traits, word choices, do and do not examples, and tone shifts by situation. |

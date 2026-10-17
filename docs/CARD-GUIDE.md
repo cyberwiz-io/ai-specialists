@@ -24,7 +24,7 @@ ID: family/slug. Version: 1.0.
 **Handoff:** what the next role needs. All Coordinator boundaries apply; <one role-specific limit>.
 ```
 
-- Line 1 is `# Name` in sentence case, matching the manifest name. Line 3 is `ID: <prefix>/<slug>. Version: <VERSION>.` The prefix is the family id (`core` for the four original marketing roles).
+- Line 1 is `# Name` in sentence case, matching the manifest name. Line 3 is `ID: <prefix>/<slug>. Version: <VERSION>.` The prefix is the family id.
 - Labels appear in the order shown. Each is a bold label followed by a colon, one paragraph each.
 - Keep a card to about 1.4 to 2.4 KB (hard limit 3.5 KB). Write for a person who is not technical.
 
