@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import sys
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 def check(root):
     errors = []
@@ -79,6 +79,12 @@ def check(root):
                 errors.append(name + ": deployment cancellation is unsafe")
         else:
             errors.append(name + ": unknown workflow mode")
+        for job in spec.get("required_jobs", []):
+            value = jobs.get(job, {})
+            if value.get("continue-on-error", "false") != "false":
+                errors.append(name + ": required job is nonblocking " + job)
+            if any(step.get("continue-on-error", "false") != "false" for step in value.get("steps", [])):
+                errors.append(name + ": required job contains nonblocking step " + job)
         for job, commands in spec.get("required_commands", {}).items():
             job_spec = jobs.get(job, {})
             if job_spec.get("continue-on-error", "false") != "false" or ("if" in job_spec and job_spec["if"] not in ("always()", "${{ always() }}")):

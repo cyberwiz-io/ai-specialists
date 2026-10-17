@@ -49,3 +49,9 @@ Public content is organized in `catalog/`, `pack/` and `docs/`. Maintenance code
 Use a branch and a pull request. Explain the problem, the resulting behavior, the checks you ran, and any unchecked assumptions. Update the changelog for user-visible changes. Run the build, check and tests before submitting; continuous integration repeats the check and tests. Claims about compatibility, usability, or performance need actual evidence and must identify their limits.
 
 By contributing, you agree to license your changes under the license applying to the affected files. Preserve attribution for reused material and disclose its origin and license.
+
+## Engineering policy validation
+Pack build/test tooling remains standard-library only. Before delivery, create a
+separate venv with Python 3.9+ and install PyYAML==6.0.3. Use that environment to run
+python .engineering/check.py and python -m unittest discover -s .engineering -p 'test_*.py'.
+Do not commit the environment. GitHub's Engineering policy workflow performs both.

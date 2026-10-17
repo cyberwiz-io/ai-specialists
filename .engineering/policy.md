@@ -1,4 +1,4 @@
-# Engineering policy 1.0.0
+# Engineering policy 1.0.1
 
 Source: lewismatlock/ai-home, tools/engineering-policy. The local lock file pins
 reviewed bytes; update through a reviewed PR. Do not fetch latest at task startup.
@@ -45,3 +45,11 @@ reviewed bytes; update through a reviewed PR. Do not fetch latest at task startu
 - New repositories stay pending until policy, workflow execution and protections have
   separate evidence. Daily reconciliation reports drift and prepares update PRs;
   it never silently certifies, activates protections or merges its own updates.
+
+## Local checker setup
+Use Python 3.9+ and a task-scoped virtual environment. Install only the pinned
+checker dependency: python -m pip install PyYAML==6.0.3, then run
+python .engineering/check.py. This dependency is separate from product tooling.
+On Windows use py -3.12 -m venv .venv-policy and its Scripts/python executable;
+on macOS/Linux use python3 -m venv .venv-policy and its bin/python executable.
+Do not commit the virtual environment. Repository-specific test requirements remain.

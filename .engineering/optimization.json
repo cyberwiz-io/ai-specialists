@@ -9,7 +9,8 @@
       "max_timeout_minutes": 5,
       "required_commands": {
         "policy": [
-          "python .engineering/check.py"
+          "python .engineering/check.py",
+          "python -m unittest discover -s .engineering -p 'test_*.py'"
         ]
       }
     },
