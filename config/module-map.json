@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "dad2c8a51589d1d7ccd4e6414f02dfb7406d4579a08197f3422925884ed86370",
+      "digest": "d58deec536338edeea8b3faa1a3619d1a025e57eb9aa258e4e6a83e1ee3aa6a1",
       "files": 33,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -186,7 +186,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "42b0c0e3b12b776c6342a838a2589fa3c0bbbf33ff55f846dee7e59a3a8a42e5",
+      "digest": "8b1aea4f46f0f0cf74d87f084ba0e397084196b07b8aa2e53b40a2f3f0b74e18",
       "files": 33,
       "guide": "evals/README.md",
       "id": "evals",
