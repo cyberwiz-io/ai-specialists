@@ -233,7 +233,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "a4c67c2cfc7bc4ca8ad2e832aea7f84114546d2c0cb6563073b9eadb7abd07ba",
+      "digest": "3e49da12bb8c95d390e76e754c456bbb949ab2d607bd0c809242aaff531fc7b6",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -280,7 +280,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "c37e4792f9bb9ccb6f5e96e2a9d9946864960d6f64d77f79fbd63bf612d1a7da",
+      "digest": "f9a4d9f105527ff6a4d8e0778bda28d0d65423594e3271eee4c90de9359a8f02",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -319,7 +319,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "01730b0ea58fd5c3d22b2a0dd938ac4f8c9a75022255b20ba7005abab2d5163e",
+      "digest": "443114cc1e21b3920fd4dbbba9dd072475ef9fb89f9a85b15710ab119f1a7fbc",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -663,7 +663,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "6754bf4d2b85e7a3f0ccaa1b9f24911797d8c5011c8f2f15a62abdf530a14381",
+      "digest": "6159a3a0089b0b569f1c03f5ee1ae41b47e68fb0e9a56dd36058b361b2c38214",
       "files": 9,
       "guide": "catalog/business-operations/INDEX.md",
       "id": "family-business-operations",
