@@ -1,0 +1,54 @@
+{
+  "checks": [
+    ["python3", "-B", "scripts/pack.py", "check"],
+    ["python3", "-B", "-m", "unittest", "discover", "-s", "tests"]
+  ],
+  "entry": "REPO-MAP.md",
+  "generated": [
+    "catalog/*/INDEX.md",
+    "catalog/REGISTRY.jsonl",
+    "config/module-map.json",
+    "dist/packs/*.md",
+    "pack/STARTER-PACK.md"
+  ],
+  "modules": [
+    {
+      "consumers": ["maintenance"],
+      "guide": "pack/START-HERE.md",
+      "id": "instructions",
+      "interfaces": ["pack/COORDINATOR.md", "pack/FAMILY-COORDINATOR.md", "pack/MARKETING-WORKFLOW.md"],
+      "invariants": ["Keep private data out of public sources; preserve advisory materials-only boundaries."],
+      "paths": [
+        ".github/ISSUE_TEMPLATE/*.md",
+        "AGENTS.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE.md", "NOTICE.md", "README.md", "REPO-MAP.md", "VERSION",
+        "docs/*.md",
+        "pack/BUSINESS-PROFILE.md", "pack/COORDINATOR.md", "pack/CUSTOM-SPECIALISTS.md",
+        "pack/FAMILY-COORDINATOR.md", "pack/MARKETING-WORKFLOW.md", "pack/START-HERE.md"
+      ],
+      "purpose": "Portable materials-only instructions, coordinators, workflow and public documentation."
+    },
+    {
+      "consumers": ["maintenance"],
+      "guide": "docs/CARD-GUIDE.md",
+      "id": "catalog-manifest",
+      "interfaces": ["catalog/families.json"],
+      "invariants": ["The manifest is the roster: every card and index must match it."],
+      "paths": ["catalog/families.json"],
+      "purpose": "Families, roles, slugs and sensitivity that drive indexes, registry, packs and checks."
+    },
+    {
+      "dependencies": ["instructions", "catalog-manifest"],
+      "guide": "CONTRIBUTING.md",
+      "id": "maintenance",
+      "interfaces": ["scripts/pack.py"],
+      "invariants": ["Standard library only; every check has a success and a failure test."],
+      "paths": [
+        ".github/workflows/*.yml",
+        "config/modules.json",
+        "scripts/pack.py", "scripts/packlib/*.py",
+        "tests/*.py"
+      ],
+      "purpose": "Build, check and search tooling, plus its failure-path tests."
+    }
+  ]
+}

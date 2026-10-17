@@ -1,9 +1,9 @@
 # Contributor guidance
 
-Read CONTRIBUTING.md and the affected instruction files before changing this project. Keep the user-facing pack portable, readable, and materials-only. Host rules and explicit user restrictions remain authoritative.
+Start with REPO-MAP.md: it routes each task to the few files that matter, so do not scan the whole repository. Read CONTRIBUTING.md and the affected cards or instruction files before changing anything. Keep the user-facing pack portable, readable, and materials-only. Host rules and explicit user restrictions remain authoritative.
 
-Individual instruction files are the source of truth. Rebuild the combined pack and ZIP with `python3 -B scripts/pack.py build`; check with `python3 -B scripts/pack.py check` and `python3 -B -m unittest discover -s tests`.
+Individual cards and instruction files are the source of truth. Generated files (family indexes, `catalog/REGISTRY.jsonl`, `pack/STARTER-PACK.md`, `dist/packs/`, `downloads/`, `config/module-map.json`) are never edited by hand. After any change run `python3 -B scripts/pack.py build`, then `python3 -B scripts/pack.py check` and `python3 -B -m unittest discover -s tests`. Find a specialist with `python3 -B scripts/pack.py find <words>`.
 
-Use fictional examples and preserve license coverage. Never commit credentials, private profiles, customer data, generated campaign records, or machine-specific settings. No specialist may enable external actions or promise unavailable capabilities.
+Use fictional examples and preserve license coverage. Never commit credentials, private profiles, customer data, generated campaign records, or machine-specific settings. No specialist may enable external actions or promise unavailable capabilities. Sensitive families (security, finance, people and HR, legal and compliance) keep their Safeguards paragraph.
 
-Documentation changes need proportionate checks. Maintenance code changes must exercise success and failure behavior. Keep new roles and host integrations outside the shipped pack until their distinct deliverables and actual capabilities are reviewed.
+Documentation changes need proportionate checks. Maintenance code changes must exercise success and failure behavior. A new role needs a distinct deliverable, acceptance checks and a manifest entry, per docs/CARD-GUIDE.md. Keep new host integrations outside the shipped pack until their actual capabilities are reviewed.

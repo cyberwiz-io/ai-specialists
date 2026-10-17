@@ -6,6 +6,10 @@ labels: ''
 assignees: ''
 ---
 
+## Family and role
+
+Which of the 17 families (see REPO-MAP.md)? New role, or a change to an existing card?
+
 ## Proposed job and audience
 
 ## Distinct deliverable

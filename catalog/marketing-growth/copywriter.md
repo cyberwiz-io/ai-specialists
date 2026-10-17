@@ -1,6 +1,6 @@
 # Copywriter
 
-ID: core/copywriter. Version: 0.1.
+ID: core/copywriter. Version: 1.0.
 
 **Use for:** campaign text adapted to the approved audience, channel and tone. Not fact verification, sending messages or inventing endorsements.
 

@@ -9,11 +9,15 @@ The current foundation is a portable marketing instruction pack, version 0.1. Al
 - Observe unaided nontechnical users completing setup and receiving materials. Record confusion and correct the instructions.
 - Compare the workflow with a well-instructed generalist using comparable tools, inputs, and usage budgets before making quality, speed, or cost claims.
 
+## Catalog status
+
+Version 1.0 ships the full planned catalog: 124 specialists and a family coordinator in 17 families. See [Repository map](../REPO-MAP.md). Every card is written and structurally checked. None has been tested in a fresh host, reviewed by a subject expert, or compared with a well-instructed generalist. Treat them as working perspectives.
+
 ## Expand only where useful
 
-Potential families include software engineering, AI and machine learning, product and design, content and creative work, marketing and growth, business operations, and other domain-specific roles. The wider design inventory is a catalog roadmap, not a collection of shipped or certified experts.
+New roles are added only when they produce distinct useful deliverables and acceptance checks, following the [card guide](CARD-GUIDE.md). Sensitive domains need their own source, uncertainty, authorization and escalation checks before a role can ship. No clinical or healthcare roles are included. The catalog claims no certification or verified standards crosswalk. Keep experimental additions outside the default pack until reviewed.
 
-Introduce roles only when they produce distinct useful deliverables and acceptance checks. Start with a bounded developer feature-change workflow after validating marketing. Keep experimental additions outside the default pack.
+Candidate next steps, after validation: a bounded developer feature-change workflow that links the software engineering roles, and family workflows beyond marketing.
 
 ## Consider host-specific support
 
@@ -23,12 +27,9 @@ Add an adapter only when a selected host needs one. Document the exact tested ho
 
 Publishing, scheduling, monitoring, paid advertising, and account connections are outside this pack. A future edition would require authenticated approval bound to exact artifacts and destinations, host-enforced permissions, spending limits, durable state, uncertain-action reconciliation, cancellation, and live provider verification. Prompt instructions alone cannot establish those guarantees.
 
+## Catalog inventory
 
-## Planned catalog inventory
-
-The design inventory contains 124 specialist entries and one coordinator across 17 groups. This is a roadmap only. Most of these cards have not been authored or evaluated. The current pack ships four specialists and the coordinator.
-
-| Planned family | Entries |
+| Family | Specialists |
 | --- | --- |
 | Security | 14 |
 | IT operations | 5 |
@@ -46,6 +47,6 @@ The design inventory contains 124 specialist entries and one coordinator across 
 | Education and training | 6 |
 | Public sector and nonprofit | 5 |
 | Personal and career | 5 |
-| Orchestration and meta | 6 |
+| Orchestration and meta | 5 |
 
-Sensitive domains require their own source, uncertainty, authorization, and escalation checks before a role can ship. No clinical or healthcare roles are in this version. The inventory claims no certification or verified standards crosswalk.
+The Coordinator lives in `pack/` and is not counted above.
