@@ -22,6 +22,10 @@ python3 -B -m unittest discover -s tests
 
 To find a specialist, run `python3 -B scripts/pack.py find <words>`. To add or change a role, follow the [card guide](docs/CARD-GUIDE.md). The build computes every generated file before writing any of them. The check covers the roster, card shape and wording rules, safeguards for sensitive families, handoff IDs, size limits, generated-file freshness, local links, module coverage, and that no archive is committed. Each combined pack must stay under 32 KB (about 8,000 tokens); a larger family lists `packs` in `catalog/families.json` to split into parts. Tests exercise failures as well as the successful build. Generated archives are reproducible from the same file bytes.
 
+## Claude Code
+
+`.claude/` holds maintainer config for Claude Code: a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-adapter`. The build also generates the experimental adapter in `adapters/claude-code/agents/`, which stays outside the shipped pack and release archive. `python3 -B scripts/evals.py selfcheck` proves the fixture eval rules in [evals](evals/README.md) still discriminate; the tests run it too.
+
 ## Release
 
 The release ZIP is not kept in Git, because every committed version would stay in the history. To release, update `VERSION` and the changelog, merge, then push a tag named `v` plus the version, such as `v1.1`. The release workflow runs the check and tests, builds the archive with `python3 -B scripts/pack.py release --tag v1.1`, and attaches it to the GitHub Release for that tag. Run the same command locally to inspect the archive; it is written to the ignored `work/release/` folder.

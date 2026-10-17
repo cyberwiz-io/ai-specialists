@@ -13,6 +13,8 @@ Start here. Find the smallest set of files for your task and read only those. Th
 | Change the marketing campaign flow | [Marketing workflow](pack/MARKETING-WORKFLOW.md) |
 | Change user setup text | [Start here](pack/START-HERE.md) |
 | Change build, checks or tests | [Contributing](CONTRIBUTING.md), then `scripts/packlib/` (`cards.py` card rules, `check.py` checks, `build.py` outputs) and `tests/`; finish with the three commands under Rules |
+| Use a specialist in Claude Code | [Claude Code adapter](adapters/claude-code/README.md) (experimental, generated, outside the pack) |
+| Check a card with fixture evals | [Evals](evals/README.md); in Claude Code, `/review-card <id>` |
 | Understand ownership of files | `config/module-map.json` (modules, guides, interfaces, digests) |
 | Check scope, limits and status | [Roadmap](docs/ROADMAP.md), [Validation](docs/VALIDATION.md) |
 
@@ -52,6 +54,9 @@ Each family folder has a generated `INDEX.md` listing its specialists with one-l
 | `pack/STARTER-PACK.md` | Marketing starter, pasted as one file | No, generated |
 | `dist/packs/<pack>.md` | Pasteable combined pack per family, or per part where `families.json` lists `packs` | No, generated |
 | `work/release/*.zip` | Release archive from `pack.py release`; CI attaches it to tagged GitHub Releases | No, generated and never committed |
+| `adapters/claude-code/agents/*.md` | Experimental Claude Code subagents, one per card | No, generated |
+| `adapters/claude-code/README.md`, `evals/` | Adapter status and limits; fixture eval scenarios | Yes |
+| `.claude/` | Maintainer config for Claude Code: hook, commands, card reviewer | Yes |
 | `config/modules.json` | Module definitions | Yes |
 | `config/module-map.json` | Module map with digests | No, generated |
 | `docs/` | Guides, roadmap, validation status | Yes |

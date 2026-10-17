@@ -23,6 +23,8 @@ Candidate next steps, after validation: a bounded developer feature-change workf
 
 Add an adapter only when a selected host needs one. Document the exact tested host/version, setup path, capabilities, limitations, and evidence. Native delegation, reliable persistence, and independent review require their own checks.
 
+Status: an experimental [Claude Code adapter](../adapters/claude-code/README.md) generates read-only subagents from the cards. It is untested in a live host and is not part of the pack or the release archive. The [fixture evals](../evals/README.md) are keyword smoke tests, not the evidence this section asks for.
+
 ## External actions remain future work
 
 Publishing, scheduling, monitoring, paid advertising, and account connections are outside this pack. A future edition would require authenticated approval bound to exact artifacts and destinations, host-enforced permissions, spending limits, durable state, uncertain-action reconciliation, cancellation, and live provider verification. Prompt instructions alone cannot establish those guarantees.

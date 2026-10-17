@@ -1,6 +1,7 @@
 {
   "entry": "REPO-MAP.md",
   "generated": [
+    "adapters/claude-code/agents/*.md",
     "catalog/*/INDEX.md",
     "catalog/REGISTRY.jsonl",
     "config/module-map.json",
@@ -30,7 +31,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "24ab827265c7c6c164092ac9569afbd4084b7f62c6a5f4b27a7b1ec2498637c0",
+      "digest": "f0020d38ad33991b82b5a910f6ee40e56bf13c516ce2ab85c75df84167ad126d",
       "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -122,8 +123,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "29bd26909c7a3373e270713cde256ceed18551643ff7eee59e874806c174a91f",
-      "files": 14,
+      "digest": "1827ae48b670979d417c293c392617ca243e9b399ceb4ae90d9b4c8ec89dc64f",
+      "files": 33,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -133,13 +134,59 @@
         "Standard library only; every check has a success and a failure test."
       ],
       "paths": [
+        ".claude/CLAUDE.md",
+        ".claude/agents/*.md",
+        ".claude/commands/*.md",
+        ".claude/settings.json",
         ".github/workflows/*.yml",
         "config/modules.json",
+        "evals/README.md",
+        "evals/scenarios/*.json",
+        "scripts/evals.py",
         "scripts/pack.py",
         "scripts/packlib/*.py",
         "tests/*.py"
       ],
-      "purpose": "Build, check and search tooling, plus its failure-path tests."
+      "purpose": "Build, check, search and eval tooling, Claude Code maintainer config, and their failure-path tests."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
+      "digest": "c62135f1544dfad38247775be3fd650ab351fab5d15848039b5f47c3edef0fb2",
+      "files": 125,
+      "guide": "adapters/claude-code/README.md",
+      "id": "claude-code-adapter",
+      "interfaces": [
+        "adapters/claude-code/agents/*.md"
+      ],
+      "invariants": [
+        "Experimental and outside the shipped pack: read-only tools, generated from the cards, never edited by hand."
+      ],
+      "paths": [
+        "adapters/claude-code/README.md",
+        "adapters/claude-code/agents/*.md"
+      ],
+      "purpose": "Claude Code subagents generated from the catalog cards, kept apart from the pack until evidence supports them."
     },
     {
       "checks": [
