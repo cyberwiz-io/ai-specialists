@@ -61,7 +61,7 @@
       "invariants": ["Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."],
       "paths": [
         ".claude/agents/*.md", ".claude/skills/*/SKILL.md",
-        "evals/*.md", "evals/fixtures/*.json", "evals/reports/*.md",
+        "evals/*.md", "evals/baseline.json", "evals/fixtures/*.json", "evals/reports/*.md",
         "scripts/evals.py"
       ],
       "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."

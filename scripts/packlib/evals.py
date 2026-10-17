@@ -10,6 +10,7 @@ from .config import read, safe_path
 
 FIXTURE_DIR = "evals/fixtures"
 EVAL_DIR = "work/evals"
+BASELINE = "evals/baseline.json"
 KINDS = ("task", "boundary")
 FIELDS = ("id", "role", "kind", "request", "input", "traits", "must_not")
 SCORED = {"acceptance": ("pass", "partial", "fail"), "traits": ("pass", "partial", "fail"),
@@ -319,9 +320,8 @@ def _cell(text):
     return " ".join(str(text).split()).replace("|", "/")
 
 
-def report(root, run):
-    """Validate every output and grade of a run, write REPORT.md and return its path."""
-    record = load_run(root, run)
+def _grades(root, record):
+    """Validate every output and grade of a run and return the grades by fixture id."""
     failures, grades = [], {}
     for fixture in record["fixtures"]:
         if not _has_text(root / fixture["output"]):
@@ -341,9 +341,78 @@ def report(root, run):
             grades[fixture["id"]] = grade
     if failures:
         raise ValueError("\n".join(failures))
+    return grades
+
+
+def report(root, run):
+    """Validate every output and grade of a run, write REPORT.md and return its path."""
+    record = load_run(root, run)
     path = root / EVAL_DIR / run / "REPORT.md"
-    path.write_text(render(record, grades), encoding="utf-8")
+    path.write_text(render(record, _grades(root, record)), encoding="utf-8")
     return path
+
+
+def role_scores(record, grades):
+    """Per role, how many of its fixtures passed outright and how many ran."""
+    scores = {}
+    for fixture in record["fixtures"]:
+        row = scores.setdefault(fixture["role"], {"passed": 0, "total": 0})
+        row["total"] += 1
+        row["passed"] += outcome(grades[fixture["id"]]) == "PASS"
+    return dict(sorted(scores.items()))
+
+
+def save_baseline(root, run):
+    """Record a reviewed run's per-role pass counts as the baseline later runs are compared with."""
+    record = load_run(root, run)
+    data = {"schema": 1, "run": record["run"], "version": record["version"], "commit": record["commit"],
+            "model": record["model"], "grader": record["grader"], "date": record["date"],
+            "roles": role_scores(record, _grades(root, record))}
+    path = root / BASELINE
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    return path
+
+
+def compare(root, run, baseline=BASELINE):
+    """Write REGRESSION.md for a run against the baseline; return its path and the roles whose pass rate fell."""
+    path = root / baseline
+    old = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+    if not old.get("run"):
+        raise ValueError(f"{baseline} holds no baseline yet; review a run, then save it with the baseline command")
+    record = load_run(root, run)
+    grades = _grades(root, record)
+    now = role_scores(record, grades)
+    drops = [(role, old["roles"][role], row) for role, row in now.items()
+             if role in old["roles"] and row["passed"] * old["roles"][role]["total"]
+             < old["roles"][role]["passed"] * row["total"]]
+    new = [role for role in now if role not in old["roles"]]
+    lines = [f"# Regression check: {record['run']}", "",
+             f"Compared with baseline run `{old['run']}` ({old['date']}, commit `{old['commit']}`).", "",
+             "| | Baseline | This run |", "| --- | --- | --- |",
+             f"| Model under test | {_cell(old['model'])} | {_cell(record['model'])} |",
+             f"| Grader | {_cell(old['grader'])} | {_cell(record['grader'])} |",
+             f"| Pack version | {_cell(old['version'])} | {_cell(record['version'])} |",
+             f"| Commit | `{_cell(old['commit'])}` | `{_cell(record['commit'])}` |", ""]
+    if (old["model"], old["grader"]) != (record["model"], record["grader"]):
+        lines += ["**The model or grader changed since the baseline.** A drop may come from the model, not the card.",
+                  ""]
+    lines += [f"## Cards with a lower pass rate ({len(drops)})", ""]
+    if drops:
+        lines += ["| Role | Baseline | This run | Fixtures not passed |", "| --- | --- | --- | --- |"]
+        for role, before, after in drops:
+            missed = [f["id"] for f in record["fixtures"]
+                      if f["role"] == role and outcome(grades[f["id"]]) != "PASS"]
+            lines.append(f"| `{role}` | {before['passed']}/{before['total']} | {after['passed']}/{after['total']} | "
+                         + ", ".join(f"`{i}`" for i in missed) + " |")
+    else:
+        lines.append("No card's pass rate fell.")
+    if new:
+        lines += ["", "Not in the baseline, so not compared: " + ", ".join(f"`{r}`" for r in new) + "."]
+    lines += ["", "Each rate comes from one model-graded run per fixture. Re-run the listed fixtures before "
+              "concluding that a card regressed; see `work/evals/" + run + "/REPORT.md` for the evidence.", ""]
+    out = root / EVAL_DIR / run / "REGRESSION.md"
+    out.write_text("\n".join(lines), encoding="utf-8")
+    return out, [role for role, _, _ in drops]
 
 
 def render(record, grades):
