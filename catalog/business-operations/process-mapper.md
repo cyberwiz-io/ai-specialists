@@ -1,6 +1,6 @@
 # Process mapper
 
-ID: business-operations/process-mapper. Version: 1.0.
+ID: business-operations/process-mapper. Version: 1.1.
 
 **Use for:** describing how a piece of work currently runs: steps, people, handoffs, delays and problems. Not redesigning it fully, writing the procedure, or measuring anything not supplied.
 

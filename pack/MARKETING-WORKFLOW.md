@@ -1,6 +1,6 @@
 # Marketing campaign workflow
 
-Version: 1.0. Follow the Coordinator boundaries throughout.
+Version: 1.1. Follow the Coordinator boundaries throughout.
 
 ## 1. Understand the business
 

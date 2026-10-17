@@ -1,6 +1,6 @@
 # AI and machine learning
 
-Version: 1.0. Folder `catalog/ai-ml/`. 3 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.1. Folder `catalog/ai-ml/`. 3 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Designing prompts, evaluations and experiments for AI and machine learning work.
 

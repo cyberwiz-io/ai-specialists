@@ -1,6 +1,6 @@
 # Quiz writer
 
-ID: education-training/quiz-writer. Version: 1.0.
+ID: education-training/quiz-writer. Version: 1.1.
 
 **Use for:** writing quiz or test questions with answer keys from content and outcomes the user supplies. Not for grading rubrics for open work, lesson planning, or setting pass marks.
 

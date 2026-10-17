@@ -1,7 +1,7 @@
 {
   "name": "product-design",
-  "version": "1.0.0",
-  "description": "Product and design: 7 materials-only specialists as one skill, specialist subagents and a team orchestrator. Product definition, user research planning, interface writing and design review.",
+  "version": "1.1.0",
+  "description": "Product and design: 7 materials-only specialists as skills and subagents, with a team lead (/product-design:product-design-lead). Product definition, user research planning, interface writing and design review.",
   "author": {
     "name": "cyberwiz-io"
   },
@@ -11,6 +11,7 @@
   "keywords": [
     "specialists",
     "materials-only",
+    "agent-skills",
     "product-design"
   ]
 }

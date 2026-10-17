@@ -5,7 +5,7 @@ import re
 from urllib.parse import unquote, urlsplit
 
 from . import bundle, cards, evals, manifest, modmap, plugin
-from .build import outputs, stale_files
+from .build import HOSTS, outputs, stale_files
 from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, read, safe_path, version
 
 VERSION_MENTION = re.compile(r"\bVersion:?\s+([0-9]+\.[0-9]+)")
@@ -116,6 +116,8 @@ def check(root):
     failures += check_versions(root, generated, current)
     failures += check_generated(root, generated)
     failures += plugin.problems(root, families, generated)
+    for host in HOSTS:
+        failures += host.problems(root, families, generated)
     failures += check_links(root)
     failures += check_navigation(root, families, generated)
     failures += check_archives(root)

@@ -19,32 +19,31 @@
                    "security-awareness-trainer", "privacy-engineer", "vendor-security-assessor"]}
       ],
       "roles": [
-        {"slug": "security-architect", "name": "Security architect"},
-        {"slug": "threat-modeler", "name": "Threat modeler"},
-        {"slug": "appsec-reviewer", "name": "Application security reviewer"},
-        {"slug": "secure-code-reviewer", "name": "Secure code reviewer"},
+        {"slug": "security-architect", "name": "Security architect", "model": "opus"},
+        {"slug": "threat-modeler", "name": "Threat modeler", "model": "opus"},
+        {"slug": "appsec-reviewer", "name": "Application security reviewer", "model": "opus"},
+        {"slug": "secure-code-reviewer", "name": "Secure code reviewer", "model": "opus", "commands": true},
         {"slug": "vulnerability-triage-analyst", "name": "Vulnerability triage analyst"},
         {"slug": "incident-response-planner", "name": "Incident response planner"},
         {"slug": "security-policy-writer", "name": "Security policy writer"},
         {"slug": "risk-register-analyst", "name": "Risk register analyst"},
         {"slug": "access-review-analyst", "name": "Access review analyst"},
-        {"slug": "cloud-security-reviewer", "name": "Cloud security reviewer"},
+        {"slug": "cloud-security-reviewer", "name": "Cloud security reviewer", "model": "opus"},
         {"slug": "security-awareness-trainer", "name": "Security awareness trainer"},
         {"slug": "privacy-engineer", "name": "Privacy engineer"},
         {"slug": "vendor-security-assessor", "name": "Vendor security assessor"},
-        {"slug": "detection-rule-reviewer", "name": "Detection rule reviewer"}
+        {"slug": "detection-rule-reviewer", "name": "Detection rule reviewer", "model": "opus"}
       ]
     },
     {
       "id": "it-operations",
       "name": "IT operations",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Documentation and planning for everyday IT support and infrastructure upkeep.",
       "flow": "Capture the environment and constraint, draft the document or plan, check it against the supplied details, then hand it to the person who will carry it out.",
       "roles": [
-        {"slug": "support-documenter", "name": "Support documenter"},
-        {"slug": "runbook-writer", "name": "Runbook writer"},
+        {"slug": "support-documenter", "name": "Support documenter", "model": "haiku"},
+        {"slug": "runbook-writer", "name": "Runbook writer", "model": "haiku"},
         {"slug": "change-planner", "name": "Change planner"},
         {"slug": "backup-recovery-planner", "name": "Backup and recovery planner"},
         {"slug": "asset-inventory-analyst", "name": "Asset inventory analyst"}
@@ -58,16 +57,16 @@
       "flow": "Pin down the requirement, plan the smallest change, review supplied code or tests, then document the result. Nothing is run or changed in the user's systems by these instructions.",
       "roles": [
         {"slug": "requirements-analyst", "name": "Requirements analyst"},
-        {"slug": "software-architect", "name": "Software architect"},
+        {"slug": "software-architect", "name": "Software architect", "model": "opus"},
         {"slug": "feature-change-planner", "name": "Feature change planner"},
-        {"slug": "code-reviewer", "name": "Code reviewer", "commands": true},
-        {"slug": "test-designer", "name": "Test designer"},
+        {"slug": "code-reviewer", "name": "Code reviewer", "model": "opus", "commands": true},
+        {"slug": "test-designer", "name": "Test designer", "commands": true},
         {"slug": "refactoring-planner", "name": "Refactoring planner"},
         {"slug": "api-designer", "name": "API designer"},
         {"slug": "debugging-analyst", "name": "Debugging analyst", "commands": true},
-        {"slug": "technical-writer", "name": "Technical writer", "model": "sonnet"},
-        {"slug": "release-notes-writer", "name": "Release notes writer", "model": "sonnet"},
-        {"slug": "schema-reviewer", "name": "Schema reviewer"}
+        {"slug": "technical-writer", "name": "Technical writer", "model": "haiku"},
+        {"slug": "release-notes-writer", "name": "Release notes writer", "model": "haiku"},
+        {"slug": "schema-reviewer", "name": "Schema reviewer", "model": "opus"}
       ]
     },
     {
@@ -86,33 +85,31 @@
       "id": "product-design",
       "name": "Product and design",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Product definition, user research planning, interface writing and design review.",
       "flow": "Define the user problem, plan the research or design work, produce the written or visual-brief deliverable, then review for accessibility and clarity.",
       "roles": [
         {"slug": "product-manager", "name": "Product manager"},
         {"slug": "ux-researcher", "name": "UX researcher"},
-        {"slug": "ux-writer", "name": "UX writer"},
+        {"slug": "ux-writer", "name": "UX writer", "model": "haiku"},
         {"slug": "ui-designer", "name": "UI designer"},
-        {"slug": "accessibility-reviewer", "name": "Accessibility reviewer"},
+        {"slug": "accessibility-reviewer", "name": "Accessibility reviewer", "model": "opus"},
         {"slug": "roadmap-planner", "name": "Roadmap planner"},
-        {"slug": "design-system-documenter", "name": "Design system documenter"}
+        {"slug": "design-system-documenter", "name": "Design system documenter", "model": "haiku"}
       ]
     },
     {
       "id": "content-creative",
       "name": "Content and creative",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Writing and planning of articles, scripts, newsletters and other creative content.",
       "flow": "Confirm audience and purpose, outline, draft, then edit against the brief. Facts that are not supplied are marked, not invented.",
       "roles": [
-        {"slug": "editor", "name": "Editor"},
-        {"slug": "blog-writer", "name": "Blog writer"},
-        {"slug": "scriptwriter", "name": "Scriptwriter"},
-        {"slug": "social-media-writer", "name": "Social media writer"},
-        {"slug": "newsletter-writer", "name": "Newsletter writer"},
-        {"slug": "storyteller", "name": "Storyteller"},
+        {"slug": "editor", "name": "Editor", "model": "haiku"},
+        {"slug": "blog-writer", "name": "Blog writer", "model": "haiku"},
+        {"slug": "scriptwriter", "name": "Scriptwriter", "model": "haiku"},
+        {"slug": "social-media-writer", "name": "Social media writer", "model": "haiku"},
+        {"slug": "newsletter-writer", "name": "Newsletter writer", "model": "haiku"},
+        {"slug": "storyteller", "name": "Storyteller", "model": "haiku"},
         {"slug": "podcast-planner", "name": "Podcast planner"},
         {"slug": "storyboard-planner", "name": "Storyboard planner"}
       ]
@@ -121,15 +118,14 @@
       "id": "marketing-growth",
       "name": "Marketing and growth",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack.",
       "flow": "Follow the marketing campaign workflow: goal, package, visual direction if needed, create and check, deliver. Add the specialists whose deliverable the package needs.",
       "coordinator": ["pack/COORDINATOR.md", "pack/MARKETING-WORKFLOW.md"],
       "roles": [
         {"slug": "marketing-strategist", "name": "Marketing strategist"},
-        {"slug": "copywriter", "name": "Copywriter"},
+        {"slug": "copywriter", "name": "Copywriter", "model": "haiku"},
         {"slug": "graphic-designer", "name": "Graphic designer"},
-        {"slug": "quality-reviewer", "name": "Quality reviewer"},
+        {"slug": "quality-reviewer", "name": "Quality reviewer", "model": "opus"},
         {"slug": "seo-strategist", "name": "SEO strategist"},
         {"slug": "email-campaign-planner", "name": "Email campaign planner"},
         {"slug": "brand-voice-guide", "name": "Brand voice guide"},
@@ -142,16 +138,15 @@
       "id": "sales-customer",
       "name": "Sales and customer",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Drafts and plans for selling, supporting and onboarding customers.",
       "flow": "Confirm the customer and offer, draft the sales or support material from supplied facts, and review claims before the user uses it.",
       "roles": [
-        {"slug": "outreach-drafter", "name": "Outreach drafter"},
-        {"slug": "proposal-writer", "name": "Proposal writer"},
+        {"slug": "outreach-drafter", "name": "Outreach drafter", "model": "haiku"},
+        {"slug": "proposal-writer", "name": "Proposal writer", "model": "haiku"},
         {"slug": "discovery-call-planner", "name": "Discovery call planner"},
         {"slug": "objection-coach", "name": "Objection coach"},
-        {"slug": "support-responder", "name": "Support responder"},
-        {"slug": "knowledge-base-writer", "name": "Knowledge base writer"},
+        {"slug": "support-responder", "name": "Support responder", "model": "haiku"},
+        {"slug": "knowledge-base-writer", "name": "Knowledge base writer", "model": "haiku"},
         {"slug": "feedback-analyst", "name": "Feedback analyst"},
         {"slug": "customer-onboarding-planner", "name": "Customer onboarding planner"}
       ]
@@ -160,14 +155,13 @@
       "id": "business-operations",
       "name": "Business operations",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Process, planning and decision documents for running a small organization.",
       "flow": "Name the process or decision, gather the facts supplied, produce the document, and list open assumptions for the owner.",
       "roles": [
         {"slug": "process-mapper", "name": "Process mapper"},
-        {"slug": "sop-writer", "name": "SOP writer"},
+        {"slug": "sop-writer", "name": "SOP writer", "model": "haiku"},
         {"slug": "project-planner", "name": "Project planner"},
-        {"slug": "meeting-facilitator", "name": "Meeting facilitator"},
+        {"slug": "meeting-facilitator", "name": "Meeting facilitator", "model": "haiku"},
         {"slug": "vendor-comparer", "name": "Vendor comparer"},
         {"slug": "business-plan-drafter", "name": "Business plan drafter"},
         {"slug": "okr-coach", "name": "OKR coach"},
@@ -183,7 +177,7 @@
       "notes": "Educational drafts and checks on supplied numbers. Not financial, tax, accounting or investment advice. Show assumptions and arithmetic. Decisions and filings belong to the user and a qualified professional.",
       "roles": [
         {"slug": "budget-planner", "name": "Budget planner"},
-        {"slug": "model-reviewer", "name": "Financial model reviewer"},
+        {"slug": "model-reviewer", "name": "Financial model reviewer", "model": "opus"},
         {"slug": "pricing-analyst", "name": "Pricing analyst"},
         {"slug": "cash-flow-planner", "name": "Cash flow planner"},
         {"slug": "expense-categorizer", "name": "Expense categorizer"},
@@ -205,7 +199,7 @@
         {"slug": "data-analyst", "name": "Data analyst"},
         {"slug": "dashboard-specifier", "name": "Dashboard specifier"},
         {"slug": "survey-designer", "name": "Survey designer"},
-        {"slug": "statistical-reviewer", "name": "Statistical reviewer"},
+        {"slug": "statistical-reviewer", "name": "Statistical reviewer", "model": "opus"},
         {"slug": "competitive-intelligence-analyst", "name": "Competitive intelligence analyst"}
       ]
     },
@@ -243,7 +237,7 @@
         {"slug": "policy-drafter", "name": "Policy drafter"},
         {"slug": "privacy-policy-drafter", "name": "Privacy policy drafter"},
         {"slug": "compliance-checklist-builder", "name": "Compliance checklist builder"},
-        {"slug": "terms-reviewer", "name": "Terms reviewer"},
+        {"slug": "terms-reviewer", "name": "Terms reviewer", "model": "opus"},
         {"slug": "ip-basics-explainer", "name": "IP basics explainer"},
         {"slug": "retention-planner", "name": "Records retention planner"},
         {"slug": "regulatory-change-summarizer", "name": "Regulatory change summarizer"}
@@ -253,13 +247,12 @@
       "id": "education-training",
       "name": "Education and training",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Designing courses, lessons, assessments and study support.",
       "flow": "Confirm learners and outcomes, design the material, align assessment to outcomes, and note what needs a real trial with learners.",
       "roles": [
         {"slug": "curriculum-designer", "name": "Curriculum designer"},
         {"slug": "lesson-planner", "name": "Lesson planner"},
-        {"slug": "quiz-writer", "name": "Quiz writer"},
+        {"slug": "quiz-writer", "name": "Quiz writer", "model": "haiku"},
         {"slug": "study-coach", "name": "Study coach"},
         {"slug": "training-developer", "name": "Training developer"},
         {"slug": "rubric-designer", "name": "Rubric designer"}
@@ -269,11 +262,10 @@
       "id": "public-nonprofit",
       "name": "Public sector and nonprofit",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Grant, program, policy and community materials for public-benefit organizations.",
       "flow": "Confirm the mission and audience, draft from supplied facts, check claims and funder requirements the user provides, and list open items.",
       "roles": [
-        {"slug": "grant-writer", "name": "Grant writer"},
+        {"slug": "grant-writer", "name": "Grant writer", "model": "haiku"},
         {"slug": "program-evaluator", "name": "Program evaluator"},
         {"slug": "policy-brief-writer", "name": "Policy brief writer"},
         {"slug": "volunteer-planner", "name": "Volunteer planner"},
@@ -284,12 +276,11 @@
       "id": "personal-career",
       "name": "Personal and career",
       "sensitive": false,
-      "model": "sonnet",
       "purpose": "Help individuals with applications, interviews, career thinking and personal projects.",
       "flow": "Learn the person's goal and real experience, draft or plan from it, and keep every claim true to what they supplied.",
       "roles": [
-        {"slug": "resume-editor", "name": "Resume editor"},
-        {"slug": "cover-letter-writer", "name": "Cover letter writer"},
+        {"slug": "resume-editor", "name": "Resume editor", "model": "haiku"},
+        {"slug": "cover-letter-writer", "name": "Cover letter writer", "model": "haiku"},
         {"slug": "interview-coach", "name": "Interview coach"},
         {"slug": "career-planner", "name": "Career planner"},
         {"slug": "personal-project-planner", "name": "Personal project planner"}
@@ -300,13 +291,13 @@
       "name": "Orchestration and meta",
       "sensitive": false,
       "purpose": "Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.",
-      "flow": "Route the task, decompose it, run the chosen specialists in sequence as perspectives, package each handoff, and review the combined result.",
+      "flow": "Route the task, decompose it, package each handoff, run the chosen specialists (as parallel subagents where the host allows, otherwise in turn as perspectives), and review the combined result in a fresh context.",
       "roles": [
         {"slug": "task-router", "name": "Task router"},
         {"slug": "plan-decomposer", "name": "Plan decomposer"},
-        {"slug": "handoff-packager", "name": "Handoff packager"},
+        {"slug": "handoff-packager", "name": "Handoff packager", "model": "haiku"},
         {"slug": "specialist-builder", "name": "Specialist builder"},
-        {"slug": "cross-family-reviewer", "name": "Cross-family reviewer"}
+        {"slug": "cross-family-reviewer", "name": "Cross-family reviewer", "model": "opus"}
       ]
     }
   ]

@@ -1,6 +1,6 @@
 # OKR coach
 
-ID: business-operations/okr-coach. Version: 1.0.
+ID: business-operations/okr-coach. Version: 1.1.
 
 **Use for:** turning direction into a few objectives with measurable key results for one period. Not scoring people, setting targets without baselines, or tracking progress.
 

@@ -10,7 +10,7 @@ A specialist proposal should explain its distinct deliverable, when to use it, r
 
 ## Edit the files
 
-Start with [REPO-MAP.md](REPO-MAP.md); it routes each kind of change to the few files involved. Role cards in `catalog/<family>/`, the roster in `catalog/families.json`, and the instructions in `pack/` are authoritative. Family indexes, `catalog/REGISTRY.jsonl`, `pack/STARTER-PACK.md`, `dist/packs/` and `config/module-map.json` are generated; never edit them by hand. Edit the sources, then rebuild. Preserve the materials-only boundary, explicit user decisions, evidence requirements, and honest host limitations.
+Start with [REPO-MAP.md](REPO-MAP.md); it routes each kind of change to the few files involved. Role cards in `catalog/<family>/`, the roster in `catalog/families.json`, and the instructions in `pack/` are authoritative. Family indexes, `catalog/REGISTRY.jsonl`, `pack/STARTER-PACK.md`, `dist/packs/`, `config/module-map.json`, `skills/`, `plugins/`, `adapters/` (except each `README.md`) and the root host manifests (`.claude-plugin/`, `.cursor-plugin/`, `.agents/plugins/marketplace.json`, `gemini-extension.json`) are generated; never edit them by hand. Edit the sources, then rebuild. Preserve the materials-only boundary, explicit user decisions, evidence requirements, and honest host limitations.
 
 For maintenance, use Python 3.9 or newer. No packages need to be installed. From the repository root:
 
@@ -28,7 +28,7 @@ Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and e
 
 ## Claude Code
 
-`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-plugins`. The build also generates the Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a skill with the cards as references, a subagent per card (read-only plus `Agent` so specialists can delegate; `commands` and `model` in `catalog/families.json` opt a role into an allowlisted test runner or a cheaper model), and a `<family>-orchestrator` agent that runs the team. The release archive includes them, plus one upload-ready skill ZIP per family for claude.ai. Never edit them by hand; they change when a card, a coordinator or `scripts/packlib/plugin.py` changes.
+`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-plugins`. The build also generates the Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a team lead skill with the cards as references, the role skills, and a worker agent per card. Workers are read-only and cannot start other agents; only the lead, in the main conversation, starts them. `commands`, `model` and the tier in `catalog/families.json` opt a role into an allowlisted test runner and set its model and effort. The build also writes the root `skills/` folder, the files in `adapters/` (except each `README.md`, which is written by hand) and the root manifests for other hosts (`.agents/plugins/marketplace.json`, `.cursor-plugin/marketplace.json`, `gemini-extension.json`). The release archive includes them, plus one upload-ready skill ZIP per family for claude.ai. Never edit them by hand; they change when a card, a coordinator or a module in `scripts/packlib/` changes. `python3 -B scripts/pack.py stats` estimates their token cost.
 
 ## Release
 

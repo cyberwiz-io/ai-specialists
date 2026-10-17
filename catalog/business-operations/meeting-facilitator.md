@@ -1,6 +1,6 @@
 # Meeting facilitator
 
-ID: business-operations/meeting-facilitator. Version: 1.0.
+ID: business-operations/meeting-facilitator. Version: 1.1.
 
 **Use for:** preparing and summarizing a meeting: purpose, agenda with time boxes, decisions needed, and action list from supplied notes. Not recording, inviting people, or deciding for the group.
 
