@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "workflows": {
+    ".github/workflows/engineering-policy.yml": {
+      "mode": "validation",
+      "required_jobs": [
+        "policy"
+      ],
+      "max_timeout_minutes": 5,
+      "required_commands": {
+        "policy": [
+          "python .engineering/check.py"
+        ]
+      }
+    },
+    ".github/workflows/check.yml": {
+      "mode": "validation",
+      "required_jobs": [
+        "check",
+        "validate",
+        "acceptance"
+      ],
+      "max_timeout_minutes": 45,
+      "aggregate": "acceptance",
+      "required_commands": {
+        "acceptance": [
+          "python3 - <<'PYGATE'\nimport json, os, sys\nresults = json.loads(os.environ[\"RESULTS\"])\nbad = {name: item.get(\"result\") for name, item in results.items() if item.get(\"result\") != \"success\"}\nprint(\"Required job results:\", {name: item.get(\"result\") for name, item in results.items()})\nsys.exit(bool(bad))\nPYGATE\n"
+        ]
+      }
+    }
+  },
+  "retry": {
+    "persistent_infrastructure": 0
+  },
+  "verification_key": [
+    "commit",
+    "inputs",
+    "toolchain",
+    "environment",
+    "check_configuration"
+  ],
+  "exceptions": [
+    "Existing workflows not listed here retain their current acceptance. Enrollment is not full CI optimization."
+  ],
+  "enforcement": "editable PR workflow; independent trusted enforcement pending"
+}

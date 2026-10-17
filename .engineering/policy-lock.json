@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "source_repository": "lewismatlock/ai-home",
+  "source_commit": "8591546835da999d72b4265a9b15123cd5073abd",
+  "source_path": "tools/engineering-policy",
+  "sha256": {
+    ".engineering/policy.md": "84142d359d4d06c9212facfec5dfc292b078b14db71236f5db86563641390318",
+    ".engineering/check.py": "6916bc175a4fd7854e0c12ec9d4e427dfe4f9719979db8dedc5faae69b7124f9"
+  }
+}
