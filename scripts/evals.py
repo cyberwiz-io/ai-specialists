@@ -46,9 +46,11 @@ def main(argv=None, root=None):
     first.add_argument("--family", help="only this family")
     first.add_argument("--role", help="only this role ID")
     first.add_argument("--kind", choices=evals.KINDS, help="only task or boundary fixtures")
+    commands.add_parser("baseline", help="save reviewed runs' per-card pass counts as evals/baseline.json; "
+                        "with several --run, a later run replaces an earlier one for the cards it ran").add_argument(
+        "--run", required=True, action="append")
     for name, text in (("status", "list fixtures still lacking a reply or grade"),
                        ("report", "validate every reply and grade, then write REPORT.md"),
-                       ("baseline", "save a reviewed run's per-card pass counts as evals/baseline.json"),
                        ("compare", "write REGRESSION.md; exit 3 when a card's pass rate fell below the baseline")):
         commands.add_parser(name, help=text).add_argument("--run", required=True)
     args = parser.parse_args(argv)

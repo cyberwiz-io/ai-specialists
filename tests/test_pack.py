@@ -240,6 +240,12 @@ class NavigationTests(FixtureCase):
         (self.root / "notes.md").write_text("# Notes\n")
         self.assertFails("notes.md is not covered by any module")
 
+    def test_local_plugin_eval_results_are_ignored(self):
+        results = self.root / "plugins/security/evals/results/2026-10-17T00-00-00-000Z"
+        results.mkdir(parents=True)
+        (results / "aggregate-result.json").write_text("{}\n")
+        check.check(self.root)
+
     def test_module_map_edit_is_detected(self):
         self.edit(config.MODULE_MAP, lambda text: text.replace('"digest": "', '"digest": "0'))
         self.assertFails("config/module-map.json differs from sources")
@@ -309,7 +315,7 @@ class ArchiveTests(FixtureCase):
         prefix = "ai-specialists-1.1/"
         for required in ("catalog/security/threat-modeler.md", "dist/packs/finance.md",
                          "dist/packs/security-engineering.md", "dist/packs/security-governance.md",
-                         "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):
+                         "dist/packs/security-operations.md", "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):
             self.assertIn(prefix + required, names)
         self.assertFalse([name for name in names if "/work/" in name or "/profiles/" in name])
         self.assertNotIn(prefix + "dist/packs/security.md", names)
@@ -327,7 +333,8 @@ class SplitPackTests(FixtureCase):
         security = next(family for family in families if family["id"] == "security")
         packs = {name: data.decode("utf-8") for name, data in generated.items()
                  if name.startswith(config.PACK_DIR + "/security")}
-        self.assertEqual(sorted(packs), ["dist/packs/security-engineering.md", "dist/packs/security-governance.md"])
+        self.assertEqual(sorted(packs), ["dist/packs/security-engineering.md", "dist/packs/security-governance.md",
+                                        "dist/packs/security-operations.md"])
         for role in security["roles"]:
             holders = [name for name, text in packs.items() if f"<!-- Source: {role['path']} -->" in text]
             self.assertEqual(len(holders), 1, role["path"])
@@ -343,7 +350,7 @@ class SplitPackTests(FixtureCase):
         self.assertNotIn("outside this pack", text)
 
     def test_role_in_no_pack_fails(self):
-        self.change_manifest(lambda packs: packs[1]["roles"].remove("privacy-engineer"))
+        self.change_manifest(lambda packs: packs[-1]["roles"].remove("privacy-engineer"))
         with self.assertRaisesRegex(ValueError, "roles in no pack: privacy-engineer"):
             manifest.load(self.root)
 
@@ -368,7 +375,7 @@ class SplitPackTests(FixtureCase):
             manifest.load(self.root)
 
     def test_single_pack_split_fails(self):
-        self.change_manifest(lambda packs: packs.pop())
+        self.change_manifest(lambda packs: packs.__delitem__(slice(1, None)))
         with self.assertRaisesRegex(ValueError, "at least two packs"):
             manifest.load(self.root)
 

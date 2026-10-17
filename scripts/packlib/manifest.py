@@ -31,7 +31,7 @@ def load(root):
         _require(SLUG.fullmatch(fid) is not None, f"bad family id {fid!r}")
         _require(fid not in seen_families, f"duplicate family {fid}")
         seen_families.add(fid)
-        for key in ("name", "purpose", "flow"):
+        for key in ("name", "purpose", "triggers", "flow"):
             _require(isinstance(family.get(key), str) and family[key], f"{fid}: missing {key}")
         _require(isinstance(family.get("sensitive"), bool), f"{fid}: sensitive must be true or false")
         _require(not family["sensitive"] or family.get("notes"), f"{fid}: sensitive family needs notes")
@@ -61,7 +61,7 @@ def load(root):
         _require(roles, f"{fid}: no roles")
         packs = _packs(fid, family, roles, seen_packs)
         families.append({"id": fid, "name": family["name"], "sensitive": family["sensitive"],
-                         "purpose": family["purpose"], "flow": family["flow"],
+                         "purpose": family["purpose"], "triggers": family["triggers"], "flow": family["flow"],
                          "notes": family.get("notes", ""),
                          "coordinator": tuple(family.get("coordinator", DEFAULT_COORDINATOR)),
                          "roles": roles, "packs": packs})

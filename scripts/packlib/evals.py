@@ -363,11 +363,23 @@ def role_scores(record, grades):
 
 
 def save_baseline(root, run):
-    """Record a reviewed run's per-role pass counts as the baseline later runs are compared with."""
-    record = load_run(root, run)
-    data = {"schema": 1, "run": record["run"], "version": record["version"], "commit": record["commit"],
-            "model": record["model"], "grader": record["grader"], "date": record["date"],
-            "roles": role_scores(record, _grades(root, record))}
+    """Record reviewed runs' per-role pass counts as the baseline later runs are compared with.
+
+    `run` is one run name or a list; a later run replaces an earlier one for every role it ran, so a re-run of
+    the cards that changed can be laid over a full run. All runs must share the model and grader."""
+    runs = [run] if isinstance(run, str) else list(run)
+    records = [load_run(root, name) for name in runs]
+    for record in records[1:]:
+        if (record["model"], record["grader"]) != (records[0]["model"], records[0]["grader"]):
+            raise ValueError(f"{record['run']}: model or grader differs from {records[0]['run']}; "
+                             "a baseline holds one model and grader")
+    roles = {}
+    for record in records:
+        roles.update(role_scores(record, _grades(root, record)))
+    last = records[-1]
+    data = {"schema": 1, "run": " + ".join(r["run"] for r in records), "version": last["version"],
+            "commit": last["commit"], "model": last["model"], "grader": last["grader"], "date": last["date"],
+            "roles": dict(sorted(roles.items()))}
     path = root / BASELINE
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     return path

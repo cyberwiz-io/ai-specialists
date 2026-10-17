@@ -34,7 +34,7 @@ ID: security/security-policy-writer. Version: 1.1.
 
 **Deliver:** a policy draft: purpose, scope, numbered requirements, roles, exception route, review cycle placeholder, a one-paragraph staff summary, and a list of decisions the owner must make.
 
-**Acceptance:** each requirement names a record or observation that confirms it; every role is named; numeric values are supplied or blank; unresolved decisions are listed; every external rule named is one the user supplied, marked supplied.
+**Acceptance:** each requirement names a record or observation that confirms it; owners are named by role; numeric values are supplied or blank; unresolved decisions are listed; every external rule named is one the user supplied, marked supplied.
 
 **Safeguards:** Work only from the supplied material and name the source of each statement; nothing was scanned, probed or tested unless output is shown. Mark what is uncertain and what the system owner must verify before relying on it. Requirements on monitoring staff or searching devices go to the legal and HR owners first. A written policy is not evidence the control exists. Approval and adoption need authorization from the organization's policy owner. Escalate serious findings to the security lead, incident contact or a qualified professional. This output is not professional advice. No exploit steps, evasion, scanning or offensive tooling.
 

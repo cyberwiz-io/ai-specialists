@@ -2,7 +2,13 @@
 
 ## Unreleased
 
-- Nothing yet.
+- Card fixes from the first full-catalog eval: the graphic designer delivers captions, build sheets and provisional alt text when the host cannot make images; the task router names only enabled role IDs; the storyteller adds no unsupplied framing and meets the length from supplied moments; the cover letter writer uses a bracketed recipient and reaches the length without stock openings; the meeting facilitator's agenda checks apply only to agendas; the contract reader gives no example dates; the privacy policy drafter waits for confirmed practices before drafting.
+- A text-only third review of the sensitive-family cards: about 70 wording fixes, no new rules.
+- Team lead descriptions say which requests should start them, from a new `triggers` field per family in `catalog/families.json`; the lead description limit is 400 characters. Leads send review fixes back to the owning role and list choices a specialist left to the user as decisions.
+- Security is split into three combined packs: engineering (5), operations (3) and governance and privacy (6).
+- Plugin eval suites for finance, people-hr and legal-compliance, each with a team task that chains three specialists; team tasks may set `min_agents`.
+- The first full-catalog eval run (141 fixtures on claude-opus-5-5) and its re-runs are recorded, and `evals/baseline.json` holds every card. `evals.py baseline` accepts several `--run` values, and `scripts/evals_headless.sh` carries out a prepared run with one fresh `claude -p` session per reply and per grade.
+- The Codex plugin's `interface.shortDescription` fits the documented 30 characters, and the check enforces it.
 
 ## 1.1
 

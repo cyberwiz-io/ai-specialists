@@ -36,7 +36,7 @@ Prefer a download? The [latest release](https://github.com/cyberwiz-io/ai-specia
 
 ## Families
 
-Each family has a pasteable combined pack and an index of its specialists. Every pack stays under 32 KB, about 8,000 tokens, so it fits in a 16,000-token context window with room to work; Security is split into two packs to stay under that limit.
+Each family has a pasteable combined pack and an index of its specialists. Every pack stays under 32 KB, about 8,000 tokens, so it fits in a 16,000-token context window with room to work; Security is split into three packs and legal and compliance into two to stay under that limit.
 
 | Family | Specialists | Index | Combined pack |
 | --- | --- | --- | --- |
@@ -53,7 +53,7 @@ Each family has a pasteable combined pack and an index of its specialists. Every
 | Public sector and nonprofit | 5 | [index](catalog/public-nonprofit/INDEX.md) | [pack](dist/packs/public-nonprofit.md) |
 | Personal and career | 5 | [index](catalog/personal-career/INDEX.md) | [pack](dist/packs/personal-career.md) |
 | Orchestration and meta | 5 | [index](catalog/orchestration/INDEX.md) | [pack](dist/packs/orchestration.md) |
-| Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | Two packs: [engineering](dist/packs/security-engineering.md) (8), [governance and privacy](dist/packs/security-governance.md) (6) |
+| Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | Three packs: [engineering](dist/packs/security-engineering.md) (5), [operations](dist/packs/security-operations.md) (3), [governance and privacy](dist/packs/security-governance.md) (6) |
 | Finance (sensitive) | 8 | [index](catalog/finance/INDEX.md) | [pack](dist/packs/finance.md) |
 | People and HR (sensitive) | 5 | [index](catalog/people-hr/INDEX.md) | [pack](dist/packs/people-hr.md) |
 | Legal and compliance (sensitive) | 8 | [index](catalog/legal-compliance/INDEX.md) | Two packs: [documents](dist/packs/legal-compliance-documents.md) (4), [rules and policies](dist/packs/legal-compliance-rules.md) (4) |
@@ -70,7 +70,7 @@ Humans and AI agents should begin with the [repository map](REPO-MAP.md), which 
 - Security, finance, people and HR, and legal and compliance cards are defensive or educational support for material you supply. They are not professional advice and make no claim of compliance or certification. Consult a qualified person for consequential decisions.
 - Research, image generation, file exports, memory, and separate review contexts depend on the host. Missing capabilities should produce a smaller agreed package, not pretend outputs.
 - Switching roles in one chat is self-review, not independent multi-agent review. Independent review needs a host with subagents, such as Claude Code with the plugins.
-- Only Claude Code is checked: `claude plugin validate --strict` passes and one local team-lead run and one security eval pilot are recorded. A GitHub marketplace install was observed for the 1.0 plugins only. Codex, Gemini CLI, Copilot and Cursor are not yet tested, and no claude.ai upload is recorded. In the eval pilot the security plugin was picked up on 3 of 7 plain prompts, so name the lead (for example `/security:security-lead`) when you want the team. No improved performance or outcome is established; subject-expert review is pending. See [Validation status](docs/VALIDATION.md).
+- Only Claude Code is run: `claude plugin validate --strict` passes, every card has a recorded eval run, and plugin evals with team tasks are recorded for security, finance, people and HR, and legal and compliance. A GitHub marketplace install was observed for the 1.0 plugins only. The Codex, Gemini CLI, Copilot and Cursor files were checked against each vendor's documentation but not installed or run there, and no claude.ai upload is recorded. In the plugin evals a lead was picked up on 7 of 12 plain single-task prompts, so name the lead (for example `/security:security-lead`) when you want the team. No improved performance or outcome is established; subject-expert review is pending. See [Validation status](docs/VALIDATION.md).
 - The project has no accounts, connectors, telemetry, or model service. Your chosen host may process information in the cloud and has its own usage limits and data policies. Never supply credentials or private customer data to this pack.
 
 ## License

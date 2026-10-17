@@ -31,7 +31,7 @@ If a family's agents are not installed, or the host has no subagents, use that f
 - `security-appsec-reviewer`: Reviewing an application's features, endpoints and user flows for weak design in sign-in.
 - `security-secure-code-reviewer`: Reading supplied code for insecure patterns.
 - `security-vulnerability-triage-analyst`: Sorting a supplied list of reported weaknesses into a working order.
-- `security-incident-response-planner`: Preparing a written plan for handling a security incident before one happens.
+- `security-incident-response-planner`: Preparing a written plan for handling a security incident.
 - `security-security-policy-writer`: Drafting plain-language security policies and standards for an organization.
 - `security-risk-register-analyst`: Turning scattered concerns into a clear.
 - `security-access-review-analyst`: Checking a supplied list of who has access to what, to find stale.

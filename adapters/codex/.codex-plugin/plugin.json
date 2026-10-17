@@ -17,7 +17,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "AI Specialists",
-    "shortDescription": "Materials-only specialist team leads for plans, drafts and reviews.",
+    "shortDescription": "Materials-only team leads",
     "developerName": "cyberwiz-io",
     "category": "Productivity"
   }

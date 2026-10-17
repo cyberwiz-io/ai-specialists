@@ -237,6 +237,19 @@ class RunTests(FixtureCase):
         self.assertIn(f"fell\t{worse['role']}", out.getvalue())
         self.assertIn(f"`{worse['id']}`", (self.root / "work/evals/t3/REGRESSION.md").read_text())
 
+    def test_baseline_lays_a_later_run_over_an_earlier_one(self):
+        record = self.prepare(family="ai-ml")
+        worse = record["fixtures"][0]
+        self.answer(record, {worse["id"]: {"traits": "fail"}})
+        self.prepare("t2", role=worse["role"])
+        self.answer(evals.load_run(self.root, "t2"))
+        with contextlib.redirect_stdout(io.StringIO()):
+            evals_cli.main(["baseline", "--run", "t1", "--run", "t2"], root=self.root)
+        data = json.loads((self.root / evals.BASELINE).read_text())
+        self.assertEqual(data["run"], "t1 + t2")
+        self.assertEqual(data["roles"][worse["role"]]["passed"], data["roles"][worse["role"]]["total"])
+        self.assertEqual(sorted(data["roles"]), sorted({f["role"] for f in record["fixtures"]}))
+
     def test_compare_needs_a_baseline(self):
         record = self.prepare(role=ROLE)
         self.answer(record)

@@ -94,6 +94,15 @@ class HostTests(FixtureCase):
             adapter.NOTE.encode(), adapter.COMMAND_NOTE.encode(), 1)
         self.assertTrue([f for f in copilot.problems(self.root, families, generated) if "promises commands" in f])
 
+    def test_codex_interface_strings_fit_the_directory_limit(self):
+        families, generated = self.outputs()
+        meta = json.loads(generated["adapters/codex/.codex-plugin/plugin.json"])
+        for key in ("displayName", "shortDescription"):
+            self.assertLessEqual(len(meta["interface"][key]), codex.INTERFACE_MAX)
+        meta["interface"]["shortDescription"] = "x" * (codex.INTERFACE_MAX + 1)
+        generated["adapters/codex/.codex-plugin/plugin.json"] = json.dumps(meta).encode()
+        self.assertTrue([f for f in codex.problems(self.root, families, generated) if "shortDescription" in f])
+
     def test_codex_agent_with_sandbox_mode_fails(self):
         families, generated = self.outputs()
         name = "adapters/codex/agents/security-threat-modeler.toml"

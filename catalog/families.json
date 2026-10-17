@@ -7,13 +7,15 @@
       "name": "Security",
       "sensitive": true,
       "purpose": "Defensive security planning, review and documentation of materials the user supplies.",
+      "triggers": "a check of code, app designs or cloud settings for security problems, a threat model, scan triage, an incident response plan, a review of who has access, a security policy, risk register or vendor assessment",
       "flow": "Clarify the asset and decision, review only supplied material, rank findings with stated uncertainty, then hand a written result to the people who own the system.",
       "notes": "Defensive work on supplied material only. No offensive tooling, exploitation steps, evasion or probing of systems. Findings stay provisional until the system owner verifies them. A suspected live incident goes to the user's responsible people at once.",
       "packs": [
         {"id": "security-engineering", "name": "Security engineering",
          "roles": ["security-architect", "threat-modeler", "appsec-reviewer", "secure-code-reviewer",
-                   "vulnerability-triage-analyst", "incident-response-planner", "cloud-security-reviewer",
-                   "detection-rule-reviewer"]},
+                   "cloud-security-reviewer"]},
+        {"id": "security-operations", "name": "Security operations",
+         "roles": ["vulnerability-triage-analyst", "incident-response-planner", "detection-rule-reviewer"]},
         {"id": "security-governance", "name": "Security governance and privacy",
          "roles": ["security-policy-writer", "risk-register-analyst", "access-review-analyst",
                    "security-awareness-trainer", "privacy-engineer", "vendor-security-assessor"]}
@@ -40,6 +42,7 @@
       "name": "IT operations",
       "sensitive": false,
       "purpose": "Documentation and planning for everyday IT support and infrastructure upkeep.",
+      "triggers": "a runbook, support or troubleshooting guide, change plan, backup and recovery plan or IT asset inventory review",
       "flow": "Capture the environment and constraint, draft the document or plan, check it against the supplied details, then hand it to the person who will carry it out.",
       "roles": [
         {"slug": "support-documenter", "name": "Support documenter", "model": "haiku"},
@@ -54,6 +57,7 @@
       "name": "Software engineering",
       "sensitive": false,
       "purpose": "Planning, review and documentation of software changes from supplied code, requirements and notes.",
+      "triggers": "requirements, an architecture or API design, a code review, test plan, refactoring or change plan, debugging help, a schema review, technical docs or release notes",
       "flow": "Pin down the requirement, plan the smallest change, review supplied code or tests, then document the result. Nothing is run or changed in the user's systems by these instructions.",
       "roles": [
         {"slug": "requirements-analyst", "name": "Requirements analyst"},
@@ -74,6 +78,7 @@
       "name": "AI and machine learning",
       "sensitive": false,
       "purpose": "Designing prompts, evaluations and experiments for AI and machine learning work.",
+      "triggers": "writing or improving a prompt, designing an AI evaluation or test set, or planning a machine learning experiment",
       "flow": "State the task and success measure, draft the prompt, evaluation or experiment plan, and mark what still needs real runs by the user.",
       "roles": [
         {"slug": "prompt-engineer", "name": "Prompt engineer"},
@@ -86,6 +91,7 @@
       "name": "Product and design",
       "sensitive": false,
       "purpose": "Product definition, user research planning, interface writing and design review.",
+      "triggers": "a product spec or PRD, user research plan, interface copy, UI or accessibility review, product roadmap or design system docs",
       "flow": "Define the user problem, plan the research or design work, produce the written or visual-brief deliverable, then review for accessibility and clarity.",
       "roles": [
         {"slug": "product-manager", "name": "Product manager"},
@@ -102,6 +108,7 @@
       "name": "Content and creative",
       "sensitive": false,
       "purpose": "Writing and planning of articles, scripts, newsletters and other creative content.",
+      "triggers": "editing a draft, a blog post, video or podcast script, social posts, a newsletter, a story or a storyboard",
       "flow": "Confirm audience and purpose, outline, draft, then edit against the brief. Facts that are not supplied are marked, not invented.",
       "roles": [
         {"slug": "editor", "name": "Editor", "model": "haiku"},
@@ -119,6 +126,7 @@
       "name": "Marketing and growth",
       "sensitive": false,
       "purpose": "Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack.",
+      "triggers": "a marketing campaign, ad or web copy, social visuals, SEO plan, email campaign, brand voice guide, market research, landing page or growth experiment",
       "flow": "Follow the marketing campaign workflow: goal, package, visual direction if needed, create and check, deliver. Add the specialists whose deliverable the package needs.",
       "coordinator": ["pack/COORDINATOR.md", "pack/MARKETING-WORKFLOW.md"],
       "roles": [
@@ -139,6 +147,7 @@
       "name": "Sales and customer",
       "sensitive": false,
       "purpose": "Drafts and plans for selling, supporting and onboarding customers.",
+      "triggers": "sales outreach, a proposal, discovery call plan, objection handling, a support reply, help-center article, customer feedback analysis or onboarding plan",
       "flow": "Confirm the customer and offer, draft the sales or support material from supplied facts, and review claims before the user uses it.",
       "roles": [
         {"slug": "outreach-drafter", "name": "Outreach drafter", "model": "haiku"},
@@ -156,6 +165,7 @@
       "name": "Business operations",
       "sensitive": false,
       "purpose": "Process, planning and decision documents for running a small organization.",
+      "triggers": "a process map, SOP, project plan, meeting agenda, vendor comparison, business plan, OKRs or contingency plan",
       "flow": "Name the process or decision, gather the facts supplied, produce the document, and list open assumptions for the owner.",
       "roles": [
         {"slug": "process-mapper", "name": "Process mapper"},
@@ -173,6 +183,7 @@
       "name": "Finance",
       "sensitive": true,
       "purpose": "Educational drafts, explanations and checks of financial figures the user supplies.",
+      "triggers": "a budget, pricing analysis, cash flow plan, review of a financial model or report, expense categories, grant budget or unit economics",
       "flow": "Confirm the figures and period, show assumptions and arithmetic, produce the draft or check, and flag every number that still needs confirmation.",
       "notes": "Educational drafts and checks on supplied numbers. Not financial, tax, accounting or investment advice. Show assumptions and arithmetic. Decisions and filings belong to the user and a qualified professional.",
       "roles": [
@@ -191,6 +202,7 @@
       "name": "Data and research",
       "sensitive": false,
       "purpose": "Planning and reviewing research, surveys and data analysis from supplied sources and data.",
+      "triggers": "a research plan, literature summary, data cleaning plan, data analysis, dashboard spec, survey, statistics check or competitor research",
       "flow": "State the question, plan the method, analyze or summarize only the supplied material, and report limits and what was not checked.",
       "roles": [
         {"slug": "research-planner", "name": "Research planner"},
@@ -208,6 +220,7 @@
       "name": "People and HR",
       "sensitive": true,
       "purpose": "Drafts for hiring, onboarding, reviews and workplace policies, for human decision.",
+      "triggers": "a job description, interview guide, onboarding plan, performance review draft or employee handbook section",
       "flow": "Confirm the role or policy and the organization's own rules, draft the material, check it for fairness and clarity, and leave every decision to the responsible people.",
       "notes": "Drafts for human decision. Avoid discriminatory criteria and do not infer protected traits. No automated hiring, discipline or termination decisions. Employment-law questions go to a qualified professional.",
       "roles": [
@@ -223,6 +236,7 @@
       "name": "Legal and compliance",
       "sensitive": true,
       "purpose": "Plain-language reading, drafting and checklists from documents and rules the user supplies.",
+      "triggers": "reading a contract or terms, drafting a policy or privacy policy, a compliance checklist, IP basics, a records retention plan or a summary of a rule change",
       "flow": "Confirm the document, jurisdiction and purpose, work only from supplied sources, state what is uncertain, and send decisions to a qualified professional.",
       "notes": "Plain-language support, not legal advice. Work only from user-supplied sources. State jurisdiction and currency uncertainty. No claim of compliance, certification or enforceability. Consequential decisions go to a qualified professional.",
       "packs": [
@@ -248,6 +262,7 @@
       "name": "Education and training",
       "sensitive": false,
       "purpose": "Designing courses, lessons, assessments and study support.",
+      "triggers": "a curriculum, lesson plan, quiz, study plan, staff training or grading rubric",
       "flow": "Confirm learners and outcomes, design the material, align assessment to outcomes, and note what needs a real trial with learners.",
       "roles": [
         {"slug": "curriculum-designer", "name": "Curriculum designer"},
@@ -263,6 +278,7 @@
       "name": "Public sector and nonprofit",
       "sensitive": false,
       "purpose": "Grant, program, policy and community materials for public-benefit organizations.",
+      "triggers": "a grant application, program evaluation, policy brief, volunteer plan or community outreach plan",
       "flow": "Confirm the mission and audience, draft from supplied facts, check claims and funder requirements the user provides, and list open items.",
       "roles": [
         {"slug": "grant-writer", "name": "Grant writer", "model": "haiku"},
@@ -277,6 +293,7 @@
       "name": "Personal and career",
       "sensitive": false,
       "purpose": "Help individuals with applications, interviews, career thinking and personal projects.",
+      "triggers": "a resume, cover letter, interview practice, career plan or personal project plan",
       "flow": "Learn the person's goal and real experience, draft or plan from it, and keep every claim true to what they supplied.",
       "roles": [
         {"slug": "resume-editor", "name": "Resume editor", "model": "haiku"},
@@ -291,6 +308,7 @@
       "name": "Orchestration and meta",
       "sensitive": false,
       "purpose": "Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.",
+      "triggers": "choosing which specialists fit a request, breaking a large project into tasks, a handoff packet, a new custom specialist role or a review of work from several areas",
       "flow": "Route the task, decompose it, package each handoff, run the chosen specialists (as parallel subagents where the host allows, otherwise in turn as perspectives), and review the combined result in a fresh context.",
       "roles": [
         {"slug": "task-router", "name": "Task router"},

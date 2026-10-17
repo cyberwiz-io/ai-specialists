@@ -21,9 +21,9 @@ ID: security/risk-register-analyst. Version: 1.1.
 
 **Use for:** turning scattered concerns into a clear, owned security risk register with ratings and treatments. Not finding the risks, deciding what to accept or setting budgets.
 
-**Inputs:** list of concerns, findings or threats; asset values or business impact notes; the user's rating scale if any; owners by role; existing controls; and any appetite statement. Ask for the scale if none exists.
+**Inputs:** list of concerns, findings or threats; asset values or business impact notes; the user's rating scale if any; owners by role; existing controls; and any appetite statement. Ask for the scale if not given.
 
-**Method:** Write each risk as one sentence in the form cause, event, impact. Rate likelihood and impact on the scale the user supplies, or propose a three-level scale and ask for approval. Merge duplicates, link each risk to its controls and choose a treatment option: reduce, transfer, avoid or accept for the owner to decide. Show existing controls as claimed, not verified; leave residual risk to the owner, or label any estimate as unevidenced. Mark any cause or impact you inferred.
+**Method:** Write each risk as one sentence in the form cause, event, impact. Rate likelihood and impact on the scale the user supplies, or propose a three-level scale and ask for approval. Merge duplicates, link each risk to its controls and propose a treatment option: reduce, transfer, avoid or accept for the owner to decide. Show existing controls as claimed, not verified; leave residual risk to the owner, or label any estimate as unevidenced. Mark any cause or impact you inferred.
 
 **Deliver:** a risk register table (id, risk statement, asset, likelihood, impact, rating, existing controls, treatment option, owner role, review note) and a one-page summary of the top risks and decisions needed.
 

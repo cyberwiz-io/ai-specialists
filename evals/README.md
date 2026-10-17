@@ -2,7 +2,7 @@
 
 This folder holds the fixture tasks for an evaluation harness that runs each specialist card in a fresh AI context and grades the output against that card's own **Acceptance** line. The harness produces the reports that [Validation](../docs/VALIDATION.md) asks for: tested version, host and tools, inputs, observed outcomes and limits. It is maintenance tooling and is not part of the shipped pack.
 
-Runs have been recorded for the marketing and growth family and for two software-engineering roles (the code reviewer and the debugging analyst). A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
+Every card has a recorded run: the 2026-10-17 full-catalog run and its re-runs, besides earlier runs for the marketing and growth family and two software-engineering roles. A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
 
 ## Layout
 
@@ -10,7 +10,8 @@ Runs have been recorded for the marketing and growth family and for two software
 | --- | --- | --- |
 | `evals/fixtures/<family>.json` | Fictional tasks for every card in one family | Yes |
 | `evals/reports/*.md` | Reviewed run reports, copied in after a run | Yes, after review |
-| `scripts/evals.py` | `prepare`, `status` and `report` commands | Yes |
+| `scripts/evals.py` | `prepare`, `status`, `report`, `baseline` and `compare` commands | Yes |
+| `scripts/evals_headless.sh` | Carries out a prepared run with one fresh `claude -p` session per reply and per grade | Yes |
 | `scripts/packlib/evals.py` | Fixture rules, prompts and grading | Yes |
 | `.claude/skills/card-evals/SKILL.md` | How Claude Code carries out a run | Yes |
 | `.claude/agents/card-eval-*.md` | The fresh subject and grader subagents | Yes |
@@ -81,10 +82,10 @@ A fixture **passes** when every criterion and trait passes and nothing is violat
 
 ## Regression check
 
-`evals/baseline.json` holds each card's pass count from one reviewed run. It currently holds the `2026-10-17-marketing-growth` run, so only the marketing and growth cards are compared; the weekly run lists every other card as not in the baseline. After you review a fuller run, save it and rebuild (the module map digests the file):
+`evals/baseline.json` holds each card's pass count from reviewed runs. It currently holds the 2026-10-17 full-catalog run on claude-opus-5-5, with the re-runs of the cards edited afterwards laid over it, so every card is compared. After you review a new run, save it and rebuild (the module map digests the file). Give `--run` more than once to lay a re-run of some cards over a full run; a later run replaces an earlier one for the cards it ran, and all runs must share the model and grader:
 
 ```sh
-python3 -B scripts/evals.py baseline --run <run>
+python3 -B scripts/evals.py baseline --run <full run> [--run <re-run> ...]
 python3 -B scripts/pack.py build
 ```
 

@@ -211,7 +211,7 @@ class PluginTests(FixtureCase):
 
     def test_oversized_lead_description_fails_build(self):
         self.edit("catalog/families.json", lambda text: text.replace(
-            '"purpose": "Defensive security planning', '"purpose": "' + "x" * 300 + ' Defensive security planning', 1))
+            '"triggers": "', '"triggers": "' + "x" * 400, 1))
         with self.assertRaisesRegex(ValueError, "lead description is"):
             build.outputs(self.root)
 
