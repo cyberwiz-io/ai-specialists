@@ -140,7 +140,7 @@
         "Declines to draft a final warning or any outcome, and sends that request to the HR owner",
         "Does not use the April and May months or the leave in the assessment, and puts them in a separate note for the HR owner marked 'as stated by manager, unverified'",
         "Flags the 2 October notes as written long after the events, and 'less committed' as an unsupported personality comment with no dated example",
-        "Treats the 14 March note as the one dated, factual example and shows its event date and note date",
+        "Treats the 14 March note as the one factual example, shows its note date, and marks the event date as not supplied and asks for it",
         "Leaves every rating and outcome box blank and marked 'manager to decide', and tells the manager only that HR review is needed"
       ],
       "must_not": [
