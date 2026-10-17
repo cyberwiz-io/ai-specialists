@@ -30,13 +30,23 @@ Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and e
 
 `.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-plugins`. The build also generates the Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a team lead skill with the cards as references, the role skills, and a worker agent per card. Workers are read-only and cannot start other agents; only the lead, in the main conversation, starts them. `commands`, `model` and the tier in `catalog/families.json` opt a role into an allowlisted test runner and set its model and effort. The build also writes the root `skills/` folder, the files in `adapters/` (except each `README.md`, which is written by hand) and the root manifests for other hosts (`.agents/plugins/marketplace.json`, `.cursor-plugin/marketplace.json`, `gemini-extension.json`). The release archive includes them, plus one upload-ready skill ZIP per family for claude.ai. Never edit them by hand; they change when a card, a coordinator or a module in `scripts/packlib/` changes. `python3 -B scripts/pack.py stats` estimates their token cost.
 
+## Security checks
+
+Checks and scans run on pull requests only, not on pushes to `main` or on a schedule, so a change is checked once, before it merges. Each pull request runs:
+
+- `check`: the pack check, the unit tests and `claude plugin validate --strict`.
+- `codeql`: CodeQL for Python and for the workflows.
+- `security`: Gitleaks for secrets in the pull request's commits, on every pull request; Semgrep Community Edition for risky code in `scripts/`, `tests/` and the workflows, and Trivy for vulnerable dependencies and configuration mistakes, both skipped when only prose changed; and a targeted AI security review when the change touches the security, finance, people-hr or legal-compliance cards, the workflows, `.claude/`, `scripts/`, `config/` or release settings. The AI review needs the `ANTHROPIC_API_KEY` repository secret and is skipped without it.
+
+These tools cover different things: CodeQL and Semgrep look at code patterns, Gitleaks at secrets, Trivy at dependencies and configuration, and the AI review at intent and at the wording of sensitive cards. None of them alone shows that the project is secure, and passing all of them does not either; they catch known kinds of mistakes cheaply. Pin every downloaded tool by version and checksum, as `security.yml` does.
+
 ## Release
 
 The release ZIP is not kept in Git, because every committed version would stay in the history. To release:
 
 1. Set `VERSION` and give the changelog a `## <version>` section holding the notes (move entries out of `## Unreleased`). That section becomes the GitHub Release text, and the workflow fails if it is missing.
 2. Run `python3 -B scripts/pack.py build`, `check` and the tests, and `python3 -B scripts/pack.py release --tag v<version>` to inspect the archive.
-3. Merge to `main` and confirm the check workflow is green there.
+3. Open a pull request, confirm the check workflow is green on it, and merge to `main`. Checks and CodeQL run on pull requests only, not on pushes to `main` or on a schedule.
 4. Push a tag named `v` plus the version, such as `v1.1`.
 5. Confirm the release workflow attached the archive and one skill ZIP per family to the GitHub Release.
 

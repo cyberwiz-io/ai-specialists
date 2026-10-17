@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Checks and scans run on pull requests only. A new `security` workflow runs Gitleaks, Semgrep CE, Trivy and, for sensitive paths, an AI security review; CodeQL moves from default setup to a pull-request-only workflow. See "Security checks" in CONTRIBUTING.md.
 - Card fixes from the first full-catalog eval: the graphic designer delivers captions, build sheets and provisional alt text when the host cannot make images; the task router names only enabled role IDs; the storyteller adds no unsupplied framing and meets the length from supplied moments; the cover letter writer uses a bracketed recipient and reaches the length without stock openings; the meeting facilitator's agenda checks apply only to agendas; the contract reader gives no example dates; the privacy policy drafter waits for confirmed practices before drafting.
 - A text-only third review of the sensitive-family cards: about 70 wording fixes, no new rules.
 - Team lead descriptions say which requests should start them, from a new `triggers` field per family in `catalog/families.json`; the lead description limit is 400 characters. Leads send review fixes back to the owning role and list choices a specialist left to the user as decisions.
