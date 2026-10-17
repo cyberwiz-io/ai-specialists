@@ -12,10 +12,10 @@ Documentation changes need proportionate checks. Maintenance code changes must e
 
 Plugin subagents are read-only plus `Agent` by default. A role gets allowlisted `Bash` (git inspection and test runners) only through `commands: true` in `catalog/families.json`, only when its output is stronger for running tests, and never edit, write, network or arbitrary shell access. Set `model` in the manifest per family or role (`sonnet` for drafting-heavy families; sensitive families and every orchestrator keep `inherit`), and change it only with a reason recorded in the commit. Docs must describe these exceptions exactly; never write "every subagent is read-only" or "materials only, never runs commands" without them.
 
-## Working autonomy
-
-Finish a task end to end: build, check, test, open the pull request and drive CI to green. Ask the owner only for a genuine blocker, such as a missing credential, a decision that changes the product's goal, or a step that cannot be undone. Do not tag a release, publish, or change repository or organisation settings: the owner does those. Workflow actions must be pinned to full commit SHAs from GitHub-owned or verified publishers, or the organisation's policy fails the run.
-
 ## Branch naming
 
-Name every branch you create after the work it contains, in lowercase kebab-case with a type prefix, such as `fix/login-redirect-loop`, `feat/export-csv` or `docs/branch-naming-rule`. Never use random, opaque or tool-generated names such as `ccr-58c0cebc-iezwgg`, `claude/abc123`, `agent-42` or `temp`. If a session or tool assigns a name like that, rename the branch before pushing when that is allowed; if the user or host requires the assigned name, use it and say so. Give pull requests a title that describes the change.
+Name every branch you create after the work it contains, in lowercase kebab-case with a type prefix, such as `fix/login-redirect-loop`, `feat/export-csv` or `docs/branch-naming-rule`. Never use random, opaque or tool-generated names such as `ccr-58c0cebc-iezwgg`, `claude/abc123`, `agent-42` or `temp`. If a session or tool assigns a name like that, rename the branch before pushing when that is allowed; if the user or host requires the assigned name, use it and say so. Give pull requests a title that describes the change, and delete a temporary branch once it is merged.
+
+## Working autonomously
+
+When the user asks for a task to be finished, choose the most complete reasonable answer, state the default you picked, and carry the work through to done, including the follow-up steps it implies (build, checks, PR, merge, cleanup). Ask only about a blocker that needs the user, such as missing access, an irreversible or outward-facing action nobody has authorized, or a choice that changes their goal. Report what is unverified instead of claiming it passed. The owner tags releases, publishes, and changes repository or organisation settings: do not. Workflow actions must be pinned to full commit SHAs from GitHub-owned or verified publishers, or the organisation's policy fails the run.
