@@ -14,7 +14,7 @@ Start here. Find the smallest set of files for your task and read only those. Th
 | Change user setup text | [Start here](pack/START-HERE.md) |
 | Change build, checks or tests | [Contributing](CONTRIBUTING.md), then `scripts/packlib/` (`cards.py` card rules, `check.py` checks, `build.py` outputs) and `tests/`; finish with the three commands under Rules |
 | Use a specialist in Claude Code | [Claude Code adapter](adapters/claude-code/README.md) (experimental, generated, outside the pack) |
-| Check a card with fixture evals | [Evals](evals/README.md); in Claude Code, `/review-card <id>` |
+| Run or extend the card evaluations | [Evals](evals/README.md), `evals/fixtures/<family>.json`, `scripts/evals.py`; Claude Code uses `.claude/skills/card-evals/SKILL.md` |
 | Understand ownership of files | `config/module-map.json` (modules, guides, interfaces, digests) |
 | Check scope, limits and status | [Roadmap](docs/ROADMAP.md), [Validation](docs/VALIDATION.md) |
 
@@ -55,11 +55,15 @@ Each family folder has a generated `INDEX.md` listing its specialists with one-l
 | `dist/packs/<pack>.md` | Pasteable combined pack per family, or per part where `families.json` lists `packs` | No, generated |
 | `work/release/*.zip` | Release archive from `pack.py release`; CI attaches it to tagged GitHub Releases | No, generated and never committed |
 | `adapters/claude-code/agents/*.md` | Experimental Claude Code subagents, one per card | No, generated |
-| `adapters/claude-code/README.md`, `evals/` | Adapter status and limits; fixture eval scenarios | Yes |
+| `adapters/claude-code/README.md`, `evals/` | Adapter status and limits | Yes |
 | `.claude/` | Maintainer config for Claude Code: hook, commands, card reviewer | Yes |
 | `config/modules.json` | Module definitions | Yes |
 | `config/module-map.json` | Module map with digests | No, generated |
 | `docs/` | Guides, roadmap, validation status | Yes |
+| `evals/fixtures/<family>.json` | Fictional evaluation tasks, at least one per card | Yes |
+| `evals/reports/` | Reviewed evaluation reports | Yes, after review |
+| `.claude/` | Claude Code skill and subagents for the evaluation harness; not shipped | Yes |
+| `work/evals/<run>/` | Prompts, replies, grades and report of one run | No, generated and never committed |
 | `scripts/`, `tests/` | Build, check, search; their tests | Yes |
 | `LICENSES/`, `NOTICE.md`, `LICENSE.md` | License text and coverage | Rarely |
 

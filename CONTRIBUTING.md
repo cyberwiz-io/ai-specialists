@@ -22,9 +22,13 @@ python3 -B -m unittest discover -s tests
 
 To find a specialist, run `python3 -B scripts/pack.py find <words>`. To add or change a role, follow the [card guide](docs/CARD-GUIDE.md). The build computes every generated file before writing any of them. The check covers the roster, card shape and wording rules, safeguards for sensitive families, handoff IDs, size limits, generated-file freshness, local links, module coverage, and that no archive is committed. Each combined pack must stay under 32 KB (about 8,000 tokens); a larger family lists `packs` in `catalog/families.json` to split into parts. Tests exercise failures as well as the successful build. Generated archives are reproducible from the same file bytes.
 
+## Evaluate cards
+
+Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and every family has a boundary fixture; the check enforces both. When you add or change a role, add or update its fixture. To run the evaluations, ask Claude Code to run the card evals (the `card-evals` skill), or follow [evals/README.md](evals/README.md). A run spawns a fresh subagent per reply and per grade, writes everything under the ignored `work/evals/` folder, and produces a report. Commit a report to `evals/reports/` only after reviewing it, and keep its Limits section.
+
 ## Claude Code
 
-`.claude/` holds maintainer config for Claude Code: a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-adapter`. The build also generates the experimental adapter in `adapters/claude-code/agents/`, which stays outside the shipped pack and release archive. `python3 -B scripts/evals.py selfcheck` proves the fixture eval rules in [evals](evals/README.md) still discriminate; the tests run it too.
+`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-adapter`. The build generates the experimental adapter in `adapters/claude-code/agents/`, which stays outside the shipped pack and release archive.
 
 ## Release
 

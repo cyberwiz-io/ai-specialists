@@ -1,53 +1,70 @@
 # SPDX-License-Identifier: Apache-2.0
-"""List, prompt, grade and self-check the fixture evals for specialist cards, using only the standard library."""
+"""Prepare, track and report card evaluation runs. Claude Code runs the subagents; see the card-evals skill."""
 import argparse
+from datetime import date
 from pathlib import Path
+import subprocess
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from packlib import config, evals, manifest  # noqa: E402
+from packlib import check as checker, config, evals  # noqa: E402
+
+DEFAULT_TOOLS = ("Claude Code; each fixture ran in a fresh subject subagent and was graded by a separate fresh "
+                 "grader subagent, both limited to Read and Write for the harness files")
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("list", "prompt", "grade", "selfcheck"))
-    parser.add_argument("role", nargs="?", help="role ID such as software-engineering/code-reviewer")
-    parser.add_argument("scenario", nargs="?", help="scenario id")
-    parser.add_argument("response", nargs="?", type=Path, help="grade: file holding the saved response")
-    args = parser.parse_args(argv)
-    root = config.ROOT
+def commit(root):
+    """Current commit, marked when the working tree has uncommitted changes."""
     try:
-        scenarios = evals.load(root)
-        if args.command == "selfcheck":
-            print(f"PASS: {evals.selfcheck(scenarios)} scenarios; good samples pass and bad samples fail")
-            return
-        families = manifest.load(root)
-        if args.command == "list":
-            roles = [evals.find_role(families, args.role)] if args.role else manifest.roles(families)
-            for sid, scenario in scenarios.items():
-                count = sum(evals.applies(scenario, role) for role in roles)
-                if count:
-                    print(f"{sid}\t{count} role(s)\t{scenario['source']}")
-            return
-        if not (args.role and args.scenario):
-            parser.error(f"{args.command} needs a role ID and a scenario id")
-        role = evals.find_role(families, args.role)
-        if args.scenario not in scenarios:
-            raise ValueError(f"unknown scenario {args.scenario!r}; known: {', '.join(scenarios)}")
-        scenario = scenarios[args.scenario]
-        if not evals.applies(scenario, role):
-            raise ValueError(f"scenario {args.scenario} does not apply to {role['id']}")
-        if args.command == "prompt":
-            print(evals.prompt(root, families, role, scenario))
-            return
-        if not args.response:
-            parser.error("grade needs a response file")
-        if not args.response.is_file():
-            raise ValueError(f"response file not found: {args.response}")
-        failures = evals.grade(scenario, args.response.read_text(encoding="utf-8"))
-        if failures:
-            raise ValueError("\n".join(failures))
-        print(f"PASS: {role['id']} / {args.scenario} (keyword rules only)")
+        head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True)
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", "catalog", "pack", "evals", "dist"],
+                               cwd=root, capture_output=True, text=True, check=True)
+    except (OSError, subprocess.CalledProcessError):
+        return "unknown (not a Git checkout)"
+    return head.stdout.strip() + (" with uncommitted changes" if dirty.stdout.strip() else "")
+
+
+def prepare(root, args, today=None):
+    families, generated = checker.check(root)
+    fixtures = evals.select(evals.load(root, families), args.family, args.role, args.kind)
+    meta = {"version": config.version(root), "commit": commit(root), "host": args.host, "tools": args.tools,
+            "model": args.model, "grader": args.grader or args.model, "date": (today or date.today()).isoformat()}
+    folder = evals.prepare(root, families, generated, fixtures, args.run, meta)
+    return folder, len(fixtures)
+
+
+def main(argv=None, root=None):
+    root = root or config.ROOT
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="command", required=True)
+    first = commands.add_parser("prepare", help="write prompts for a new run under work/evals/<run>/")
+    first.add_argument("--run", required=True, help="new run name, a slug such as 2026-10-17-security")
+    first.add_argument("--host", required=True, help="host that runs the subagents, such as 'Claude Code (cloud)'")
+    first.add_argument("--model", required=True, help="model under test, as the host reports it")
+    first.add_argument("--grader", help="grader model, if different from --model")
+    first.add_argument("--tools", default=DEFAULT_TOOLS, help="tools available to the subagents")
+    first.add_argument("--family", help="only this family")
+    first.add_argument("--role", help="only this role ID")
+    first.add_argument("--kind", choices=evals.KINDS, help="only task or boundary fixtures")
+    for name, text in (("status", "list fixtures still lacking a reply or grade"),
+                       ("report", "validate every reply and grade, then write REPORT.md")):
+        commands.add_parser(name, help=text).add_argument("--run", required=True)
+    args = parser.parse_args(argv)
+    try:
+        if args.command == "prepare":
+            folder, count = prepare(root, args)
+            print(f"Prepared {count} fixtures in {folder.relative_to(root).as_posix()}")
+        elif args.command == "status":
+            record, need_output, need_grade = evals.status(root, args.run)
+            for fixture in need_output:
+                print(f"needs reply\t{fixture['key']}\t{fixture['subject_prompt']}\t{fixture['output']}")
+            for fixture in need_grade:
+                print(f"needs grade\t{fixture['key']}\t{fixture['grader_prompt']}\t{fixture['grade']}")
+            done = len(record["fixtures"]) - len(need_output) - len(need_grade)
+            print(f"{done} of {len(record['fixtures'])} fixtures replied and graded")
+        else:
+            path = evals.report(root, args.run)
+            print(f"Report written to {path.relative_to(root).as_posix()}")
     except (OSError, ValueError) as error:
         parser.exit(1, f"Eval {args.command} failed: {error}\n")
 

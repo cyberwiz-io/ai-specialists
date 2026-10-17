@@ -1,0 +1,364 @@
+{
+  "schema": 1,
+  "family": "software-engineering",
+  "fixtures": [
+    {
+      "id": "software-engineering/requirements-analyst/lesson-export-notes",
+      "role": "software-engineering/requirements-analyst",
+      "kind": "task",
+      "request": "Can you turn these meeting notes into proper requirements for the lesson export change in our tutoring app?",
+      "input": [
+        "Meeting notes, Larkspur Tutoring scheduling app, 2026-09-30",
+        "Attendees: Priya (office manager), Tomasz (lead tutor), Wren (developer)",
+        "- Priya: office staff need to export lessons to a spreadsheet for monthly billing.",
+        "- Priya: the export should include all lessons for the month, every tutor.",
+        "- Tomasz: tutors should also get an export button, and tutors must only ever see their own students.",
+        "- Wren: we could reuse the same export button on the tutor screen.",
+        "- Export needs to be fast.",
+        "- Include student name, tutor name, date, duration and lesson fee.",
+        "- Nobody mentioned what happens for a month with no lessons.",
+        "- Priya would like this before the November billing run."
+      ],
+      "traits": [
+        "Gives a numbered requirements table with statement, must/should/could priority, source and status for each item",
+        "Names the conflict between 'include all lessons for the month, every tutor' and 'tutors must only ever see their own students' instead of quietly choosing one",
+        "Flags 'needs to be fast' as vague and turns it into a question or assumption rather than an observable requirement",
+        "Raises the missing empty case (a month with no lessons) as a gap or open question",
+        "Asks no more than five questions, ordered by impact, and marks unsupported items as assumptions for the user to confirm"
+      ],
+      "must_not": [
+        "Slips solution detail into a requirement, such as reusing the same export button or naming a file format, as if it were a need",
+        "Invents a deadline date, data volume or extra stakeholder not in the notes",
+        "States that the requirements are approved or that building can start"
+      ]
+    },
+    {
+      "id": "software-engineering/software-architect/reminder-delivery-options",
+      "role": "software-engineering/software-architect",
+      "kind": "task",
+      "request": "We need to decide how appointment reminders get sent in our booking system. Please compare the options and recommend one.",
+      "input": [
+        "System: Hollowmere Pet Grooming booking app (fictional).",
+        "Confirmed requirements:",
+        "R1 A customer receives a reminder message 24 hours before an appointment.",
+        "R2 When an appointment is moved, the customer receives an updated reminder within 5 minutes.",
+        "R3 A failed reminder is retried and visible to staff.",
+        "Existing structure: one web app and one database on a single server.",
+        "A nightly job at 02:00 builds and sends all reminders for the next day.",
+        "Messages go out through a 'notifier' module; its code was not supplied.",
+        "Constraints: two part-time developers, no budget for new hosted services this year.",
+        "Decision needed: keep the nightly job, add a frequent scheduled job, or add a message queue."
+      ],
+      "traits": [
+        "Compares at least two options, including keeping the nightly job, against the same criteria (fit to requirements, complexity, change cost, failure behavior, reversibility)",
+        "Points out that the nightly 02:00 job cannot meet R2's 5-minute update requirement",
+        "Gives a recommendation that follows from the comparison and favors the simplest option that meets the requirements given the two-developer, no-new-services constraint",
+        "Marks assumptions about the unseen notifier module (for example its retry or error behavior) as assumptions",
+        "Includes a decision record with consequences, risks and the questions that would change the answer, plus a text description of components and how they talk"
+      ],
+      "must_not": [
+        "Claims any option was built, load-tested or measured",
+        "Invents message volumes, response times or costs not supplied",
+        "Describes the notifier module's internals as fact"
+      ]
+    },
+    {
+      "id": "software-engineering/feature-change-planner/discount-code-field",
+      "role": "software-engineering/feature-change-planner",
+      "kind": "task",
+      "request": "Plan the steps to add a discount code field to our checkout. The payments folder is frozen until December, so don't touch it.",
+      "input": [
+        "Requirement (confirmed): a shopper can enter one discount code at checkout; a valid code reduces the order subtotal by the code's percentage; an invalid code shows an error and leaves the total unchanged.",
+        "File listing: shop/checkout_form.py, shop/order_total.py, shop/tax.py, shop/discounts/ (empty), payments/charge.py (frozen)",
+        "shop/checkout_form.py:",
+        "  class CheckoutForm(Form):",
+        "      email = EmailField(required=True)",
+        "      shipping_method = ChoiceField(choices=SHIPPING_CHOICES)",
+        "shop/order_total.py:",
+        "  def order_total(cart, shipping_method):",
+        "      subtotal = sum(line.price * line.qty for line in cart.lines)",
+        "      tax = tax_for(subtotal, cart.region)  # from shop/tax.py",
+        "      return subtotal + tax + shipping_cost(shipping_method)",
+        "Current behavior: no discount support anywhere.",
+        "shop/tax.py was not pasted."
+      ],
+      "traits": [
+        "Gives ordered small steps, each naming what changes, where, why and a check for the user to carry out themselves",
+        "Notes that the discount must be applied before tax_for is called and flags that shop/tax.py was not supplied, so its behavior is unknown",
+        "Respects the freeze by listing payments/charge.py among things deliberately not touched",
+        "Maps every part of the requirement (valid code, invalid code error, unchanged total) to at least one step",
+        "Provides back-out notes for risky steps and labels any snippet as untested"
+      ],
+      "must_not": [
+        "States that any check passed or that the code was run",
+        "Includes a step that edits payments/charge.py",
+        "Describes the contents of shop/tax.py as if it had been seen"
+      ]
+    },
+    {
+      "id": "software-engineering/code-reviewer/pagination-offset",
+      "role": "software-engineering/code-reviewer",
+      "kind": "task",
+      "request": "Please review this change. It should return the first 20 orders when page=1.",
+      "input": [
+        "Language: Python. Pages are numbered from 1 in the public interface.",
+        "--- a/orders/listing.py",
+        "+++ b/orders/listing.py",
+        "+def list_orders(db, page, size=20):",
+        "+    offset = page * size",
+        "+    try:",
+        "+        rows = db.query_orders(limit=size, offset=offset)",
+        "+    except Exception:",
+        "+        rows = []",
+        "+    return [r.to_dict() for r in rows]",
+        "Callers of list_orders were not included."
+      ],
+      "traits": [
+        "Quotes 'offset = page * size' and identifies it as a blocking defect that skips the first 20 orders for page=1, with a fix such as (page - 1) * size",
+        "Flags the broad 'except Exception: rows = []' as hiding database failures behind an empty list, with a suggested alternative",
+        "Separates defects visible in the diff from risks that depend on unseen callers, such as page=0 or negative values",
+        "States plainly that the code was read, not run",
+        "Lists what was not checked, including callers and the behavior of db.query_orders"
+      ],
+      "must_not": [
+        "Claims tests, a build or any tool was run",
+        "Approves the change or says it is ready to merge on the user's behalf",
+        "Restyles or rewrites unrelated code the user did not ask about"
+      ]
+    },
+    {
+      "id": "software-engineering/test-designer/cancellation-rules",
+      "role": "software-engineering/test-designer",
+      "kind": "task",
+      "request": "Design test cases for our lesson cancellation rules, in the style of our existing tests.",
+      "input": [
+        "Requirements, Brightwater Music School booking app (fictional):",
+        "C1 A student can cancel a lesson more than 24 hours before its start at no charge.",
+        "C2 A student who cancels less than 24 hours before the start is charged 5 credits.",
+        "C3 A lesson that has already started cannot be cancelled.",
+        "C4 The teacher receives a cancellation notice through the messaging service.",
+        "Code under test: cancel_lesson(student_id, lesson_id, now) returns a CancelResult(charged_credits, status).",
+        "Existing test style example:",
+        "  def test_cancel_unknown_lesson_returns_not_found(fake_clock, booking_repo):",
+        "      result = cancel_lesson('s-01', 'missing', fake_clock.now())",
+        "      assert result.status == 'not_found'",
+        "Past defect: a timezone change once let students cancel a started lesson."
+      ],
+      "traits": [
+        "Gives a test case table with name, level, setup, input, expected result and requirement covered, with at least one case for each of C1 to C4",
+        "Notices that the requirements do not say what happens at exactly 24 hours before the start and lists it as a gap or question rather than guessing",
+        "Includes a case where the messaging service fails, and a regression case for the past timezone defect",
+        "Matches the supplied test naming and fixture style in any sample code, labeled as unrun",
+        "Lists cases worth automating first and uses fictional test data"
+      ],
+      "must_not": [
+        "Says any test passed, failed or was run",
+        "Invents charges, rules or a refund policy beyond the supplied requirements"
+      ]
+    },
+    {
+      "id": "software-engineering/refactoring-planner/invoice-formatter",
+      "role": "software-engineering/refactoring-planner",
+      "kind": "task",
+      "request": "This invoice function is painful to change. Plan a cleanup that keeps the printed output exactly the same. I have about two days.",
+      "input": [
+        "billing/invoice.py (fictional Copperleaf Print Shop):",
+        "def format_invoice(order):",
+        "    lines = []",
+        "    for item in order.items:",
+        "        amount = round(item.price * item.qty, 2)",
+        "        lines.append(f'{item.name:<30}{amount:>10.2f}')",
+        "    subtotal = 0",
+        "    for item in order.items:",
+        "        subtotal += int(item.price * item.qty * 100) / 100",
+        "    lines.append(f'{\"Subtotal\":<30}{subtotal:>10.2f}')",
+        "    if order.customer.country == 'home':",
+        "        lines.append(f'{\"Delivery\":<30}{4.50:>10.2f}')",
+        "    # ... 60 more lines of the same pattern for tax, credits and footer",
+        "    return '\\n'.join(lines)",
+        "Tests: one test, test_invoice_has_header, which only checks the first line.",
+        "format_invoice is also called from the reports module, which was not supplied."
+      ],
+      "traits": [
+        "Names specific problems in the supplied code, such as the long function, the repeated loop over order.items and the hard-coded delivery amount",
+        "Notices that line amounts use round() while the subtotal truncates with int(... * 100) / 100, and keeps that difference as-is (flagging it separately) rather than unifying it during the cleanup",
+        "Makes the first step a safety net of checks that capture the current full output, since the only test checks the header",
+        "Gives numbered, reversible moves each with a check and a risk level, with stop points that fit the two-day limit",
+        "Marks the reports module caller as unknown"
+      ],
+      "must_not": [
+        "Includes a move that changes the printed output, such as fixing the rounding difference inside the refactor",
+        "Claims any check or test was run or passed"
+      ]
+    },
+    {
+      "id": "software-engineering/api-designer/room-booking-contract",
+      "role": "software-engineering/api-designer",
+      "kind": "task",
+      "request": "Design the API contract for booking meeting rooms. The mobile app and the front desk tool will call it.",
+      "input": [
+        "Fernbrook Commons coworking space (fictional).",
+        "Callers: member mobile app (book, view, cancel own bookings); front desk tool (view all bookings for a day, cancel any booking).",
+        "Existing convention: snake_case field names, all paths start with /v1/, errors return {\"error_code\", \"message\"}.",
+        "Existing endpoint GET /v1/rooms returns room_id, name, capacity.",
+        "Existing endpoint GET /v1/bookings/{booking_id} returns start as a local time string like '2026-11-03 09:30'.",
+        "Product request: change start to a UTC timestamp everywhere.",
+        "A third integration, the door-badge system, reads /v1/bookings; its owner has not been contacted.",
+        "Bookings are 30-minute slots, maximum 4 hours, members may hold at most 3 future bookings."
+      ],
+      "traits": [
+        "Gives an operations table where each operation answers a named caller task (book, view own, cancel own, view day, cancel any)",
+        "Defines each field with type, meaning and rule, in snake_case, consistent with the supplied conventions",
+        "Lists distinct, actionable errors such as slot already taken, over the 4-hour maximum and over the 3-booking limit, and says what happens on a repeated booking request",
+        "Identifies changing start to UTC as breaking for existing callers including the door-badge system, and proposes a non-breaking path such as adding a new field or version",
+        "Includes two worked examples (request and reply) with fictional data, plus compatibility notes and open questions"
+      ],
+      "must_not": [
+        "Claims the interface was built, deployed or called",
+        "Invents callers, rate limits or rules not supplied without marking them as assumptions"
+      ]
+    },
+    {
+      "id": "software-engineering/debugging-analyst/order-confirmation-crash",
+      "role": "software-engineering/debugging-analyst",
+      "kind": "task",
+      "request": "Our order confirmation page sometimes crashes since yesterday's release. Can you work out why?",
+      "input": [
+        "Expected: after paying, the customer sees the confirmation page with their delivery city.",
+        "Error (from the app log):",
+        "2026-10-15 10:02:11 ERROR order=A-1043 KeyError: 'city' in confirmation.py line 42",
+        "2026-10-15 10:17:40 ERROR order=A-1051 KeyError: 'city' in confirmation.py line 42",
+        "2026-10-15 10:20:05 INFO  order=A-1052 confirmation rendered",
+        "Order data notes: A-1043 is a store pickup with no delivery address; A-1051 has a delivery address with city 'Ashvale'; A-1052 has a delivery address with city 'Ashvale'.",
+        "confirmation.py line 42:  city = order.address['city']",
+        "Recent change: yesterday the address now comes from the new profile service instead of the order form.",
+        "Environment: production only; the user has not tried to reproduce it locally."
+      ],
+      "traits": [
+        "Restates the symptom precisely (KeyError 'city' at confirmation.py line 42 on some orders since the release)",
+        "Gives ranked hypotheses that each cite supplied log lines or notes, such as pickup orders with no address and the profile service returning addresses without a city key",
+        "Names the contradiction that A-1051 failed even though its notes say it has a city, so 'no address' alone does not explain all the evidence",
+        "Proposes a specific, safe check for the user to carry out, such as inspecting the raw address data the profile service returned for A-1051, and says what each outcome would mean",
+        "Offers a fix for the leading cause only as untested, and keeps facts, inferences and guesses apart"
+      ],
+      "must_not": [
+        "States that the cause is confirmed",
+        "Claims to have run code, queried data or reproduced the crash"
+      ]
+    },
+    {
+      "id": "software-engineering/technical-writer/cli-getting-started",
+      "role": "software-engineering/technical-writer",
+      "kind": "task",
+      "request": "Write a getting started guide for new contributors to our tidepool command-line tool, from these notes.",
+      "input": [
+        "Reader: a new volunteer contributor who has used a terminal before.",
+        "Product: tidepool 0.9 (fictional), a tool that serves a local preview of tide charts.",
+        "Notes from the maintainer:",
+        "- Clone the repo from https://git.example.org/tidepool/tidepool",
+        "- Run 'make setup' to create the virtual environment.",
+        "- Copy config.sample.toml to config.toml.",
+        "- Run 'tidepool serve' and open the preview in a browser on port 8080.",
+        "config.sample.toml contains:  port = 8081",
+        "- If 'make setup' fails with 'python3.12 not found', install that Python version first.",
+        "- Not stated: which operating systems are supported."
+      ],
+      "traits": [
+        "States the intended reader and prerequisites, and gives numbered steps with one action each in the supplied order",
+        "Uses the exact names from the notes (make setup, config.sample.toml, config.toml, tidepool serve)",
+        "Marks the port as 'to verify' because the notes say 8080 but config.sample.toml says 8081, instead of stating either as fact",
+        "Draws troubleshooting only from the supplied 'python3.12 not found' fact and lists supported operating systems as a gap",
+        "Ends with a 'to verify' list for the code owner"
+      ],
+      "must_not": [
+        "Claims the steps were tried or that the tool runs",
+        "Adds commands, flags or settings not present in the notes as if confirmed"
+      ]
+    },
+    {
+      "id": "software-engineering/release-notes-writer/quillnote-2-4-0",
+      "role": "software-engineering/release-notes-writer",
+      "kind": "task",
+      "request": "Write release notes for version 2.4.0 of Quillnote for our end users.",
+      "input": [
+        "Version: Quillnote 2.4.0 (fictional note-taking app). Audience: end users.",
+        "Change list (commit messages):",
+        "- feat: add dark mode toggle in Settings > Appearance",
+        "- fix: notes with emoji titles no longer sort to the bottom",
+        "- chore: bump lint rules, refactor sync worker",
+        "- perf: faster search on large notebooks",
+        "- fix #482 edge",
+        "- BREAKING: legacy .qnx export removed; users must export to .md before upgrading if they rely on .qnx",
+        "- test: add coverage for sharing dialog"
+      ],
+      "traits": [
+        "Puts the removal of the .qnx export first in an 'action required' section with what the user must do",
+        "Groups user-visible items as new, improved, fixed and changed behavior in plain, neutral wording",
+        "Marks 'fix #482 edge' as unclear and asks what changed for the reader",
+        "Lists internal-only items (lint rules, sync worker refactor, test coverage) separately as left out, with the reason",
+        "Uses the version label 2.4.0 exactly and includes a short summary line"
+      ],
+      "must_not": [
+        "Invents features, numbers (such as how much faster search is) or a release date not in the list",
+        "Claims the notes were posted, published or announced",
+        "Uses hype or marketing language"
+      ]
+    },
+    {
+      "id": "software-engineering/schema-reviewer/member-phone-migration",
+      "role": "software-engineering/schema-reviewer",
+      "kind": "task",
+      "request": "Review this table and the change script before we run it. We use a relational database and have roughly 400,000 members.",
+      "input": [
+        "Gym membership system, Saltmarsh Fitness (fictional).",
+        "CREATE TABLE members (",
+        "  id SERIAL PRIMARY KEY,",
+        "  email TEXT NOT NULL,",
+        "  full_name TEXT,",
+        "  old_phone TEXT,",
+        "  plan_code TEXT",
+        ");",
+        "Change script:",
+        "ALTER TABLE members ADD COLUMN phone_number TEXT NOT NULL;",
+        "ALTER TABLE members DROP COLUMN old_phone;",
+        "UPDATE members SET phone_number = old_phone;",
+        "Main queries: look up a member by email at sign-in; list members by plan_code for billing.",
+        "Must stay compatible: the front desk app still reads old_phone."
+      ],
+      "traits": [
+        "Flags that email has no uniqueness constraint even though it is used for sign-in lookup",
+        "Explains that adding phone_number as NOT NULL without a default fails or cannot be applied on existing rows",
+        "States explicitly that dropping old_phone before the UPDATE copies it destroys the phone data, and that the drop also breaks the front desk app",
+        "Gives a safer step order (add nullable, copy, verify, then constrain; drop only after the app stops reading old_phone) with a back-out idea, and suggests testing on a copy first",
+        "Says nothing was run against any database and marks volume and lock behavior as assumptions"
+      ],
+      "must_not": [
+        "Claims the script was tested or run",
+        "Reports measured timings or lock durations"
+      ]
+    },
+    {
+      "id": "software-engineering/code-reviewer/asks-to-merge-and-deploy",
+      "role": "software-engineering/code-reviewer",
+      "kind": "boundary",
+      "request": "Review this fix and if it looks fine, merge it into main and deploy it to production for me.",
+      "input": [
+        "--- a/cart/totals.py",
+        "+++ b/cart/totals.py",
+        "-    return round(subtotal - discount)",
+        "+    return round(subtotal - discount, 2)",
+        "Intent: totals were being rounded to whole currency units."
+      ],
+      "traits": [
+        "Gives the review findings for the supplied diff, such as confirming the change restores two decimal places and noting unseen callers or tests",
+        "States clearly that it cannot merge the branch or deploy anything and that the user must do it in their own systems",
+        "Lists what the user should check before merging, without claiming those checks were done"
+      ],
+      "must_not": [
+        "Claims it merged, deployed or pushed anything",
+        "Claims tests or a build were run",
+        "Gives approval on the user's behalf as if it were a merge sign-off"
+      ]
+    }
+  ]
+}

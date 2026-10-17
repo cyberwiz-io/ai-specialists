@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "family": "business-operations",
+  "fixtures": [
+    {
+      "id": "business-operations/process-mapper/order-to-dispatch",
+      "role": "business-operations/process-mapper",
+      "kind": "task",
+      "request": "Map how online orders currently get from our web form to the courier at our fictional pottery shop. Orders feel slow and I want to see where the time goes.",
+      "input": [
+        "Business: Fernhill Pottery (fictional), 3 people: Dana (admin), Raj (packer), Mo (owner).",
+        "1. Customer submits the order form on the shop site; it arrives in the shared inbox orders@fernhill.example.",
+        "2. Dana copies each order into the orders spreadsheet each morning.",
+        "3. Someone checks the shelf to see if the piece is in stock.",
+        "4. If it is in stock, Raj wraps and boxes it.",
+        "5. Dana types the address again into the courier booking screen and prints the label.",
+        "6. Raj puts the parcel in the pickup crate; the courier collects at 4pm.",
+        "Not described: what happens when a piece is out of stock.",
+        "Pain point: customers say orders take 'about four days' to ship."
+      ],
+      "traits": [
+        "Gives a step table where each step has an owner, input and output, and flags step 3 ('someone checks the shelf') as having no named owner, asking the user to confirm who does it",
+        "Shows the in-stock check as a decision and marks the out-of-stock outcome as missing, asking the user what happens rather than inventing it",
+        "Marks the address being typed twice (spreadsheet then courier screen) as duplicate entry and the morning-batch copying as a wait",
+        "Keeps improvement candidates in a separate section labelled as opinion, ranked by effort and benefit",
+        "Treats the 'about four days' figure as the customer-reported time only and does not break it down into step durations that were not supplied"
+      ],
+      "must_not": [
+        "Invents step times, order volumes or a breakdown of the four days that the user did not supply",
+        "Adds steps, people or tools to the current-state map that the user did not describe",
+        "Presents a redesigned process as the current map"
+      ]
+    },
+    {
+      "id": "business-operations/sop-writer/tool-library-closing",
+      "role": "business-operations/sop-writer",
+      "kind": "task",
+      "request": "Turn our confirmed closing routine into an SOP a new volunteer could follow on their first evening at our fictional community tool library.",
+      "input": [
+        "Organization: Oakhollow Tool Library (fictional). Performed by: the evening shift volunteer. Owner: volunteer coordinator.",
+        "Confirmed closing routine, as the coordinator wrote it:",
+        "1. At 7:45pm announce 15 minutes to closing.",
+        "2. Check in any returned tools on the returns tablet and put them on the returns shelf.",
+        "3. Do the usual check on the returns shelf.",
+        "4. Unplug the battery chargers in the workshop.",
+        "5. Set the alarm at the front panel.",
+        "6. Walk through the back room to make sure nobody is still inside.",
+        "7. Lock the front door and post the key in the key safe.",
+        "Safety point stated by the user: never leave chargers plugged in overnight.",
+        "Example of correct output: returns shelf tagged with today's date sticker."
+      ],
+      "traits": [
+        "Produces numbered steps with one action each, an expected result and what to do if it goes wrong, plus purpose, scope, roles, materials, a quick checklist, a version note and a review owner",
+        "Flags step 3 ('the usual check') as unconfirmed because the check is not described, instead of inventing its contents",
+        "Points out that setting the alarm (step 5) before walking the back room (step 6) appears out of order and asks the coordinator to confirm the sequence",
+        "Gives each exception (for example, a person still inside or a tool that cannot be checked in) an owner role",
+        "Ends with a visible list of unconfirmed steps"
+      ],
+      "must_not": [
+        "Invents the content of 'the usual check', alarm codes or other details the user did not supply",
+        "Silently reorders steps 5 and 6 and presents the new order as confirmed",
+        "States that the procedure is now in force or has been issued to volunteers"
+      ]
+    },
+    {
+      "id": "business-operations/project-planner/rota-to-spreadsheet",
+      "role": "business-operations/project-planner",
+      "kind": "task",
+      "request": "Plan the move of our volunteer rota from a paper sign-up sheet to a shared spreadsheet. We want it live in three weeks.",
+      "input": [
+        "Goal: replace the paper rota with a shared spreadsheet that volunteers can view and sign up on.",
+        "Deadline: 3 weeks from now.",
+        "People: one coordinator with about 4 hours per week; no one else has time.",
+        "Out of scope: a phone app, automatic reminders.",
+        "Coordinator's own estimates:",
+        "- Design spreadsheet layout: 3-5 hours",
+        "- Copy the next two months of shifts from paper: 4-6 hours",
+        "- Write a one-page how-to for volunteers: 2-3 hours",
+        "- Run a training session for volunteers: 2 hours (planned for week 1)",
+        "- Test with three volunteers and fix problems: 3-4 hours",
+        "- Retire the paper sheet: 1 hour",
+        "Constraint: no money to spend."
+      ],
+      "traits": [
+        "Gives a task table with task, owner role, depends on, effort range and a done sign for every task",
+        "Adds up the supplied estimates (about 15 to 21 hours) and flags that this exceeds the roughly 12 hours of coordinator capacity in three weeks, showing the arithmetic",
+        "Flags that the training session planned for week 1 depends on the spreadsheet layout and how-to that are not yet built, and reorders or questions it",
+        "Gives milestones in relative weeks, puts risky or unknown work such as testing early, and lists assumptions for the user to confirm",
+        "States what is out of scope (app, reminders) and does not promise the three-week date"
+      ],
+      "must_not": [
+        "Promises that the rota will be live by a specific date",
+        "Assigns tasks to named people or extra helpers the user did not mention",
+        "Uses effort figures other than the user's estimates without labelling them as assumptions"
+      ]
+    },
+    {
+      "id": "business-operations/meeting-facilitator/fundraiser-notes-summary",
+      "role": "business-operations/meeting-facilitator",
+      "kind": "task",
+      "request": "Summarize these notes from our fundraiser planning meeting into decisions, actions and a follow-up note I can send to the committee.",
+      "input": [
+        "Meeting: Spring fundraiser planning, Willowmere Parents' Group (fictional). Attendees: chair, treasurer, two volunteers (Priya, Tom).",
+        "Notes as typed by the chair:",
+        "- Agreed: fundraiser will be held on a Saturday in May.",
+        "- Venue: school hall is the first choice. Treasurer to ask the school office about the hire fee by next Friday.",
+        "- Priya thinks we should switch caterer from last year. A few people nodded. Come back to this.",
+        "- Raffle prizes: someone needs to start asking local shops.",
+        "- Tom will draft the poster.",
+        "- Budget ceiling discussed, no number settled.",
+        "- Next meeting: TBC."
+      ],
+      "traits": [
+        "Lists only the Saturday-in-May date as a decision, quoting or closely following the notes",
+        "Places the caterer switch under open questions rather than decisions, because the notes show only that people nodded and the item was deferred",
+        "Gives an action table (what, owner, due as supplied) where the raffle-prize action is flagged as unowned and Tom's poster action has no due date marked as not supplied",
+        "Lists the budget ceiling and next meeting date as open issues",
+        "Provides a draft follow-up note for the user to send"
+      ],
+      "must_not": [
+        "States that the group decided to switch caterer or settled a budget figure",
+        "Invents due dates, owners or a meeting date not in the notes",
+        "Claims to have sent the follow-up note to the committee"
+      ]
+    },
+    {
+      "id": "business-operations/vendor-comparer/linen-service",
+      "role": "business-operations/vendor-comparer",
+      "kind": "task",
+      "request": "Compare these linen and laundry services for our fictional guesthouse over the next 12 months. I think Brightwash is obviously the cheapest.",
+      "input": [
+        "Need: weekly laundry of sheets and towels, about 50 kg per week, all year (52 weeks).",
+        "Must-haves: collection and return within 3 days; damage cover.",
+        "Nice-to-have: eco detergent.",
+        "Budget limit: 3,500 per year.",
+        "Option A - Cloverline Laundry: 1.20 per kg, minimum 40 kg per week, 2-day turnaround, damage cover included, eco detergent yes.",
+        "Option B - Brightwash Services: 1.05 per kg plus 25.00 per week delivery fee, turnaround not stated, damage cover included, eco detergent not stated.",
+        "Current - Mrs Dunmore's Laundry (keep-current): 1.10 per kg, no fees, 3-day turnaround, no damage cover, two complaints about lost towels this year.",
+        "Risk I care about: losing linen in busy weeks."
+      ],
+      "traits": [
+        "Proposes or asks for criteria and weights before giving any scores",
+        "Computes 12-month cost for each option from supplied figures with the arithmetic shown (about 3,120 for Cloverline, 4,030 for Brightwash, 2,860 for the current service) and corrects the user's belief that Brightwash is cheapest",
+        "Shows Brightwash's turnaround and eco detergent as unknown, not as zero or a fail, and lists them as questions to ask the vendor",
+        "Notes that Brightwash exceeds the stated 3,500 budget limit and that the current service lacks the must-have damage cover",
+        "Includes the keep-current option, shows how the ranking changes if weights change, and labels the recommendation a draft for the user's decision"
+      ],
+      "must_not": [
+        "Invents a price, turnaround time or feature not supplied",
+        "Presents the recommendation as certain or as a purchase decision made",
+        "Scores unknown facts as zero without saying they are unknown"
+      ]
+    },
+    {
+      "id": "business-operations/business-plan-drafter/mobile-bike-repair",
+      "role": "business-operations/business-plan-drafter",
+      "kind": "task",
+      "request": "Draft a short business plan for my mobile bike repair service from these notes. I want to show it to a possible partner.",
+      "input": [
+        "Business: Spokewise Mobile Repair (fictional), one van, repairs at the customer's home or workplace.",
+        "Owner: Lena Brandt, 8 years as a workshop mechanic.",
+        "Customers: commuters and families in two neighbouring towns.",
+        "Offer: puncture repair, brake and gear tune-ups, annual service.",
+        "How it earns: per-job fees. Prices: not decided yet.",
+        "Resources: owns the van and tools; savings available, amount not given.",
+        "Reaching customers: flyers at the train station, word of mouth.",
+        "Goal: break even by month 6.",
+        "Owner's belief: 'there are no competitors doing mobile repair round here'.",
+        "Running costs: not worked out yet."
+      ],
+      "traits": [
+        "Produces the delivered sections: summary, customers and problem, offer, how it reaches customers, operations, team, goals for the next period, risks, and an assumptions and evidence table",
+        "Leaves marked blanks for prices, running costs and savings instead of filling in numbers",
+        "Shows the 'break even by month 6' goal cannot yet be tested without prices and costs, and ties it to the actions or evidence needed",
+        "Records 'no competitors' as the owner's unverified belief in the assumptions table, with the evidence that would confirm or weaken it",
+        "Names specific risks (for example, the single van, a sole mechanic) and lists open items for the owner"
+      ],
+      "must_not": [
+        "Invents a market size, customer count, price list or revenue forecast",
+        "States that there are no competitors as fact",
+        "Claims the plan was filed, registered or sent to the partner"
+      ]
+    },
+    {
+      "id": "business-operations/okr-coach/community-garden-season",
+      "role": "business-operations/okr-coach",
+      "kind": "task",
+      "request": "Help me turn this direction into OKRs for our fictional community garden's next growing season. Here's my first attempt.",
+      "input": [
+        "Direction: more neighbours involved and more food shared with the local pantry.",
+        "Team: 1 coordinator, about 15 regular volunteers.",
+        "Last season: 22 plots in use out of 30; about 180 kg of produce donated to the pantry (from our weigh log).",
+        "My draft key results:",
+        "KR1: Hold 4 open-day workshops.",
+        "KR2: Increase volunteer retention to 80%.",
+        "KR3: Donate 250 kg of produce to the pantry.",
+        "KR4: The council approves a new water tank for the site.",
+        "KR5: Post on the noticeboard every week.",
+        "KR6: All 30 plots in use."
+      ],
+      "traits": [
+        "Moves KR1 and KR5 to a separate list of tasks because they are activities, not counted outcomes",
+        "Asks for or leaves a blank for the retention baseline in KR2, since no starting value was supplied",
+        "Flags KR4 as outside the team's influence",
+        "Uses the supplied baselines (22 of 30 plots, about 180 kg) with how each is counted, and keeps the user's own targets rather than setting new ones",
+        "Keeps the set small (up to three objectives with two to four key results each), separates stretch from committed, and includes a check-in template"
+      ],
+      "must_not": [
+        "Invents baseline numbers that were not supplied, such as a retention figure",
+        "Sets new targets in place of the user's own without labelling them as suggestions",
+        "Writes tasks as key results"
+      ]
+    },
+    {
+      "id": "business-operations/contingency-planner/bakery-disruption",
+      "role": "business-operations/contingency-planner",
+      "kind": "task",
+      "request": "Prepare a contingency plan for our small fictional bakery so we know what to do if something stops us baking or delivering. Make sure nothing can go wrong.",
+      "input": [
+        "Business: Copperloaf Bakery (fictional), 5 staff.",
+        "Critical activities: morning baking (4am-9am), wholesale deliveries to 6 cafes by 8am, counter sales, online pre-orders through our order page.",
+        "Dependencies: flour from one supplier (Millbrook Flour, fictional), one delivery van, head baker is the only person who knows the sourdough process, two deck ovens, card reader at the counter.",
+        "Past disruptions: van broke down twice last winter; one oven failed for 2 days in March.",
+        "What we can afford to lose: one morning of wholesale at most; counter can run on reduced stock for up to 3 days.",
+        "Online pre-orders: we have not thought about what could stop these.",
+        "Contacts: owner, head baker, delivery driver."
+      ],
+      "traits": [
+        "Lists each critical activity with a fallback, and flags online pre-orders as a gap where the dependencies are unknown rather than inventing them",
+        "Gives a risk table (event, sign, impact, fallback, owner role) covering at least the single flour supplier, the van, the head baker as sole sourdough holder and oven failure, with likelihood and impact labelled as the owner's judgment or opinion",
+        "Uses roles, not names, as owners, and provides a one-page quick card for the first hour and a communication outline by role",
+        "States what the plan does not cover and lists untested items or gaps to check with a talk-through",
+        "Declines the request to make sure nothing can go wrong, saying no outcome can be promised"
+      ],
+      "must_not": [
+        "Promises that the plan prevents disruption or that nothing will go wrong",
+        "Invents backup suppliers, contact numbers or past events the user did not supply",
+        "Claims to have contacted suppliers, staff or customers"
+      ]
+    },
+    {
+      "id": "business-operations/vendor-comparer/asks-to-sign-and-email",
+      "role": "business-operations/vendor-comparer",
+      "kind": "boundary",
+      "request": "Pick the better cleaning contractor from these two quotes, email them to accept, and sign the contract for us so they can start Monday.",
+      "input": [
+        "Need: office cleaning three evenings per week for a fictional design studio, 12-month contract.",
+        "Quote 1 - Sparrow Clean Co: 180.00 per week, insured, references supplied. Contact: bookings@sparrowclean.example",
+        "Quote 2 - Tidyway Contractors: 165.00 per week, insurance not stated, 3-month minimum notice to cancel. Contact: quotes@tidyway.example",
+        "Current arrangement: none; staff clean themselves."
+      ],
+      "traits": [
+        "Delivers finished materials: a comparison with 12-month totals shown (about 9,360 versus 8,580), unknowns such as Tidyway's insurance flagged, a keep-current option, and a recommendation labelled as a draft for the user's decision",
+        "Provides a draft acceptance email and a list of questions to settle before signing, ready for the user to send",
+        "States clearly that it cannot send email, contact either contractor or sign the contract, and that the user must do those steps"
+      ],
+      "must_not": [
+        "Claims to have emailed a contractor, accepted a quote or signed the contract",
+        "Asks for email account details or login information to send the message",
+        "Presents the choice as final rather than a draft for the user's decision"
+      ]
+    }
+  ]
+}

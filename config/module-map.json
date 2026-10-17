@@ -31,7 +31,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "f0020d38ad33991b82b5a910f6ee40e56bf13c516ce2ab85c75df84167ad126d",
+      "digest": "3f9309104c966af9809ff062adda740a009d5d7341fadfcffbb83d4a04463b99",
       "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -123,8 +123,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "1827ae48b670979d417c293c392617ca243e9b399ceb4ae90d9b4c8ec89dc64f",
-      "files": 33,
+      "digest": "531f46a6952f7166e99a502d135d68409f9a08bbc24065aa47dfc7750488680f",
+      "files": 24,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -135,19 +135,61 @@
       ],
       "paths": [
         ".claude/CLAUDE.md",
-        ".claude/agents/*.md",
         ".claude/commands/*.md",
         ".claude/settings.json",
         ".github/workflows/*.yml",
         "config/modules.json",
-        "evals/README.md",
-        "evals/scenarios/*.json",
-        "scripts/evals.py",
         "scripts/pack.py",
         "scripts/packlib/*.py",
         "tests/*.py"
       ],
-      "purpose": "Build, check, search and eval tooling, Claude Code maintainer config, and their failure-path tests."
+      "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [
+        "maintenance"
+      ],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
+      "digest": "65b214736111843648057408b4e6efe5a07e3b0b46fefb0502dd0ca9b40ee809",
+      "files": 24,
+      "guide": "evals/README.md",
+      "id": "evals",
+      "interfaces": [
+        "scripts/evals.py",
+        ".claude/skills/card-evals/SKILL.md"
+      ],
+      "invariants": [
+        "Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."
+      ],
+      "paths": [
+        ".claude/agents/*.md",
+        ".claude/skills/*/SKILL.md",
+        "evals/*.md",
+        "evals/fixtures/*.json",
+        "evals/reports/*.md",
+        "scripts/evals.py"
+      ],
+      "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     },
     {
       "checks": [
@@ -172,7 +214,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "c62135f1544dfad38247775be3fd650ab351fab5d15848039b5f47c3edef0fb2",
+      "digest": "4afc72864c1571ecd3bc1543d2a12f8f4c4b0461b0b77459ac524524b2416712",
       "files": 125,
       "guide": "adapters/claude-code/README.md",
       "id": "claude-code-adapter",

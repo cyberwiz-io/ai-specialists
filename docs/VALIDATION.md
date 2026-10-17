@@ -14,7 +14,17 @@ Run `python3 -B scripts/pack.py check` and the test command in [Contributing](..
 - generated files (indexes, registry, combined packs, module map) match their sources, each combined pack is under 32 KB, local links resolve, every source file belongs to a module, and no archive is committed;
 - the release command rebuilds the archive and verifies its members and bytes before CI attaches it to a tagged release.
 
+- every card has an evaluation fixture and every family a boundary fixture, with fictional data only.
+
 These are structural checks of the written instructions.
+
+## Evaluation harness
+
+The [card evaluation harness](../evals/README.md) produces the reports this page asks for. Every card has at least one fictional task fixture, and every family has a boundary fixture that asks for an external action. Claude Code runs each fixture in a fresh subagent, using the shipped combined pack. A separate fresh subagent then grades the reply against the card's own Acceptance line and the fixture's expected traits. `python3 -B scripts/evals.py report` writes a report with the tested version and commit, host and tools, models, inputs, outcomes and limits.
+
+## Recorded evaluations
+
+None yet. The harness is built, but no run has been recorded, so the fresh-host evidence below is still pending. Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linked here.
 
 ## Paper review
 
@@ -33,7 +43,7 @@ The written instructions were reviewed against these scenarios. They are content
 
 ## Pending evidence
 
-- Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family.
+- Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. The evaluation harness can now produce this evidence, but no run is recorded.
 - Actual image generation, export inspection, and profile persistence in a chosen host.
 - Unaided nontechnical-user trials.
 - Subject-expert review of the cards in each family, in particular the sensitive families. The cards describe working perspectives, not professional expertise or certification.

@@ -8,7 +8,7 @@ Generates one Claude Code subagent per specialist card, so a Claude Code user ca
 | --- | --- |
 | Tested Claude Code version | Not yet tested |
 | Fresh-host delegation behavior | Not observed |
-| Evidence | Offline [fixture evals](../../evals/README.md) only; keyword rules, not a quality measure |
+| Evidence | None yet: the [card evals](../../evals/README.md) harness exists but no run is recorded, and it tests cards, not this adapter |
 | Shipped in the pack or release ZIP | No |
 
 Do not rely on this adapter for sensitive work. The cards remain working perspectives, not expert review.

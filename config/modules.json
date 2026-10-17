@@ -44,14 +44,27 @@
       "interfaces": ["scripts/pack.py"],
       "invariants": ["Standard library only; every check has a success and a failure test."],
       "paths": [
-        ".claude/CLAUDE.md", ".claude/settings.json", ".claude/agents/*.md", ".claude/commands/*.md",
+        ".claude/CLAUDE.md", ".claude/settings.json", ".claude/commands/*.md",
         ".github/workflows/*.yml",
         "config/modules.json",
-        "evals/README.md", "evals/scenarios/*.json",
-        "scripts/pack.py", "scripts/evals.py", "scripts/packlib/*.py",
+        "scripts/pack.py", "scripts/packlib/*.py",
         "tests/*.py"
       ],
-      "purpose": "Build, check, search and eval tooling, Claude Code maintainer config, and their failure-path tests."
+      "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
+    },
+    {
+      "consumers": ["maintenance"],
+      "dependencies": ["catalog-manifest", "maintenance"],
+      "guide": "evals/README.md",
+      "id": "evals",
+      "interfaces": ["scripts/evals.py", ".claude/skills/card-evals/SKILL.md"],
+      "invariants": ["Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."],
+      "paths": [
+        ".claude/agents/*.md", ".claude/skills/*/SKILL.md",
+        "evals/*.md", "evals/fixtures/*.json", "evals/reports/*.md",
+        "scripts/evals.py"
+      ],
+      "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     },
     {
       "dependencies": ["catalog-manifest", "maintenance"],
