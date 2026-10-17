@@ -8,11 +8,11 @@ Start here. Find the smallest set of files for your task and read only those. Th
 | --- | --- |
 | Find a specialist for a job | `python3 -B scripts/pack.py find <words>`, or the table for its family below |
 | Read or edit one specialist | `catalog/<family>/<slug>.md` (one card, about 2 KB) |
-| Add a specialist | [Card guide](docs/CARD-GUIDE.md), then `catalog/families.json` |
-| Change shared behavior or boundaries | [Marketing coordinator](pack/COORDINATOR.md) or [family coordinator](pack/FAMILY-COORDINATOR.md) |
+| Add a specialist | [Card guide](docs/CARD-GUIDE.md); add the role to `catalog/families.json`; write `catalog/<family>/<slug>.md`; then run the three commands under Rules |
+| Change shared behavior or boundaries | [Marketing coordinator](pack/COORDINATOR.md) (marketing only) or [family coordinator](pack/FAMILY-COORDINATOR.md) (every other family). Guarded by `scripts/packlib/check.py` (versions, freshness) and `tests/test_pack.py` |
 | Change the marketing campaign flow | [Marketing workflow](pack/MARKETING-WORKFLOW.md) |
 | Change user setup text | [Start here](pack/START-HERE.md) |
-| Change build, checks or tests | [Contributing](CONTRIBUTING.md), then `scripts/packlib/` and `tests/` |
+| Change build, checks or tests | [Contributing](CONTRIBUTING.md), then `scripts/packlib/` (`cards.py` card rules, `check.py` checks, `build.py` outputs) and `tests/`; finish with the three commands under Rules |
 | Understand ownership of files | `config/module-map.json` (modules, guides, interfaces, digests) |
 | Check scope, limits and status | [Roadmap](docs/ROADMAP.md), [Validation](docs/VALIDATION.md) |
 
@@ -20,25 +20,25 @@ Start here. Find the smallest set of files for your task and read only those. Th
 
 Each family folder has a generated `INDEX.md` listing its specialists with one-line summaries. Read the index first, then one card.
 
-| Family | Index |
-| --- | --- |
-| Security (sensitive) | [catalog/security/INDEX.md](catalog/security/INDEX.md) |
-| IT operations | [catalog/it-operations/INDEX.md](catalog/it-operations/INDEX.md) |
-| Software engineering | [catalog/software-engineering/INDEX.md](catalog/software-engineering/INDEX.md) |
-| AI and machine learning | [catalog/ai-ml/INDEX.md](catalog/ai-ml/INDEX.md) |
-| Product and design | [catalog/product-design/INDEX.md](catalog/product-design/INDEX.md) |
-| Content and creative | [catalog/content-creative/INDEX.md](catalog/content-creative/INDEX.md) |
-| Marketing and growth | [catalog/marketing-growth/INDEX.md](catalog/marketing-growth/INDEX.md) |
-| Sales and customer | [catalog/sales-customer/INDEX.md](catalog/sales-customer/INDEX.md) |
-| Business operations | [catalog/business-operations/INDEX.md](catalog/business-operations/INDEX.md) |
-| Finance (sensitive) | [catalog/finance/INDEX.md](catalog/finance/INDEX.md) |
-| Data and research | [catalog/data-research/INDEX.md](catalog/data-research/INDEX.md) |
-| People and HR (sensitive) | [catalog/people-hr/INDEX.md](catalog/people-hr/INDEX.md) |
-| Legal and compliance (sensitive) | [catalog/legal-compliance/INDEX.md](catalog/legal-compliance/INDEX.md) |
-| Education and training | [catalog/education-training/INDEX.md](catalog/education-training/INDEX.md) |
-| Public sector and nonprofit | [catalog/public-nonprofit/INDEX.md](catalog/public-nonprofit/INDEX.md) |
-| Personal and career | [catalog/personal-career/INDEX.md](catalog/personal-career/INDEX.md) |
-| Orchestration and meta | [catalog/orchestration/INDEX.md](catalog/orchestration/INDEX.md) |
+| Family | Topics | Index |
+| --- | --- | --- |
+| Security (sensitive) | threat, vulnerability, incident, access, cloud, privacy, detection | [catalog/security/INDEX.md](catalog/security/INDEX.md) |
+| IT operations | runbook, support, backup, change, inventory | [catalog/it-operations/INDEX.md](catalog/it-operations/INDEX.md) |
+| Software engineering | requirements, architecture, code review, tests, API, debugging, release notes | [catalog/software-engineering/INDEX.md](catalog/software-engineering/INDEX.md) |
+| AI and machine learning | prompt, evaluation, experiment | [catalog/ai-ml/INDEX.md](catalog/ai-ml/INDEX.md) |
+| Product and design | product, UX, UI, accessibility, roadmap | [catalog/product-design/INDEX.md](catalog/product-design/INDEX.md) |
+| Content and creative | editing, blog, script, newsletter, story, podcast | [catalog/content-creative/INDEX.md](catalog/content-creative/INDEX.md) |
+| Marketing and growth | campaign, SEO, email, brand, landing page, growth | [catalog/marketing-growth/INDEX.md](catalog/marketing-growth/INDEX.md) |
+| Sales and customer | outreach, proposal, objections, support replies, onboarding | [catalog/sales-customer/INDEX.md](catalog/sales-customer/INDEX.md) |
+| Business operations | process, SOP, project, meeting, vendor, OKR | [catalog/business-operations/INDEX.md](catalog/business-operations/INDEX.md) |
+| Finance (sensitive) | budget, pricing, cash flow, model, expenses, unit economics | [catalog/finance/INDEX.md](catalog/finance/INDEX.md) |
+| Data and research | research, survey, analysis, statistics, dashboard, literature | [catalog/data-research/INDEX.md](catalog/data-research/INDEX.md) |
+| People and HR (sensitive) | job description, interview, onboarding, review, handbook | [catalog/people-hr/INDEX.md](catalog/people-hr/INDEX.md) |
+| Legal and compliance (sensitive) | contract, policy, privacy policy, terms, retention | [catalog/legal-compliance/INDEX.md](catalog/legal-compliance/INDEX.md) |
+| Education and training | curriculum, lesson, quiz, study, rubric | [catalog/education-training/INDEX.md](catalog/education-training/INDEX.md) |
+| Public sector and nonprofit | grant, program evaluation, policy brief, volunteers | [catalog/public-nonprofit/INDEX.md](catalog/public-nonprofit/INDEX.md) |
+| Personal and career | resume, cover letter, interview, career | [catalog/personal-career/INDEX.md](catalog/personal-career/INDEX.md) |
+| Orchestration and meta | routing, planning, handoff, custom role, cross-review | [catalog/orchestration/INDEX.md](catalog/orchestration/INDEX.md) |
 
 ## Layout
 
