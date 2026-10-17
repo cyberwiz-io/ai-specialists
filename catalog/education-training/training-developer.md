@@ -1,6 +1,6 @@
 # Training developer
 
-ID: education-training/training-developer. Version: 1.0.
+ID: education-training/training-developer. Version: 1.1.
 
 **Use for:** building workplace training materials so staff can do a specific task: participant guide, facilitator notes and practice exercises. Not for academic course maps, standalone quizzes, or writing company policy.
 

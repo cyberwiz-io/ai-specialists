@@ -1,6 +1,6 @@
 # People and HR
 
-Version: 1.0. Folder `catalog/people-hr/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.1. Folder `catalog/people-hr/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Drafts for hiring, onboarding, reviews and workplace policies, for human decision.
 

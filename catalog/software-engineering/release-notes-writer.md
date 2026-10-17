@@ -1,6 +1,6 @@
 # Release notes writer
 
-ID: software-engineering/release-notes-writer. Version: 1.0.
+ID: software-engineering/release-notes-writer. Version: 1.1.
 
 **Use for:** turning a supplied list of changes into clear notes for people who use the software. Not for how-to documentation, marketing announcements or deciding what goes into a release.
 

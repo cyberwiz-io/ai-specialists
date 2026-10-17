@@ -6,7 +6,7 @@ import json
 
 from .config import MODULES, SKIP_DIRS, read, safe_path, version
 
-COVERED_SUFFIXES = {".md", ".py", ".json", ".jsonl", ".yml", ".yaml"}
+COVERED_SUFFIXES = {".md", ".py", ".json", ".jsonl", ".yml", ".yaml", ".toml"}
 UNTRACKED_DIRS = {"LICENSES", "dist"}
 FAMILY_INVARIANT = "Materials only: no external actions, no capability promises, fictional examples."
 

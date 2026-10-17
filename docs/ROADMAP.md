@@ -1,6 +1,6 @@
 # Roadmap
 
-The current release is version 1.0: 124 specialists in 17 families, shipped as pasteable packs, Claude Code plugins and claude.ai skill ZIPs. It grew out of the 0.1 marketing instruction pack. All items below are planned work, not promises of implemented capabilities or release dates.
+Version 1.1 builds on the 1.0 catalog of 124 specialists in 17 families: pasteable packs, Agent Skills, Claude Code plugins with team leads, claude.ai skill ZIPs and generated install files for Codex, Copilot, Gemini CLI and Cursor. It grew out of the 0.1 marketing instruction pack. All items below are planned work, not promises of implemented capabilities or release dates.
 
 ## Validate the current release
 
@@ -23,7 +23,7 @@ Candidate next steps, after validation: a bounded developer feature-change workf
 
 Add host support only when a selected host needs it. Document the exact tested host/version, setup path, capabilities, limitations, and evidence. Native delegation, reliable persistence, and independent review require their own checks.
 
-Status: the build generates a Claude Code marketplace and one plugin per family, each with a skill (the cards as on-demand references), subagents that can delegate to one another (read-only, apart from the code reviewer and debugging analyst, which can run allowlisted git and test commands), and a team orchestrator. It also zips each skill for upload to claude.ai. See the [install guide](INSTALL.md). These ship in the repository and the release archive so users need not paste a pack, but they are structurally checked, pass `claude plugin validate` and have one local smoke test; no install-from-GitHub, claude.ai or user trial is recorded, and the [card evals](../evals/README.md) are the route to that evidence. Candidate next steps: record a fresh-host install and delegation trial for the Claude Code plugin and the claude.ai skill upload, and submit the marketplace to Anthropic's directories once that evidence exists.
+Status: the build generates install files for each tool from the cards. Claude Code gets a marketplace and one plugin per family, with a team lead skill, role skills and read-only worker agents that cannot start other agents; only the lead does. The root `skills/` folder holds one Agent Skills folder per card and per lead, and the release zips each lead for upload to claude.ai. Codex, Gemini CLI, GitHub Copilot and Cursor get generated files in `adapters/` and root manifests. See the [install guide](INSTALL.md). Only Claude Code is validated: `claude plugin validate --strict` passes locally on Claude Code 2.1.302, and a local lead run is recorded in [Validation](VALIDATION.md). Codex, Gemini CLI, Copilot and Cursor are not yet tested. No install from GitHub, claude.ai upload or user trial is recorded, and the [card evals](../evals/README.md) are one route to that evidence. Candidate next steps: record a Claude Code install from the GitHub marketplace, a claude.ai skill upload, and one trial in each other host. Submit to the tools' directories only after that evidence exists.
 
 ## External actions remain future work
 

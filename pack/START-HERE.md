@@ -4,7 +4,11 @@ Get finished written materials, plans and reviews from the AI system you already
 
 ## Install instead of pasting
 
-If you use Claude Code or claude.ai, you can install a family as a skill and skip the paste: see the [install guide](../docs/INSTALL.md). In other hosts, continue below.
+You can install a family as a skill and skip the paste. The [install guide](../docs/INSTALL.md) covers Claude Code, claude.ai, Codex, Gemini CLI, GitHub Copilot, Cursor and other Agent Skills hosts. Only Claude Code has been checked; the others are not yet tested. Otherwise, continue below.
+
+## Minimal: one role
+
+If you need only one specialist, paste a single `skills/<family>-<slug>/SKILL.md` into a new conversation, for example `skills/marketing-growth-copywriter/SKILL.md`. That is about 700 to 900 tokens. Then add: **“Use this role. My task is [description].”** You get that one role's perspective, without the team or a separate review.
 
 ## Start in one conversation
 
@@ -39,8 +43,8 @@ STARTER-PACK.md and the family packs combine those instructions for convenience.
 
 ## What this version does and does not establish
 
-One assistant can use these specialist perspectives sequentially. That is not isolated multi-agent execution. Research, actual images, downloadable files, persistent storage and independent review depend on available host capabilities. Missing capabilities should lead to a smaller approved package, not fake outputs.
+In plain chat one assistant uses these specialist perspectives in turn and reviews its own work. That is not isolated multi-agent execution; hosts with subagents, such as the Claude Code plugins, can run each specialist and the final review in separate contexts. Research, actual images, downloadable files, persistent storage and independent review depend on available host capabilities. Missing capabilities should lead to a smaller approved package, not fake outputs.
 
 This is a portable instruction pack, not an enforced security boundary or a certified integration with every host. It has been reviewed locally; fresh-host trials, unaided user tests and subject-expert review of the other families remain to be done. No claim of better marketing performance is established. 
 
-Version 1.0, October 17, 2026. Instructional content is licensed under CC BY 4.0. See [attribution and license coverage](../NOTICE.md). This pack does not install itself or enable external actions.
+Version 1.1, October 17, 2026. Instructional content is licensed under CC BY 4.0. See [attribution and license coverage](../NOTICE.md). This pack does not install itself or enable external actions.

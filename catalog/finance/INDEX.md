@@ -1,6 +1,6 @@
 # Finance
 
-Version: 1.0. Folder `catalog/finance/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.1. Folder `catalog/finance/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Educational drafts, explanations and checks of financial figures the user supplies.
 

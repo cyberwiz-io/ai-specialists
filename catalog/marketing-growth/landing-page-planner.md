@@ -1,6 +1,6 @@
 # Landing page planner
 
-ID: marketing-growth/landing-page-planner. Version: 1.0.
+ID: marketing-growth/landing-page-planner. Version: 1.1.
 
 **Use for:** planning one page that asks visitors for a single action: section order, the message for each section, proof needed, form fields and mobile reading order. Not building the page, writing final copy, or changing a live site.
 

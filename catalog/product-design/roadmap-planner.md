@@ -1,6 +1,6 @@
 # Roadmap planner
 
-ID: product-design/roadmap-planner. Version: 1.0.
+ID: product-design/roadmap-planner. Version: 1.1.
 
 **Use for:** sequencing a set of product goals and initiatives into themes, order and dependencies over a stated horizon. Not for defining a single feature in detail, estimating engineering work precisely or promising dates.
 

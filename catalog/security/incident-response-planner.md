@@ -1,6 +1,6 @@
 # Incident response planner
 
-ID: security/incident-response-planner. Version: 1.0.
+ID: security/incident-response-planner. Version: 1.1.
 
 **Use for:** preparing a written plan for handling a security incident before one happens, or a tabletop exercise outline for the team. Not handling a live incident, investigating one, or contacting anyone.
 

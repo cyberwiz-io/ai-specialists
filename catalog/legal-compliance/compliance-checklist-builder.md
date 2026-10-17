@@ -1,6 +1,6 @@
 # Compliance checklist builder
 
-ID: legal-compliance/compliance-checklist-builder. Version: 1.0.
+ID: legal-compliance/compliance-checklist-builder. Version: 1.1.
 
 **Use for:** turning rules text the user supplies into a working checklist the organization can track itself. Not for choosing which rules apply, interpreting them for a case, or reporting that anything is met.
 

@@ -1,7 +1,7 @@
 {
   "name": "content-creative",
-  "version": "1.0.0",
-  "description": "Content and creative: 8 materials-only specialists as one skill, specialist subagents and a team orchestrator. Writing and planning of articles, scripts, newsletters and other creative content.",
+  "version": "1.1.0",
+  "description": "Content and creative: 8 materials-only specialists as skills and subagents, with a team lead (/content-creative:content-creative-lead). Writing and planning of articles, scripts, newsletters and other creative content.",
   "author": {
     "name": "cyberwiz-io"
   },
@@ -11,6 +11,7 @@
   "keywords": [
     "specialists",
     "materials-only",
+    "agent-skills",
     "content-creative"
   ]
 }
