@@ -1,6 +1,6 @@
 # Specialist starter pack
 
-Create campaign materials in the AI system you already use. No app, Terminal, Node, account connection or installation is required by this pack.
+Get finished written materials, plans and reviews from the AI system you already use. The marketing starter below is the best-developed path; 16 other families are in `dist/packs/`. No app, Terminal, Node, account connection or installation is required by this pack.
 
 ## Start in one conversation
 
@@ -12,6 +12,10 @@ Ask the assistant to confirm that it can read the Coordinator, workflow and four
 
 Nothing is published, scheduled, sent or connected. Finished materials come with manual posting instructions. Use only a host you trust with the business information you provide. No new paid tool or service is required; your existing host's usage limits still apply.
 
+## Other families
+
+Open `dist/packs/<family>.md` for the family you need (for example `finance.md` or `software-engineering.md`), copy it into a new conversation, and add: **“Use this pack. My task is [description]. Here is the material I can supply: [...].”** Each pack includes the family coordinator and every specialist in that family. Security, finance, people and HR, and legal and compliance packs give support material, not professional advice; take consequential decisions to a qualified person.
+
 ## Make it yours
 
 Say **“Create a specialist that…”** and describe its job. The assistant will explain whether to customize a role or create one, show a sample, and ask before enabling it. You can also ask to save a reviewed business profile, or choose to use the facts for this campaign only.
@@ -22,16 +26,17 @@ To pause, say **“Pause and give me a resume note.”** Continue in the same co
 
 - [Coordinator](COORDINATOR.md): shared behavior, permissions and handoffs.
 - [Marketing workflow](MARKETING-WORKFLOW.md): the campaign from idea to delivered materials.
-- [Strategist](specialists/marketing-strategist.md), [copywriter](specialists/copywriter.md), [designer](specialists/graphic-designer.md), [reviewer](specialists/quality-reviewer.md): editable role cards.
+- [Family coordinator](FAMILY-COORDINATOR.md): the same shared behavior for every family except marketing.
+- [Strategist](../catalog/marketing-growth/marketing-strategist.md), [copywriter](../catalog/marketing-growth/copywriter.md), [designer](../catalog/marketing-growth/graphic-designer.md), [reviewer](../catalog/marketing-growth/quality-reviewer.md): the four core role cards. All 124 cards are in [the repository map](../REPO-MAP.md).
 - [Custom specialists](CUSTOM-SPECIALISTS.md): plain-language creation and a role template.
 - [Business profiles](BUSINESS-PROFILE.md): optional reviewed reuse and export.
 
-STARTER-PACK.md combines those instructions for convenience. After editing individual files, update the matching combined sections before supplying it to the host; do not load conflicting copies. A customized role still needs review before enablement. No host-specific agent configuration or executable framework is included.
+STARTER-PACK.md and the family packs combine those instructions for convenience. They are generated: edit the individual files, run the build, and do not load conflicting copies. A customized role still needs review before enablement. No host-specific agent configuration or executable framework is included.
 
 ## What this version does and does not establish
 
 One assistant can use these specialist perspectives sequentially. That is not isolated multi-agent execution. Research, actual images, downloadable files, persistent storage and independent review depend on available host capabilities. Missing capabilities should lead to a smaller approved package, not fake outputs.
 
-This is a portable instruction pack, not an enforced security boundary or a certified integration with every host. It has been reviewed locally; a fresh-host campaign and unaided user test remain to be done. No claim of better marketing performance is established. The earlier Mac prototype is no longer the product path and is not needed.
+This is a portable instruction pack, not an enforced security boundary or a certified integration with every host. It has been reviewed locally; fresh-host trials, unaided user tests and subject-expert review of the other families remain to be done. No claim of better marketing performance is established. 
 
-Version 0.1, October 13, 2026. Instructional content is licensed under CC BY 4.0. See [attribution and license coverage](../NOTICE.md). This pack does not install itself or enable external actions.
+Version 1.0, October 17, 2026. Instructional content is licensed under CC BY 4.0. See [attribution and license coverage](../NOTICE.md). This pack does not install itself or enable external actions.

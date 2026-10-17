@@ -1,4 +1,12 @@
 {
+  "entry": "REPO-MAP.md",
+  "generated": [
+    "catalog/*/INDEX.md",
+    "catalog/REGISTRY.jsonl",
+    "config/module-map.json",
+    "dist/packs/*.md",
+    "pack/STARTER-PACK.md"
+  ],
   "modules": [
     {
       "checks": [
@@ -22,88 +30,116 @@
         "maintenance"
       ],
       "dependencies": [],
-      "fingerprints": {
-        "AGENTS.md": {
-          "sha256": "29bbd212c7371ad348c13129773b74e5bc74545aecff2242f74a84e4ba1f49cf"
-        },
-        "CHANGELOG.md": {
-          "sha256": "199a11bc80d16dcc542f034f64936329d47b4ca12b83300ecac6a24bf736617f"
-        },
-        "CONTRIBUTING.md": {
-          "sha256": "7e601125cd59a1f5f481676d3aa586e1df0e7ea006d8bae7a88c672b57eee056"
-        },
-        "LICENSE.md": {
-          "sha256": "fb9761c4cae14c44f4815931168d9b9adb3d15d8771f7eb700252f64b7d224e7"
-        },
-        "NOTICE.md": {
-          "sha256": "ccb07b306173f1582a1412f1481c1900349eb83f72c2f88206199d1a6ad88b53"
-        },
-        "README.md": {
-          "sha256": "9a9842fc2f2d8bbdd457cbee8d2741605dc6d56db61f71d069f0f721e467d92d"
-        },
-        "docs/ROADMAP.md": {
-          "sha256": "88d11405044a4e0e0f1b1b88cdbbe71679ea95099d4db7e80dccb9f9bd7a186e"
-        },
-        "docs/VALIDATION.md": {
-          "sha256": "ce228486cbb44ba1c231c3d84f9bb19f483a7b10579de1c4dfe336261533b4de"
-        },
-        "pack/BUSINESS-PROFILE.md": {
-          "sha256": "63d50580794dc03f1b4e86862e6d6274b0580b0ad41a26f4c1d858e98a5c91c3"
-        },
-        "pack/COORDINATOR.md": {
-          "sha256": "e8081ec9d7f5a249167cac4f194b171d80975517540de7876e7e7dd1e4d3a976"
-        },
-        "pack/CUSTOM-SPECIALISTS.md": {
-          "sha256": "d04a600748ee10ebb0f28c138c859af200d00948f2e320490f3a8aca66eda552"
-        },
-        "pack/MARKETING-WORKFLOW.md": {
-          "sha256": "e8273ab57f03de003a796c70fad4221d26eec96edc8de1adf47f5d35eb9e9192"
-        },
-        "pack/START-HERE.md": {
-          "sha256": "0fab158ebd72c0418fd2d78359af85de9d851c5ad2c9832df5591371bce9a086"
-        },
-        "pack/specialists/copywriter.md": {
-          "sha256": "558f3da5a9dd8d7f6ca02ac77d0d02be61547e425ad2c2af26ac873e5d62bbab"
-        },
-        "pack/specialists/graphic-designer.md": {
-          "sha256": "4fbef7040afbc960cfc40b1494e8fce7588132cea05d0cac4e8a2ee66ad96aa8"
-        },
-        "pack/specialists/marketing-strategist.md": {
-          "sha256": "73ddd8cf49ce8dae98332e3bd8b161de2e078985a560224f0f2539bd1606edab"
-        },
-        "pack/specialists/quality-reviewer.md": {
-          "sha256": "8ff66f834cd3bdc1772f97f2d4c540fecd4ea8a2376afeb1086bf8f340a201f8"
-        }
-      },
+      "digest": "3c3d7a5ce4116a66beb4f4c90c9b21289f908411e1d526471ba196679b32c57c",
+      "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
       "interfaces": [
         "pack/COORDINATOR.md",
+        "pack/FAMILY-COORDINATOR.md",
         "pack/MARKETING-WORKFLOW.md"
       ],
       "invariants": [
         "Keep private data out of public sources; preserve advisory materials-only boundaries."
       ],
       "paths": [
+        ".github/ISSUE_TEMPLATE/*.md",
         "AGENTS.md",
         "CHANGELOG.md",
         "CONTRIBUTING.md",
         "LICENSE.md",
         "NOTICE.md",
         "README.md",
-        "docs/ROADMAP.md",
-        "docs/VALIDATION.md",
+        "REPO-MAP.md",
+        "VERSION",
+        "docs/*.md",
         "pack/BUSINESS-PROFILE.md",
         "pack/COORDINATOR.md",
         "pack/CUSTOM-SPECIALISTS.md",
+        "pack/FAMILY-COORDINATOR.md",
         "pack/MARKETING-WORKFLOW.md",
-        "pack/START-HERE.md",
-        "pack/specialists/copywriter.md",
-        "pack/specialists/graphic-designer.md",
-        "pack/specialists/marketing-strategist.md",
-        "pack/specialists/quality-reviewer.md"
+        "pack/START-HERE.md"
       ],
-      "purpose": "Portable materials-only marketing instructions and public documentation."
+      "purpose": "Portable materials-only instructions, coordinators, workflow and public documentation."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [
+        "maintenance"
+      ],
+      "dependencies": [],
+      "digest": "7ad08c8ebc694b61ed4a4c1c0c5acf0741a90165730a5793c7b8e66da9b90299",
+      "files": 1,
+      "guide": "docs/CARD-GUIDE.md",
+      "id": "catalog-manifest",
+      "interfaces": [
+        "catalog/families.json"
+      ],
+      "invariants": [
+        "The manifest is the roster: every card and index must match it."
+      ],
+      "paths": [
+        "catalog/families.json"
+      ],
+      "purpose": "Families, roles, slugs and sensitivity that drive indexes, registry, packs and checks."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions",
+        "catalog-manifest"
+      ],
+      "digest": "d31154a3c4c74218a49a7b6d61b80644a26af6b5868c00e53678f2e0e9da693f",
+      "files": 13,
+      "guide": "CONTRIBUTING.md",
+      "id": "maintenance",
+      "interfaces": [
+        "scripts/pack.py"
+      ],
+      "invariants": [
+        "Standard library only; every check has a success and a failure test."
+      ],
+      "paths": [
+        ".github/workflows/*.yml",
+        "config/modules.json",
+        "scripts/pack.py",
+        "scripts/packlib/*.py",
+        "tests/*.py"
+      ],
+      "purpose": "Build, check and search tooling, plus its failure-path tests."
     },
     {
       "checks": [
@@ -127,31 +163,614 @@
       "dependencies": [
         "instructions"
       ],
-      "fingerprints": {
-        "CONTRIBUTING.md": {
-          "sha256": "7e601125cd59a1f5f481676d3aa586e1df0e7ea006d8bae7a88c672b57eee056"
-        },
-        "scripts/pack.py": {
-          "sha256": "231f357a5def3efb586beee2d89b5de8e161ee0ac01a92853686306d7665d72c"
-        },
-        "tests/test_pack.py": {
-          "sha256": "a2646983f3f5bdd56cada5a2a0330ea9f5cdeef53594ab6ad2f689ac83a74329"
-        }
-      },
-      "guide": "CONTRIBUTING.md",
-      "id": "maintenance",
+      "digest": "b7d8c92c1d9eb9c7ef8bb8213dd4d51577f4a061a3b601166577b80db717df87",
+      "files": 15,
+      "guide": "catalog/security/INDEX.md",
+      "id": "family-security",
       "interfaces": [
-        "scripts/pack.py"
+        "catalog/security/INDEX.md"
       ],
       "invariants": [
-        "Keep private data out of public sources; preserve advisory materials-only boundaries."
+        "Materials only: no external actions, no capability promises, fictional examples."
       ],
       "paths": [
-        "scripts/pack.py",
-        "tests/test_pack.py"
+        "catalog/security/*.md"
       ],
-      "purpose": "Standard-library pack assembly, archive checks and failure-path tests."
+      "purpose": "Defensive security planning, review and documentation of materials the user supplies."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "5763786185ffe35baaf63432822849461558461911b5051c7aff645eab4ec75b",
+      "files": 6,
+      "guide": "catalog/it-operations/INDEX.md",
+      "id": "family-it-operations",
+      "interfaces": [
+        "catalog/it-operations/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/it-operations/*.md"
+      ],
+      "purpose": "Documentation and planning for everyday IT support and infrastructure upkeep."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "36aa87c89a6a65d08fd4badc36d9e9b6dfecede6955c219331fecb3ee03295ad",
+      "files": 12,
+      "guide": "catalog/software-engineering/INDEX.md",
+      "id": "family-software-engineering",
+      "interfaces": [
+        "catalog/software-engineering/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/software-engineering/*.md"
+      ],
+      "purpose": "Planning, review and documentation of software changes from supplied code, requirements and notes."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "c592c3fb986f5beb224b60cfd466b4faba678ee7adc903323629272d7414a230",
+      "files": 4,
+      "guide": "catalog/ai-ml/INDEX.md",
+      "id": "family-ai-ml",
+      "interfaces": [
+        "catalog/ai-ml/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/ai-ml/*.md"
+      ],
+      "purpose": "Designing prompts, evaluations and experiments for AI and machine learning work."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "4e85e7fed26d574f43cfc8dae588ed4063f6b0e56a25831531ee8b7f798f8dfb",
+      "files": 8,
+      "guide": "catalog/product-design/INDEX.md",
+      "id": "family-product-design",
+      "interfaces": [
+        "catalog/product-design/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/product-design/*.md"
+      ],
+      "purpose": "Product definition, user research planning, interface writing and design review."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "80e07013072f9e56365549b0a328e74b3845094a298b1a8ddee922f71c073d40",
+      "files": 9,
+      "guide": "catalog/content-creative/INDEX.md",
+      "id": "family-content-creative",
+      "interfaces": [
+        "catalog/content-creative/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/content-creative/*.md"
+      ],
+      "purpose": "Writing and planning of articles, scripts, newsletters and other creative content."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "79bc8da1a15fafcc713b9a60853b562f86d410a2c9fa7b231dbba47d4a13b17c",
+      "files": 11,
+      "guide": "catalog/marketing-growth/INDEX.md",
+      "id": "family-marketing-growth",
+      "interfaces": [
+        "catalog/marketing-growth/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/marketing-growth/*.md"
+      ],
+      "purpose": "Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "024525d0f38dddbcb59fa8a223f95c3c5e09bc00335bbb5bc24e8adaae5cd1f1",
+      "files": 9,
+      "guide": "catalog/sales-customer/INDEX.md",
+      "id": "family-sales-customer",
+      "interfaces": [
+        "catalog/sales-customer/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/sales-customer/*.md"
+      ],
+      "purpose": "Drafts and plans for selling, supporting and onboarding customers."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "80afdff2576815276d1c811ad4d8ac456b89fab6d400c37f39066dac1a121861",
+      "files": 9,
+      "guide": "catalog/business-operations/INDEX.md",
+      "id": "family-business-operations",
+      "interfaces": [
+        "catalog/business-operations/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/business-operations/*.md"
+      ],
+      "purpose": "Process, planning and decision documents for running a small organization."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "5f44e96bc191194d30ab505994c0766e6bcd66d832a504c08ad3b1be210b3f8a",
+      "files": 9,
+      "guide": "catalog/finance/INDEX.md",
+      "id": "family-finance",
+      "interfaces": [
+        "catalog/finance/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/finance/*.md"
+      ],
+      "purpose": "Educational drafts, explanations and checks of financial figures the user supplies."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "780fe8d417d209dd7b56836b3188f6eb2f708d76e2b07b868c60749e51ecb108",
+      "files": 9,
+      "guide": "catalog/data-research/INDEX.md",
+      "id": "family-data-research",
+      "interfaces": [
+        "catalog/data-research/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/data-research/*.md"
+      ],
+      "purpose": "Planning and reviewing research, surveys and data analysis from supplied sources and data."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "696241aeca42401e8b0a212fb2f685771a7335952ccb7454aabfb4a28dded2f9",
+      "files": 6,
+      "guide": "catalog/people-hr/INDEX.md",
+      "id": "family-people-hr",
+      "interfaces": [
+        "catalog/people-hr/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/people-hr/*.md"
+      ],
+      "purpose": "Drafts for hiring, onboarding, reviews and workplace policies, for human decision."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "adfb1d99d405c06f3a7589ae79e4b44367d2b6e8bc35af0d32be9cc81f778ecf",
+      "files": 9,
+      "guide": "catalog/legal-compliance/INDEX.md",
+      "id": "family-legal-compliance",
+      "interfaces": [
+        "catalog/legal-compliance/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/legal-compliance/*.md"
+      ],
+      "purpose": "Plain-language reading, drafting and checklists from documents and rules the user supplies."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "d357c379267093c8da5e8086c4985c5b10ff54ff18f342692e6b2d42f06d7bd6",
+      "files": 7,
+      "guide": "catalog/education-training/INDEX.md",
+      "id": "family-education-training",
+      "interfaces": [
+        "catalog/education-training/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/education-training/*.md"
+      ],
+      "purpose": "Designing courses, lessons, assessments and study support."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "59d4881a6dca2a57f1011bf24345edbc7e6e26d718913a036faa434a1b9114d2",
+      "files": 6,
+      "guide": "catalog/public-nonprofit/INDEX.md",
+      "id": "family-public-nonprofit",
+      "interfaces": [
+        "catalog/public-nonprofit/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/public-nonprofit/*.md"
+      ],
+      "purpose": "Grant, program, policy and community materials for public-benefit organizations."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "51a4254133e0d34493621574a67c4d080de55ddefedb0e31522dde96a88adb48",
+      "files": 6,
+      "guide": "catalog/personal-career/INDEX.md",
+      "id": "family-personal-career",
+      "interfaces": [
+        "catalog/personal-career/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/personal-career/*.md"
+      ],
+      "purpose": "Help individuals with applications, interviews, career thinking and personal projects."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "instructions"
+      ],
+      "digest": "53b061176d42caa3fb9f81a73e6b8a66b09abe9549c004e0954f78fed5e1c6a3",
+      "files": 6,
+      "guide": "catalog/orchestration/INDEX.md",
+      "id": "family-orchestration",
+      "interfaces": [
+        "catalog/orchestration/INDEX.md"
+      ],
+      "invariants": [
+        "Materials only: no external actions, no capability promises, fictional examples."
+      ],
+      "paths": [
+        "catalog/orchestration/*.md"
+      ],
+      "purpose": "Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder."
     }
   ],
-  "schema": 1
+  "schema": 2,
+  "version": "1.0"
 }

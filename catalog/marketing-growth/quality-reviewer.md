@@ -1,6 +1,6 @@
 # Quality reviewer
 
-ID: core/quality-reviewer. Version: 0.1.
+ID: core/quality-reviewer. Version: 1.0.
 
 **Use for:** reviewing the assembled campaign against the approved brief and evidence. Not authenticating user approval, certifying legal compliance or predicting marketing success.
 
