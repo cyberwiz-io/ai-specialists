@@ -1,8 +1,8 @@
 # Roadmap
 
-The current foundation is a portable marketing instruction pack, version 0.1. All items below are planned work, not promises of implemented capabilities or release dates.
+The current release is version 1.0: 124 specialists in 17 families, shipped as pasteable packs, Claude Code plugins and claude.ai skill ZIPs. It grew out of the 0.1 marketing instruction pack. All items below are planned work, not promises of implemented capabilities or release dates.
 
-## Validate the current pack
+## Validate the current release
 
 - Run a fictional campaign in a fresh conversation with an existing host. Record research, image, file-export, profile-storage, and review capabilities actually observed.
 - Test one custom-specialist preview and enablement, and a profile export or verified save.
