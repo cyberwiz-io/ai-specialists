@@ -1,14 +1,230 @@
 {
   "schema": 1,
-  "run": "2026-10-17-marketing-growth",
-  "version": "1.0",
-  "commit": "e3114cf3946be0d555c76c30fdf94f4c092c69da",
+  "run": "2026-10-17-catalog + 2026-10-17-rerun-security + 2026-10-17-rerun-finance + 2026-10-17-rerun-people-hr + 2026-10-17-rerun-legal-compliance + 2026-10-17-rerun-cover-letter + 2026-10-17-rerun-meeting-facilitator + 2026-10-17-rerun2-contract-reader + 2026-10-17-rerun2-privacy-policy-drafter",
+  "version": "1.1",
+  "commit": "8c4169c8eb21d47b5e4df3df28df6a0e274f5385",
   "model": "claude-opus-5-5",
   "grader": "claude-opus-5-5",
   "date": "2026-10-17",
   "roles": {
-    "marketing-growth/brand-voice-guide": {
+    "ai-ml/ai-evaluation-designer": {
       "passed": 1,
+      "total": 1
+    },
+    "ai-ml/ml-experiment-planner": {
+      "passed": 1,
+      "total": 2
+    },
+    "ai-ml/prompt-engineer": {
+      "passed": 1,
+      "total": 1
+    },
+    "business-operations/business-plan-drafter": {
+      "passed": 1,
+      "total": 1
+    },
+    "business-operations/contingency-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "business-operations/meeting-facilitator": {
+      "passed": 1,
+      "total": 1
+    },
+    "business-operations/okr-coach": {
+      "passed": 0,
+      "total": 1
+    },
+    "business-operations/process-mapper": {
+      "passed": 1,
+      "total": 1
+    },
+    "business-operations/project-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "business-operations/sop-writer": {
+      "passed": 0,
+      "total": 1
+    },
+    "business-operations/vendor-comparer": {
+      "passed": 0,
+      "total": 2
+    },
+    "content-creative/blog-writer": {
+      "passed": 1,
+      "total": 1
+    },
+    "content-creative/editor": {
+      "passed": 1,
+      "total": 1
+    },
+    "content-creative/newsletter-writer": {
+      "passed": 1,
+      "total": 1
+    },
+    "content-creative/podcast-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "content-creative/scriptwriter": {
+      "passed": 1,
+      "total": 1
+    },
+    "content-creative/social-media-writer": {
+      "passed": 1,
+      "total": 2
+    },
+    "content-creative/storyboard-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "content-creative/storyteller": {
+      "passed": 0,
+      "total": 1
+    },
+    "data-research/competitive-intelligence-analyst": {
+      "passed": 1,
+      "total": 1
+    },
+    "data-research/dashboard-specifier": {
+      "passed": 1,
+      "total": 1
+    },
+    "data-research/data-analyst": {
+      "passed": 1,
+      "total": 1
+    },
+    "data-research/data-cleaning-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "data-research/literature-summarizer": {
+      "passed": 1,
+      "total": 1
+    },
+    "data-research/research-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "data-research/statistical-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "data-research/survey-designer": {
+      "passed": 1,
+      "total": 2
+    },
+    "education-training/curriculum-designer": {
+      "passed": 0,
+      "total": 1
+    },
+    "education-training/lesson-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "education-training/quiz-writer": {
+      "passed": 1,
+      "total": 2
+    },
+    "education-training/rubric-designer": {
+      "passed": 0,
+      "total": 1
+    },
+    "education-training/study-coach": {
+      "passed": 0,
+      "total": 1
+    },
+    "education-training/training-developer": {
+      "passed": 1,
+      "total": 1
+    },
+    "finance/budget-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "finance/cash-flow-planner": {
+      "passed": 0,
+      "total": 2
+    },
+    "finance/expense-categorizer": {
+      "passed": 1,
+      "total": 1
+    },
+    "finance/grant-budget-drafter": {
+      "passed": 0,
+      "total": 1
+    },
+    "finance/model-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "finance/pricing-analyst": {
+      "passed": 2,
+      "total": 2
+    },
+    "finance/report-explainer": {
+      "passed": 0,
+      "total": 1
+    },
+    "finance/unit-economics-analyst": {
+      "passed": 0,
+      "total": 1
+    },
+    "it-operations/asset-inventory-analyst": {
+      "passed": 1,
+      "total": 1
+    },
+    "it-operations/backup-recovery-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "it-operations/change-planner": {
+      "passed": 1,
+      "total": 2
+    },
+    "it-operations/runbook-writer": {
+      "passed": 1,
+      "total": 1
+    },
+    "it-operations/support-documenter": {
+      "passed": 0,
+      "total": 1
+    },
+    "legal-compliance/compliance-checklist-builder": {
+      "passed": 0,
+      "total": 1
+    },
+    "legal-compliance/contract-reader": {
+      "passed": 3,
+      "total": 3
+    },
+    "legal-compliance/ip-basics-explainer": {
+      "passed": 0,
+      "total": 1
+    },
+    "legal-compliance/policy-drafter": {
+      "passed": 1,
+      "total": 1
+    },
+    "legal-compliance/privacy-policy-drafter": {
+      "passed": 0,
+      "total": 1
+    },
+    "legal-compliance/regulatory-change-summarizer": {
+      "passed": 1,
+      "total": 1
+    },
+    "legal-compliance/retention-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "legal-compliance/terms-reviewer": {
+      "passed": 0,
+      "total": 1
+    },
+    "marketing-growth/brand-voice-guide": {
+      "passed": 0,
       "total": 1
     },
     "marketing-growth/copywriter": {
@@ -24,7 +240,7 @@
       "total": 1
     },
     "marketing-growth/growth-experiment-designer": {
-      "passed": 0,
+      "passed": 1,
       "total": 1
     },
     "marketing-growth/landing-page-planner": {
@@ -45,6 +261,246 @@
     },
     "marketing-growth/seo-strategist": {
       "passed": 0,
+      "total": 1
+    },
+    "orchestration/cross-family-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "orchestration/handoff-packager": {
+      "passed": 2,
+      "total": 2
+    },
+    "orchestration/plan-decomposer": {
+      "passed": 0,
+      "total": 1
+    },
+    "orchestration/specialist-builder": {
+      "passed": 1,
+      "total": 1
+    },
+    "orchestration/task-router": {
+      "passed": 1,
+      "total": 1
+    },
+    "people-hr/handbook-drafter": {
+      "passed": 0,
+      "total": 1
+    },
+    "people-hr/interview-guide-designer": {
+      "passed": 1,
+      "total": 1
+    },
+    "people-hr/job-description-writer": {
+      "passed": 2,
+      "total": 2
+    },
+    "people-hr/onboarding-plan-writer": {
+      "passed": 1,
+      "total": 1
+    },
+    "people-hr/review-drafter": {
+      "passed": 0,
+      "total": 2
+    },
+    "personal-career/career-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "personal-career/cover-letter-writer": {
+      "passed": 0,
+      "total": 2
+    },
+    "personal-career/interview-coach": {
+      "passed": 1,
+      "total": 1
+    },
+    "personal-career/personal-project-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "personal-career/resume-editor": {
+      "passed": 0,
+      "total": 1
+    },
+    "product-design/accessibility-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "product-design/design-system-documenter": {
+      "passed": 1,
+      "total": 1
+    },
+    "product-design/product-manager": {
+      "passed": 1,
+      "total": 1
+    },
+    "product-design/roadmap-planner": {
+      "passed": 0,
+      "total": 2
+    },
+    "product-design/ui-designer": {
+      "passed": 0,
+      "total": 1
+    },
+    "product-design/ux-researcher": {
+      "passed": 0,
+      "total": 1
+    },
+    "product-design/ux-writer": {
+      "passed": 0,
+      "total": 1
+    },
+    "public-nonprofit/grant-writer": {
+      "passed": 0,
+      "total": 2
+    },
+    "public-nonprofit/outreach-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "public-nonprofit/policy-brief-writer": {
+      "passed": 0,
+      "total": 1
+    },
+    "public-nonprofit/program-evaluator": {
+      "passed": 0,
+      "total": 1
+    },
+    "public-nonprofit/volunteer-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "sales-customer/customer-onboarding-planner": {
+      "passed": 0,
+      "total": 1
+    },
+    "sales-customer/discovery-call-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "sales-customer/feedback-analyst": {
+      "passed": 1,
+      "total": 1
+    },
+    "sales-customer/knowledge-base-writer": {
+      "passed": 0,
+      "total": 1
+    },
+    "sales-customer/objection-coach": {
+      "passed": 0,
+      "total": 1
+    },
+    "sales-customer/outreach-drafter": {
+      "passed": 0,
+      "total": 1
+    },
+    "sales-customer/proposal-writer": {
+      "passed": 1,
+      "total": 1
+    },
+    "sales-customer/support-responder": {
+      "passed": 1,
+      "total": 2
+    },
+    "security/access-review-analyst": {
+      "passed": 1,
+      "total": 2
+    },
+    "security/appsec-reviewer": {
+      "passed": 0,
+      "total": 1
+    },
+    "security/cloud-security-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "security/detection-rule-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "security/incident-response-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "security/privacy-engineer": {
+      "passed": 1,
+      "total": 1
+    },
+    "security/risk-register-analyst": {
+      "passed": 0,
+      "total": 1
+    },
+    "security/secure-code-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "security/security-architect": {
+      "passed": 1,
+      "total": 1
+    },
+    "security/security-awareness-trainer": {
+      "passed": 0,
+      "total": 1
+    },
+    "security/security-policy-writer": {
+      "passed": 1,
+      "total": 1
+    },
+    "security/threat-modeler": {
+      "passed": 0,
+      "total": 1
+    },
+    "security/vendor-security-assessor": {
+      "passed": 0,
+      "total": 1
+    },
+    "security/vulnerability-triage-analyst": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/api-designer": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/code-reviewer": {
+      "passed": 2,
+      "total": 2
+    },
+    "software-engineering/debugging-analyst": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/feature-change-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/refactoring-planner": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/release-notes-writer": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/requirements-analyst": {
+      "passed": 0,
+      "total": 1
+    },
+    "software-engineering/schema-reviewer": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/software-architect": {
+      "passed": 1,
+      "total": 1
+    },
+    "software-engineering/technical-writer": {
+      "passed": 0,
+      "total": 1
+    },
+    "software-engineering/test-designer": {
+      "passed": 1,
       "total": 1
     }
   }

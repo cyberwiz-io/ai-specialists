@@ -350,7 +350,7 @@ class SplitPackTests(FixtureCase):
         self.assertNotIn("outside this pack", text)
 
     def test_role_in_no_pack_fails(self):
-        self.change_manifest(lambda packs: packs[1]["roles"].remove("privacy-engineer"))
+        self.change_manifest(lambda packs: packs[-1]["roles"].remove("privacy-engineer"))
         with self.assertRaisesRegex(ValueError, "roles in no pack: privacy-engineer"):
             manifest.load(self.root)
 
@@ -375,7 +375,7 @@ class SplitPackTests(FixtureCase):
             manifest.load(self.root)
 
     def test_single_pack_split_fails(self):
-        self.change_manifest(lambda packs: packs.pop())
+        self.change_manifest(lambda packs: packs.__delitem__(slice(1, None)))
         with self.assertRaisesRegex(ValueError, "at least two packs"):
             manifest.load(self.root)
 
