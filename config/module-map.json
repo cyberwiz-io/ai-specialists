@@ -35,7 +35,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "bb5c1ae3f0827bd5836c52dd98437afdd342b0320161785e0161486e4b7f4c9c",
+      "digest": "29f82546a7b26d2a6d04f92b069965acf6574acb3e90a821c085332ac388e9d2",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -89,7 +89,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "7e238aa1c41a6cd0eda2971c6a93eba27a08b56738951d3c3fca06787bdc2e3d",
+      "digest": "e74ee563ed907933db4e0f5208f7caf2e91498f41ec6517f7f3a80997e3857da",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -127,7 +127,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "dd89eab207d88e9c5815fce307c53a9c7ac671d84f0685e9ff5374b1017fff7f",
+      "digest": "a24a9a57f0dd75283e7ec73c0ab8416191492d7bfc79a93874c863f3ba80af57",
       "files": 25,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -174,8 +174,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "83f9a18657d9f85730b201b8d179e4bd78b0593682e10a7eec933176b3b018d1",
-      "files": 25,
+      "digest": "56bea47dd1542e7b5c0964952844a8302de20aabc914cf1ef9d477db40948c18",
+      "files": 26,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
@@ -219,7 +219,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "c323d910ea3b1b3f4ccbcee3aed7de4bd51014b080489167e6b0ab94983e1671",
+      "digest": "fd0b3df2d10b0379686c5cb64aa0fe6694705017355e2a05c7a13e66318f69c1",
       "files": 303,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -335,7 +335,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "36aa87c89a6a65d08fd4badc36d9e9b6dfecede6955c219331fecb3ee03295ad",
+      "digest": "47201dcb3b9f5ac0bc5e8c819690d818dc122990f26c9b98e42ea3ebbb8496d3",
       "files": 12,
       "guide": "catalog/software-engineering/INDEX.md",
       "id": "family-software-engineering",
@@ -446,7 +446,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "80e07013072f9e56365549b0a328e74b3845094a298b1a8ddee922f71c073d40",
+      "digest": "87263c9da39fc11140511402b696e37cb11b0d925e54282ded2250252319664d",
       "files": 9,
       "guide": "catalog/content-creative/INDEX.md",
       "id": "family-content-creative",
@@ -483,7 +483,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "79bc8da1a15fafcc713b9a60853b562f86d410a2c9fa7b231dbba47d4a13b17c",
+      "digest": "94f85a772a8dacbe94c0426635239e4f08e9962d4f0e204a8a7d67ce8d9d5da1",
       "files": 11,
       "guide": "catalog/marketing-growth/INDEX.md",
       "id": "family-marketing-growth",
@@ -520,7 +520,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "024525d0f38dddbcb59fa8a223f95c3c5e09bc00335bbb5bc24e8adaae5cd1f1",
+      "digest": "097ee7c390ea7290b8b7b3b8f5b1753685598463f1594a2970480576a677477c",
       "files": 9,
       "guide": "catalog/sales-customer/INDEX.md",
       "id": "family-sales-customer",
@@ -557,7 +557,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "80afdff2576815276d1c811ad4d8ac456b89fab6d400c37f39066dac1a121861",
+      "digest": "61465ffea9e12803ccf3d8c164bd2f104b1a17e2723189e7ad134a912c70f860",
       "files": 9,
       "guide": "catalog/business-operations/INDEX.md",
       "id": "family-business-operations",
@@ -631,7 +631,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "780fe8d417d209dd7b56836b3188f6eb2f708d76e2b07b868c60749e51ecb108",
+      "digest": "602c60853440b5a199f984dcf953a860f7de46a3a263121ba82e89a784342a82",
       "files": 9,
       "guide": "catalog/data-research/INDEX.md",
       "id": "family-data-research",
@@ -779,7 +779,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "59d4881a6dca2a57f1011bf24345edbc7e6e26d718913a036faa434a1b9114d2",
+      "digest": "1243528570b59985199cef18998ad0e61b2b23aa8d474e9f3fc2f9ee845a3690",
       "files": 6,
       "guide": "catalog/public-nonprofit/INDEX.md",
       "id": "family-public-nonprofit",

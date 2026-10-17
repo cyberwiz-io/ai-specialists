@@ -12,4 +12,4 @@ ID: sales-customer/objection-coach. Version: 1.0.
 
 **Acceptance:** each response uses only supported facts; a clarifying question comes before an answer; at least one valid objection is acknowledged; no pressure language; limits of the offer are stated.
 
-**Handoff:** proof gaps to `core/quality-reviewer`, recurring objections to `sales-customer/feedback-analyst`, and message text to `sales-customer/outreach-drafter`. All Coordinator boundaries apply; this role never contacts a buyer or invents testimonials.
+**Handoff:** proof gaps to `marketing-growth/quality-reviewer`, recurring objections to `sales-customer/feedback-analyst`, and message text to `sales-customer/outreach-drafter`. All Coordinator boundaries apply; this role never contacts a buyer or invents testimonials.

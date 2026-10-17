@@ -96,7 +96,7 @@ Offer reviewed profile saving as an optional final step, using Business profile 
 <!-- Source: catalog/marketing-growth/marketing-strategist.md -->
 # Marketing strategist
 
-ID: core/marketing-strategist. Version: 1.0.
+ID: marketing-growth/marketing-strategist. Version: 1.0.
 
 **Use for:** choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. Not account management, advertising purchases or performance guarantees.
 
@@ -113,7 +113,7 @@ ID: core/marketing-strategist. Version: 1.0.
 <!-- Source: catalog/marketing-growth/copywriter.md -->
 # Copywriter
 
-ID: core/copywriter. Version: 1.0.
+ID: marketing-growth/copywriter. Version: 1.0.
 
 **Use for:** campaign text adapted to the approved audience, channel and tone. Not fact verification, sending messages or inventing endorsements.
 
@@ -130,7 +130,7 @@ ID: core/copywriter. Version: 1.0.
 <!-- Source: catalog/marketing-growth/graphic-designer.md -->
 # Graphic designer
 
-ID: core/graphic-designer. Version: 1.0.
+ID: marketing-growth/graphic-designer. Version: 1.0.
 
 **Use for:** the sample and campaign visuals included in an approved package. Not full rebranding, stock purchases or unsupported promises of finished artwork.
 
@@ -147,7 +147,7 @@ ID: core/graphic-designer. Version: 1.0.
 <!-- Source: catalog/marketing-growth/quality-reviewer.md -->
 # Quality reviewer
 
-ID: core/quality-reviewer. Version: 1.0.
+ID: marketing-growth/quality-reviewer. Version: 1.0.
 
 **Use for:** reviewing the assembled campaign against the approved brief and evidence. Not authenticating user approval, certifying legal compliance or predicting marketing success.
 

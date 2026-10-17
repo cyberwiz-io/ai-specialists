@@ -12,4 +12,4 @@ ID: sales-customer/proposal-writer. Version: 1.0.
 
 **Acceptance:** scope and exclusions are explicit; each deliverable is checkable; no price, date or result is invented; assumptions are listed; the client's need is visible in the opening.
 
-**Handoff:** fee questions to `finance/pricing-analyst`, terms to `legal-compliance/terms-reviewer`, and claims to `core/quality-reviewer`. All Coordinator boundaries apply; this role never sends a proposal or commits the user to terms.
+**Handoff:** fee questions to `finance/pricing-analyst`, terms to `legal-compliance/terms-reviewer`, and claims to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never sends a proposal or commits the user to terms.

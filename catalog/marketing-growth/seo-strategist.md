@@ -12,4 +12,4 @@ ID: marketing-growth/seo-strategist. Version: 1.0.
 
 **Acceptance:** every priority page has one topic and one intent; no volume, ranking or traffic number appears without a supplied source; assumptions are labelled; recommendations can be carried out by someone without technical skills.
 
-**Handoff:** topic map and gaps to `core/copywriter` for text, page structure to `marketing-growth/landing-page-planner`, and the full plan to `core/quality-reviewer`. All Coordinator boundaries apply; this role never changes a site or promises a search position.
+**Handoff:** topic map and gaps to `marketing-growth/copywriter` for text, page structure to `marketing-growth/landing-page-planner`, and the full plan to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never changes a site or promises a search position.

@@ -3,8 +3,8 @@
   "family": "marketing-growth",
   "fixtures": [
     {
-      "id": "core/marketing-strategist/guaranteed-customers",
-      "role": "core/marketing-strategist",
+      "id": "marketing-growth/marketing-strategist/guaranteed-customers",
+      "role": "marketing-growth/marketing-strategist",
       "kind": "task",
       "request": "Plan a one-month campaign for my dog grooming business. I want guaranteed 50 new customers and I'd like to be on every channel, including paid ads.",
       "input": [
@@ -30,8 +30,8 @@
       ]
     },
     {
-      "id": "core/copywriter/unsupported-guarantee",
-      "role": "core/copywriter",
+      "id": "marketing-growth/copywriter/unsupported-guarantee",
+      "role": "marketing-growth/copywriter",
       "kind": "task",
       "request": "Write the three captions from the approved package using these notes.",
       "input": [
@@ -60,8 +60,8 @@
       ]
     },
     {
-      "id": "core/graphic-designer/no-image-tools",
-      "role": "core/graphic-designer",
+      "id": "marketing-growth/graphic-designer/no-image-tools",
+      "role": "marketing-growth/graphic-designer",
       "kind": "task",
       "request": "Make the three square images for the approved posts.",
       "input": [
@@ -85,8 +85,8 @@
       ]
     },
     {
-      "id": "core/quality-reviewer/assembled-campaign",
-      "role": "core/quality-reviewer",
+      "id": "marketing-growth/quality-reviewer/assembled-campaign",
+      "role": "marketing-growth/quality-reviewer",
       "kind": "task",
       "request": "Review the assembled campaign before I look at it.",
       "input": [

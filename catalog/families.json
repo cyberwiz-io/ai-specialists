@@ -39,6 +39,7 @@
       "id": "it-operations",
       "name": "IT operations",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Documentation and planning for everyday IT support and infrastructure upkeep.",
       "flow": "Capture the environment and constraint, draft the document or plan, check it against the supplied details, then hand it to the person who will carry it out.",
       "roles": [
@@ -59,13 +60,13 @@
         {"slug": "requirements-analyst", "name": "Requirements analyst"},
         {"slug": "software-architect", "name": "Software architect"},
         {"slug": "feature-change-planner", "name": "Feature change planner"},
-        {"slug": "code-reviewer", "name": "Code reviewer"},
+        {"slug": "code-reviewer", "name": "Code reviewer", "commands": true},
         {"slug": "test-designer", "name": "Test designer"},
         {"slug": "refactoring-planner", "name": "Refactoring planner"},
         {"slug": "api-designer", "name": "API designer"},
-        {"slug": "debugging-analyst", "name": "Debugging analyst"},
-        {"slug": "technical-writer", "name": "Technical writer"},
-        {"slug": "release-notes-writer", "name": "Release notes writer"},
+        {"slug": "debugging-analyst", "name": "Debugging analyst", "commands": true},
+        {"slug": "technical-writer", "name": "Technical writer", "model": "sonnet"},
+        {"slug": "release-notes-writer", "name": "Release notes writer", "model": "sonnet"},
         {"slug": "schema-reviewer", "name": "Schema reviewer"}
       ]
     },
@@ -85,6 +86,7 @@
       "id": "product-design",
       "name": "Product and design",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Product definition, user research planning, interface writing and design review.",
       "flow": "Define the user problem, plan the research or design work, produce the written or visual-brief deliverable, then review for accessibility and clarity.",
       "roles": [
@@ -101,6 +103,7 @@
       "id": "content-creative",
       "name": "Content and creative",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Writing and planning of articles, scripts, newsletters and other creative content.",
       "flow": "Confirm audience and purpose, outline, draft, then edit against the brief. Facts that are not supplied are marked, not invented.",
       "roles": [
@@ -118,14 +121,15 @@
       "id": "marketing-growth",
       "name": "Marketing and growth",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack.",
       "flow": "Follow the marketing campaign workflow: goal, package, visual direction if needed, create and check, deliver. Add the specialists whose deliverable the package needs.",
       "coordinator": ["pack/COORDINATOR.md", "pack/MARKETING-WORKFLOW.md"],
       "roles": [
-        {"slug": "marketing-strategist", "name": "Marketing strategist", "prefix": "core"},
-        {"slug": "copywriter", "name": "Copywriter", "prefix": "core"},
-        {"slug": "graphic-designer", "name": "Graphic designer", "prefix": "core"},
-        {"slug": "quality-reviewer", "name": "Quality reviewer", "prefix": "core"},
+        {"slug": "marketing-strategist", "name": "Marketing strategist"},
+        {"slug": "copywriter", "name": "Copywriter"},
+        {"slug": "graphic-designer", "name": "Graphic designer"},
+        {"slug": "quality-reviewer", "name": "Quality reviewer"},
         {"slug": "seo-strategist", "name": "SEO strategist"},
         {"slug": "email-campaign-planner", "name": "Email campaign planner"},
         {"slug": "brand-voice-guide", "name": "Brand voice guide"},
@@ -138,6 +142,7 @@
       "id": "sales-customer",
       "name": "Sales and customer",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Drafts and plans for selling, supporting and onboarding customers.",
       "flow": "Confirm the customer and offer, draft the sales or support material from supplied facts, and review claims before the user uses it.",
       "roles": [
@@ -155,6 +160,7 @@
       "id": "business-operations",
       "name": "Business operations",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Process, planning and decision documents for running a small organization.",
       "flow": "Name the process or decision, gather the facts supplied, produce the document, and list open assumptions for the owner.",
       "roles": [
@@ -247,6 +253,7 @@
       "id": "education-training",
       "name": "Education and training",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Designing courses, lessons, assessments and study support.",
       "flow": "Confirm learners and outcomes, design the material, align assessment to outcomes, and note what needs a real trial with learners.",
       "roles": [
@@ -262,6 +269,7 @@
       "id": "public-nonprofit",
       "name": "Public sector and nonprofit",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Grant, program, policy and community materials for public-benefit organizations.",
       "flow": "Confirm the mission and audience, draft from supplied facts, check claims and funder requirements the user provides, and list open items.",
       "roles": [
@@ -276,6 +284,7 @@
       "id": "personal-career",
       "name": "Personal and career",
       "sensitive": false,
+      "model": "sonnet",
       "purpose": "Help individuals with applications, interviews, career thinking and personal projects.",
       "flow": "Learn the person's goal and real experience, draft or plan from it, and keep every claim true to what they supplied.",
       "roles": [

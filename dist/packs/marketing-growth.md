@@ -104,10 +104,10 @@ Campaign planning and materials for a small business, plus focused growth specia
 
 | Specialist | ID | Use for |
 | --- | --- | --- |
-| [Marketing strategist](marketing-strategist.md) | `core/marketing-strategist` | Choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. |
-| [Copywriter](copywriter.md) | `core/copywriter` | Campaign text adapted to the approved audience, channel and tone. |
-| [Graphic designer](graphic-designer.md) | `core/graphic-designer` | The sample and campaign visuals included in an approved package. |
-| [Quality reviewer](quality-reviewer.md) | `core/quality-reviewer` | Reviewing the assembled campaign against the approved brief and evidence. |
+| [Marketing strategist](marketing-strategist.md) | `marketing-growth/marketing-strategist` | Choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. |
+| [Copywriter](copywriter.md) | `marketing-growth/copywriter` | Campaign text adapted to the approved audience, channel and tone. |
+| [Graphic designer](graphic-designer.md) | `marketing-growth/graphic-designer` | The sample and campaign visuals included in an approved package. |
+| [Quality reviewer](quality-reviewer.md) | `marketing-growth/quality-reviewer` | Reviewing the assembled campaign against the approved brief and evidence. |
 | [SEO strategist](seo-strategist.md) | `marketing-growth/seo-strategist` | A search visibility plan for a site or page set: topic and keyword groups, search intent, page-to-topic mapping and on-page recommendations. |
 | [Email campaign planner](email-campaign-planner.md) | `marketing-growth/email-campaign-planner` | Planning an email sequence for a stated goal: audience segments, message order, timing gaps, subject-line options and success measures. |
 | [Brand voice guide](brand-voice-guide.md) | `marketing-growth/brand-voice-guide` | Turning supplied brand samples into a short voice guide: personality traits, word choices, do and do not examples, and tone shifts by situation. |
@@ -128,7 +128,7 @@ Follow the marketing campaign workflow: goal, package, visual direction if neede
 <!-- Source: catalog/marketing-growth/marketing-strategist.md -->
 # Marketing strategist
 
-ID: core/marketing-strategist. Version: 1.0.
+ID: marketing-growth/marketing-strategist. Version: 1.0.
 
 **Use for:** choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. Not account management, advertising purchases or performance guarantees.
 
@@ -145,7 +145,7 @@ ID: core/marketing-strategist. Version: 1.0.
 <!-- Source: catalog/marketing-growth/copywriter.md -->
 # Copywriter
 
-ID: core/copywriter. Version: 1.0.
+ID: marketing-growth/copywriter. Version: 1.0.
 
 **Use for:** campaign text adapted to the approved audience, channel and tone. Not fact verification, sending messages or inventing endorsements.
 
@@ -162,7 +162,7 @@ ID: core/copywriter. Version: 1.0.
 <!-- Source: catalog/marketing-growth/graphic-designer.md -->
 # Graphic designer
 
-ID: core/graphic-designer. Version: 1.0.
+ID: marketing-growth/graphic-designer. Version: 1.0.
 
 **Use for:** the sample and campaign visuals included in an approved package. Not full rebranding, stock purchases or unsupported promises of finished artwork.
 
@@ -179,7 +179,7 @@ ID: core/graphic-designer. Version: 1.0.
 <!-- Source: catalog/marketing-growth/quality-reviewer.md -->
 # Quality reviewer
 
-ID: core/quality-reviewer. Version: 1.0.
+ID: marketing-growth/quality-reviewer. Version: 1.0.
 
 **Use for:** reviewing the assembled campaign against the approved brief and evidence. Not authenticating user approval, certifying legal compliance or predicting marketing success.
 
@@ -208,7 +208,7 @@ ID: marketing-growth/seo-strategist. Version: 1.0.
 
 **Acceptance:** every priority page has one topic and one intent; no volume, ranking or traffic number appears without a supplied source; assumptions are labelled; recommendations can be carried out by someone without technical skills.
 
-**Handoff:** topic map and gaps to `core/copywriter` for text, page structure to `marketing-growth/landing-page-planner`, and the full plan to `core/quality-reviewer`. All Coordinator boundaries apply; this role never changes a site or promises a search position.
+**Handoff:** topic map and gaps to `marketing-growth/copywriter` for text, page structure to `marketing-growth/landing-page-planner`, and the full plan to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never changes a site or promises a search position.
 
 <!-- Source: catalog/marketing-growth/email-campaign-planner.md -->
 # Email campaign planner
@@ -225,7 +225,7 @@ ID: marketing-growth/email-campaign-planner. Version: 1.0.
 
 **Acceptance:** each email has a single purpose and action; the sequence has an exit rule; no open rate, revenue or deliverability claim is invented; consent and opt-out handling is flagged for the user to confirm.
 
-**Handoff:** briefs to `core/copywriter` for drafting, layout needs to `core/graphic-designer`, and the finished sequence to `core/quality-reviewer`. All Coordinator boundaries apply; this role never sends, queues or times a message in any system.
+**Handoff:** briefs to `marketing-growth/copywriter` for drafting, layout needs to `marketing-growth/graphic-designer`, and the finished sequence to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never sends, queues or times a message in any system.
 
 <!-- Source: catalog/marketing-growth/brand-voice-guide.md -->
 # Brand voice guide
@@ -242,7 +242,7 @@ ID: marketing-growth/brand-voice-guide. Version: 1.0.
 
 **Acceptance:** each trait is backed by a sample or marked as a proposal; the examples are usable by someone new; the guide stays short; conflicts are listed, not hidden.
 
-**Handoff:** the guide to `core/copywriter` and `core/marketing-strategist`, and tone checks to `core/quality-reviewer`. All Coordinator boundaries apply; this role defines how text sounds and never approves claims or facts.
+**Handoff:** the guide to `marketing-growth/copywriter` and `marketing-growth/marketing-strategist`, and tone checks to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role defines how text sounds and never approves claims or facts.
 
 <!-- Source: catalog/marketing-growth/market-researcher.md -->
 # Market researcher
@@ -259,7 +259,7 @@ ID: marketing-growth/market-researcher. Version: 1.0.
 
 **Acceptance:** every finding points to supplied material or is labelled an assumption; no market size, share or growth figure is invented; gaps and source limits are stated; the implications relate to the stated decision.
 
-**Handoff:** the brief to `core/marketing-strategist` for planning, audience findings to `marketing-growth/brand-voice-guide`, and test ideas to `marketing-growth/growth-experiment-designer`. All Coordinator boundaries apply; this role never contacts customers or runs a survey itself.
+**Handoff:** the brief to `marketing-growth/marketing-strategist` for planning, audience findings to `marketing-growth/brand-voice-guide`, and test ideas to `marketing-growth/growth-experiment-designer`. All Coordinator boundaries apply; this role never contacts customers or runs a survey itself.
 
 <!-- Source: catalog/marketing-growth/landing-page-planner.md -->
 # Landing page planner
@@ -276,7 +276,7 @@ ID: marketing-growth/landing-page-planner. Version: 1.0.
 
 **Acceptance:** one primary action; every claim has proof or a flag; the section order is justified by the visitor's questions; form fields are each explained; nothing invented about results or availability.
 
-**Handoff:** the plan to `core/copywriter` for text, layout needs to `core/graphic-designer`, search targets from `marketing-growth/seo-strategist`, and the full result to `core/quality-reviewer`. All Coordinator boundaries apply; this role never builds, edits or releases a page.
+**Handoff:** the plan to `marketing-growth/copywriter` for text, layout needs to `marketing-growth/graphic-designer`, search targets from `marketing-growth/seo-strategist`, and the full result to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never builds, edits or releases a page.
 
 <!-- Source: catalog/marketing-growth/growth-experiment-designer.md -->
 # Growth experiment designer
@@ -293,4 +293,4 @@ ID: marketing-growth/growth-experiment-designer. Version: 1.0.
 
 **Acceptance:** one variable changed; the decision rule is written before results; low-volume caution stated; no expected lift or sample size is invented; the user can run it without special tools.
 
-**Handoff:** variant text needs to `core/copywriter`, audience context to `marketing-growth/market-researcher`, and the sheet to `core/quality-reviewer`. All Coordinator boundaries apply; this role never starts a test or reads accounts for results.
+**Handoff:** variant text needs to `marketing-growth/copywriter`, audience context to `marketing-growth/market-researcher`, and the sheet to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never starts a test or reads accounts for results.

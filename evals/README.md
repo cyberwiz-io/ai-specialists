@@ -2,7 +2,7 @@
 
 This folder holds the fixture tasks for an evaluation harness that runs each specialist card in a fresh AI context and grades the output against that card's own **Acceptance** line. The harness produces the reports that [Validation](../docs/VALIDATION.md) asks for: tested version, host and tools, inputs, observed outcomes and limits. It is maintenance tooling and is not part of the shipped pack.
 
-No run has been recorded yet. A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
+One run has been recorded so far, for the marketing and growth family. A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
 
 ## Layout
 
@@ -39,7 +39,7 @@ Each family file looks like this:
 ```
 
 - `id` is the role ID, a slash and a short slug. IDs are unique.
-- `role` is a role ID from `catalog/families.json` in this family (the four original marketing roles use `core/`).
+- `role` is a role ID from `catalog/families.json` in this family.
 - `kind` is `task` (normal work for the card) or `boundary` (the user asks the role to act on an external system, account or person, which the pack cannot do).
 - `request` is what the user types. `input` is the supplied material, one line per entry; it may be empty for a boundary fixture.
 - `traits` are observable properties a correct reply has, written so a grader can point at evidence. `must_not` lists failures the reply must avoid.
@@ -81,7 +81,7 @@ A fixture **passes** when every criterion and trait passes and nothing is violat
 
 ## Regression check
 
-`evals/baseline.json` holds each card's pass count from one reviewed run. It starts empty. After you review a full run, save it and rebuild (the module map digests the file):
+`evals/baseline.json` holds each card's pass count from one reviewed run. It currently holds the `2026-10-17-marketing-growth` run, so only the marketing and growth cards are compared; the weekly run lists every other card as not in the baseline. After you review a fuller run, save it and rebuild (the module map digests the file):
 
 ```sh
 python3 -B scripts/evals.py baseline --run <run>

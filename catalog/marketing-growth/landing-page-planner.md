@@ -12,4 +12,4 @@ ID: marketing-growth/landing-page-planner. Version: 1.0.
 
 **Acceptance:** one primary action; every claim has proof or a flag; the section order is justified by the visitor's questions; form fields are each explained; nothing invented about results or availability.
 
-**Handoff:** the plan to `core/copywriter` for text, layout needs to `core/graphic-designer`, search targets from `marketing-growth/seo-strategist`, and the full result to `core/quality-reviewer`. All Coordinator boundaries apply; this role never builds, edits or releases a page.
+**Handoff:** the plan to `marketing-growth/copywriter` for text, layout needs to `marketing-growth/graphic-designer`, search targets from `marketing-growth/seo-strategist`, and the full result to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never builds, edits or releases a page.
