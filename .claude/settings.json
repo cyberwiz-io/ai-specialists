@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && (python3 -B scripts/pack.py check 2>&1 || echo \"pack.py check FAILED: the repo is not green. Tell the user and fix or report this before other work.\")",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(python3 -B scripts/pack.py:*)",
+      "Bash(python3 -B scripts/evals.py:*)",
+      "Bash(python3 -B -m unittest:*)"
+    ]
+  }
+}

@@ -26,6 +26,10 @@ To find a specialist, run `python3 -B scripts/pack.py find <words>`. To add or c
 
 Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and every family has a boundary fixture; the check enforces both. When you add or change a role, add or update its fixture. To run the evaluations, ask Claude Code to run the card evals (the `card-evals` skill), or follow [evals/README.md](evals/README.md). A run spawns a fresh subagent per reply and per grade, writes everything under the ignored `work/evals/` folder, and produces a report. Commit a report to `evals/reports/` only after reviewing it, and keep its Limits section.
 
+## Claude Code
+
+`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-adapter`. The build generates the experimental adapter in `adapters/claude-code/agents/`, which stays outside the shipped pack and release archive.
+
 ## Release
 
 The release ZIP is not kept in Git, because every committed version would stay in the history. To release, update `VERSION` and the changelog, merge, then push a tag named `v` plus the version, such as `v1.1`. The release workflow runs the check and tests, builds the archive with `python3 -B scripts/pack.py release --tag v1.1`, and attaches it to the GitHub Release for that tag. Run the same command locally to inspect the archive; it is written to the ignored `work/release/` folder.

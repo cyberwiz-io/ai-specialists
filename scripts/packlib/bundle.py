@@ -3,7 +3,7 @@
 from io import BytesIO
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
-from .config import (ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_SOURCES, archive_name,
+from .config import (ADAPTER_DIR, ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_SOURCES, archive_name,
                      read, version)
 
 
@@ -13,7 +13,7 @@ def members(root, families, generated):
     names += [role["path"] for family in families for role in family["roles"]]
     data = {prefix + name: read(root, name) for name in names}
     for name, payload in generated.items():
-        if name != MODULE_MAP:
+        if name != MODULE_MAP and not name.startswith(ADAPTER_DIR + "/"):
             data[prefix + name] = payload
     return data
 

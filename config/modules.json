@@ -9,6 +9,7 @@
     "catalog/REGISTRY.jsonl",
     "config/module-map.json",
     "dist/packs/*.md",
+    "adapters/claude-code/agents/*.md",
     "pack/STARTER-PACK.md"
   ],
   "modules": [
@@ -43,12 +44,13 @@
       "interfaces": ["scripts/pack.py"],
       "invariants": ["Standard library only; every check has a success and a failure test."],
       "paths": [
+        ".claude/CLAUDE.md", ".claude/settings.json", ".claude/commands/*.md",
         ".github/workflows/*.yml",
         "config/modules.json",
         "scripts/pack.py", "scripts/packlib/*.py",
         "tests/*.py"
       ],
-      "purpose": "Build, check and search tooling, plus its failure-path tests."
+      "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
     },
     {
       "consumers": ["maintenance"],
@@ -63,6 +65,15 @@
         "scripts/evals.py"
       ],
       "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
+    },
+    {
+      "dependencies": ["catalog-manifest", "maintenance"],
+      "guide": "adapters/claude-code/README.md",
+      "id": "claude-code-adapter",
+      "interfaces": ["adapters/claude-code/agents/*.md"],
+      "invariants": ["Experimental and outside the shipped pack: read-only tools, generated from the cards, never edited by hand."],
+      "paths": ["adapters/claude-code/README.md", "adapters/claude-code/agents/*.md"],
+      "purpose": "Claude Code subagents generated from the catalog cards, kept apart from the pack until evidence supports them."
     }
   ]
 }

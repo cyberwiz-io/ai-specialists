@@ -1,6 +1,7 @@
 {
   "entry": "REPO-MAP.md",
   "generated": [
+    "adapters/claude-code/agents/*.md",
     "catalog/*/INDEX.md",
     "catalog/REGISTRY.jsonl",
     "config/module-map.json",
@@ -30,7 +31,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "1498e83423f11ecf0a00345b584095518d3680ed2249a275fc4b5f7c226ea3db",
+      "digest": "3f9309104c966af9809ff062adda740a009d5d7341fadfcffbb83d4a04463b99",
       "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -122,8 +123,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "7910afef01370b5dd387e1db5bae1ba7da7dec8095daa24fe7bacb677b44b7f0",
-      "files": 16,
+      "digest": "531f46a6952f7166e99a502d135d68409f9a08bbc24065aa47dfc7750488680f",
+      "files": 24,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -133,13 +134,16 @@
         "Standard library only; every check has a success and a failure test."
       ],
       "paths": [
+        ".claude/CLAUDE.md",
+        ".claude/commands/*.md",
+        ".claude/settings.json",
         ".github/workflows/*.yml",
         "config/modules.json",
         "scripts/pack.py",
         "scripts/packlib/*.py",
         "tests/*.py"
       ],
-      "purpose": "Build, check and search tooling, plus its failure-path tests."
+      "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
     },
     {
       "checks": [
@@ -166,8 +170,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "c54d40a7eaa0d69fefc97982378e54dc6316118fe8c73eeb63b18d6797ccc4cb",
-      "files": 23,
+      "digest": "65b214736111843648057408b4e6efe5a07e3b0b46fefb0502dd0ca9b40ee809",
+      "files": 24,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
@@ -186,6 +190,45 @@
         "scripts/evals.py"
       ],
       "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
+      "digest": "4afc72864c1571ecd3bc1543d2a12f8f4c4b0461b0b77459ac524524b2416712",
+      "files": 125,
+      "guide": "adapters/claude-code/README.md",
+      "id": "claude-code-adapter",
+      "interfaces": [
+        "adapters/claude-code/agents/*.md"
+      ],
+      "invariants": [
+        "Experimental and outside the shipped pack: read-only tools, generated from the cards, never edited by hand."
+      ],
+      "paths": [
+        "adapters/claude-code/README.md",
+        "adapters/claude-code/agents/*.md"
+      ],
+      "purpose": "Claude Code subagents generated from the catalog cards, kept apart from the pack until evidence supports them."
     },
     {
       "checks": [
