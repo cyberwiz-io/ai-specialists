@@ -320,6 +320,8 @@ def problems(path, text, folder_name, spec_only=True):
         failures.append(f"{path}: compatibility exceeds {COMPATIBILITY_MAX} characters")
     if not isinstance(fields.get("metadata", {}), dict):
         failures.append(f"{path}: metadata must be a map")
+    if "Read" not in str(fields.get("allowed-tools", "")).split():
+        failures.append(f"{path}: allowed-tools must include Read, so card reads do not prompt for permission")
     extra = sorted(set(fields) - set(SPEC_FIELDS))
     if spec_only and extra:
         failures.append(f"{path}: frontmatter keys outside the Agent Skills spec: {', '.join(extra)}")

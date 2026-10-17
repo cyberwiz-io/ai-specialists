@@ -40,6 +40,8 @@ class SkillTests(FixtureCase):
         cases = ((good, "other-folder", "does not match its folder"),
                  (good.replace("name: security-threat-modeler", "name: Security_Threat"), "Security_Threat", "lowercase"),
                  (good.replace("name: security-threat-modeler", "name: " + "a" * 65), "a" * 65, "1-64"),
+                 (good.replace("allowed-tools: Read Grep Glob", "allowed-tools: Grep"), "security-threat-modeler",
+                  "allowed-tools must include Read"),
                  (good.replace("license: CC-BY-4.0", "license: CC-BY-4.0\nmodel: opus"), "security-threat-modeler",
                   "outside the Agent Skills spec"),
                  (re.sub(r'description: ".*?"\n', 'description: "' + "x" * 1100 + '"\n', good), "security-threat-modeler",
