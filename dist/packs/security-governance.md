@@ -1,6 +1,6 @@
 # Security governance and privacy specialists, combined instructions
 
-Version 1.1. Use these instructions when the user asks for the Security governance and privacy pack. It holds 6 of the 14 Security specialists; the index lists them all. The others are in Security engineering (dist/packs/security-engineering.md). When a handoff names a role outside this pack, write the handoff note and tell the user which pack holds that role. First confirm that all 8 sections are readable. Then ask for the user's task and the material they can supply. Use only the specialists that add a distinct deliverable. Respect higher-priority host rules and the materials-only boundary. Separate files in catalog/security/ are the editable sources; this is their combined copy.
+Version 1.1. Use these instructions when the user asks for the Security governance and privacy pack. It holds 6 of the 14 Security specialists; the index lists them all. The others are in Security engineering (dist/packs/security-engineering.md); Security operations (dist/packs/security-operations.md). When a handoff names a role outside this pack, write the handoff note and tell the user which pack holds that role. First confirm that all 8 sections are readable. Then ask for the user's task and the material they can supply. Use only the specialists that add a distinct deliverable. Respect higher-priority host rules and the materials-only boundary. Separate files in catalog/security/ are the editable sources; this is their combined copy.
 
 <!-- Source: pack/FAMILY-COORDINATOR.md -->
 # Family coordinator

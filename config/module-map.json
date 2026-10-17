@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "ed361cb87088f92936d8e7cd15ad9ad31dedfe539239835ada8ff707034b1a0e",
+      "digest": "0b1a3f82fef26153a7dd6129cef144447066491d99c82eb98c2ed8eb20ecd5f2",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -101,7 +101,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "7add1564ea5321f5158a5e01e1aa7f0282672c3ca120c0f65cf48bd582994f53",
+      "digest": "47607de4692b5e87d98b67e4d741b3f4a4a1e67a3ef641f0792b1a9c97d5b6e0",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "d2b0913589eda03cd2d8a7fe3f96b2618ab5b84a221fc25336be878dac641c42",
+      "digest": "d6644bf51fda2c708c0fca17fe07e2c356aa96d78a8413ff952cb3ffa2cbc5a5",
       "files": 33,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -186,8 +186,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "8bffc8263dee1f21b734b7680c8947ec845639b5b0eabbdbfa6d5654e28917df",
-      "files": 28,
+      "digest": "49dde5882dd80ae65600d213503e4843d3a6f20009564d6829ad80bc24912047",
+      "files": 31,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
@@ -233,8 +233,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "ff373a9b3d8c148a339392e5af49e6c79a4d859bb3612cfc4758c9f2d64cc0d1",
-      "files": 450,
+      "digest": "02a1e07adbf3ba2d08e24867c037df213d202db6735dcf2e22e4f3d4b95f86c0",
+      "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
       "interfaces": [

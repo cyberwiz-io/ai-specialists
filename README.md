@@ -36,7 +36,7 @@ Prefer a download? The [latest release](https://github.com/cyberwiz-io/ai-specia
 
 ## Families
 
-Each family has a pasteable combined pack and an index of its specialists. Every pack stays under 32 KB, about 8,000 tokens, so it fits in a 16,000-token context window with room to work; Security is split into two packs to stay under that limit.
+Each family has a pasteable combined pack and an index of its specialists. Every pack stays under 32 KB, about 8,000 tokens, so it fits in a 16,000-token context window with room to work; Security is split into three packs and legal and compliance into two to stay under that limit.
 
 | Family | Specialists | Index | Combined pack |
 | --- | --- | --- | --- |
@@ -53,7 +53,7 @@ Each family has a pasteable combined pack and an index of its specialists. Every
 | Public sector and nonprofit | 5 | [index](catalog/public-nonprofit/INDEX.md) | [pack](dist/packs/public-nonprofit.md) |
 | Personal and career | 5 | [index](catalog/personal-career/INDEX.md) | [pack](dist/packs/personal-career.md) |
 | Orchestration and meta | 5 | [index](catalog/orchestration/INDEX.md) | [pack](dist/packs/orchestration.md) |
-| Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | Two packs: [engineering](dist/packs/security-engineering.md) (8), [governance and privacy](dist/packs/security-governance.md) (6) |
+| Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | Three packs: [engineering](dist/packs/security-engineering.md) (5), [operations](dist/packs/security-operations.md) (3), [governance and privacy](dist/packs/security-governance.md) (6) |
 | Finance (sensitive) | 8 | [index](catalog/finance/INDEX.md) | [pack](dist/packs/finance.md) |
 | People and HR (sensitive) | 5 | [index](catalog/people-hr/INDEX.md) | [pack](dist/packs/people-hr.md) |
 | Legal and compliance (sensitive) | 8 | [index](catalog/legal-compliance/INDEX.md) | Two packs: [documents](dist/packs/legal-compliance-documents.md) (4), [rules and policies](dist/packs/legal-compliance-rules.md) (4) |

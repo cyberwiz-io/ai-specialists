@@ -309,7 +309,7 @@ class ArchiveTests(FixtureCase):
         prefix = "ai-specialists-1.1/"
         for required in ("catalog/security/threat-modeler.md", "dist/packs/finance.md",
                          "dist/packs/security-engineering.md", "dist/packs/security-governance.md",
-                         "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):
+                         "dist/packs/security-operations.md", "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):
             self.assertIn(prefix + required, names)
         self.assertFalse([name for name in names if "/work/" in name or "/profiles/" in name])
         self.assertNotIn(prefix + "dist/packs/security.md", names)
@@ -327,7 +327,8 @@ class SplitPackTests(FixtureCase):
         security = next(family for family in families if family["id"] == "security")
         packs = {name: data.decode("utf-8") for name, data in generated.items()
                  if name.startswith(config.PACK_DIR + "/security")}
-        self.assertEqual(sorted(packs), ["dist/packs/security-engineering.md", "dist/packs/security-governance.md"])
+        self.assertEqual(sorted(packs), ["dist/packs/security-engineering.md", "dist/packs/security-governance.md",
+                                        "dist/packs/security-operations.md"])
         for role in security["roles"]:
             holders = [name for name, text in packs.items() if f"<!-- Source: {role['path']} -->" in text]
             self.assertEqual(len(holders), 1, role["path"])

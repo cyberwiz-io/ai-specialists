@@ -13,8 +13,9 @@
       "packs": [
         {"id": "security-engineering", "name": "Security engineering",
          "roles": ["security-architect", "threat-modeler", "appsec-reviewer", "secure-code-reviewer",
-                   "vulnerability-triage-analyst", "incident-response-planner", "cloud-security-reviewer",
-                   "detection-rule-reviewer"]},
+                   "cloud-security-reviewer"]},
+        {"id": "security-operations", "name": "Security operations",
+         "roles": ["vulnerability-triage-analyst", "incident-response-planner", "detection-rule-reviewer"]},
         {"id": "security-governance", "name": "Security governance and privacy",
          "roles": ["security-policy-writer", "risk-register-analyst", "access-review-analyst",
                    "security-awareness-trainer", "privacy-engineer", "vendor-security-assessor"]}

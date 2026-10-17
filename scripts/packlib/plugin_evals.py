@@ -76,8 +76,11 @@ def outputs(root, families):
             for problem in evals.lint(" ".join([team.get("request", "")] + team.get("input", []) + team.get("traits", []))):
                 raise ValueError(f"{name}: team task {problem}")
             reviewer = read(root, "catalog/orchestration/cross-family-reviewer.md").decode("utf-8")
-            used = {"name": "spawned-specialists", "type": "tool_used", "tool": "Agent", "min": 2, "arm": "with-only"}
+            minimum = team.get("min_agents", 2)
+            if not isinstance(minimum, int) or minimum < 2:
+                raise ValueError(f"{name}: team min_agents must be a whole number of at least 2")
+            used = {"name": "spawned-specialists", "type": "tool_used", "tool": "Agent", "min": minimum, "arm": "with-only"}
             case = team["id"].split("/", 1)[1]
             files[f"{base}/{case}/case.yaml"] = _json(
-                _case(case, dict(team, kind="team"), evals.criteria(reviewer), spec, ["team", skills.lead_name(family)], [used]))
+                _case(case, {**{k: v for k, v in team.items() if k != "min_agents"}, "kind": "team"}, evals.criteria(reviewer), spec, ["team", skills.lead_name(family)], [used]))
     return files

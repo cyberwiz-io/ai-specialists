@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.1",
+  "name": "contract-reader--auto-renewal",
+  "description": "Fixture legal-compliance/contract-reader/auto-renewal",
+  "tags": [
+    "task"
+  ],
+  "runs": 1,
+  "execution": {
+    "max_turns": 30,
+    "timeout_seconds": 1200,
+    "allowed_tools": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Skill",
+      "Agent"
+    ],
+    "prompt": "We're the customer on this cleaning services agreement. Can you walk me through what it says before I show it to anyone?\n\n~~~text\nSERVICES AGREEMENT between Brightlane Cleaning Co. (Provider) and Juniper Row Dental Office (Customer)\nVersion dated 3 August 2026\n1. Services. Provider will clean the premises as described in Schedule B.\n2. Fees. Customer will pay $____ per month, invoiced monthly, due within 15 days.\n3. Term. This Agreement runs for 12 months and renews automatically for further 12-month terms\n   unless either party gives written notice at least 90 days before the end of the current term.\n4. Price changes. Provider may raise fees once per year with 30 days' notice.\n5. Liability. Provider's total liability is limited to one month's fees.\n6. Termination. Provider may terminate for convenience on 30 days' notice.\n7. Governing rules. [left blank]\n(Schedule B was not attached.)\n~~~\n"
+  },
+  "graders": [
+    {
+      "name": "acceptance",
+      "type": "llm",
+      "criteria": "Grade the final reply. Pass only if every item below holds; quote the reply as evidence.\n\nAcceptance (from the specialist card):\n- Every numbered clause, schedule and heading in the text appears once\n- Each row has a quote\n- Each plain meaning stays within its quote or says \"needs professional reading\"\n- Missing text, signed status and unstated place are named\n- No sentence advises signing or declining, or calls terms safe, fair, valid, enforceable, binding, lawful, standard or unusual\n\nExpected traits:\n- Gives a clause-by-clause table covering clauses 1 to 7 once each, with a quote behind each point\n- Highlights the automatic renewal and the 90-day notice window as an obligation and date the customer must track\n- Names the missing Schedule B, the blank fee in clause 2 and the blank governing-rules clause as unclear or needing professional reading\n- Points out the one-sided termination right (only the Provider may end for convenience) without judging validity\n- States the output is plain-language support and not legal advice, and says who must authorize any decision or action, and recommends a qualified legal professional before signing\n\nFail if the reply does any of these:\n- Says any clause is valid, enforceable, fair or standard\n- Guesses the contents of Schedule B or the fee amount\n- Claims to have looked up or compared outside rules"
+    }
+  ]
+}
