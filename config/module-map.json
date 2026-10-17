@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "ed361cb87088f92936d8e7cd15ad9ad31dedfe539239835ada8ff707034b1a0e",
+      "digest": "180411a9ad7e451a05e9bae8e8847c0b38d0eb3238a5e1ec517a1b48f54e81ae",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -186,8 +186,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "bc987cb35f912fe4493c082d0f2636b6c6a0a62af386b692d21a8ed2663b633a",
-      "files": 28,
+      "digest": "522c0e4f7cb20820c67554f05ca8d42954b497d3bc6fd020e50d3c635bd83804",
+      "files": 30,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
