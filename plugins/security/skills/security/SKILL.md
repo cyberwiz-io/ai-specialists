@@ -1,6 +1,6 @@
 ---
 name: security
-description: "Security specialist perspectives. Defensive security planning, review and documentation of materials the user supplies. Specialists: Security architect, Threat modeler, Application security reviewer, Secure code reviewer, Vulnerability triage analyst, Incident response planner, Security policy writer, Risk register analyst, Access review analyst, Cloud security reviewer, Security awareness trainer, Privacy engineer, Vendor security assessor, Detection rule reviewer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Security: Defensive security planning, review and documentation of materials the user supplies. Roles: Security architect, Threat modeler, Application security reviewer, Secure code reviewer, Vulnerability triage analyst, Incident response planner, Security policy writer, Risk register analyst, Access review analyst, Cloud security reviewer, Security awareness trainer, Privacy engineer, Vendor security assessor, Detection rule reviewer. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/security/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

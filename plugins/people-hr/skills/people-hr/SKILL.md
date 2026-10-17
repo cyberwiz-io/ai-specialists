@@ -1,6 +1,6 @@
 ---
 name: people-hr
-description: "People and HR specialist perspectives. Drafts for hiring, onboarding, reviews and workplace policies, for human decision. Specialists: Job description writer, Interview guide designer, Onboarding plan writer, Performance review drafter, Handbook drafter. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "People and HR: Drafts for hiring, onboarding, reviews and workplace policies, for human decision. Roles: Job description writer, Interview guide designer, Onboarding plan writer, Performance review drafter, Handbook drafter. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/people-hr/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

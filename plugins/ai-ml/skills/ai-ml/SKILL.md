@@ -1,6 +1,6 @@
 ---
 name: ai-ml
-description: "AI and machine learning specialist perspectives. Designing prompts, evaluations and experiments for AI and machine learning work. Specialists: Prompt engineer, AI evaluation designer, ML experiment planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "AI and machine learning: Designing prompts, evaluations and experiments for AI and machine learning work. Roles: Prompt engineer, AI evaluation designer, ML experiment planner. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/ai-ml/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

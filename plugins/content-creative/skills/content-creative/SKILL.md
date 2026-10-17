@@ -1,6 +1,6 @@
 ---
 name: content-creative
-description: "Content and creative specialist perspectives. Writing and planning of articles, scripts, newsletters and other creative content. Specialists: Editor, Blog writer, Scriptwriter, Social media writer, Newsletter writer, Storyteller, Podcast planner, Storyboard planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Content and creative: Writing and planning of articles, scripts, newsletters and other creative content. Roles: Editor, Blog writer, Scriptwriter, Social media writer, Newsletter writer, Storyteller, Podcast planner, Storyboard planner. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/content-creative/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

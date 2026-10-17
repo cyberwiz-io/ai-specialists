@@ -1,6 +1,6 @@
 ---
 name: education-training
-description: "Education and training specialist perspectives. Designing courses, lessons, assessments and study support. Specialists: Curriculum designer, Lesson planner, Quiz writer, Study coach, Training developer, Rubric designer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Education and training: Designing courses, lessons, assessments and study support. Roles: Curriculum designer, Lesson planner, Quiz writer, Study coach, Training developer, Rubric designer. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/education-training/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

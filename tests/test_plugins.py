@@ -148,7 +148,7 @@ class PluginTests(FixtureCase):
             text = (folder / "SKILL.md").read_text(encoding="utf-8")
             front, body = split(text)
             self.assertEqual(front["name"], family["id"])
-            self.assertLessEqual(len(json.loads(front["description"])), 1024)
+            self.assertLessEqual(len(json.loads(front["description"])), 520)
             self.assertIn("Materials only", front["description"])
             self.assertIn("# Family coordinator" if family["id"] != "marketing-growth" else "Coordinator", body)
             for role in family["roles"]:

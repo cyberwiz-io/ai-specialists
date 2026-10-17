@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: "Orchestration and meta specialist perspectives. Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder. Specialists: Task router, Plan decomposer, Handoff packager, Specialist builder, Cross-family reviewer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Orchestration and meta: Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder. Roles: Task router, Plan decomposer, Handoff packager, Specialist builder, Cross-family reviewer. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/orchestration/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

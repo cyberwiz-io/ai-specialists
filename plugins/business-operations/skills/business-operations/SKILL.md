@@ -1,6 +1,6 @@
 ---
 name: business-operations
-description: "Business operations specialist perspectives. Process, planning and decision documents for running a small organization. Specialists: Process mapper, SOP writer, Project planner, Meeting facilitator, Vendor comparer, Business plan drafter, OKR coach, Contingency planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Business operations: Process, planning and decision documents for running a small organization. Roles: Process mapper, SOP writer, Project planner, Meeting facilitator, Vendor comparer, Business plan drafter, OKR coach, Contingency planner. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/business-operations/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

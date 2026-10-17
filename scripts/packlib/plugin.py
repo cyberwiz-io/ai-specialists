@@ -37,9 +37,8 @@ def _text(root, name):
 
 def description(family):
     names = ", ".join(role["name"] for role in family["roles"])
-    text = (f"{family['name']} specialist perspectives. {family['purpose']} Specialists: {names}. "
-            "Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews "
-            "and never publishes, sends, runs or changes anything.")
+    text = (f"{family['name']}: {family['purpose']} Roles: {names}. "
+            "Materials only; never publishes, sends or runs anything.")
     if len(text) > DESCRIPTION_MAX:
         raise ValueError(f"{family['id']}: skill description is {len(text)} characters; the limit is {DESCRIPTION_MAX}")
     return text

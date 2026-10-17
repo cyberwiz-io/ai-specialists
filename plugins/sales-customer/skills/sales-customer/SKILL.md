@@ -1,6 +1,6 @@
 ---
 name: sales-customer
-description: "Sales and customer specialist perspectives. Drafts and plans for selling, supporting and onboarding customers. Specialists: Outreach drafter, Proposal writer, Discovery call planner, Objection coach, Support responder, Knowledge base writer, Feedback analyst, Customer onboarding planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Sales and customer: Drafts and plans for selling, supporting and onboarding customers. Roles: Outreach drafter, Proposal writer, Discovery call planner, Objection coach, Support responder, Knowledge base writer, Feedback analyst, Customer onboarding planner. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/sales-customer/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

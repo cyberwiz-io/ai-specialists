@@ -1,6 +1,6 @@
 ---
 name: product-design
-description: "Product and design specialist perspectives. Product definition, user research planning, interface writing and design review. Specialists: Product manager, UX researcher, UX writer, UI designer, Accessibility reviewer, Roadmap planner, Design system documenter. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Product and design: Product definition, user research planning, interface writing and design review. Roles: Product manager, UX researcher, UX writer, UI designer, Accessibility reviewer, Roadmap planner, Design system documenter. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/product-design/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

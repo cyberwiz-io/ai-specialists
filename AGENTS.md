@@ -11,3 +11,7 @@ Documentation changes need proportionate checks. Maintenance code changes must e
 ## Branch naming
 
 Name every branch you create after the work it contains, in lowercase kebab-case with a type prefix, such as `fix/login-redirect-loop`, `feat/export-csv` or `docs/branch-naming-rule`. Never use random, opaque or tool-generated names such as `ccr-58c0cebc-iezwgg`, `claude/abc123`, `agent-42` or `temp`. If a session or tool assigns a name like that, rename the branch before pushing when that is allowed; if the user or host requires the assigned name, use it and say so. Give pull requests a title that describes the change.
+
+## Working autonomously
+
+Finish the task you were given without stopping for approval. Pick the best option, state the choice in the pull request, and keep going through build, check, tests, pull request and merge once CI is green. Ask the user only for a genuine blocker that nobody else can clear: a credential, a permission or setting only they control, or a decision that changes their goal or cannot be undone. Never push to a branch another thread owns, force-push, delete data or publish a release without being told to. Before editing the same generated files as another open branch, check `git branch -r` and open pull requests, and keep your change to the files you own so the other branch can rebase on it. Every context-size change (descriptions, agent preambles) needs a test cap so it cannot grow back unnoticed.

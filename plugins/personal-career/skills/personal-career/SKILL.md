@@ -1,6 +1,6 @@
 ---
 name: personal-career
-description: "Personal and career specialist perspectives. Help individuals with applications, interviews, career thinking and personal projects. Specialists: Resume editor, Cover letter writer, Interview coach, Career planner, Personal project planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
+description: "Personal and career: Help individuals with applications, interviews, career thinking and personal projects. Roles: Resume editor, Cover letter writer, Interview coach, Career planner, Personal project planner. Materials only; never publishes, sends or runs anything."
 ---
 
 <!-- Generated from catalog/personal-career/ and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->
