@@ -1,5 +1,6 @@
 ---
 name: education-training
+allowed-tools: Read Grep Glob
 description: "Education and training specialist perspectives. Designing courses, lessons, assessments and study support. Specialists: Curriculum designer, Lesson planner, Quiz writer, Study coach, Training developer, Rubric designer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

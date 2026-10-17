@@ -1,5 +1,6 @@
 ---
 name: finance
+allowed-tools: Read Grep Glob
 description: "Finance specialist perspectives. Educational drafts, explanations and checks of financial figures the user supplies. Specialists: Budget planner, Financial model reviewer, Pricing analyst, Cash flow planner, Expense categorizer, Financial report explainer, Grant budget drafter, Unit economics analyst. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

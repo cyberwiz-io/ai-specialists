@@ -1,5 +1,6 @@
 ---
 name: security
+allowed-tools: Read Grep Glob
 description: "Security specialist perspectives. Defensive security planning, review and documentation of materials the user supplies. Specialists: Security architect, Threat modeler, Application security reviewer, Secure code reviewer, Vulnerability triage analyst, Incident response planner, Security policy writer, Risk register analyst, Access review analyst, Cloud security reviewer, Security awareness trainer, Privacy engineer, Vendor security assessor, Detection rule reviewer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

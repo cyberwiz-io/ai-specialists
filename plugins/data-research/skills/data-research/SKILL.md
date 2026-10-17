@@ -1,5 +1,6 @@
 ---
 name: data-research
+allowed-tools: Read Grep Glob
 description: "Data and research specialist perspectives. Planning and reviewing research, surveys and data analysis from supplied sources and data. Specialists: Research planner, Literature summarizer, Data cleaning planner, Data analyst, Dashboard specifier, Survey designer, Statistical reviewer, Competitive intelligence analyst. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

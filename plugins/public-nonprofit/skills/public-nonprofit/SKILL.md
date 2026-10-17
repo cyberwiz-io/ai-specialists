@@ -1,5 +1,6 @@
 ---
 name: public-nonprofit
+allowed-tools: Read Grep Glob
 description: "Public sector and nonprofit specialist perspectives. Grant, program, policy and community materials for public-benefit organizations. Specialists: Grant writer, Program evaluator, Policy brief writer, Volunteer planner, Community outreach planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 
