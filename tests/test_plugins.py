@@ -148,6 +148,7 @@ class PluginTests(FixtureCase):
             text = (folder / "SKILL.md").read_text(encoding="utf-8")
             front, body = split(text)
             self.assertEqual(front["name"], family["id"])
+            self.assertEqual(front["allowed-tools"], "Read Grep Glob")
             self.assertLessEqual(len(json.loads(front["description"])), 520)
             self.assertIn("Materials only", front["description"])
             self.assertIn("# Family coordinator" if family["id"] != "marketing-growth" else "Coordinator", body)

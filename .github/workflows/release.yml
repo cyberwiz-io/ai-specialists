@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
-# Builds the release ZIP for a v<VERSION> tag and attaches it to that tag's GitHub Release.
+# Builds the release ZIPs for a v<VERSION> tag and attaches them to that tag's GitHub Release,
+# using the matching CHANGELOG.md section as the release notes.
 # The archive is never committed, so the Git history does not grow with every version.
 name: release
 on:
@@ -24,14 +25,24 @@ jobs:
         run: python3 -B -m unittest discover -s tests
       - name: Build archive
         run: python3 -B scripts/pack.py release --tag "$GITHUB_REF_NAME" --out work/release
+      - name: Release notes from the changelog
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v head="## $version" '$0 == head {on=1; next} on && /^## / {exit} on' CHANGELOG.md \
+            | sed "s#](docs/#](https://github.com/$GITHUB_REPOSITORY/blob/$GITHUB_REF_NAME/docs/#g" > work/release-notes.md
+          if ! grep -q '[^[:space:]]' work/release-notes.md; then
+            echo "CHANGELOG.md has no '## $version' section" >&2
+            exit 1
+          fi
       - name: Attach archive to the release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
             gh release upload "$GITHUB_REF_NAME" work/release/*.zip --clobber
+            gh release edit "$GITHUB_REF_NAME" --notes-file work/release-notes.md
           else
             gh release create "$GITHUB_REF_NAME" work/release/*.zip --verify-tag \
               --title "AI Specialists ${GITHUB_REF_NAME#v}" \
-              --notes "See CHANGELOG.md for the changes in version ${GITHUB_REF_NAME#v}. Open pack/START-HERE.md inside the archive to begin."
+              --notes-file work/release-notes.md
           fi

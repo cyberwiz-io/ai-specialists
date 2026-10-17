@@ -1,5 +1,6 @@
 ---
 name: it-operations
+allowed-tools: Read Grep Glob
 description: "IT operations: Documentation and planning for everyday IT support and infrastructure upkeep. Roles: Support documenter, Runbook writer, Change planner, Backup and recovery planner, Asset inventory analyst. Materials only; never publishes, sends or runs anything."
 ---
 

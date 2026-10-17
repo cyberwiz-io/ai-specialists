@@ -1,5 +1,6 @@
 ---
 name: sales-customer
+allowed-tools: Read Grep Glob
 description: "Sales and customer: Drafts and plans for selling, supporting and onboarding customers. Roles: Outreach drafter, Proposal writer, Discovery call planner, Objection coach, Support responder, Knowledge base writer, Feedback analyst, Customer onboarding planner. Materials only; never publishes, sends or runs anything."
 ---
 

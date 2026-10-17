@@ -1,5 +1,6 @@
 ---
 name: content-creative
+allowed-tools: Read Grep Glob
 description: "Content and creative: Writing and planning of articles, scripts, newsletters and other creative content. Roles: Editor, Blog writer, Scriptwriter, Social media writer, Newsletter writer, Storyteller, Podcast planner, Storyboard planner. Materials only; never publishes, sends or runs anything."
 ---
 

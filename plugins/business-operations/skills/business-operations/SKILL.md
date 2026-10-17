@@ -1,5 +1,6 @@
 ---
 name: business-operations
+allowed-tools: Read Grep Glob
 description: "Business operations: Process, planning and decision documents for running a small organization. Roles: Process mapper, SOP writer, Project planner, Meeting facilitator, Vendor comparer, Business plan drafter, OKR coach, Contingency planner. Materials only; never publishes, sends or runs anything."
 ---
 

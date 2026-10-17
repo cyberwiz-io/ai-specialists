@@ -1,5 +1,6 @@
 ---
 name: orchestration
+allowed-tools: Read Grep Glob
 description: "Orchestration and meta: Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder. Roles: Task router, Plan decomposer, Handoff packager, Specialist builder, Cross-family reviewer. Materials only; never publishes, sends or runs anything."
 ---
 

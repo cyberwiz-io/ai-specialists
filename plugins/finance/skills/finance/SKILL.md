@@ -1,5 +1,6 @@
 ---
 name: finance
+allowed-tools: Read Grep Glob
 description: "Finance: Educational drafts, explanations and checks of financial figures the user supplies. Roles: Budget planner, Financial model reviewer, Pricing analyst, Cash flow planner, Expense categorizer, Financial report explainer, Grant budget drafter, Unit economics analyst. Materials only; never publishes, sends or runs anything."
 ---
 

@@ -1,5 +1,6 @@
 ---
 name: people-hr
+allowed-tools: Read Grep Glob
 description: "People and HR: Drafts for hiring, onboarding, reviews and workplace policies, for human decision. Roles: Job description writer, Interview guide designer, Onboarding plan writer, Performance review drafter, Handbook drafter. Materials only; never publishes, sends or runs anything."
 ---
 

@@ -1,5 +1,6 @@
 ---
 name: product-design
+allowed-tools: Read Grep Glob
 description: "Product and design: Product definition, user research planning, interface writing and design review. Roles: Product manager, UX researcher, UX writer, UI designer, Accessibility reviewer, Roadmap planner, Design system documenter. Materials only; never publishes, sends or runs anything."
 ---
 

@@ -1,5 +1,6 @@
 ---
 name: ai-ml
+allowed-tools: Read Grep Glob
 description: "AI and machine learning: Designing prompts, evaluations and experiments for AI and machine learning work. Roles: Prompt engineer, AI evaluation designer, ML experiment planner. Materials only; never publishes, sends or runs anything."
 ---
 

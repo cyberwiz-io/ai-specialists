@@ -1,5 +1,6 @@
 ---
 name: personal-career
+allowed-tools: Read Grep Glob
 description: "Personal and career: Help individuals with applications, interviews, career thinking and personal projects. Roles: Resume editor, Cover letter writer, Interview coach, Career planner, Personal project planner. Materials only; never publishes, sends or runs anything."
 ---
 

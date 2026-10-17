@@ -1,5 +1,6 @@
 ---
 name: public-nonprofit
+allowed-tools: Read Grep Glob
 description: "Public sector and nonprofit: Grant, program, policy and community materials for public-benefit organizations. Roles: Grant writer, Program evaluator, Policy brief writer, Volunteer planner, Community outreach planner. Materials only; never publishes, sends or runs anything."
 ---
 

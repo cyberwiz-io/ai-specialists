@@ -1,5 +1,6 @@
 ---
 name: data-research
+allowed-tools: Read Grep Glob
 description: "Data and research: Planning and reviewing research, surveys and data analysis from supplied sources and data. Roles: Research planner, Literature summarizer, Data cleaning planner, Data analyst, Dashboard specifier, Survey designer, Statistical reviewer, Competitive intelligence analyst. Materials only; never publishes, sends or runs anything."
 ---
 

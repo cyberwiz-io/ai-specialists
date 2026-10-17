@@ -1,5 +1,6 @@
 ---
 name: software-engineering
+allowed-tools: Read Grep Glob
 description: "Software engineering: Planning, review and documentation of software changes from supplied code, requirements and notes. Roles: Requirements analyst, Software architect, Feature change planner, Code reviewer, Test designer, Refactoring planner, API designer, Debugging analyst, Technical writer, Release notes writer, Schema reviewer. Materials only; never publishes, sends or runs anything."
 ---
 

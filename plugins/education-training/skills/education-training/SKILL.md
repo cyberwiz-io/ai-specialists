@@ -1,5 +1,6 @@
 ---
 name: education-training
+allowed-tools: Read Grep Glob
 description: "Education and training: Designing courses, lessons, assessments and study support. Roles: Curriculum designer, Lesson planner, Quiz writer, Study coach, Training developer, Rubric designer. Materials only; never publishes, sends or runs anything."
 ---
 
