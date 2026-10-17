@@ -1,6 +1,6 @@
 ---
 name: personal-career-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Personal and career specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Help individuals with applications, interviews, career thinking and personal projects."
+description: "Runs the Personal and career specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(personal-career:personal-career-resume-editor, personal-career:personal-career-cover-letter-writer, personal-career:personal-career-interview-coach, personal-career:personal-career-career-planner, personal-career:personal-career-personal-project-planner), Read, Grep, Glob
 model: inherit
 ---

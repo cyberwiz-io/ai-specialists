@@ -1,6 +1,6 @@
 ---
 name: content-creative-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Content and creative specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Writing and planning of articles, scripts, newsletters and other creative content."
+description: "Runs the Content and creative specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(content-creative:content-creative-editor, content-creative:content-creative-blog-writer, content-creative:content-creative-scriptwriter, content-creative:content-creative-social-media-writer, content-creative:content-creative-newsletter-writer, content-creative:content-creative-storyteller, content-creative:content-creative-podcast-planner, content-creative:content-creative-storyboard-planner), Read, Grep, Glob
 model: inherit
 ---

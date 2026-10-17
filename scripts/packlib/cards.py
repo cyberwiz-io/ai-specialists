@@ -49,6 +49,23 @@ def use_for(text):
     return sentence[:1].upper() + sentence[1:]
 
 
+LIST_CUT = re.compile(r": |; ")
+CLAUSE_CUT = re.compile(r", such as | such as |, including |, so | so | before |, from | from |, meaning |, and |, or | \(")
+BRIEF_SAFE, BRIEF_MAX = 80, 100
+
+
+def brief(text):
+    """The Use for sentence cut at a clause that still reads whole, for descriptions loaded into every conversation."""
+    sentence = use_for(text).rstrip(".")
+    if len(sentence) <= BRIEF_SAFE:
+        return sentence + "."
+    for limit, pattern in ((BRIEF_MAX, LIST_CUT), (BRIEF_SAFE, CLAUSE_CUT), (BRIEF_MAX, re.compile(", "))):
+        cuts = [m.start() for m in pattern.finditer(sentence) if 30 <= m.start() <= limit]
+        if cuts:
+            return sentence[:cuts[-1]] + "."
+    return sentence + "."
+
+
 def check(role, text, version, known_ids):
     """Return a list of failure strings for one card."""
     name, failures = role["path"], []

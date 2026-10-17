@@ -1,6 +1,6 @@
 ---
 name: orchestration-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Orchestration and meta specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder."
+description: "Runs the Orchestration and meta specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(orchestration:orchestration-task-router, orchestration:orchestration-plan-decomposer, orchestration:orchestration-handoff-packager, orchestration:orchestration-specialist-builder, orchestration:orchestration-cross-family-reviewer), Read, Grep, Glob
 model: inherit
 ---

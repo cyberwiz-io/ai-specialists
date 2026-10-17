@@ -1,6 +1,6 @@
 ---
 name: people-hr-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the People and HR specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Drafts for hiring, onboarding, reviews and workplace policies, for human decision."
+description: "Runs the People and HR specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(people-hr:people-hr-job-description-writer, people-hr:people-hr-interview-guide-designer, people-hr:people-hr-onboarding-plan-writer, people-hr:people-hr-review-drafter, people-hr:people-hr-handbook-drafter), Read, Grep, Glob
 model: inherit
 ---

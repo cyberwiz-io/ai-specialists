@@ -1,6 +1,6 @@
 ---
 name: sales-customer-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Sales and customer specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Drafts and plans for selling, supporting and onboarding customers."
+description: "Runs the Sales and customer specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(sales-customer:sales-customer-outreach-drafter, sales-customer:sales-customer-proposal-writer, sales-customer:sales-customer-discovery-call-planner, sales-customer:sales-customer-objection-coach, sales-customer:sales-customer-support-responder, sales-customer:sales-customer-knowledge-base-writer, sales-customer:sales-customer-feedback-analyst, sales-customer:sales-customer-customer-onboarding-planner), Read, Grep, Glob
 model: inherit
 ---

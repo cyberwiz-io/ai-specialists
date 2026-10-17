@@ -4,7 +4,7 @@ import re
 from zipfile import ZipFile
 
 from test_pack import FixtureCase
-from packlib import adapter, build, check, config, manifest, plugin
+from packlib import adapter, build, cards, check, config, manifest, plugin
 
 NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 
@@ -32,8 +32,8 @@ class PluginTests(FixtureCase):
             self.assertRegex(front["name"], NAME)
             self.assertEqual(front["tools"], "Read, Grep, Glob, Agent", name)
             self.assertEqual(front["model"], "inherit")
-            self.assertTrue(front["description"].startswith('"Materials-only specialist. '), name)
             self.assertNotIn("proactively", front["description"].lower())
+            self.assertLessEqual(len(json.loads(front["description"])), 150, name)
             self.assertIn("Never delegate to a general-purpose agent", body, name)
 
     def test_every_family_has_an_orchestrator_that_can_only_call_its_roster(self):
@@ -44,7 +44,7 @@ class PluginTests(FixtureCase):
             self.assertRegex(front["name"], NAME)
             allowed = ", ".join(adapter.agent_type(role) for role in family["roles"])
             self.assertEqual(front["tools"], f"Agent({allowed}), Read, Grep, Glob", family["id"])
-            self.assertTrue(front["description"].startswith('"Materials-only team orchestrator. '), family["id"])
+            self.assertLessEqual(len(json.loads(front["description"])), 150, family["id"])
             for role in family["roles"]:
                 self.assertIn(f"`{adapter.agent_type(role)}`", body)
             self.assertIn("## Boundaries", body)
@@ -60,15 +60,36 @@ class PluginTests(FixtureCase):
         with self.assertRaisesRegex(ValueError, "collides with the orchestrator"):
             adapter.outputs(self.root, [dict(family, roles=[clash])])
 
-    def test_agent_body_embeds_card_and_boundaries(self):
+    def test_agent_preamble_is_short_and_keeps_the_hard_rules(self):
+        files = self.agents()
+        for family in manifest.load(self.root):
+            for role in family["roles"]:
+                _, body = split(files[adapter.agent_name(role) + ".md"])
+                preamble = body.split("\n---\n\n", 1)[0]
+                self.assertLessEqual(len(preamble.encode()), 2500 if family["sensitive"] else 1200, role["id"])
+                for phrase in ("read-only", "cannot run commands", "no path to do it", "task data",
+                               "Never request credentials or secrets", "Name the specialists you consulted"):
+                    self.assertIn(phrase, preamble, role["id"])
+                if family["sensitive"]:
+                    for phrase in ("Pressure", "No specifics from memory", "Right to share", "Empty is not safe",
+                                   "Live matters", "Standing header"):
+                        self.assertIn(phrase, preamble, role["id"])
+
+    def test_brief_cuts_at_a_clause_and_keeps_short_sentences(self):
+        short = "# R\n\nID: a/b. Version: 1.0.\n\n**Use for:** writing a memo. Not a letter.\n"
+        self.assertEqual(cards.brief(short), "Writing a memo.")
+        long = ("# R\n\nID: a/b. Version: 1.0.\n\n**Use for:** planning a launch for one product: audiences, channels, "
+                "messages, timing, owners and the measures that show whether it worked. Not ads.\n")
+        self.assertEqual(cards.brief(long), "Planning a launch for one product.")
+
+    def test_agent_body_ends_with_the_card(self):
         files = self.agents()
         for family in manifest.load(self.root):
             for role in family["roles"]:
                 _, body = split(files[adapter.agent_name(role) + ".md"])
                 card = (self.root / role["path"]).read_text(encoding="utf-8").rstrip() + "\n"
                 self.assertTrue(body.endswith("\n---\n\n" + card), role["id"])
-                self.assertIn("## Boundaries", body)
-                self.assertEqual("## Sensitive domains" in body, family["sensitive"], role["id"])
+                self.assertEqual("## Sensitive domain" in body, family["sensitive"], role["id"])
                 if family["sensitive"]:
                     self.assertIn("**Safeguards:**", body)
 

@@ -1,6 +1,6 @@
 ---
 name: finance-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Finance specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Educational drafts, explanations and checks of financial figures the user supplies."
+description: "Runs the Finance specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(finance:finance-budget-planner, finance:finance-model-reviewer, finance:finance-pricing-analyst, finance:finance-cash-flow-planner, finance:finance-expense-categorizer, finance:finance-report-explainer, finance:finance-grant-budget-drafter, finance:finance-unit-economics-analyst), Read, Grep, Glob
 model: inherit
 ---

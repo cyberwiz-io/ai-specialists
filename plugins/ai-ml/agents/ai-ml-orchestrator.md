@@ -1,6 +1,6 @@
 ---
 name: ai-ml-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the AI and machine learning specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Designing prompts, evaluations and experiments for AI and machine learning work."
+description: "Runs the AI and machine learning specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(ai-ml:ai-ml-prompt-engineer, ai-ml:ai-ml-ai-evaluation-designer, ai-ml:ai-ml-ml-experiment-planner), Read, Grep, Glob
 model: inherit
 ---

@@ -1,6 +1,6 @@
 ---
 name: legal-compliance-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Legal and compliance specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Plain-language reading, drafting and checklists from documents and rules the user supplies."
+description: "Runs the Legal and compliance specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(legal-compliance:legal-compliance-contract-reader, legal-compliance:legal-compliance-policy-drafter, legal-compliance:legal-compliance-privacy-policy-drafter, legal-compliance:legal-compliance-compliance-checklist-builder, legal-compliance:legal-compliance-terms-reviewer, legal-compliance:legal-compliance-ip-basics-explainer, legal-compliance:legal-compliance-retention-planner, legal-compliance:legal-compliance-regulatory-change-summarizer), Read, Grep, Glob
 model: inherit
 ---

@@ -1,6 +1,6 @@
 ---
 name: security-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Security specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Defensive security planning, review and documentation of materials the user supplies."
+description: "Runs the Security specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(security:security-security-architect, security:security-threat-modeler, security:security-appsec-reviewer, security:security-secure-code-reviewer, security:security-vulnerability-triage-analyst, security:security-incident-response-planner, security:security-security-policy-writer, security:security-risk-register-analyst, security:security-access-review-analyst, security:security-cloud-security-reviewer, security:security-security-awareness-trainer, security:security-privacy-engineer, security:security-vendor-security-assessor, security:security-detection-rule-reviewer), Read, Grep, Glob
 model: inherit
 ---

@@ -1,6 +1,6 @@
 ---
 name: software-engineering-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Software engineering specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Planning, review and documentation of software changes from supplied code, requirements and notes."
+description: "Runs the Software engineering specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(software-engineering:software-engineering-requirements-analyst, software-engineering:software-engineering-software-architect, software-engineering:software-engineering-feature-change-planner, software-engineering:software-engineering-code-reviewer, software-engineering:software-engineering-test-designer, software-engineering:software-engineering-refactoring-planner, software-engineering:software-engineering-api-designer, software-engineering:software-engineering-debugging-analyst, software-engineering:software-engineering-technical-writer, software-engineering:software-engineering-release-notes-writer, software-engineering:software-engineering-schema-reviewer), Read, Grep, Glob
 model: inherit
 ---

@@ -127,7 +127,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "faade7da37ffcd689c5bb287906a88b3d24dec59503e255c2779daffaf2f89b1",
+      "digest": "0befc32a617358253d52b7b025f97447931dab6fa425bfc06f589a3392969874",
       "files": 25,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -219,7 +219,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "5bb6ee8f615c157c420a0c8170067c5cf29e22031932473388f47b0f9052a99e",
+      "digest": "c323d910ea3b1b3f4ccbcee3aed7de4bd51014b080489167e6b0ab94983e1671",
       "files": 303,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
