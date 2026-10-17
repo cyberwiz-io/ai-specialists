@@ -2,7 +2,7 @@
 
 This folder holds the fixture tasks for an evaluation harness that runs each specialist card in a fresh AI context and grades the output against that card's own **Acceptance** line. The harness produces the reports that [Validation](../docs/VALIDATION.md) asks for: tested version, host and tools, inputs, observed outcomes and limits. It is maintenance tooling and is not part of the shipped pack.
 
-One run has been recorded so far, for the marketing and growth family. A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
+Runs have been recorded for the marketing and growth family and for two software-engineering roles (the code reviewer and the debugging analyst). A fixture file is not evidence; only a reviewed report in [reports](reports/README.md) is.
 
 ## Layout
 
