@@ -1,4 +1,4 @@
-# Engineering policy 1.0.1
+# Engineering policy 1.0.2
 
 Source: lewismatlock/ai-home, tools/engineering-policy. The local lock file pins
 reviewed bytes; update through a reviewed PR. Do not fetch latest at task startup.
