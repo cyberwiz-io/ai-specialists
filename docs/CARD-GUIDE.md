@@ -51,4 +51,4 @@ Security, Finance, People and HR, and Legal and compliance cards add a `Safeguar
 
 ## Adding a role
 
-Add it to the manifest (and to one of the family's `packs`, if it lists any), write the card, then run `python3 -B scripts/pack.py build` and `check`. New roles need a distinct deliverable and acceptance checks, per [Contributing](../CONTRIBUTING.md).
+Add it to the manifest (and to one of the family's `packs`, if it lists any), write the card, add a fictional task fixture for it to `evals/fixtures/<family>.json` (maintainers only; see `evals/README.md` in the repository), then run `python3 -B scripts/pack.py build` and `check`. New roles need a distinct deliverable and acceptance checks, per [Contributing](../CONTRIBUTING.md).

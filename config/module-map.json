@@ -30,7 +30,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "24ab827265c7c6c164092ac9569afbd4084b7f62c6a5f4b27a7b1ec2498637c0",
+      "digest": "1498e83423f11ecf0a00345b584095518d3680ed2249a275fc4b5f7c226ea3db",
       "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -122,8 +122,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "29bd26909c7a3373e270713cde256ceed18551643ff7eee59e874806c174a91f",
-      "files": 14,
+      "digest": "7910afef01370b5dd387e1db5bae1ba7da7dec8095daa24fe7bacb677b44b7f0",
+      "files": 16,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -140,6 +140,52 @@
         "tests/*.py"
       ],
       "purpose": "Build, check and search tooling, plus its failure-path tests."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [
+        "maintenance"
+      ],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
+      "digest": "c54d40a7eaa0d69fefc97982378e54dc6316118fe8c73eeb63b18d6797ccc4cb",
+      "files": 23,
+      "guide": "evals/README.md",
+      "id": "evals",
+      "interfaces": [
+        "scripts/evals.py",
+        ".claude/skills/card-evals/SKILL.md"
+      ],
+      "invariants": [
+        "Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."
+      ],
+      "paths": [
+        ".claude/agents/*.md",
+        ".claude/skills/*/SKILL.md",
+        "evals/*.md",
+        "evals/fixtures/*.json",
+        "evals/reports/*.md",
+        "scripts/evals.py"
+      ],
+      "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     },
     {
       "checks": [

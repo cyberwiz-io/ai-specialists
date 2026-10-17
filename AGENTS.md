@@ -6,4 +6,6 @@ Individual cards and instruction files are the source of truth. Generated files 
 
 Use fictional examples and preserve license coverage. Never commit credentials, private profiles, customer data, generated campaign records, or machine-specific settings. No specialist may enable external actions or promise unavailable capabilities. Sensitive families (security, finance, people and HR, legal and compliance) keep their Safeguards paragraph.
 
-Documentation changes need proportionate checks. Maintenance code changes must exercise success and failure behavior. A new role needs a distinct deliverable, acceptance checks and a manifest entry, per docs/CARD-GUIDE.md. Keep new host integrations outside the shipped pack until their actual capabilities are reviewed.
+Documentation changes need proportionate checks. Maintenance code changes must exercise success and failure behavior. A new role needs a distinct deliverable, acceptance checks, a manifest entry and an eval fixture in `evals/fixtures/`, per docs/CARD-GUIDE.md. Run the card evaluations (evals/README.md) only when asked, and commit only reviewed reports. Keep new host integrations outside the shipped pack until their actual capabilities are reviewed.
+
+Name branches simply after the feature, such as `eval-harness`; never use random or generated branch names.

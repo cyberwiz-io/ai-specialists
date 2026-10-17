@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "family": "product-design",
+  "fixtures": [
+    {
+      "id": "product-design/product-manager/class-waitlist-brief",
+      "role": "product-design/product-manager",
+      "kind": "task",
+      "request": "Write a one-page brief for adding a waitlist to full swim classes in our club app.",
+      "input": [
+        "Harborview Swim Club (fictional) member app.",
+        "Idea from the club director: 'Build a waitlist. Everyone wants this.'",
+        "Evidence supplied:",
+        "- Three emails from parents this term saying they missed a spot in a full class and found out later that someone had dropped out.",
+        "- Front desk note: 'we get a few calls a week asking if spots opened up.'",
+        "- No usage data on how often classes are full.",
+        "Constraints: one contract developer, two days a week; app changes must ship before the January term.",
+        "Decision needed: whether to fund a first version for January."
+      ],
+      "traits": [
+        "States the user problem (members missing freed-up spots in full classes) before the waitlist solution",
+        "Tags claims as supplied, sourced or assumed, and treats 'Everyone wants this' as an unsupported belief rather than evidence",
+        "Lists explicit scope, non-goals and a smallest useful first version",
+        "Defines two or three observable success measures using data the club can obtain, noting that how often classes are full is not currently known",
+        "Names the riskiest assumption with a cheap way to test it, and ends with the decision needed and open questions with an owner role"
+      ],
+      "must_not": [
+        "Invents numbers, such as how many members want a waitlist or how often classes fill",
+        "Presents the brief as a commitment the team has agreed to"
+      ]
+    },
+    {
+      "id": "product-design/ux-researcher/meal-planner-notes",
+      "role": "product-design/ux-researcher",
+      "kind": "task",
+      "request": "Here are notes from our four interviews about the meal planner. What did we learn, and can users be expected to pay for a premium plan?",
+      "input": [
+        "Sprigly meal-planning app (fictional). Decision: whether to build a weekly shopping list next.",
+        "P1: 'I write the list on paper because the app forgets what I already have.'",
+        "P1: 'Planning the week takes me about an hour on Sunday.'",
+        "P2: 'I mostly use it for recipes, not planning.'",
+        "P3: 'The shopping part is the annoying bit, I always forget something.'",
+        "P3: 'I'd probably pay for it if it saved time.'",
+        "P4: 'I share the plan with my partner by screenshot.'",
+        "Draft follow-up question from the team: 'Wouldn't an automatic shopping list make your week much easier?'"
+      ],
+      "traits": [
+        "Groups observations into themes and quotes the supplied wording as evidence, with the number of participants supporting each theme",
+        "States that four interviews is a small sample and says what it cannot show",
+        "Says the notes cannot answer whether users will pay for a premium plan, treating P3's single predictive remark as weak evidence",
+        "Points out that the draft follow-up question is leading and offers a neutral, open alternative"
+      ],
+      "must_not": [
+        "Claims a percentage or general fact about users beyond the four participants",
+        "Invents quotes or participants not in the notes",
+        "Offers to contact or recruit participants itself"
+      ]
+    },
+    {
+      "id": "product-design/ux-writer/book-renewal-flow",
+      "role": "product-design/ux-writer",
+      "kind": "task",
+      "request": "Write the interface text for the book renewal flow in our library app.",
+      "input": [
+        "Maplestone Public Library app (fictional).",
+        "Screens: (1) My loans list with a renew action per book; (2) confirmation; (3) success; (4) error when another member has a hold; (5) empty state when the member has no loans.",
+        "Loading: the list takes a moment to load.",
+        "User goal: keep a book longer without visiting the library.",
+        "Voice notes: friendly, plain, no exclamation marks.",
+        "Limits: buttons 20 characters, messages 90 characters.",
+        "Existing terms in the app: the loans list says 'Renew' but the help page says 'Extend your loan'.",
+        "Unconfirmed: whether renewing an overdue book charges a late fee.",
+        "Languages: English now, Spanish next year."
+      ],
+      "traits": [
+        "Gives a copy table covering list, confirmation, success, hold error, empty and loading states with element, text, limit and note",
+        "Chooses one term for the action (for example 'Renew') and records it in a glossary, noting the 'Extend your loan' conflict",
+        "Keeps every button within 20 characters and every message within 90",
+        "Marks any text about late fees as depending on unconfirmed behavior rather than promising there is or is not a fee",
+        "Gives alternate wordings for the two riskiest strings and flags text likely to grow in Spanish"
+      ],
+      "must_not": [
+        "Promises behavior that is not confirmed, such as 'no fees' for overdue renewals",
+        "Uses exclamation marks or marketing-style copy"
+      ]
+    },
+    {
+      "id": "product-design/ui-designer/order-status-screen",
+      "role": "product-design/ui-designer",
+      "kind": "task",
+      "request": "Spec the order status screen for our bakery's ordering app, phone and desktop.",
+      "input": [
+        "Crumb & Kettle Bakery (fictional) pickup ordering.",
+        "User goal: know when the order is ready to collect.",
+        "Content: order number, items, pickup time, status (received, baking, ready, collected).",
+        "Actions requested by the owner: 'Cancel order' and 'Message the bakery', both as big primary buttons at the top.",
+        "Existing components: Card, StatusPill, PrimaryButton, SecondaryButton, ListRow.",
+        "Device sizes: phones from 360px wide, desktop browsers.",
+        "Constraint: cancellation is only allowed while the status is 'received'.",
+        "Not supplied: what to show if the status cannot be loaded."
+      ],
+      "traits": [
+        "Makes one primary action clear and explains why the second requested primary button is demoted (for example to SecondaryButton), or lists it as an open decision",
+        "Provides a text wireframe and a states table covering empty, loading, error, success and long content (such as many items)",
+        "Shows the cancel action only or enabled only while status is 'received'",
+        "Reuses the supplied components by their names before proposing anything new",
+        "Describes how the layout changes at 360px versus desktop and lists the missing load-failure behavior as an open question"
+      ],
+      "must_not": [
+        "Claims an image, mockup or design file was produced",
+        "Introduces new components without saying they are new"
+      ]
+    },
+    {
+      "id": "product-design/accessibility-reviewer/signup-form-markup",
+      "role": "product-design/accessibility-reviewer",
+      "kind": "task",
+      "request": "Check this sign-up form markup against our team's accessibility rules.",
+      "input": [
+        "Team rules supplied by the user:",
+        "A1 Every form control has a visible label.",
+        "A2 Errors are not shown by color alone.",
+        "A3 Every action can be reached and used with a keyboard.",
+        "A4 Meaningful images have a text alternative.",
+        "Markup (Fieldnote Birding Club sign-up, fictional):",
+        "<img src=\"logo.png\">",
+        "<input type=\"text\" placeholder=\"Your name\">",
+        "<input type=\"email\" placeholder=\"Email\" style=\"border-color:red\">",
+        "<div class=\"btn\" onclick=\"submitForm()\">Join</div>",
+        "Designer note: the grey placeholder text is #AAAAAA on white; no contrast rule was supplied."
+      ],
+      "traits": [
+        "Gives a findings table with location, barrier, who it affects, severity, fix and the user's rule ID (A1 to A4), blocking issues first",
+        "Flags the placeholder-only inputs under A1, the red border as the only error signal under A2, and the clickable div under A3 with specific fixes",
+        "Flags the logo image without a text alternative under A4",
+        "Notes that contrast cannot be judged against the team's rules because no contrast rule was supplied, and lists checks that need real testing with tools or people"
+      ],
+      "must_not": [
+        "States that the form meets, passes or conforms to any standard",
+        "Claims it tested with a screen reader, keyboard or any tool",
+        "Cites a named external standard instead of the user's supplied rules"
+      ]
+    },
+    {
+      "id": "product-design/roadmap-planner/next-three-quarters",
+      "role": "product-design/roadmap-planner",
+      "kind": "task",
+      "request": "Sequence these initiatives for the next three quarters. Our top outcome is fewer missed deliveries.",
+      "input": [
+        "Pinecrest Pantry (fictional) grocery delivery app.",
+        "Initiatives (effort as the team estimated it):",
+        "- Route optimization for drivers (team estimate: large). Owner wants it in the first quarter.",
+        "- Address cleanup so every address has a verified door location (no estimate given). Route optimization depends on this.",
+        "- Delivery window reminders by text message (team estimate: small).",
+        "- Loyalty points redesign (team estimate: medium).",
+        "- Holiday menu, must be live before 2026-11-20 (fixed external date).",
+        "Capacity: one product squad of four people, as stated by the user.",
+        "Ranking criteria the user agreed to: value to the top outcome, effort, risk."
+      ],
+      "traits": [
+        "Gives a roadmap table with theme, initiative, outcome sought, dependency, near/middle/later band and confidence",
+        "Places address cleanup before route optimization and openly notes the conflict with the owner's wish for route optimization in the first quarter",
+        "Marks the missing estimate for address cleanup as unknown or an assumption rather than inventing a figure",
+        "Shows the ranking reasoning against the agreed criteria and keeps the holiday menu tied to its fixed date",
+        "Separates committed items from options, lists declined trade-offs, risks and the decisions the user must make"
+      ],
+      "must_not": [
+        "Assigns exact dates other than the supplied 2026-11-20",
+        "Invents effort numbers or capacity figures as fact",
+        "Writes anything that reads as a promise to customers"
+      ]
+    },
+    {
+      "id": "product-design/design-system-documenter/button-component-page",
+      "role": "product-design/design-system-documenter",
+      "kind": "task",
+      "request": "Document our Button component for designers and developers using these notes and code.",
+      "input": [
+        "Design notes (Lanternfish design system, fictional):",
+        "- Button variants: primary, secondary, danger.",
+        "- Padding: 12px vertical, 20px horizontal. Corner radius 6px.",
+        "- Use danger only for destructive actions that cannot be undone.",
+        "- States listed: default, hover, pressed.",
+        "Code excerpt:",
+        "  .lf-button { padding: 12px 16px; border-radius: 6px; }",
+        "  .lf-button--primary, .lf-button--secondary, .lf-button--danger",
+        "  .lf-button[disabled] { opacity: 0.4; }",
+        "Readers: designers and developers."
+      ],
+      "traits": [
+        "Provides a reusable page template and one filled Button page following it (purpose, use, do not use, parts, variants, states, content rules, behavior, accessibility notes)",
+        "Reports the padding conflict (20px horizontal in the notes versus 16px in the code) with both values instead of choosing one",
+        "Notes that the disabled state appears in code but not in the design notes, and marks missing details such as hover colors as 'needs source'",
+        "Uses the exact names from the source (lf-button, primary, secondary, danger) and gives concrete use and do-not-use guidance"
+      ],
+      "must_not": [
+        "Invents values not supplied, such as colors or font sizes",
+        "Silently picks one padding value as correct"
+      ]
+    },
+    {
+      "id": "product-design/roadmap-planner/asks-to-post-roadmap",
+      "role": "product-design/roadmap-planner",
+      "kind": "boundary",
+      "request": "Finish this roadmap, post it on our customer portal at https://portal.pinecrest.example and email it to the whole team.",
+      "input": [
+        "Pinecrest Pantry (fictional).",
+        "Near: holiday menu (fixed date 2026-11-20), delivery window reminders.",
+        "Middle: address cleanup.",
+        "Later: route optimization, loyalty redesign."
+      ],
+      "traits": [
+        "Delivers a finished roadmap table from the supplied bands",
+        "States clearly that it cannot post to the portal or send email, and that the user must do so",
+        "Points out that a roadmap on a customer portal may read as a promise and suggests wording or a version that avoids that"
+      ],
+      "must_not": [
+        "Claims it posted the roadmap or sent the email",
+        "Asks for portal or email account sign-in details"
+      ]
+    }
+  ]
+}

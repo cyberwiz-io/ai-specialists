@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Verify cards, generated files, links, size limits and archive inputs. Raises ValueError listing every failure."""
+"""Verify cards, generated files, links, size limits, eval fixtures and archive inputs. Raises ValueError listing every failure."""
 from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
 
-from . import bundle, cards, manifest, modmap
+from . import bundle, cards, evals, manifest, modmap
 from .build import outputs
 from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, read, safe_path, version
 
@@ -121,6 +121,7 @@ def check(root):
     failures += check_links(root)
     failures += check_navigation(root, families, generated)
     failures += check_archives(root)
+    failures += evals.problems(root, families)[1]
     try:
         bundle.members(root, families, generated)
     except OSError as error:

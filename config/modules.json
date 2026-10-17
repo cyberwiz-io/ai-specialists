@@ -49,6 +49,20 @@
         "tests/*.py"
       ],
       "purpose": "Build, check and search tooling, plus its failure-path tests."
+    },
+    {
+      "consumers": ["maintenance"],
+      "dependencies": ["catalog-manifest", "maintenance"],
+      "guide": "evals/README.md",
+      "id": "evals",
+      "interfaces": ["scripts/evals.py", ".claude/skills/card-evals/SKILL.md"],
+      "invariants": ["Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."],
+      "paths": [
+        ".claude/agents/*.md", ".claude/skills/*/SKILL.md",
+        "evals/*.md", "evals/fixtures/*.json", "evals/reports/*.md",
+        "scripts/evals.py"
+      ],
+      "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     }
   ]
 }
