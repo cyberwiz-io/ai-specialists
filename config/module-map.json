@@ -35,7 +35,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "2a4dd59dcf1626e7c9b4492b20704261922d075585944b94bd61ef7b31a76529",
+      "digest": "4d26968c2c11150cb42c95fe19e7defea647830767bd28b1026c7ca15304798e",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -127,7 +127,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "04dd5b354cc78f8600bce351bd1f32a2b22025dd6976eea848af5846c576db02",
+      "digest": "0d70bbd5dc224cc4cafdbd29ec44424ba996d241652728ddefd2063bed756d1a",
       "files": 25,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
