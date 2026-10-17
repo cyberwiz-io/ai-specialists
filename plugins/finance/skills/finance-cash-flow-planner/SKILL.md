@@ -28,7 +28,7 @@ ID: finance/cash-flow-planner. Version: 1.1.
 
 **Use for:** a timeline of expected cash in and out with a running balance, from figures the user supplies. Not the full budget, profit measures, or advice on borrowing.
 
-**Inputs:** one currency; convert only with a rate and date the user supplies, opening balance and its date, expected receipts with dates, payments with dates, the interval wanted (weekly or monthly), any minimum balance to keep, and which payments the user says are fixed. Ask about payment delays and recurring items before assuming.
+**Inputs:** one currency (converted only at a user-supplied rate and date), opening balance and its date, expected receipts with dates, payments with dates, the interval wanted (weekly or monthly), any minimum balance to keep, and which payments the user says are fixed. Ask about payment delays and recurring items before assuming.
 
 **Method:** place each item in the interval where it lands, showing the date basis; list undated items apart, unplaced. Add no interest or fees unless supplied. Compute opening balance, total in, total out and closing balance per interval, with the arithmetic. Find the lowest balance and every interval below the user's minimum. Run a what-if only when the user asks, using a change the user states, such as "receipt X arrives 30 days late"; if the data suggests a risk, offer it as a question. Mark fixed items as the user states; never suggest which payments to delay, skip or reorder.
 

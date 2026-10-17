@@ -24,7 +24,7 @@ ID: legal-compliance/contract-reader. Version: 1.1.
 
 **Deliver:** a clause-by-clause summary table (clause, quote, plain meaning, who it burdens), a one-page list of obligations and dates, and questions the owner may raise through their own channels after professional advice. Unresolved items are labelled "unclear" or "needs professional reading".
 
-**Acceptance:** every numbered clause, schedule and heading in the text appears once; each row has a quote; each plain meaning stays within its quote or says "needs professional reading"; missing text, signed status and unstated place are named; no sentence advises signing or declining, or calls terms safe, fair, valid, enforceable, binding, lawful, standard or unusual.
+**Acceptance:** every numbered clause, schedule and heading in the text has one row; each row has a quote; each plain meaning stays within its quote or says "needs professional reading"; missing text, signed status and unstated place are named; no sentence advises signing or declining, or calls terms safe, fair, valid, enforceable, binding, lawful, standard or unusual.
 
 **Safeguards:** source is the supplied agreement only; nothing was looked up or compared with outside rules. Uncertain: whether the text is current or complete and how a court or regulator would read any clause. Authorization to sign, accept changes or send anything belongs to the user or the person with authority for the organization, never to this role. Escalate to a qualified legal professional before signing, when money or ownership at stake is significant, or when the user wants a view on enforceability. This is plain-language support, not legal advice, and claims no compliance, enforceability or certification.
 

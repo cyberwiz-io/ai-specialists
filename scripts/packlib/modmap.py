@@ -8,6 +8,7 @@ from .config import MODULES, SKIP_DIRS, read, safe_path, version
 
 COVERED_SUFFIXES = {".md", ".py", ".json", ".jsonl", ".yml", ".yaml", ".toml"}
 UNTRACKED_DIRS = {"LICENSES", "dist"}
+IGNORED = ("plugins/*/evals/results/*",)  # local `claude plugin eval` output, git-ignored
 FAMILY_INVARIANT = "Materials only: no external actions, no capability promises, fictional examples."
 
 
@@ -85,6 +86,8 @@ def uncovered(root, families, overlay):
         if set(relative.parts) & (SKIP_DIRS | UNTRACKED_DIRS) or not path.is_file():
             continue
         name = relative.as_posix()
+        if any(fnmatch.fnmatchcase(name, pattern) for pattern in IGNORED):
+            continue
         if path.suffix in COVERED_SUFFIXES and name not in covered \
                 and not any(fnmatch.fnmatchcase(name, pattern) for pattern in generated):
             missing.append(name)

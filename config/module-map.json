@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "d6644bf51fda2c708c0fca17fe07e2c356aa96d78a8413ff952cb3ffa2cbc5a5",
+      "digest": "dad2c8a51589d1d7ccd4e6414f02dfb7406d4579a08197f3422925884ed86370",
       "files": 33,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -233,7 +233,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "02a1e07adbf3ba2d08e24867c037df213d202db6735dcf2e22e4f3d4b95f86c0",
+      "digest": "93497f7c90824338dcaefe10f8a6a8771dbecb6a71c1e7b2c2c0bf0249eb1448",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -280,7 +280,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "9e18cfe506579439693eecbb598691a9aa5217b610a22261bd6d2c5aa7d3e8eb",
+      "digest": "6953604daddcfb0fd5b6c4f73abcecb8ff7ea5fa21cec32b90d306af4ffb639b",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -319,7 +319,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "1a4e749efddfe5ccdc4ef28ef2ad628327cb1a190bea3235f94fd5597cff8e72",
+      "digest": "3735e0c2021333cd674ba423ee4d62084485de428ba29f178abd69ddecb379b0",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -367,7 +367,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "36c1c57701e74d319cf709596e5d40eb7926db866327fc85b4e195c540384d11",
+      "digest": "a43891bb843955ecf82da2712fe297352f15cc58faad0e97132f87f77780c86c",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -700,7 +700,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "2d19965b5e0d5382b516fc58595dad7b629510c2af361f67e385c5c72bd81d95",
+      "digest": "b1483261211b0e2d3dd0eeb9f8417918a4efe1d1e603c64bed13cf4506c9e248",
       "files": 9,
       "guide": "catalog/finance/INDEX.md",
       "id": "family-finance",
@@ -774,7 +774,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "a48a5d19e2a8c6e894e9b0a287c5c53f85cd54fdf98ef1fd20fa80d8464aa666",
+      "digest": "d09dfb615dbc9283a88bbc0f74f996115b92d623692ca47b4603705668d4c680",
       "files": 6,
       "guide": "catalog/people-hr/INDEX.md",
       "id": "family-people-hr",
@@ -811,7 +811,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "4ce0a010144680f65f81023a9e1462da23d2091166c5d0ad45b67b0594ad8d1a",
+      "digest": "02a2a31ac0bd62da6c0b1c3a70122d131a9af94fca769626eb17ea61a044e477",
       "files": 9,
       "guide": "catalog/legal-compliance/INDEX.md",
       "id": "family-legal-compliance",

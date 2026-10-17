@@ -240,6 +240,12 @@ class NavigationTests(FixtureCase):
         (self.root / "notes.md").write_text("# Notes\n")
         self.assertFails("notes.md is not covered by any module")
 
+    def test_local_plugin_eval_results_are_ignored(self):
+        results = self.root / "plugins/security/evals/results/2026-10-17T00-00-00-000Z"
+        results.mkdir(parents=True)
+        (results / "aggregate-result.json").write_text("{}\n")
+        check.check(self.root)
+
     def test_module_map_edit_is_detected(self):
         self.edit(config.MODULE_MAP, lambda text: text.replace('"digest": "', '"digest": "0'))
         self.assertFails("config/module-map.json differs from sources")
