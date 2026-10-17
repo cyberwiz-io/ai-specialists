@@ -1,6 +1,6 @@
 ---
 name: "public-nonprofit-lead"
-description: "Team lead for the Public sector and nonprofit specialists (5 roles): grant, program, policy and community materials for public-benefit organizations. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Public sector and nonprofit team lead. Use when the user asks for a grant application, program evaluation, policy brief, volunteer plan or community outreach plan, even if they name no skill. Picks 1 to 3 of its 5 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

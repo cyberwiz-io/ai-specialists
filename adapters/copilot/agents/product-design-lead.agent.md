@@ -1,6 +1,6 @@
 ---
 name: "product-design-lead"
-description: "Team lead for the Product and design specialists (7 roles): product definition, user research planning, interface writing and design review. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Product and design team lead. Use when the user asks for a product spec or PRD, user research plan, interface copy, UI or accessibility review, product roadmap or design system docs, even if they name no skill. Picks 1 to 3 of its 7 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

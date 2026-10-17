@@ -16,7 +16,7 @@ SKILL_NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 NAME_MAX, DESCRIPTION_MAX, COMPATIBILITY_MAX = 64, 1024, 500
 # Descriptions sit in every conversation's skill listing, so they stay near this length.
 DESCRIPTION_TARGET = 200
-LEAD_DESCRIPTION_MAX = 300
+LEAD_DESCRIPTION_MAX = 400
 SPEC_FIELDS = ("name", "description", "license", "compatibility", "metadata", "allowed-tools")
 LICENSE = "CC-BY-4.0"
 SPECIALISTS = "specialists"
@@ -83,11 +83,10 @@ def description(role, text):
 
 
 def lead_description(family):
-    purpose = family["purpose"].split(". ")[0].rstrip(".")
-    purpose = purpose[:1].lower() + purpose[1:]
-    text = (f"Team lead for the {family['name']} specialists ({len(family['roles'])} roles): {purpose}. Picks 1 to 3 "
-            "roles, runs them as parallel subagents where possible, gets an independent review and returns "
-            "one deliverable.")
+    """A loading cue in task words: the requests that should start this lead, so a host picks it without being named."""
+    text = (f"{family['name']} team lead. Use when the user asks for {family['triggers'].rstrip('.')}, even if they "
+            f"name no skill. Picks 1 to 3 of its {len(family['roles'])} specialists, runs them as subagents where "
+            "possible and returns one reviewed deliverable.")
     if len(text) > LEAD_DESCRIPTION_MAX:
         raise ValueError(f"{family['id']}: lead description is {len(text)} characters; the limit is {LEAD_DESCRIPTION_MAX}")
     return text

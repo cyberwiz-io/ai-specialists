@@ -1,6 +1,6 @@
 ---
 name: "business-operations-lead"
-description: "Team lead for the Business operations specialists (8 roles): process, planning and decision documents for running a small organization. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Business operations team lead. Use when the user asks for a process map, SOP, project plan, meeting agenda, vendor comparison, business plan, OKRs or contingency plan, even if they name no skill. Picks 1 to 3 of its 8 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

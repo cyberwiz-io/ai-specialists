@@ -1,6 +1,6 @@
 ---
 name: people-hr-lead
-description: "Team lead for the People and HR specialists (5 roles): drafts for hiring, onboarding, reviews and workplace policies, for human decision. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "People and HR team lead. Use when the user asks for a job description, interview guide, onboarding plan, performance review draft or employee handbook section, even if they name no skill. Picks 1 to 3 of its 5 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 license: CC-BY-4.0
 compatibility: "Materials only: writes plans, drafts and reviews from supplied material. Works in any Agent Skills host; team leads use subagents where the host provides them."
 metadata:

@@ -1,6 +1,6 @@
 # Generated from catalog/education-training/ by scripts/pack.py build. Do not edit.
 name = "education-training-lead"
-description = "Team lead for the Education and training specialists (6 roles): designing courses, lessons, assessments and study support. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description = "Education and training team lead. Use when the user asks for a curriculum, lesson plan, quiz, study plan, staff training or grading rubric, even if they name no skill. Picks 1 to 3 of its 6 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 model_reasoning_effort = "medium"
 developer_instructions = """
 <!-- Generated from catalog/education-training/, catalog/families.json and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

@@ -1,6 +1,6 @@
 ---
 name: data-research-lead
-description: "Team lead for the Data and research specialists (8 roles): planning and reviewing research, surveys and data analysis from supplied sources and data. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Data and research team lead. Use when the user asks for a research plan, literature summary, data cleaning plan, data analysis, dashboard spec, survey, statistics check or competitor research, even if they name no skill. Picks 1 to 3 of its 8 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 license: CC-BY-4.0
 compatibility: "Materials only: writes plans, drafts and reviews from supplied material. Works in any Agent Skills host; team leads use subagents where the host provides them."
 metadata:

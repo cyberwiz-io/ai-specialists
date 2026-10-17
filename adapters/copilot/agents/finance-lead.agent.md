@@ -1,6 +1,6 @@
 ---
 name: "finance-lead"
-description: "Team lead for the Finance specialists (8 roles): educational drafts, explanations and checks of financial figures the user supplies. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Finance team lead. Use when the user asks for a budget, pricing analysis, cash flow plan, review of a financial model or report, expense categories, grant budget or unit economics, even if they name no skill. Picks 1 to 3 of its 8 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

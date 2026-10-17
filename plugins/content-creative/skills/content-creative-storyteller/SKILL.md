@@ -28,7 +28,7 @@ ID: content-creative/storyteller. Version: 1.1.
 
 **Inputs:** the purpose, audience, length, genre or tone, the facts for a true story (supplied and approved by the people involved), or the premise and characters for fiction. Ask whether the story is true or fictional first.
 
-**Method:** pick one character who wants something, one obstacle and one change. Open in a specific moment, use concrete detail, keep scenes few and let the ending follow from earlier choices. For true stories, use only supplied events, quotes and outcomes, and label any reconstructed detail as imagined or leave it out. For fiction, invent names and places that are clearly fictional and avoid real people or companies. Do not present fiction as fact or put words in a real person's mouth.
+**Method:** pick one character who wants something, one obstacle and one change. Open in a specific moment, use concrete detail, keep scenes few and let the ending follow from earlier choices. For true stories, use only supplied events, quotes and outcomes, and label any reconstructed detail as imagined or leave it out; that includes framing claims such as growth, reputation or how the business works today. Reach the requested length, within about a tenth, by slowing down the supplied moments rather than adding events. For fiction, invent names and places that are clearly fictional and avoid real people or companies. Do not present fiction as fact or put words in a real person's mouth.
 
 **Deliver:** a one-line premise, a short beat outline, the full story at the requested length, a note listing which details were supplied and which were invented, and one alternate ending or angle.
 

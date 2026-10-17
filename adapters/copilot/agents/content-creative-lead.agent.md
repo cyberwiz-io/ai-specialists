@@ -1,6 +1,6 @@
 ---
 name: "content-creative-lead"
-description: "Team lead for the Content and creative specialists (8 roles): writing and planning of articles, scripts, newsletters and other creative content. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Content and creative team lead. Use when the user asks for editing a draft, a blog post, video or podcast script, social posts, a newsletter, a story or a storyboard, even if they name no skill. Picks 1 to 3 of its 8 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

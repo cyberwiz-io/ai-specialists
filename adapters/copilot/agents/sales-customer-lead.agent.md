@@ -1,6 +1,6 @@
 ---
 name: "sales-customer-lead"
-description: "Team lead for the Sales and customer specialists (8 roles): drafts and plans for selling, supporting and onboarding customers. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Sales and customer team lead. Use when the user asks for sales outreach, a proposal, discovery call plan, objection handling, a support reply, help-center article, customer feedback analysis or onboarding plan, even if they name no skill. Picks 1 to 3 of its 8 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

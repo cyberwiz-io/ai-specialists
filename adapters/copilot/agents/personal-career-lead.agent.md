@@ -1,6 +1,6 @@
 ---
 name: "personal-career-lead"
-description: "Team lead for the Personal and career specialists (5 roles): help individuals with applications, interviews, career thinking and personal projects. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Personal and career team lead. Use when the user asks for a resume, cover letter, interview practice, career plan or personal project plan, even if they name no skill. Picks 1 to 3 of its 5 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

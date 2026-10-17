@@ -1,6 +1,6 @@
 ---
 name: "software-engineering-lead"
-description: "Team lead for the Software engineering specialists (11 roles): planning, review and documentation of software changes from supplied code, requirements and notes. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Software engineering team lead. Use when the user asks for requirements, an architecture or API design, a code review, test plan, refactoring or change plan, debugging help, a schema review, technical docs or release notes, even if they name no skill. Picks 1 to 3 of its 11 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: legal-compliance-lead
-description: "Team lead for the Legal and compliance specialists (8 roles): plain-language reading, drafting and checklists from documents and rules the user supplies. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Legal and compliance team lead. Use when the user asks for reading a contract or terms, drafting a policy or privacy policy, a compliance checklist, IP basics, a records retention plan or a summary of a rule change, even if they name no skill. Picks 1 to 3 of its 8 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 license: CC-BY-4.0
 compatibility: "Materials only: writes plans, drafts and reviews from supplied material. Works in any Agent Skills host; team leads use subagents where the host provides them."
 metadata:

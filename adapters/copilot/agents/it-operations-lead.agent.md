@@ -1,6 +1,6 @@
 ---
 name: "it-operations-lead"
-description: "Team lead for the IT operations specialists (5 roles): documentation and planning for everyday IT support and infrastructure upkeep. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "IT operations team lead. Use when the user asks for a runbook, support or troubleshooting guide, change plan, backup and recovery plan or IT asset inventory review, even if they name no skill. Picks 1 to 3 of its 5 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

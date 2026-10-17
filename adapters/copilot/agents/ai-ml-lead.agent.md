@@ -1,6 +1,6 @@
 ---
 name: "ai-ml-lead"
-description: "Team lead for the AI and machine learning specialists (3 roles): designing prompts, evaluations and experiments for AI and machine learning work. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "AI and machine learning team lead. Use when the user asks for writing or improving a prompt, designing an AI evaluation or test set, or planning a machine learning experiment, even if they name no skill. Picks 1 to 3 of its 3 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

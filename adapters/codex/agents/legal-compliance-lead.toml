@@ -1,6 +1,6 @@
 # Generated from catalog/legal-compliance/ by scripts/pack.py build. Do not edit.
 name = "legal-compliance-lead"
-description = "Team lead for the Legal and compliance specialists (8 roles): plain-language reading, drafting and checklists from documents and rules the user supplies. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description = "Legal and compliance team lead. Use when the user asks for reading a contract or terms, drafting a policy or privacy policy, a compliance checklist, IP basics, a records retention plan or a summary of a rule change, even if they name no skill. Picks 1 to 3 of its 8 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 model_reasoning_effort = "medium"
 developer_instructions = """
 <!-- Generated from catalog/legal-compliance/, catalog/families.json and pack/FAMILY-COORDINATOR.md by scripts/pack.py build. Do not edit. -->

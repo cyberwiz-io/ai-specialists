@@ -1,6 +1,6 @@
 ---
 name: security-lead
-description: "Team lead for the Security specialists (14 roles): defensive security planning, review and documentation of materials the user supplies. Picks 1 to 3 roles, runs them as parallel subagents where possible, gets an independent review and returns one deliverable."
+description: "Security team lead. Use when the user asks for a threat model, a security review of code, an app or cloud settings, triage of scan findings, an incident response plan, an access review, a security policy, risk register or vendor security assessment, even if they name no skill. Picks 1 to 3 of its 14 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 license: CC-BY-4.0
 compatibility: "Materials only: writes plans, drafts and reviews from supplied material. Works in any Agent Skills host; team leads use subagents where the host provides them."
 metadata:

@@ -101,7 +101,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "5c1b81dcd9d3a501e1434b688979478b9a4b611691e30a890de8603799bebdec",
+      "digest": "595fb9b336389e3951d2e023714e0c0f4bc3af421ff5d2aa98b5ef07bcd7f9f0",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "e98724f93ebee8eaeeccdb99576b30b12a592f90d9dccfe31567ba7c9a82512b",
+      "digest": "d2b0913589eda03cd2d8a7fe3f96b2618ab5b84a221fc25336be878dac641c42",
       "files": 33,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -233,7 +233,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "ecb0886532e5899160e8fc5c0dcb095dbe779dea8a606a5bb5b6c8269d47f41d",
+      "digest": "8d09435effa065df29b687d0563fcf6e6f5fb70a4375d6d1e3dfe10e07bc3bf9",
       "files": 450,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -280,7 +280,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "6649e56c2b50a5652cdfaec21356d86867a7824f9d1e01809288e9034ccd4f62",
+      "digest": "53e054b66881f8976654205e4a445eed53ac8d398e003c3186ab3ff0a9c68c0a",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -319,7 +319,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "a208a97f848970193e83e9858e561e50d47ddc7a51605ba2f88106292af8870b",
+      "digest": "a1cd0ae740193e40d3c677a016c8edb1a02fe94de6007e932372bd0fa1629437",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -552,7 +552,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "a5ce5d4262fc07c8fdfeaab686cbadc6d07b12a779860d2d3bbcc10d3a83cede",
+      "digest": "4e8322181dc5e4e0ce2fb1e0e14f1ffb6806a3884cf82ba03e51a581f29c7fd6",
       "files": 9,
       "guide": "catalog/content-creative/INDEX.md",
       "id": "family-content-creative",
@@ -589,7 +589,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "30329c9c93fcee4dc5186afcde3269f152552459e4a772a2f217edc891fbc2d0",
+      "digest": "550cd0757a960c4a2c4754cffedd34bb2c7f074986177c72112feaa9ede93736",
       "files": 11,
       "guide": "catalog/marketing-growth/INDEX.md",
       "id": "family-marketing-growth",
@@ -922,7 +922,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "aba4aea54c4161d692f690031d86321e8c449b7e949a4f3185018afa41dd0cb8",
+      "digest": "d9f30b4bd2c961794fbdf3666a015cda7da7e003033e04f4548165360c0cd44e",
       "files": 6,
       "guide": "catalog/personal-career/INDEX.md",
       "id": "family-personal-career",
@@ -959,7 +959,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "8c814d9b60cc4c3c657bbf69cc648945384c5036055792c937bba7933413b2a1",
+      "digest": "0c8c9b5a4c7032335883e907e85a176e6478af7ae673d41ebaf03b74ed20c3e3",
       "files": 6,
       "guide": "catalog/orchestration/INDEX.md",
       "id": "family-orchestration",
