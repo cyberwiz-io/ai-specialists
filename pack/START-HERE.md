@@ -14,7 +14,7 @@ Nothing is published, scheduled, sent or connected. Finished materials come with
 
 ## Other families
 
-Open `dist/packs/<family>.md` for the family you need (for example `finance.md` or `software-engineering.md`), copy it into a new conversation, and add: **“Use this pack. My task is [description]. Here is the material I can supply: [...].”** Each pack includes the family coordinator and every specialist in that family. Security comes in two packs, `security-engineering.md` and `security-governance.md`, so each fits smaller context windows. Security, finance, people and HR, and legal and compliance packs give support material, not professional advice; take consequential decisions to a qualified person.
+Open `dist/packs/<family>.md` for the family you need (for example `finance.md` or `software-engineering.md`), copy it into a new conversation, and add: **“Use this pack. My task is [description]. Here is the material I can supply: [...].”** Each pack includes the family coordinator and every specialist in that family. Security comes in two packs, `security-engineering.md` and `security-governance.md`, and legal and compliance in two, `legal-compliance-documents.md` and `legal-compliance-rules.md`, so each fits smaller context windows. Security, finance, people and HR, and legal and compliance packs give support material, not professional advice; take consequential decisions to a qualified person.
 
 ## Make it yours
 

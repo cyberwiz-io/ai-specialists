@@ -36,7 +36,7 @@ Each family has a pasteable combined pack and an index of its specialists. Every
 | Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | Two packs: [engineering](dist/packs/security-engineering.md) (8), [governance and privacy](dist/packs/security-governance.md) (6) |
 | Finance (sensitive) | 8 | [index](catalog/finance/INDEX.md) | [pack](dist/packs/finance.md) |
 | People and HR (sensitive) | 5 | [index](catalog/people-hr/INDEX.md) | [pack](dist/packs/people-hr.md) |
-| Legal and compliance (sensitive) | 8 | [index](catalog/legal-compliance/INDEX.md) | [pack](dist/packs/legal-compliance.md) |
+| Legal and compliance (sensitive) | 8 | [index](catalog/legal-compliance/INDEX.md) | Two packs: [documents](dist/packs/legal-compliance-documents.md) (4), [rules and policies](dist/packs/legal-compliance-rules.md) (4) |
 
 The [marketing Coordinator](pack/COORDINATOR.md) and [marketing workflow](pack/MARKETING-WORKFLOW.md) keep campaign decisions and handoffs consistent; the [family coordinator](pack/FAMILY-COORDINATOR.md) does the same for every other family. You can [customize a specialist](pack/CUSTOM-SPECIALISTS.md) in plain language and preview it before enabling it. A [reviewed business profile](pack/BUSINESS-PROFILE.md) is optional.
 

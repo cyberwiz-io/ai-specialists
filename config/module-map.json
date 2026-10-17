@@ -31,7 +31,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "9309036c25ece0024029c29b578c66579e30c1d2ab7c5d145e72639764866e36",
+      "digest": "9f909907a2acba161fd2d735cc8ec06f323278ca8df3759c2ddab2c29c4b9e4d",
       "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -85,7 +85,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "fd5893651e7365158fa4e11ed2e75e939b93c4a85b1337ba3293eb770be991e2",
+      "digest": "7e238aa1c41a6cd0eda2971c6a93eba27a08b56738951d3c3fca06787bdc2e3d",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -214,7 +214,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "2b3dc441043234ddc12332a4bedf8174213d5d44f48fdb31da371547ab63107b",
+      "digest": "1ed4f57a44fb2a0c8080225eac3a6e0488d6b0d82e224a3c7a81b8bc2f554a5a",
       "files": 125,
       "guide": "adapters/claude-code/README.md",
       "id": "claude-code-adapter",

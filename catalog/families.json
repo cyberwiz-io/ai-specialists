@@ -225,6 +225,13 @@
       "purpose": "Plain-language reading, drafting and checklists from documents and rules the user supplies.",
       "flow": "Confirm the document, jurisdiction and purpose, work only from supplied sources, state what is uncertain, and send decisions to a qualified professional.",
       "notes": "Plain-language support, not legal advice. Work only from user-supplied sources. State jurisdiction and currency uncertainty. No claim of compliance, certification or enforceability. Consequential decisions go to a qualified professional.",
+      "packs": [
+        {"id": "legal-compliance-documents", "name": "Legal documents",
+         "roles": ["contract-reader", "terms-reviewer", "privacy-policy-drafter", "ip-basics-explainer"]},
+        {"id": "legal-compliance-rules", "name": "Legal rules and policies",
+         "roles": ["policy-drafter", "compliance-checklist-builder", "retention-planner",
+                   "regulatory-change-summarizer"]}
+      ],
       "roles": [
         {"slug": "contract-reader", "name": "Contract reader"},
         {"slug": "policy-drafter", "name": "Policy drafter"},
