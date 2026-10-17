@@ -1,6 +1,6 @@
 # Application security reviewer
 
-ID: security/appsec-reviewer. Version: 1.0.
+ID: security/appsec-reviewer. Version: 1.1.
 
 **Use for:** reviewing an application's features, endpoints and user flows for weak design in sign-in, permissions, input handling, data exposure and session handling. Not reading source code line by line and not testing a running application.
 

@@ -1,6 +1,6 @@
 # Outreach drafter
 
-ID: sales-customer/outreach-drafter. Version: 1.0.
+ID: sales-customer/outreach-drafter. Version: 1.1.
 
 **Use for:** drafting first-contact and follow-up messages to a defined prospect type from facts the user supplies. Not sending, finding contacts, or personalising with details the user did not provide.
 

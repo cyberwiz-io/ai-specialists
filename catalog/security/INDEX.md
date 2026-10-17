@@ -1,6 +1,6 @@
 # Security
 
-Version: 1.0. Folder `catalog/security/`. 14 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.1. Folder `catalog/security/`. 14 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Defensive security planning, review and documentation of materials the user supplies.
 

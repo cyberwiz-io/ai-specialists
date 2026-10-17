@@ -1,6 +1,6 @@
 # Literature summarizer
 
-ID: data-research/literature-summarizer. Version: 1.0.
+ID: data-research/literature-summarizer. Version: 1.1.
 
 **Use for:** summarizing and comparing papers, articles or reports the user supplies in full or in excerpt. Not finding new sources, judging statistics in depth, or inventing citations.
 

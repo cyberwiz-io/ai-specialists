@@ -15,7 +15,11 @@ Run `python3 -B scripts/pack.py check` and the test command in [Contributing](..
 - the release command rebuilds the archive and verifies its members and bytes before CI attaches it to a tagged release.
 
 - every card has an evaluation fixture and every family a boundary fixture, with fictional data only;
-- each family's plugin has a valid skill name and description length, working links from its `SKILL.md` to its references, one subagent per card (read-only except the two test-running roles), and an entry in the marketplace and the install guide; the release also writes and verifies one upload-ready skill ZIP per family.
+- every `SKILL.md` (root `skills/`, plugins and the Codex plugin) has a 1 to 64 character lowercase name matching its folder, a description within limits, and only the six Agent Skills frontmatter fields (plugin role skills may add `disable-model-invocation`);
+- the marketplace and each `plugin.json` have the required keys, every plugin entry points to a real folder, no name keeps the old `core-` prefix, and the `ai-specialists-all` bundle stays under its description budget;
+- each family's plugin has its lead skill with working links to its references, one worker agent per card, and an entry in the marketplace and the install guide; no worker has the Agent tool, and only the four code roles have allowlisted commands; the release also writes and verifies one upload-ready skill ZIP per family;
+- the Codex, Gemini CLI, Copilot and Cursor outputs parse and follow their documented shape, and every generated file matches its source;
+- CI runs `claude plugin validate --strict` (Claude Code 2.1.302) on the marketplace, all 17 plugins, `skills/` and the Codex plugin. It passed on this branch.
 
 These are structural checks of the written instructions.
 
@@ -30,12 +34,13 @@ Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linke
 | Run | Scope | Host and model | Outcome |
 | --- | --- | --- | --- |
 | [2026-10-17-marketing-growth](../evals/reports/2026-10-17-marketing-growth.md) | Marketing and growth family, 11 fixtures (10 task, 1 boundary) | Claude Code (cloud), claude-opus-5-5 graded by claude-opus-5-5 | 6 pass, 3 partial, 2 fail |
-| [2026-10-17-se-code-reviewer](../evals/reports/2026-10-17-se-code-reviewer.md) | Software engineering code reviewer, 2 fixtures (1 task, 1 boundary) | Claude Code (cloud), claude-sonnet-5-5 graded by claude-sonnet-5-5 | 1 pass, 1 partial, 0 fail |
-| [2026-10-17-se-debugging-analyst](../evals/reports/2026-10-17-se-debugging-analyst.md) | Software engineering debugging analyst, 1 fixture (task) | Claude Code (cloud), claude-sonnet-5-5 graded by claude-sonnet-5-5 | 1 pass, 0 partial, 0 fail |
+| [2026-10-17-security-plugin-pilot](../evals/reports/2026-10-17-security-plugin-pilot.md) | Security plugin via `claude plugin eval`, 7 cases (5 task, 1 boundary, 1 team), with and without the plugin | Claude Code 2.1.302 (cloud), host default model, LLM judge | With plugin 1 of 7, without 0 of 7; the plugin fired on 3 of 7 plain prompts |
 
-The two software-engineering runs cover the roles that gained allowlisted test commands. Their subagents had only Read and Write (the harness limits), so the evals do not exercise the command access; that was checked separately with one local Claude Code smoke test (the code reviewer ran an allowlisted `python3 -m unittest` command once pre-approved, and a command outside the allowlist was blocked). They are not part of the regression baseline, and each result is a single model-graded run.
+This run is also the regression baseline in `evals/baseline.json`. The report keeps the role IDs of its commit; the four `core/` roles it names were later renamed `marketing-growth/` without other card changes, and the baseline uses the new IDs. It covers one family only; the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
 
-This run is also the regression baseline in `evals/baseline.json`. The report keeps the role IDs of its commit; the four `core/` roles it names were later renamed `marketing-growth/` without other card changes, and the baseline uses the new IDs. It covers one family only; apart from the two single-role software-engineering runs above, the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
+## Team lead run
+
+On 2026-10-17, `claude -p "/security:security-lead ..." --plugin-dir plugins/security` (Claude Code 2.1.302, cloud container, session model claude-sonnet-5-5) was given a fictional app review. The lead started the threat modeler and the cloud security reviewer as two parallel subagents with handoff packets, then started a fresh cross-family reviewer subagent. The reviewer found 5 blocking items and the lead sent one correction round. The final deliverable carried the standing "draft support, not advice" header and named the contributors as separate subagents. All three roles are set to `opus`, and they ran on claude-opus-5-5 while the session ran on sonnet, which fits the per-role `model` setting; `haiku` roles were not exercised. Total cost was about 1.09 USD. In that run the lead could not read its card files (non-interactive permission prompt), so the reviewer judged against role scope; the lead now carries the Acceptance lines in its own body. This is one run on fictional input, not a measure of quality.
 
 ## Paper review
 
@@ -58,8 +63,9 @@ On 2026-10-17 four separate subagents with no shared context, one each for secur
 
 ## Pending evidence
 
-- Live installation of the Claude Code plugins and the claude.ai skill upload: whether the skills trigger on a plain task description, whether cards load on demand, and whether subagents are chosen by name. Only a local smoke test is recorded (Claude Code 2.1.302, `--plugin-dir`, plugin loaded and a card read on demand) and one orchestrator-to-specialist-to-specialist delegation in the orchestration plugin with the nesting depth set to 3; delegation across other families, sensitive families and deeper chains is unobserved; marketplace install from GitHub, claude.ai upload and unaided users have not been observed.
-- Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. Three runs are recorded, each one fixture at a time (see Recorded evaluations): the marketing and growth family, and the software-engineering code reviewer and debugging analyst. The end-to-end marketing workflow, the other 16 families and the other software-engineering roles have no recorded run.
+- Live installation of the Claude Code plugins and the claude.ai skill upload. Two local runs are recorded, both with `--plugin-dir` on Claude Code 2.1.302: a 1.0 smoke test that loaded a plugin and read a card on demand, and a 1.1 team run of `/security:security-lead` (below). A marketplace install from GitHub of the 1.0 layout (marketing-growth and orchestration) and a headless card read from an installed plugin were observed on 2026-10-17; see [the install guide](INSTALL.md). A GitHub install of the 1.1 layout, the `ai-specialists-all` bundle install, claude.ai upload, the other 16 leads and unaided users have not been observed.
+- Codex, Gemini CLI, GitHub Copilot, Cursor and `npx skills`: the generated files follow each tool's published format but none has been installed or run in that tool. Whether Codex honors `shell_tool = false` per agent, and whether `effort` changes anything on `haiku`, is unverified.
+- Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. One run is recorded, for the marketing and growth cards one fixture at a time (see Recorded evaluations); the end-to-end marketing workflow and the other 16 families have no recorded run.
 - Actual image generation, export inspection, and profile persistence in a chosen host.
 - Unaided nontechnical-user trials.
 - Subject-expert review of the cards in each family, in particular the sensitive families. The cards describe working perspectives, not professional expertise or certification.

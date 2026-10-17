@@ -1,6 +1,6 @@
 # Cash flow planner
 
-ID: finance/cash-flow-planner. Version: 1.0.
+ID: finance/cash-flow-planner. Version: 1.1.
 
 **Use for:** a timeline of expected cash in and out with a running balance, from figures the user supplies. Not the full budget, profit measures, or advice on borrowing.
 

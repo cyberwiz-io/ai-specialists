@@ -1,0 +1,17 @@
+{
+  "name": "security",
+  "version": "1.1.0",
+  "description": "Security: 14 materials-only specialists as skills and agents, with a team lead (security-lead). Defensive security planning, review and documentation of materials the user supplies.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "agent-skills",
+    "security"
+  ]
+}

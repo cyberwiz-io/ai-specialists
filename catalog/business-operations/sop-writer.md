@@ -1,6 +1,6 @@
 # SOP writer
 
-ID: business-operations/sop-writer. Version: 1.0.
+ID: business-operations/sop-writer. Version: 1.1.
 
 **Use for:** turning a confirmed process into a standard operating procedure someone new can follow. Not mapping the process, deciding policy, or training staff.
 

@@ -140,14 +140,14 @@ class CardRuleTests(FixtureCase):
         self.rebuild_and_fail("more than one label")
 
     def test_wrong_card_version_and_id_fail(self):
-        self.edit(self.CARD, lambda text: text.replace("Version: 1.0.", "Version: 0.9."))
-        self.rebuild_and_fail("expected one Version 1.0")
+        self.edit(self.CARD, lambda text: text.replace("Version: 1.1.", "Version: 0.9."))
+        self.rebuild_and_fail("expected one Version 1.1")
         self.edit(self.CARD, lambda text: text.replace("software-engineering/code-reviewer", "software-engineering/other"))
         self.rebuild_and_fail("header must read")
 
     def test_wrong_document_version_fails(self):
-        self.edit("pack/COORDINATOR.md", lambda text: text.replace("Version: 1.0", "Version: 0.2"))
-        self.rebuild_and_fail("pack/COORDINATOR.md: expected one Version 1.0")
+        self.edit("pack/COORDINATOR.md", lambda text: text.replace("Version: 1.1", "Version: 0.2"))
+        self.rebuild_and_fail("pack/COORDINATOR.md: expected one Version 1.1")
 
     def test_sensitive_card_needs_safeguards(self):
         self.edit(self.SENSITIVE, lambda text: text.replace("**Safeguards:**", "**Notes:**"))
@@ -252,12 +252,12 @@ class NavigationTests(FixtureCase):
 
 class ArchiveTests(FixtureCase):
     def test_release_writes_verified_archive_outside_tracked_tree(self):
-        archive = self.release("v1.0")
-        self.assertEqual(archive, self.root / config.RELEASE_DIR / "ai-specialists-1.0.zip")
+        archive = self.release("v1.1")
+        self.assertEqual(archive, self.root / config.RELEASE_DIR / "ai-specialists-1.1.zip")
         check.check(self.root)  # work/ is ignored, so a local release never fails the check
 
     def test_release_rejects_mismatched_tag(self):
-        with self.assertRaisesRegex(ValueError, "tag 'v2.0' does not match VERSION 1.0"):
+        with self.assertRaisesRegex(ValueError, "tag 'v2.0' does not match VERSION 1.1"):
             self.release("v2.0")
         self.assertFalse((self.root / config.RELEASE_DIR).exists())
 
@@ -306,7 +306,7 @@ class ArchiveTests(FixtureCase):
     def test_archive_contains_cards_packs_and_licenses(self):
         with ZipFile(self.release()) as bundled:
             names = bundled.namelist()
-        prefix = "ai-specialists-1.0/"
+        prefix = "ai-specialists-1.1/"
         for required in ("catalog/security/threat-modeler.md", "dist/packs/finance.md",
                          "dist/packs/security-engineering.md", "dist/packs/security-governance.md",
                          "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):

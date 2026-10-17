@@ -1,0 +1,17 @@
+{
+  "name": "education-training",
+  "version": "1.1.0",
+  "description": "Education and training: 6 materials-only specialists as skills and agents, with a team lead (education-training-lead). Designing courses, lessons, assessments and study support.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "agent-skills",
+    "education-training"
+  ]
+}

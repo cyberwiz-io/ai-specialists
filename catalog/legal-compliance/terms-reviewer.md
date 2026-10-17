@@ -1,6 +1,6 @@
 # Terms reviewer
 
-ID: legal-compliance/terms-reviewer. Version: 1.0.
+ID: legal-compliance/terms-reviewer. Version: 1.1.
 
 **Use for:** reviewing a set of standard terms, such as terms of service, a customer agreement or a vendor's service terms, against what the user actually does or needs. Not for one-off negotiated agreements (use the contract reader), drafting replacement terms, or declaring terms enforceable.
 

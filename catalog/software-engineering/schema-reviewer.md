@@ -1,6 +1,6 @@
 # Schema reviewer
 
-ID: software-engineering/schema-reviewer. Version: 1.0.
+ID: software-engineering/schema-reviewer. Version: 1.1.
 
 **Use for:** reviewing a supplied data model, table definitions or change script for correctness, integrity and migration risk. Not for tuning live databases, writing application code or deciding business rules.
 

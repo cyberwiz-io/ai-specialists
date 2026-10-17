@@ -1,6 +1,6 @@
 # Program evaluator
 
-ID: public-nonprofit/program-evaluator. Version: 1.0.
+ID: public-nonprofit/program-evaluator. Version: 1.1.
 
 **Use for:** designing how a program will be judged, or reading results the user already has, so the organization can show what changed and what did not. Not for writing the grant narrative, auditing finances, or proving that the program caused an outcome.
 
