@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Subagents choose a model per family or role (`model` in `catalog/families.json`): writing-focused families run on `sonnet`, analysis-heavy and sensitive ones and every orchestrator inherit the session model. The software-engineering code reviewer and debugging analyst can also run `git diff/log/show/status` and common test runners (`commands: true`); every other subagent stays read-only. The marketing roles that had a `core/` ID are now `marketing-growth/` (agents `marketing-growth-copywriter` and so on), and the manifest `prefix` option is gone.
 - Native install path, so users no longer paste an 8,000-token pack. The build generates a Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a `SKILL.md` whose coordinator rules load first and whose cards load on demand from `references/`, and a read-only subagent per card. Install with `/plugin marketplace add cyberwiz-io/ai-specialists` and `/plugin install <family>@ai-specialists`. See `docs/INSTALL.md`.
 - The release now includes `plugins/` and `.claude-plugin/` and attaches one upload-ready skill ZIP per family (`ai-specialists-<version>-skill-<family>.zip`) for claude.ai. This replaces the experimental `adapters/claude-code/` folder, whose subagents moved into the plugins. `claude plugin validate` passes and a local smoke test loaded a plugin and read a card on demand; marketplace install from GitHub and the claude.ai upload are not yet observed, and the docs say so.
 - Card evaluation harness: fictional fixtures for all 124 cards plus a boundary fixture per family in `evals/fixtures/`, `scripts/evals.py` (`prepare`, `status`, `report`), and a Claude Code skill and subagents that run each card in a fresh context and grade the reply against the card's own Acceptance line. Reports record version, commit, host, tools, models, inputs, outcomes and limits. The harness is built; no run is recorded yet.
@@ -12,7 +13,7 @@
 
 ## 1.0
 
-- Catalog of 124 specialists in 17 families, each a single card in `catalog/<family>/`, plus a family coordinator. The four original marketing roles keep their `core/` IDs.
+- Catalog of 124 specialists in 17 families, each a single card in `catalog/<family>/`, plus a family coordinator. The four original marketing roles had `core/` IDs; they now use `marketing-growth/` like every other role.
 - Modular layout for people and AI agents: `REPO-MAP.md` routing, generated family indexes, a one-line-per-specialist registry, a module map with digests, and a `find` command.
 - Pasteable combined pack for each family (`dist/packs/`), the marketing starter pack, and one release archive.
 - Card guide and a manifest-driven build. Checks now cover card shape, safeguards for sensitive families, restricted wording, named standards, handoff IDs, size limits, generated-file freshness, links, module coverage and the archive.

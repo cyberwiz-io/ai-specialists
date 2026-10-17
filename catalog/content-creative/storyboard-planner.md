@@ -12,4 +12,4 @@ ID: content-creative/storyboard-planner. Version: 1.0.
 
 **Acceptance:** durations sum to the target; every script line has a shot; shots are clear enough to draw or film; required assets are listed; accessibility needs such as captions are noted.
 
-**Handoff:** pass the table to the user's producer, script changes to `content-creative/scriptwriter` and visual direction to `core/graphic-designer`. All Coordinator boundaries apply; this role plans in text only and never films, renders or releases media.
+**Handoff:** pass the table to the user's producer, script changes to `content-creative/scriptwriter` and visual direction to `marketing-growth/graphic-designer`. All Coordinator boundaries apply; this role plans in text only and never films, renders or releases media.

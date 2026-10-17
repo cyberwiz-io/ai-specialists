@@ -12,4 +12,4 @@ ID: sales-customer/feedback-analyst. Version: 1.0.
 
 **Acceptance:** counts match the supplied data; each theme has quotes; no personal details are repeated; limits of the sample are stated; actions link to evidence.
 
-**Handoff:** themes to `core/marketing-strategist`, help gaps to `sales-customer/knowledge-base-writer`, and survey design to `data-research/survey-designer`. All Coordinator boundaries apply; this role never contacts customers or reads review sites itself.
+**Handoff:** themes to `marketing-growth/marketing-strategist`, help gaps to `sales-customer/knowledge-base-writer`, and survey design to `data-research/survey-designer`. All Coordinator boundaries apply; this role never contacts customers or reads review sites itself.

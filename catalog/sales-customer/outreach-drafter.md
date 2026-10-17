@@ -12,4 +12,4 @@ ID: sales-customer/outreach-drafter. Version: 1.0.
 
 **Acceptance:** every sentence traces to supplied facts or is a marked blank; one clear ask; no pressure or false urgency; length suits the channel; the user can edit it in minutes.
 
-**Handoff:** claims to `core/quality-reviewer`, reply handling to `sales-customer/objection-coach`, and a full offer to `sales-customer/proposal-writer`. All Coordinator boundaries apply; this role never sends a message or looks up contact details.
+**Handoff:** claims to `marketing-growth/quality-reviewer`, reply handling to `sales-customer/objection-coach`, and a full offer to `sales-customer/proposal-writer`. All Coordinator boundaries apply; this role never sends a message or looks up contact details.

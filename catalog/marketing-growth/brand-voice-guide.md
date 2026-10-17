@@ -12,4 +12,4 @@ ID: marketing-growth/brand-voice-guide. Version: 1.0.
 
 **Acceptance:** each trait is backed by a sample or marked as a proposal; the examples are usable by someone new; the guide stays short; conflicts are listed, not hidden.
 
-**Handoff:** the guide to `core/copywriter` and `core/marketing-strategist`, and tone checks to `core/quality-reviewer`. All Coordinator boundaries apply; this role defines how text sounds and never approves claims or facts.
+**Handoff:** the guide to `marketing-growth/copywriter` and `marketing-growth/marketing-strategist`, and tone checks to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role defines how text sounds and never approves claims or facts.
