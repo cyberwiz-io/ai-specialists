@@ -28,6 +28,8 @@ LEAD_EFFORT = "medium"
 # Codex has no "max" reasoning effort; its highest is "xhigh".
 EFFORT = {"max": "xhigh"}
 DESCRIPTION_MAX = 1024
+# Codex plugin directory limit for interface.displayName and interface.shortDescription.
+INTERFACE_MAX = 30
 
 
 def _json(value):
@@ -43,7 +45,7 @@ def plugin_json(root, families):
         "keywords": ["specialists", "materials-only", "agent-skills", "team-lead"],
         "skills": "./skills/",
         "interface": {"displayName": "AI Specialists",
-                      "shortDescription": "Materials-only specialist team leads for plans, drafts and reviews.",
+                      "shortDescription": "Materials-only team leads",
                       "developerName": "cyberwiz-io", "category": "Productivity"}})
 
 
@@ -156,6 +158,10 @@ def problems(root, families, generated):
     for key in ("name", "version"):
         if not manifest.get(key):
             failures.append(f"{PLUGIN_JSON}: missing {key}")
+    for key in ("displayName", "shortDescription"):
+        value = manifest.get("interface", {}).get(key)
+        if not isinstance(value, str) or not value or len(value) > INTERFACE_MAX:
+            failures.append(f"{PLUGIN_JSON}: interface.{key} must be 1-{INTERFACE_MAX} characters")
     if manifest.get("skills") != "./skills/":
         failures.append(f"{PLUGIN_JSON}: skills must be ./skills/")
     elif not any(path.startswith(f"{BASE}/skills/") for path in generated):
