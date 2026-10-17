@@ -1,6 +1,6 @@
 ---
 name: "security-lead"
-description: "Security team lead. Use when the user asks for a threat model, a security review of code, an app or cloud settings, triage of scan findings, an incident response plan, an access review, a security policy, risk register or vendor security assessment, even if they name no skill. Picks 1 to 3 of its 14 specialists, runs them as subagents where possible and returns one reviewed deliverable."
+description: "Security team lead. Use when the user asks for a check of code, app designs or cloud settings for security problems, a threat model, scan triage, an incident response plan, a review of who has access, a security policy, risk register or vendor assessment, even if they name no skill. Picks 1 to 3 of its 14 specialists, runs them as subagents where possible and returns one reviewed deliverable."
 tools: ["read", "search", "agent"]
 ---
 

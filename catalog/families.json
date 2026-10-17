@@ -7,7 +7,7 @@
       "name": "Security",
       "sensitive": true,
       "purpose": "Defensive security planning, review and documentation of materials the user supplies.",
-      "triggers": "a threat model, a security review of code, an app or cloud settings, triage of scan findings, an incident response plan, an access review, a security policy, risk register or vendor security assessment",
+      "triggers": "a check of code, app designs or cloud settings for security problems, a threat model, scan triage, an incident response plan, a review of who has access, a security policy, risk register or vendor assessment",
       "flow": "Clarify the asset and decision, review only supplied material, rank findings with stated uncertainty, then hand a written result to the people who own the system.",
       "notes": "Defensive work on supplied material only. No offensive tooling, exploitation steps, evasion or probing of systems. Findings stay provisional until the system owner verifies them. A suspected live incident goes to the user's responsible people at once.",
       "packs": [

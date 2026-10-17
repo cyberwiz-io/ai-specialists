@@ -101,7 +101,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "595fb9b336389e3951d2e023714e0c0f4bc3af421ff5d2aa98b5ef07bcd7f9f0",
+      "digest": "7add1564ea5321f5158a5e01e1aa7f0282672c3ca120c0f65cf48bd582994f53",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -233,7 +233,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "8d09435effa065df29b687d0563fcf6e6f5fb70a4375d6d1e3dfe10e07bc3bf9",
+      "digest": "ff373a9b3d8c148a339392e5af49e6c79a4d859bb3612cfc4758c9f2d64cc0d1",
       "files": 450,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -280,7 +280,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "53e054b66881f8976654205e4a445eed53ac8d398e003c3186ab3ff0a9c68c0a",
+      "digest": "9e18cfe506579439693eecbb598691a9aa5217b610a22261bd6d2c5aa7d3e8eb",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -319,7 +319,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "a1cd0ae740193e40d3c677a016c8edb1a02fe94de6007e932372bd0fa1629437",
+      "digest": "1a4e749efddfe5ccdc4ef28ef2ad628327cb1a190bea3235f94fd5597cff8e72",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
