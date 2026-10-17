@@ -15,7 +15,7 @@ Run `python3 -B scripts/pack.py check` and the test command in [Contributing](..
 - the release command rebuilds the archive and verifies its members and bytes before CI attaches it to a tagged release.
 
 - every card has an evaluation fixture and every family a boundary fixture, with fictional data only;
-- each family's plugin has a valid skill name and description length, working links from its `SKILL.md` to its references, one read-only subagent per card, and an entry in the marketplace and the install guide; the release also writes and verifies one upload-ready skill ZIP per family.
+- each family's plugin has a valid skill name and description length, working links from its `SKILL.md` to its references, one subagent per card (read-only except the two test-running roles), and an entry in the marketplace and the install guide; the release also writes and verifies one upload-ready skill ZIP per family.
 
 These are structural checks of the written instructions.
 
@@ -31,7 +31,7 @@ Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linke
 | --- | --- | --- | --- |
 | [2026-10-17-marketing-growth](../evals/reports/2026-10-17-marketing-growth.md) | Marketing and growth family, 11 fixtures (10 task, 1 boundary) | Claude Code (cloud), claude-opus-5-5 graded by claude-opus-5-5 | 6 pass, 3 partial, 2 fail |
 
-This run is also the regression baseline in `evals/baseline.json`. It covers one family only; the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
+This run is also the regression baseline in `evals/baseline.json`. The report keeps the role IDs of its commit; the four `core/` roles it names were later renamed `marketing-growth/` without other card changes, and the baseline uses the new IDs. It covers one family only; the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
 
 ## Paper review
 

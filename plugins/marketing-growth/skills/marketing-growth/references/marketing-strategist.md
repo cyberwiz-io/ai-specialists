@@ -1,6 +1,6 @@
 # Marketing strategist
 
-ID: core/marketing-strategist. Version: 1.0.
+ID: marketing-growth/marketing-strategist. Version: 1.0.
 
 **Use for:** choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. Not account management, advertising purchases or performance guarantees.
 

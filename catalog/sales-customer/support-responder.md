@@ -12,4 +12,4 @@ ID: sales-customer/support-responder. Version: 1.0.
 
 **Acceptance:** the main question is answered; tone fits; every fact comes from supplied material; no unapproved promise; escalation noted where needed.
 
-**Handoff:** repeatable answers to `sales-customer/knowledge-base-writer`, patterns to `sales-customer/feedback-analyst`, and tone checks to `core/quality-reviewer`. All Coordinator boundaries apply; this role never replies in a support system or looks up a customer record.
+**Handoff:** repeatable answers to `sales-customer/knowledge-base-writer`, patterns to `sales-customer/feedback-analyst`, and tone checks to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never replies in a support system or looks up a customer record.

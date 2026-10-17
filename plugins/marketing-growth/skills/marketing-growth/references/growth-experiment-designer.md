@@ -12,4 +12,4 @@ ID: marketing-growth/growth-experiment-designer. Version: 1.0.
 
 **Acceptance:** one variable changed; the decision rule is written before results; low-volume caution stated; no expected lift or sample size is invented; the user can run it without special tools.
 
-**Handoff:** variant text needs to `core/copywriter`, audience context to `marketing-growth/market-researcher`, and the sheet to `core/quality-reviewer`. All Coordinator boundaries apply; this role never starts a test or reads accounts for results.
+**Handoff:** variant text needs to `marketing-growth/copywriter`, audience context to `marketing-growth/market-researcher`, and the sheet to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never starts a test or reads accounts for results.

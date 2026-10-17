@@ -12,4 +12,4 @@ ID: marketing-growth/market-researcher. Version: 1.0.
 
 **Acceptance:** every finding points to supplied material or is labelled an assumption; no market size, share or growth figure is invented; gaps and source limits are stated; the implications relate to the stated decision.
 
-**Handoff:** the brief to `core/marketing-strategist` for planning, audience findings to `marketing-growth/brand-voice-guide`, and test ideas to `marketing-growth/growth-experiment-designer`. All Coordinator boundaries apply; this role never contacts customers or runs a survey itself.
+**Handoff:** the brief to `marketing-growth/marketing-strategist` for planning, audience findings to `marketing-growth/brand-voice-guide`, and test ideas to `marketing-growth/growth-experiment-designer`. All Coordinator boundaries apply; this role never contacts customers or runs a survey itself.
