@@ -10,12 +10,12 @@ Documentation changes need proportionate checks. Maintenance code changes must e
 
 ## Branch naming
 
-Name every branch you create after the work it contains, in lowercase kebab-case with a type prefix, such as `fix/login-redirect-loop`, `feat/export-csv` or `docs/branch-naming-rule`. Never use random, opaque or tool-generated names such as `ccr-58c0cebc-iezwgg`, `claude/abc123`, `agent-42` or `temp`. If a session or tool assigns a name like that, rename the branch before pushing when that is allowed; if the user or host requires the assigned name, use it and say so. Give pull requests a title that describes the change.
+Name every branch you create after the work it contains, in lowercase kebab-case with a type prefix, such as `fix/login-redirect-loop`, `feat/export-csv` or `docs/branch-naming-rule`. Never use random, opaque or tool-generated names such as `ccr-58c0cebc-iezwgg`, `claude/abc123`, `agent-42` or `temp`. If a session or tool assigns a name like that, rename the branch before pushing when that is allowed; if the user or host requires the assigned name, use it and say so. Give pull requests a title that describes the change, and delete a temporary branch once it is merged.
 
-## Working autonomy and release limits
+## Working autonomously
 
-The owner has asked agents to take each task to completion with the best available answer rather than stopping for approval. Decide, act, verify and report. Stop and ask only for a genuine blocker that needs the owner, such as a credential, an account setting or an irreversible external step. Open a pull request for your work and drive it to green CI; do not push to `main` directly.
+When the user asks for a task to be finished, choose the most complete reasonable answer, state the default you picked, and carry the work through to done, including the follow-up steps it implies (build, checks, PR, merge, cleanup). Ask only about a blocker that needs the user, such as missing access, an irreversible or outward-facing action nobody has authorized, or a choice that changes their goal. Report what is unverified instead of claiming it passed.
 
-Never push a release tag, publish to a package registry, or submit to a marketplace or directory yourself. Do the work up to that point and list the remaining steps for the owner. Every action in `.github/workflows/` must be GitHub-owned or Marketplace-verified and pinned to a full commit SHA, or the organization's policy ends the run in `startup_failure`.
+Never push a release tag, publish to a package registry, or submit to a marketplace or directory yourself unless the owner has asked for that step; do the work up to it and list the remaining steps. Every action in `.github/workflows/` must be GitHub-owned or Marketplace-verified and pinned to a full commit SHA, or the organization's policy ends the run in `startup_failure`.
 
 Before claiming an install path works, run it: add the marketplace from GitHub with a clean `CLAUDE_CONFIG_DIR`, install a plugin, and exercise the skill with `claude -p`. Record only what you saw in `docs/INSTALL.md` and `docs/VALIDATION.md`.
