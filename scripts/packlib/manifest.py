@@ -6,6 +6,7 @@ import re
 from .config import DEFAULT_COORDINATOR, MANIFEST, read
 
 SLUG = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
+MODELS = ("inherit", "sonnet", "haiku", "opus")
 
 
 def _require(condition, message):
@@ -29,6 +30,8 @@ def load(root):
             _require(isinstance(family.get(key), str) and family[key], f"{fid}: missing {key}")
         _require(isinstance(family.get("sensitive"), bool), f"{fid}: sensitive must be true or false")
         _require(not family["sensitive"] or family.get("notes"), f"{fid}: sensitive family needs notes")
+        model = family.get("model", "inherit")
+        _require(model in MODELS, f"{fid}: model must be one of {', '.join(MODELS)}")
         roles, slugs = [], set()
         for role in family.get("roles", []):
             slug = role.get("slug", "")
@@ -36,11 +39,15 @@ def load(root):
             _require(slug not in slugs, f"{fid}: duplicate slug {slug}")
             _require(isinstance(role.get("name"), str) and role["name"], f"{fid}/{slug}: missing name")
             slugs.add(slug)
-            role_id = f"{role.get('prefix', fid)}/{slug}"
+            role_model = role.get("model", model)
+            _require(role_model in MODELS, f"{fid}/{slug}: model must be one of {', '.join(MODELS)}")
+            _require(isinstance(role.get("commands", False), bool), f"{fid}/{slug}: commands must be true or false")
+            role_id = f"{fid}/{slug}"
             _require(role_id not in seen_ids, f"duplicate role id {role_id}")
             seen_ids.add(role_id)
             roles.append({"id": role_id, "slug": slug, "name": role["name"], "family": fid,
                           "family_name": family["name"], "sensitive": family["sensitive"],
+                          "model": role_model, "commands": role.get("commands", False),
                           "path": f"catalog/{fid}/{slug}.md"})
         _require(roles, f"{fid}: no roles")
         packs = _packs(fid, family, roles, seen_packs)

@@ -12,4 +12,4 @@ ID: data-research/competitive-intelligence-analyst. Version: 1.0.
 
 **Acceptance:** every cell has a source and date or reads "not supplied"; inference is labeled; no private or invented detail appears; findings connect to the stated decision.
 
-**Handoff:** the matrix and unknowns to `marketing-growth/market-researcher` for wider research or `core/marketing-strategist` for positioning. All Coordinator boundaries apply; this role never contacts competitors or gathers non-public information.
+**Handoff:** the matrix and unknowns to `marketing-growth/market-researcher` for wider research or `marketing-growth/marketing-strategist` for positioning. All Coordinator boundaries apply; this role never contacts competitors or gathers non-public information.

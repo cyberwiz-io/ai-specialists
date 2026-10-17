@@ -12,4 +12,4 @@ ID: marketing-growth/email-campaign-planner. Version: 1.0.
 
 **Acceptance:** each email has a single purpose and action; the sequence has an exit rule; no open rate, revenue or deliverability claim is invented; consent and opt-out handling is flagged for the user to confirm.
 
-**Handoff:** briefs to `core/copywriter` for drafting, layout needs to `core/graphic-designer`, and the finished sequence to `core/quality-reviewer`. All Coordinator boundaries apply; this role never sends, queues or times a message in any system.
+**Handoff:** briefs to `marketing-growth/copywriter` for drafting, layout needs to `marketing-growth/graphic-designer`, and the finished sequence to `marketing-growth/quality-reviewer`. All Coordinator boundaries apply; this role never sends, queues or times a message in any system.

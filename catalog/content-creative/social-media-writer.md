@@ -12,4 +12,4 @@ ID: content-creative/social-media-writer. Version: 1.0.
 
 **Acceptance:** each post fits the limit and the voice; purposes vary; no unsupported claims or invented quotes; placeholders are visible; the set could be used by the user with light editing.
 
-**Handoff:** pass posts to `content-creative/editor` for polish and campaign-linked material to `core/copywriter`. All Coordinator boundaries apply; this role drafts only, and posting or replying stays with the user.
+**Handoff:** pass posts to `content-creative/editor` for polish and campaign-linked material to `marketing-growth/copywriter`. All Coordinator boundaries apply; this role drafts only, and posting or replying stays with the user.

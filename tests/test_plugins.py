@@ -26,15 +26,47 @@ class PluginTests(FixtureCase):
     def test_one_valid_delegating_agent_per_card(self):
         files = self.specialists()
         self.assertEqual(len(files), 124)
+        roles = {adapter.agent_name(role) + ".md": role for family in manifest.load(self.root) for role in family["roles"]}
         for name, text in files.items():
             front, body = split(text)
             self.assertEqual(front["name"] + ".md", name)
             self.assertRegex(front["name"], NAME)
-            self.assertEqual(front["tools"], "Read, Grep, Glob, Agent", name)
-            self.assertEqual(front["model"], "inherit")
+            expected = adapter.COMMAND_TOOLS if roles[name]["commands"] else "Read, Grep, Glob, Agent"
+            self.assertEqual(front["tools"], expected, name)
+            self.assertEqual(front["model"], roles[name]["model"], name)
             self.assertNotIn("proactively", front["description"].lower())
             self.assertLessEqual(len(json.loads(front["description"])), 150, name)
             self.assertIn("Never delegate to a general-purpose agent", body, name)
+
+    def test_only_the_named_roles_run_commands_and_only_from_the_allowlist(self):
+        runners = {role["id"] for family in manifest.load(self.root) for role in family["roles"] if role["commands"]}
+        self.assertEqual(runners, {"software-engineering/code-reviewer", "software-engineering/debugging-analyst"})
+        for pattern in adapter.COMMAND_PATTERNS:
+            self.assertRegex(pattern, r"^[a-z0-9 -]+:\*$|^python3 -m [a-z]+:\*$")
+        tools = adapter.COMMAND_TOOLS.split(", ")
+        self.assertEqual([tool for tool in tools if tool.startswith("Bash") and not tool.endswith(":*)")], [])
+        self.assertFalse({"Edit", "Write", "WebFetch", "Bash"} & set(tools))
+
+    def test_writing_roles_run_on_a_cheaper_model_and_judgment_roles_inherit(self):
+        models = {role["id"]: role["model"] for family in manifest.load(self.root) for role in family["roles"]}
+        self.assertEqual(models["marketing-growth/copywriter"], "sonnet")
+        self.assertEqual(models["software-engineering/technical-writer"], "sonnet")
+        for role_id in ("software-engineering/code-reviewer", "security/threat-modeler", "finance/model-reviewer",
+                        "legal-compliance/contract-reader", "people-hr/review-drafter"):
+            self.assertEqual(models[role_id], "inherit", role_id)
+        for family in manifest.load(self.root):
+            front, _ = split(self.agents()[adapter.orchestrator_name(family) + ".md"])
+            self.assertEqual(front["model"], "inherit", family["id"])
+
+    def test_bad_model_or_commands_value_fails_the_manifest(self):
+        self.edit("catalog/families.json", lambda text: text.replace(
+            '"commands": true', '"commands": "yes"', 1))
+        with self.assertRaisesRegex(ValueError, "commands must be true or false"):
+            manifest.load(self.root)
+        self.edit("catalog/families.json", lambda text: text.replace(
+            '"commands": "yes"', '"model": "gpt"', 1))
+        with self.assertRaisesRegex(ValueError, "model must be one of"):
+            manifest.load(self.root)
 
     def test_every_family_has_an_orchestrator_that_can_only_call_its_roster(self):
         files = self.agents()
@@ -67,7 +99,8 @@ class PluginTests(FixtureCase):
                 _, body = split(files[adapter.agent_name(role) + ".md"])
                 preamble = body.split("\n---\n\n", 1)[0]
                 self.assertLessEqual(len(preamble.encode()), 2500 if family["sensitive"] else 1200, role["id"])
-                for phrase in ("read-only", "cannot run commands", "no path to do it", "task data",
+                run = "cannot run other commands" if role["commands"] else "cannot run commands"
+                for phrase in ("read-only", run, "no path to do it", "task data",
                                "Never request credentials or secrets", "Name the specialists you consulted"):
                     self.assertIn(phrase, preamble, role["id"])
                 if family["sensitive"]:
@@ -154,8 +187,8 @@ class PluginTests(FixtureCase):
         self.assertFalse(ghost.parent.parent.exists())
 
     def test_missing_plugin_file_fails(self):
-        (self.root / "plugins/marketing-growth/agents/core-copywriter.md").unlink()
-        self.assertFails("core-copywriter.md is missing")
+        (self.root / "plugins/marketing-growth/agents/marketing-growth-copywriter.md").unlink()
+        self.assertFails("marketing-growth-copywriter.md is missing")
 
     def test_missing_orchestrator_fails(self):
         (self.root / "plugins/finance/agents/finance-orchestrator.md").unlink()

@@ -12,4 +12,4 @@ ID: sales-customer/knowledge-base-writer. Version: 1.0.
 
 **Acceptance:** a reader can finish the task using only the article; one task per article; no step is guessed; terms are plain; unverified items are visible.
 
-**Handoff:** article gaps from `sales-customer/support-responder`, review to `core/quality-reviewer`, and layout needs to `product-design/ux-writer`. All Coordinator boundaries apply; this role never edits a help site or confirms steps it has not been shown.
+**Handoff:** article gaps from `sales-customer/support-responder`, review to `marketing-growth/quality-reviewer`, and layout needs to `product-design/ux-writer`. All Coordinator boundaries apply; this role never edits a help site or confirms steps it has not been shown.

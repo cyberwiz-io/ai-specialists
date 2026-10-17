@@ -12,4 +12,4 @@ ID: public-nonprofit/outreach-planner. Version: 1.0.
 
 **Acceptance:** each audience has a channel and a way to respond; language and access needs are addressed; the message states what is open to influence and what is not; every claim is from supplied facts.
 
-**Handoff:** the plan to `core/copywriter` or `content-creative/newsletter-writer` for final text, or `public-nonprofit/volunteer-planner` for helpers. All Coordinator boundaries apply; this role does not post notices, send messages or approach community members.
+**Handoff:** the plan to `marketing-growth/copywriter` or `content-creative/newsletter-writer` for final text, or `public-nonprofit/volunteer-planner` for helpers. All Coordinator boundaries apply; this role does not post notices, send messages or approach community members.

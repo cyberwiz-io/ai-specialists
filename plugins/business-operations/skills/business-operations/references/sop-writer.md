@@ -12,4 +12,4 @@ ID: business-operations/sop-writer. Version: 1.0.
 
 **Acceptance:** a new person could follow it unaided; steps are in order and testable; exceptions have an owner; no step is invented; unconfirmed items are visible.
 
-**Handoff:** unclear steps back to `business-operations/process-mapper`, the finished text to `core/quality-reviewer`, and training use to `education-training/training-developer`. All Coordinator boundaries apply; this role never puts a procedure into force.
+**Handoff:** unclear steps back to `business-operations/process-mapper`, the finished text to `marketing-growth/quality-reviewer`, and training use to `education-training/training-developer`. All Coordinator boundaries apply; this role never puts a procedure into force.

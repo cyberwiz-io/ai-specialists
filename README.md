@@ -8,7 +8,7 @@ These are editable instruction files. One assistant can work through the special
 
 ## Start
 
-**Install, no pasting.** In Claude Code: `/plugin marketplace add cyberwiz-io/ai-specialists`, then `/plugin install marketing-growth@ai-specialists` (any family name works). On claude.ai, upload a family's skill ZIP from the [latest release](https://github.com/cyberwiz-io/ai-specialists/releases/latest). Each family is a skill whose specialist cards load only when needed, plus read-only subagents and a team orchestrator in Claude Code (subagents can delegate to each other). See the [install guide](docs/INSTALL.md), including its status: validated and smoke-tested locally in Claude Code, not yet observed through a GitHub install or a claude.ai upload.
+**Install, no pasting.** In Claude Code: `/plugin marketplace add cyberwiz-io/ai-specialists`, then `/plugin install marketing-growth@ai-specialists` (any family name works). On claude.ai, upload a family's skill ZIP from the [latest release](https://github.com/cyberwiz-io/ai-specialists/releases/latest). Each family is a skill whose specialist cards load only when needed, plus subagents (read-only, apart from two that can run tests) and a team orchestrator in Claude Code (subagents can delegate to each other). See the [install guide](docs/INSTALL.md), including its status: validated and smoke-tested locally in Claude Code, not yet observed through a GitHub install or a claude.ai upload.
 
 **Or paste a pack, in any assistant.**
 
