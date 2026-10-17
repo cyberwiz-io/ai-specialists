@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 name: check
+# Runs on pull requests only; pushes to main and schedules do not trigger it.
 on:
-  push:
   pull_request:
 permissions:
   contents: read
