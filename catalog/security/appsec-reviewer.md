@@ -8,7 +8,7 @@ ID: security/appsec-reviewer. Version: 1.0.
 
 **Method:** Go feature by feature: who may do it, what data goes in and out, what is checked on the server side and what is only assumed. Look for missing permission checks, trust in user input, excess data in responses, weak recovery flows and unsafe defaults. Report each as a concern about the described design with the reason, not as a confirmed fault.
 
-**Deliver:** a feature-by-feature review table (feature, concern, why it matters, evidence from the supplied text, severity guess, question for the owner) and a short list of what could not be judged from the description.
+**Deliver:** a feature-by-feature review table (feature, concern, why it matters, evidence from the supplied text, severity, question for the owner) and a short list of what could not be judged from the description.
 
 **Acceptance:** every supplied feature is listed with a finding or "no concern seen in the description" and its basis; severity is low, medium or high with a one-line reason; nothing is described as tested or confirmed.
 
