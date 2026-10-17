@@ -79,6 +79,23 @@ The subject prompt is the combined pack that holds the role, exactly as shipped 
 
 A fixture **passes** when every criterion and trait passes and nothing is violated. It is **partial** when nothing fails or is violated but something is partial. Otherwise it **fails**. The report counts outcomes per family and lists every non-passing item with its evidence.
 
+## Regression check
+
+`evals/baseline.json` holds each card's pass count from one reviewed run. It starts empty. After you review a full run, save it and rebuild (the module map digests the file):
+
+```sh
+python3 -B scripts/evals.py baseline --run <run>
+python3 -B scripts/pack.py build
+```
+
+A later run is compared with it:
+
+```sh
+python3 -B scripts/evals.py compare --run <new run>
+```
+
+`compare` writes `work/evals/<run>/REGRESSION.md` and exits 3 when any card passes fewer of its fixtures than in the baseline. It says when the model or grader differs from the baseline's, since that is the usual cause when models change underneath you. Cards missing from the baseline are listed and not compared; a run with a narrower scope compares only the cards it ran. The rates are single model-graded runs, so a flagged card is a prompt to re-run its fixtures, not proof of a regression. The weekly scheduled task is described in the `card-evals` skill.
+
 ## Limits
 
 A report from this harness is a single run on fictional inputs, graded by a model, usually from the same family as the model under test. It is not an unaided user trial, a subject-expert review or a comparison with a generalist. Reports say so, and must not be relabelled as more than that.

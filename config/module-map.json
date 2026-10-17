@@ -123,7 +123,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "531f46a6952f7166e99a502d135d68409f9a08bbc24065aa47dfc7750488680f",
+      "digest": "c11a90aaa682f0ad1b3d89fb87e8d0436f9aca07984e1d868b9efe38433aa0c1",
       "files": 24,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -170,8 +170,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "65b214736111843648057408b4e6efe5a07e3b0b46fefb0502dd0ca9b40ee809",
-      "files": 24,
+      "digest": "83f9a18657d9f85730b201b8d179e4bd78b0593682e10a7eec933176b3b018d1",
+      "files": 25,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
@@ -185,6 +185,7 @@
         ".claude/agents/*.md",
         ".claude/skills/*/SKILL.md",
         "evals/*.md",
+        "evals/baseline.json",
         "evals/fixtures/*.json",
         "evals/reports/*.md",
         "scripts/evals.py"

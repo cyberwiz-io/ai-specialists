@@ -47,7 +47,9 @@ def main(argv=None, root=None):
     first.add_argument("--role", help="only this role ID")
     first.add_argument("--kind", choices=evals.KINDS, help="only task or boundary fixtures")
     for name, text in (("status", "list fixtures still lacking a reply or grade"),
-                       ("report", "validate every reply and grade, then write REPORT.md")):
+                       ("report", "validate every reply and grade, then write REPORT.md"),
+                       ("baseline", "save a reviewed run's per-card pass counts as evals/baseline.json"),
+                       ("compare", "write REGRESSION.md; exit 3 when a card's pass rate fell below the baseline")):
         commands.add_parser(name, help=text).add_argument("--run", required=True)
     args = parser.parse_args(argv)
     try:
@@ -62,6 +64,16 @@ def main(argv=None, root=None):
                 print(f"needs grade\t{fixture['key']}\t{fixture['grader_prompt']}\t{fixture['grade']}")
             done = len(record["fixtures"]) - len(need_output) - len(need_grade)
             print(f"{done} of {len(record['fixtures'])} fixtures replied and graded")
+        elif args.command == "baseline":
+            path = evals.save_baseline(root, args.run)
+            print(f"Baseline written to {path.relative_to(root).as_posix()}")
+        elif args.command == "compare":
+            path, drops = evals.compare(root, args.run)
+            print(f"Comparison written to {path.relative_to(root).as_posix()}; {len(drops)} cards fell")
+            for role in drops:
+                print(f"fell\t{role}")
+            if drops:
+                sys.exit(3)
         else:
             path = evals.report(root, args.run)
             print(f"Report written to {path.relative_to(root).as_posix()}")
