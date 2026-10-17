@@ -19,3 +19,10 @@ When the user asks for a task to be finished, choose the most complete reasonabl
 Never push a release tag, publish to a package registry, or submit to a marketplace or directory yourself unless the owner has asked for that step; do the work up to it and list the remaining steps. Every action in `.github/workflows/` must be GitHub-owned or Marketplace-verified and pinned to a full commit SHA, or the organization's policy ends the run in `startup_failure`.
 
 Before claiming an install path works, run it: add the marketplace from GitHub with a clean `CLAUDE_CONFIG_DIR`, install a plugin, and exercise the skill with `claude -p`. Record only what you saw in `docs/INSTALL.md` and `docs/VALIDATION.md`.
+
+## Pinned engineering policy
+
+Read [.engineering/policy.md](.engineering/policy.md) once per task. Preserve the
+repository-specific guidance above and applicable nested instructions. Run
+`python3 .engineering/check.py` before delivery. Policy updates arrive by PR;
+never fetch an unpinned latest policy at task startup.

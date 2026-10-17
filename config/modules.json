@@ -104,7 +104,7 @@
         "scripts/pack.py"
       ],
       "invariants": [
-        "Standard library only; every check has a success and a failure test."
+        "Pack tooling uses the standard library; separate engineering-policy lint requires pinned PyYAML. Every check has success and failure tests."
       ],
       "paths": [
         ".claude/CLAUDE.md",
@@ -114,7 +114,9 @@
         "config/modules.json",
         "scripts/pack.py",
         "scripts/packlib/*.py",
-        "tests/*.py"
+        "tests/*.py",
+        ".engineering/*",
+        "CLAUDE.md"
       ],
       "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
     },

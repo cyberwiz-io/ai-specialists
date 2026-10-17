@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "4d524af2a5016f9f3e72c5812c7e0bde425ec1c3d243e8b0405f809579cefdf2",
+      "digest": "ce2e2f2446854c023d42985f0ca1fde77529586871e1df952a677bcccf3b5334",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -139,21 +139,23 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "c53d700dad547cefc001e0b14bfa216e6fb6c6f54ec3323ff678cd0eabedfe23",
-      "files": 33,
+      "digest": "08ed59c37e8fc0ee71af5d8f77805bdf1336985c1923809a9f66e453c906cf48",
+      "files": 40,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
         "scripts/pack.py"
       ],
       "invariants": [
-        "Standard library only; every check has a success and a failure test."
+        "Pack tooling uses the standard library; separate engineering-policy lint requires pinned PyYAML. Every check has success and failure tests."
       ],
       "paths": [
         ".claude/CLAUDE.md",
         ".claude/commands/*.md",
         ".claude/settings.json",
+        ".engineering/*",
         ".github/workflows/*.yml",
+        "CLAUDE.md",
         "config/modules.json",
         "scripts/pack.py",
         "scripts/packlib/*.py",
