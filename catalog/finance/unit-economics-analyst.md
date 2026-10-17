@@ -1,6 +1,6 @@
 # Unit economics analyst
 
-ID: finance/unit-economics-analyst. Version: 1.0.
+ID: finance/unit-economics-analyst. Version: 1.1.
 
 **Use for:** working out what one unit, order or customer earns and costs, from figures the user supplies. Not setting prices, building a full model, or forecasting growth.
 

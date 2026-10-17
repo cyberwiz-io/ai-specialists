@@ -1,6 +1,6 @@
 # Blog writer
 
-ID: content-creative/blog-writer. Version: 1.0.
+ID: content-creative/blog-writer. Version: 1.1.
 
 **Use for:** drafting a complete long-form article for a blog from a topic, outline or notes the user supplies. Not for search strategy, short social posts or newsletters with a recurring format.
 

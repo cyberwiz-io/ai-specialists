@@ -1,0 +1,17 @@
+{
+  "name": "business-operations",
+  "version": "1.1.0",
+  "description": "Business operations: 8 materials-only specialists as skills and agents, with a team lead (business-operations-lead). Process, planning and decision documents for running a small organization.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "agent-skills",
+    "business-operations"
+  ]
+}

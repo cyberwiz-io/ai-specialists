@@ -4,7 +4,7 @@ from io import BytesIO
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
 from . import plugin
-from .config import (ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_SOURCES, archive_name,
+from .config import (ADAPTERS_DIR, ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_SOURCES, archive_name,
                      read, version)
 
 
@@ -12,6 +12,7 @@ def members(root, families, generated):
     prefix = f"{ARCHIVE_PREFIX}{version(root)}/"
     names = list(PACK_SOURCES) + [GUIDE, MANIFEST] + list(LICENSE_FILES)
     names += [role["path"] for family in families for role in family["roles"]]
+    names += sorted(path.relative_to(root).as_posix() for path in (root / ADAPTERS_DIR).glob("*/README.md"))
     data = {prefix + name: read(root, name) for name in names}
     for name, payload in generated.items():
         if name != MODULE_MAP:

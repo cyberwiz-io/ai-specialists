@@ -7,7 +7,7 @@ import sys
 from zipfile import BadZipFile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from packlib import build as builder, bundle, check as checker, config  # noqa: E402
+from packlib import build as builder, bundle, check as checker, config, stats  # noqa: E402
 
 
 def find(root, terms):
@@ -23,15 +23,21 @@ def find(root, terms):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("build", "check", "release", "find"))
+    parser.add_argument("command", choices=("build", "check", "release", "find", "stats"))
     parser.add_argument("terms", nargs="*", help="words to search for with the find command")
     parser.add_argument("--out", type=Path, help=f"release: folder for the archive (default {config.RELEASE_DIR})")
     parser.add_argument("--tag", help="release: the Git tag being released, which must be v plus VERSION")
+    parser.add_argument("--root", type=Path, help="stats: measure another checkout, such as an older version")
+    parser.add_argument("--json", action="store_true", help="stats: print rows as JSON")
     args = parser.parse_args(argv)
     try:
         if args.command == "find":
             rows = find(config.ROOT, args.terms)
             print("\n".join(rows) if rows else "No matching specialists")
+            return
+        if args.command == "stats":
+            found = stats.rows(args.root or config.ROOT)
+            print(json.dumps(found, indent=2) if args.json else stats.table(found))
             return
         if args.command == "build":
             builder.build(config.ROOT)

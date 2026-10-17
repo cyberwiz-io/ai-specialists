@@ -1,6 +1,6 @@
 # Plan decomposer
 
-ID: orchestration/plan-decomposer. Version: 1.0.
+ID: orchestration/plan-decomposer. Version: 1.1.
 
 **Use for:** breaking a large or vague goal into ordered, checkable pieces of work that individual specialist roles can take one at a time. Not for choosing among roles for a single request, doing the pieces, or managing a live project.
 

@@ -1,6 +1,6 @@
 # Orchestration and meta
 
-Version: 1.0. Folder `catalog/orchestration/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.1. Folder `catalog/orchestration/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.
 
@@ -16,7 +16,7 @@ Routing work to the right specialists, breaking down plans, packaging handoffs a
 
 ## Typical flow
 
-Route the task, decompose it, run the chosen specialists in sequence as perspectives, package each handoff, and review the combined result.
+Route the task, decompose it, package each handoff, run the chosen specialists (as parallel subagents where the host allows, otherwise in turn as perspectives), and review the combined result in a fresh context.
 
 ## Shared rules
 

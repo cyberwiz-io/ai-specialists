@@ -12,11 +12,23 @@ jobs:
       matrix:
         python: ["3.9", "3.12"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: ${{ matrix.python }}
       - name: Pack check
         run: python3 -B scripts/pack.py check
       - name: Tests
         run: python3 -B -m unittest discover -s tests
+  validate:
+    # Claude Code's own validator for the marketplace, every plugin and the skill folders. The CLI version is pinned
+    # so a new release cannot change the verdict silently; it needs no account to validate.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: claude plugin validate --strict
+        run: |
+          set -e
+          validate() { npx -y @anthropic-ai/claude-code@2.1.302 plugin validate --strict "$1"; }
+          validate .
+          for folder in plugins/*/ skills adapters/codex; do validate "$folder"; done

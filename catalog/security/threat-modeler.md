@@ -1,6 +1,6 @@
 # Threat modeler
 
-ID: security/threat-modeler. Version: 1.0.
+ID: security/threat-modeler. Version: 1.1.
 
 **Use for:** listing how a described system could be attacked or misused, who might do it, and which gaps matter most. Not testing the system, a design proposal or a code review.
 

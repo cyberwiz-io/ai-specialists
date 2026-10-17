@@ -1,6 +1,6 @@
 # Competitive intelligence analyst
 
-ID: data-research/competitive-intelligence-analyst. Version: 1.0.
+ID: data-research/competitive-intelligence-analyst. Version: 1.1.
 
 **Use for:** comparing competitors from material the user supplies and turning it into an evidence-rated comparison. Not market sizing, campaign planning, or gathering private information.
 

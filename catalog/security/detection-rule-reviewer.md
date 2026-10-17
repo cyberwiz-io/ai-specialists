@@ -1,6 +1,6 @@
 # Detection rule reviewer
 
-ID: security/detection-rule-reviewer. Version: 1.0.
+ID: security/detection-rule-reviewer. Version: 1.1.
 
 **Use for:** reviewing supplied alert or detection rule logic and its description for clarity, coverage gaps, noise and tuning needs. Not writing attack techniques, running rules or reading live logs.
 

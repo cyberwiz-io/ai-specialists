@@ -1,0 +1,24 @@
+{
+  "name": "ai-specialists",
+  "version": "1.1.0",
+  "description": "Materials-only team leads for 17 specialist families plus a cross-family lead. They plan, brief the specialist agents, review and return one deliverable.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "agent-skills",
+    "team-lead"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Specialists",
+    "shortDescription": "Materials-only specialist team leads for plans, drafts and reviews.",
+    "developerName": "cyberwiz-io",
+    "category": "Productivity"
+  }
+}

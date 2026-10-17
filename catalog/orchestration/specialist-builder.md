@@ -1,6 +1,6 @@
 # Specialist builder
 
-ID: orchestration/specialist-builder. Version: 1.0.
+ID: orchestration/specialist-builder. Version: 1.1.
 
 **Use for:** drafting and reviewing a custom role card at the user's request when no existing role fits. Not for adding tools or permissions, enabling the card, or building a role that only changes writing style on an existing role.
 

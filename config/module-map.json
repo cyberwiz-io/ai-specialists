@@ -1,16 +1,28 @@
 {
   "entry": "REPO-MAP.md",
   "generated": [
+    ".agents/plugins/marketplace.json",
     ".claude-plugin/marketplace.json",
+    ".cursor-plugin/marketplace.json",
+    "adapters/*/.codex-plugin/plugin.json",
+    "adapters/*/agents/*.agent.md",
+    "adapters/*/agents/*.toml",
+    "adapters/*/skills/*/SKILL.md",
+    "adapters/*/skills/*/references/*.md",
     "catalog/*/INDEX.md",
     "catalog/REGISTRY.jsonl",
     "config/module-map.json",
     "dist/packs/*.md",
+    "gemini-extension.json",
     "pack/STARTER-PACK.md",
     "plugins/*/.claude-plugin/plugin.json",
+    "plugins/*/.cursor-plugin/plugin.json",
     "plugins/*/agents/*.md",
+    "plugins/*/evals/*/case.yaml",
     "plugins/*/skills/*/SKILL.md",
-    "plugins/*/skills/*/references/*.md"
+    "plugins/*/skills/*/references/*.md",
+    "skills/*/SKILL.md",
+    "skills/*/references/*.md"
   ],
   "modules": [
     {
@@ -35,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "c96d3207a744796aafa588ea63e69bebf9505de298cc1ce43b8d41aa2e4949fa",
+      "digest": "ed361cb87088f92936d8e7cd15ad9ad31dedfe539239835ada8ff707034b1a0e",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -89,7 +101,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "e74ee563ed907933db4e0f5208f7caf2e91498f41ec6517f7f3a80997e3857da",
+      "digest": "5c1b81dcd9d3a501e1434b688979478b9a4b611691e30a890de8603799bebdec",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -127,8 +139,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "f93abaee999cc0aadb6d293ec4cab85cf5dd0203b5fdc10a73e7357c11931233",
-      "files": 25,
+      "digest": "e98724f93ebee8eaeeccdb99576b30b12a592f90d9dccfe31567ba7c9a82512b",
+      "files": 33,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -174,13 +186,14 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "dff9d2c99e232ee071ef3bc9934d634a3aad687cf4055fdb0bb67345f9ffa05a",
-      "files": 25,
+      "digest": "b8decf94bd4bab10b3ab5da865df83118695fc399b305d90a9230519c4b88c66",
+      "files": 28,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
         "scripts/evals.py",
-        ".claude/skills/card-evals/SKILL.md"
+        ".claude/skills/card-evals/SKILL.md",
+        "scripts/packlib/plugin_evals.py"
       ],
       "invariants": [
         "Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."
@@ -191,6 +204,7 @@
         "evals/*.md",
         "evals/baseline.json",
         "evals/fixtures/*.json",
+        "evals/plugin/*.json",
         "evals/reports/*.md",
         "scripts/evals.py"
       ],
@@ -219,8 +233,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "fd0b3df2d10b0379686c5cb64aa0fe6694705017355e2a05c7a13e66318f69c1",
-      "files": 303,
+      "digest": "ecb0886532e5899160e8fc5c0dcb095dbe779dea8a606a5bb5b6c8269d47f41d",
+      "files": 450,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
       "interfaces": [
@@ -228,16 +242,108 @@
         "plugins/*/skills/*/SKILL.md"
       ],
       "invariants": [
-        "Generated from the cards and never edited by hand; subagents have no write or command tools and delegate only to specialist subagents; host status stays honest until eval evidence exists."
+        "Generated from the cards and never edited by hand; worker subagents are read-only, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
       ],
       "paths": [
         ".claude-plugin/marketplace.json",
         "plugins/*/.claude-plugin/plugin.json",
         "plugins/*/agents/*.md",
+        "plugins/*/evals/*/case.yaml",
         "plugins/*/skills/*/SKILL.md",
         "plugins/*/skills/*/references/*.md"
       ],
-      "purpose": "Claude Code marketplace and one plugin per family (a skill with the cards as references, plus read-only subagents), also zipped as upload-ready skills for claude.ai."
+      "purpose": "Claude Code marketplace, one plugin per family (role skills, a team lead skill with the cards as references, read-only worker subagents) and the all-in-one bundle; the lead folders are also zipped as upload-ready skills for claude.ai."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [
+        "claude-plugins",
+        "host-adapters"
+      ],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
+      "digest": "6649e56c2b50a5652cdfaec21356d86867a7824f9d1e01809288e9034ccd4f62",
+      "files": 285,
+      "guide": "docs/INSTALL.md",
+      "id": "skills",
+      "interfaces": [
+        "skills/*/SKILL.md"
+      ],
+      "invariants": [
+        "Agent Skills frontmatter only (name, description, license, compatibility, metadata, allowed-tools); name matches the folder; generated, never edited by hand."
+      ],
+      "paths": [
+        "skills/*/SKILL.md",
+        "skills/*/references/*.md"
+      ],
+      "purpose": "Universal Agent Skills at the repository root: one per card, a team lead per family and the cross-family specialists lead."
+    },
+    {
+      "checks": [
+        [
+          "python3",
+          "-B",
+          "scripts/pack.py",
+          "check"
+        ],
+        [
+          "python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests"
+        ]
+      ],
+      "consumers": [],
+      "dependencies": [
+        "skills",
+        "maintenance"
+      ],
+      "digest": "a208a97f848970193e83e9858e561e50d47ddc7a51605ba2f88106292af8870b",
+      "files": 471,
+      "guide": "adapters/claude-code/README.md",
+      "id": "host-adapters",
+      "interfaces": [
+        ".agents/plugins/marketplace.json",
+        ".cursor-plugin/marketplace.json",
+        "gemini-extension.json"
+      ],
+      "invariants": [
+        "Generated from the cards except the READMEs; each README states the tested host and version or says not yet tested."
+      ],
+      "paths": [
+        ".agents/plugins/marketplace.json",
+        ".cursor-plugin/marketplace.json",
+        "adapters/*/.codex-plugin/plugin.json",
+        "adapters/*/README.md",
+        "adapters/*/agents/*.agent.md",
+        "adapters/*/agents/*.toml",
+        "adapters/*/skills/*/SKILL.md",
+        "adapters/*/skills/*/references/*.md",
+        "gemini-extension.json",
+        "plugins/*/.cursor-plugin/plugin.json"
+      ],
+      "purpose": "Install files for Codex, GitHub Copilot, Gemini CLI and Cursor, built from the same cards and skills."
     },
     {
       "checks": [
@@ -261,7 +367,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "cd7a1c788330974236b284931931593b2b0333d0d40f044be1c3803090ed5f96",
+      "digest": "36c1c57701e74d319cf709596e5d40eb7926db866327fc85b4e195c540384d11",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -298,7 +404,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "5763786185ffe35baaf63432822849461558461911b5051c7aff645eab4ec75b",
+      "digest": "6f088643e9145aedfeba758324bb4063dcc6a7c332bcd29aaa59d4dd31b9ed8b",
       "files": 6,
       "guide": "catalog/it-operations/INDEX.md",
       "id": "family-it-operations",
@@ -335,7 +441,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "47201dcb3b9f5ac0bc5e8c819690d818dc122990f26c9b98e42ea3ebbb8496d3",
+      "digest": "34b92617c5071581bf33fe50516b507000b888c8bd5ff6f4822c783ebbecbad3",
       "files": 12,
       "guide": "catalog/software-engineering/INDEX.md",
       "id": "family-software-engineering",
@@ -372,7 +478,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "c592c3fb986f5beb224b60cfd466b4faba678ee7adc903323629272d7414a230",
+      "digest": "251842f279719e96991dbe814fe6261bab40ccd44f1fbee8cdd57cd1dcf093b0",
       "files": 4,
       "guide": "catalog/ai-ml/INDEX.md",
       "id": "family-ai-ml",
@@ -409,7 +515,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "4e85e7fed26d574f43cfc8dae588ed4063f6b0e56a25831531ee8b7f798f8dfb",
+      "digest": "64bb9425162cfcf75d74a17cc0bc3991a54775307c144c491f2aa68385c0ff78",
       "files": 8,
       "guide": "catalog/product-design/INDEX.md",
       "id": "family-product-design",
@@ -446,7 +552,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "87263c9da39fc11140511402b696e37cb11b0d925e54282ded2250252319664d",
+      "digest": "a5ce5d4262fc07c8fdfeaab686cbadc6d07b12a779860d2d3bbcc10d3a83cede",
       "files": 9,
       "guide": "catalog/content-creative/INDEX.md",
       "id": "family-content-creative",
@@ -483,7 +589,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "94f85a772a8dacbe94c0426635239e4f08e9962d4f0e204a8a7d67ce8d9d5da1",
+      "digest": "30329c9c93fcee4dc5186afcde3269f152552459e4a772a2f217edc891fbc2d0",
       "files": 11,
       "guide": "catalog/marketing-growth/INDEX.md",
       "id": "family-marketing-growth",
@@ -520,7 +626,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "097ee7c390ea7290b8b7b3b8f5b1753685598463f1594a2970480576a677477c",
+      "digest": "a5fa4daec9a9ca23a635ecd029306efbf477607c5d9b08cee82cf7229ecb8a85",
       "files": 9,
       "guide": "catalog/sales-customer/INDEX.md",
       "id": "family-sales-customer",
@@ -557,7 +663,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "61465ffea9e12803ccf3d8c164bd2f104b1a17e2723189e7ad134a912c70f860",
+      "digest": "6754bf4d2b85e7a3f0ccaa1b9f24911797d8c5011c8f2f15a62abdf530a14381",
       "files": 9,
       "guide": "catalog/business-operations/INDEX.md",
       "id": "family-business-operations",
@@ -594,7 +700,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "bac52abf7aa07dc4635f14e604d2601faabccd9431e8ba401af4989026b86b2d",
+      "digest": "2d19965b5e0d5382b516fc58595dad7b629510c2af361f67e385c5c72bd81d95",
       "files": 9,
       "guide": "catalog/finance/INDEX.md",
       "id": "family-finance",
@@ -631,7 +737,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "602c60853440b5a199f984dcf953a860f7de46a3a263121ba82e89a784342a82",
+      "digest": "60b868b32f5d3d52714004e0138f04e5fdb87076c4a63bb21a4ce77720c0158d",
       "files": 9,
       "guide": "catalog/data-research/INDEX.md",
       "id": "family-data-research",
@@ -668,7 +774,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "f8447a2bcb1f98bc9a03e00c013e17f8a579681734483a557f947b6b75aac244",
+      "digest": "a48a5d19e2a8c6e894e9b0a287c5c53f85cd54fdf98ef1fd20fa80d8464aa666",
       "files": 6,
       "guide": "catalog/people-hr/INDEX.md",
       "id": "family-people-hr",
@@ -705,7 +811,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "57e0832b5c7950e3a14c1511e0a78c4872e5c9b19f879c7daac5100d74efac55",
+      "digest": "4ce0a010144680f65f81023a9e1462da23d2091166c5d0ad45b67b0594ad8d1a",
       "files": 9,
       "guide": "catalog/legal-compliance/INDEX.md",
       "id": "family-legal-compliance",
@@ -742,7 +848,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "d357c379267093c8da5e8086c4985c5b10ff54ff18f342692e6b2d42f06d7bd6",
+      "digest": "6e82596f69a61ddb60dfbdf8281e37e15ca754bc323d3ac93961ce874028111a",
       "files": 7,
       "guide": "catalog/education-training/INDEX.md",
       "id": "family-education-training",
@@ -779,7 +885,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "1243528570b59985199cef18998ad0e61b2b23aa8d474e9f3fc2f9ee845a3690",
+      "digest": "d634b9845a57040aa8acca0d5ba44c4a80eb0dd3800744bbe2040dc0f9f2b41e",
       "files": 6,
       "guide": "catalog/public-nonprofit/INDEX.md",
       "id": "family-public-nonprofit",
@@ -816,7 +922,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "51a4254133e0d34493621574a67c4d080de55ddefedb0e31522dde96a88adb48",
+      "digest": "aba4aea54c4161d692f690031d86321e8c449b7e949a4f3185018afa41dd0cb8",
       "files": 6,
       "guide": "catalog/personal-career/INDEX.md",
       "id": "family-personal-career",
@@ -853,7 +959,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "53b061176d42caa3fb9f81a73e6b8a66b09abe9549c004e0954f78fed5e1c6a3",
+      "digest": "8c814d9b60cc4c3c657bbf69cc648945384c5036055792c937bba7933413b2a1",
       "files": 6,
       "guide": "catalog/orchestration/INDEX.md",
       "id": "family-orchestration",
@@ -870,5 +976,5 @@
     }
   ],
   "schema": 2,
-  "version": "1.0"
+  "version": "1.1"
 }

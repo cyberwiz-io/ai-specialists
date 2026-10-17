@@ -1,7 +1,7 @@
 {
   "name": "security",
-  "version": "1.0.0",
-  "description": "Security: 14 materials-only specialists as one skill, specialist subagents and a team orchestrator. Defensive security planning, review and documentation of materials the user supplies.",
+  "version": "1.1.0",
+  "description": "Security: 14 materials-only specialists as skills and subagents, with a team lead (/security:security-lead). Defensive security planning, review and documentation of materials the user supplies.",
   "author": {
     "name": "cyberwiz-io"
   },
@@ -11,6 +11,7 @@
   "keywords": [
     "specialists",
     "materials-only",
+    "agent-skills",
     "security"
   ]
 }

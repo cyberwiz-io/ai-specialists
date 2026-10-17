@@ -1,88 +1,228 @@
 {
   "checks": [
-    ["python3", "-B", "scripts/pack.py", "check"],
-    ["python3", "-B", "-m", "unittest", "discover", "-s", "tests"]
+    [
+      "python3",
+      "-B",
+      "scripts/pack.py",
+      "check"
+    ],
+    [
+      "python3",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
   ],
   "entry": "REPO-MAP.md",
   "generated": [
+    ".agents/plugins/marketplace.json",
+    ".claude-plugin/marketplace.json",
+    ".cursor-plugin/marketplace.json",
+    "adapters/*/.codex-plugin/plugin.json",
+    "adapters/*/agents/*.agent.md",
+    "adapters/*/agents/*.toml",
+    "adapters/*/skills/*/SKILL.md",
+    "adapters/*/skills/*/references/*.md",
     "catalog/*/INDEX.md",
     "catalog/REGISTRY.jsonl",
     "config/module-map.json",
     "dist/packs/*.md",
-    ".claude-plugin/marketplace.json",
+    "gemini-extension.json",
+    "pack/STARTER-PACK.md",
     "plugins/*/.claude-plugin/plugin.json",
+    "plugins/*/.cursor-plugin/plugin.json",
+    "plugins/*/agents/*.md",
+    "plugins/*/evals/*/case.yaml",
     "plugins/*/skills/*/SKILL.md",
     "plugins/*/skills/*/references/*.md",
-    "plugins/*/agents/*.md",
-    "pack/STARTER-PACK.md"
+    "skills/*/SKILL.md",
+    "skills/*/references/*.md"
   ],
   "modules": [
     {
-      "consumers": ["maintenance"],
+      "consumers": [
+        "maintenance"
+      ],
       "guide": "pack/START-HERE.md",
       "id": "instructions",
-      "interfaces": ["pack/COORDINATOR.md", "pack/FAMILY-COORDINATOR.md", "pack/MARKETING-WORKFLOW.md"],
-      "invariants": ["Keep private data out of public sources; preserve advisory materials-only boundaries."],
+      "interfaces": [
+        "pack/COORDINATOR.md",
+        "pack/FAMILY-COORDINATOR.md",
+        "pack/MARKETING-WORKFLOW.md"
+      ],
+      "invariants": [
+        "Keep private data out of public sources; preserve advisory materials-only boundaries."
+      ],
       "paths": [
         ".github/ISSUE_TEMPLATE/*.md",
-        "AGENTS.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE.md", "NOTICE.md", "README.md", "REPO-MAP.md", "VERSION",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "LICENSE.md",
+        "NOTICE.md",
+        "README.md",
+        "REPO-MAP.md",
+        "VERSION",
         "docs/*.md",
-        "pack/BUSINESS-PROFILE.md", "pack/COORDINATOR.md", "pack/CUSTOM-SPECIALISTS.md",
-        "pack/FAMILY-COORDINATOR.md", "pack/MARKETING-WORKFLOW.md", "pack/START-HERE.md"
+        "pack/BUSINESS-PROFILE.md",
+        "pack/COORDINATOR.md",
+        "pack/CUSTOM-SPECIALISTS.md",
+        "pack/FAMILY-COORDINATOR.md",
+        "pack/MARKETING-WORKFLOW.md",
+        "pack/START-HERE.md"
       ],
       "purpose": "Portable materials-only instructions, coordinators, workflow and public documentation."
     },
     {
-      "consumers": ["maintenance"],
+      "consumers": [
+        "maintenance"
+      ],
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
-      "interfaces": ["catalog/families.json"],
-      "invariants": ["The manifest is the roster: every card and index must match it."],
-      "paths": ["catalog/families.json"],
+      "interfaces": [
+        "catalog/families.json"
+      ],
+      "invariants": [
+        "The manifest is the roster: every card and index must match it."
+      ],
+      "paths": [
+        "catalog/families.json"
+      ],
       "purpose": "Families, roles, slugs and sensitivity that drive indexes, registry, packs and checks."
     },
     {
-      "dependencies": ["instructions", "catalog-manifest"],
+      "dependencies": [
+        "instructions",
+        "catalog-manifest"
+      ],
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
-      "interfaces": ["scripts/pack.py"],
-      "invariants": ["Standard library only; every check has a success and a failure test."],
+      "interfaces": [
+        "scripts/pack.py"
+      ],
+      "invariants": [
+        "Standard library only; every check has a success and a failure test."
+      ],
       "paths": [
-        ".claude/CLAUDE.md", ".claude/settings.json", ".claude/commands/*.md",
+        ".claude/CLAUDE.md",
+        ".claude/settings.json",
+        ".claude/commands/*.md",
         ".github/workflows/*.yml",
         "config/modules.json",
-        "scripts/pack.py", "scripts/packlib/*.py",
+        "scripts/pack.py",
+        "scripts/packlib/*.py",
         "tests/*.py"
       ],
       "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
     },
     {
-      "consumers": ["maintenance"],
-      "dependencies": ["catalog-manifest", "maintenance"],
+      "consumers": [
+        "maintenance"
+      ],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
       "guide": "evals/README.md",
       "id": "evals",
-      "interfaces": ["scripts/evals.py", ".claude/skills/card-evals/SKILL.md"],
-      "invariants": ["Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."],
+      "interfaces": [
+        "scripts/evals.py",
+        ".claude/skills/card-evals/SKILL.md",
+        "scripts/packlib/plugin_evals.py"
+      ],
+      "invariants": [
+        "Fictional fixtures only; every card has a task fixture and every family a boundary fixture; host integrations stay outside the shipped pack."
+      ],
       "paths": [
-        ".claude/agents/*.md", ".claude/skills/*/SKILL.md",
-        "evals/*.md", "evals/baseline.json", "evals/fixtures/*.json", "evals/reports/*.md",
-        "scripts/evals.py"
+        ".claude/agents/*.md",
+        ".claude/skills/*/SKILL.md",
+        "evals/*.md",
+        "evals/baseline.json",
+        "evals/fixtures/*.json",
+        "evals/reports/*.md",
+        "scripts/evals.py",
+        "evals/plugin/*.json"
       ],
       "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     },
     {
-      "dependencies": ["catalog-manifest", "maintenance"],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
-      "interfaces": [".claude-plugin/marketplace.json", "plugins/*/skills/*/SKILL.md"],
-      "invariants": ["Generated from the cards and never edited by hand; subagents have no write or command tools and delegate only to specialist subagents; host status stays honest until eval evidence exists."],
+      "interfaces": [
+        ".claude-plugin/marketplace.json",
+        "plugins/*/skills/*/SKILL.md"
+      ],
+      "invariants": [
+        "Generated from the cards and never edited by hand; worker subagents are read-only, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
+      ],
       "paths": [
         ".claude-plugin/marketplace.json",
         "plugins/*/.claude-plugin/plugin.json",
-        "plugins/*/skills/*/SKILL.md", "plugins/*/skills/*/references/*.md",
-        "plugins/*/agents/*.md"
+        "plugins/*/agents/*.md",
+        "plugins/*/evals/*/case.yaml",
+        "plugins/*/skills/*/SKILL.md",
+        "plugins/*/skills/*/references/*.md"
       ],
-      "purpose": "Claude Code marketplace and one plugin per family (a skill with the cards as references, plus read-only subagents), also zipped as upload-ready skills for claude.ai."
+      "purpose": "Claude Code marketplace, one plugin per family (role skills, a team lead skill with the cards as references, read-only worker subagents) and the all-in-one bundle; the lead folders are also zipped as upload-ready skills for claude.ai."
+    },
+    {
+      "consumers": [
+        "claude-plugins",
+        "host-adapters"
+      ],
+      "dependencies": [
+        "catalog-manifest",
+        "maintenance"
+      ],
+      "guide": "docs/INSTALL.md",
+      "id": "skills",
+      "interfaces": [
+        "skills/*/SKILL.md"
+      ],
+      "invariants": [
+        "Agent Skills frontmatter only (name, description, license, compatibility, metadata, allowed-tools); name matches the folder; generated, never edited by hand."
+      ],
+      "paths": [
+        "skills/*/SKILL.md",
+        "skills/*/references/*.md"
+      ],
+      "purpose": "Universal Agent Skills at the repository root: one per card, a team lead per family and the cross-family specialists lead."
+    },
+    {
+      "dependencies": [
+        "skills",
+        "maintenance"
+      ],
+      "guide": "adapters/claude-code/README.md",
+      "id": "host-adapters",
+      "interfaces": [
+        ".agents/plugins/marketplace.json",
+        ".cursor-plugin/marketplace.json",
+        "gemini-extension.json"
+      ],
+      "invariants": [
+        "Generated from the cards except the READMEs; each README states the tested host and version or says not yet tested."
+      ],
+      "paths": [
+        "adapters/*/README.md",
+        "adapters/*/.codex-plugin/plugin.json",
+        "adapters/*/skills/*/SKILL.md",
+        "adapters/*/skills/*/references/*.md",
+        "adapters/*/agents/*.toml",
+        "adapters/*/agents/*.agent.md",
+        ".agents/plugins/marketplace.json",
+        ".cursor-plugin/marketplace.json",
+        "gemini-extension.json",
+        "plugins/*/.cursor-plugin/plugin.json"
+      ],
+      "purpose": "Install files for Codex, GitHub Copilot, Gemini CLI and Cursor, built from the same cards and skills."
     }
   ]
 }
