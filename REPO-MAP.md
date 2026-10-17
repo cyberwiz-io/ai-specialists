@@ -54,7 +54,7 @@ Each family folder has a generated `INDEX.md` listing its specialists with one-l
 | `pack/STARTER-PACK.md` | Marketing starter, pasted as one file | No, generated |
 | `dist/packs/<pack>.md` | Pasteable combined pack per family, or per part where `families.json` lists `packs` | No, generated |
 | `work/release/*.zip` | Release archive and one upload-ready skill ZIP per family from `pack.py release`; CI attaches them to tagged GitHub Releases | No, generated and never committed |
-| `.claude-plugin/marketplace.json`, `plugins/<family>/` | Claude Code marketplace and one plugin per family: `skills/<family>/SKILL.md` with the cards in `references/`, a read-only subagent per card, and a `<family>-orchestrator` in `agents/` | No, generated |
+| `.claude-plugin/marketplace.json`, `plugins/<family>/` | Claude Code marketplace and one plugin per family: `skills/<family>/SKILL.md` with the cards in `references/`, a subagent per card (read-only, except the software-engineering code reviewer and debugging analyst, which may run allowlisted test commands; `model` and `commands` come from `catalog/families.json`), and a `<family>-orchestrator` in `agents/` | No, generated |
 | `docs/INSTALL.md`, `evals/` | Install paths, their status and limits | Yes |
 | `.claude/` | Maintainer config for Claude Code: hook, commands, card reviewer | Yes |
 | `config/modules.json` | Module definitions | Yes |
