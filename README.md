@@ -1,48 +1,57 @@
 # AI Specialists
 
-Turn a short business description into a practical marketing campaign using the AI assistant you already have.
+A library of 124 specialist instruction cards in 17 families, plus a coordinator, for the AI assistant you already have. Describe a task, and the coordinator guides the right specialist perspectives through it. The best-developed path is a small-business marketing campaign.
 
-**Experimental · Version 0.1 · Materials only**
+**Version 1.0 · Materials only · [Validation status](docs/VALIDATION.md)**
 
-This is an editable instruction pack. A coordinator guides four specialist perspectives through planning, writing, visuals when available, and review. One assistant can work through them in one conversation. No app, installation, account connection, or developer tools are required to use the pack.
+These are editable instruction files. One assistant can work through the specialists in a single conversation. No app, installation, account connection, or developer tools are required. Nothing is posted, sent, scheduled, deployed or changed by this pack.
 
-## Start a campaign
+## Start
 
-1. Open [the combined starter pack](pack/STARTER-PACK.md), select **Raw**, and copy its contents into a new conversation with an AI assistant you trust. You may instead supply the file using that assistant's supported file feature.
-2. Paste this request, replacing the description:
+1. Pick a family below and open its combined pack under `dist/packs/` (select **Raw**), or open [the marketing starter pack](pack/STARTER-PACK.md). Copy it into a new conversation with an AI assistant you trust, or supply the file with that assistant's file feature.
+2. Describe your task. For marketing: *Use this starter pack. My business is [short description]. My website is [optional]. Help me create a marketing campaign. First confirm that you can read all eight instruction sections.* For another family: *Use this pack. My task is [description]. Here is the material I can supply: [...]. First confirm that you can read all the sections.*
+3. Confirm the plan, review the materials, and accept or revise.
 
-   > Use this starter pack. My business is [short description]. My website is [optional]. Help me create a marketing campaign. First confirm that you can read all eight instruction sections.
+Prefer a download? [Get the release ZIP](downloads/ai-specialists-1.0.zip?raw=1) with every card, every combined pack, attribution and licenses, then open `pack/START-HERE.md`.
 
-3. Confirm the proposed goal and campaign package. Review a sample visual if needed, then accept or revise the finished materials.
+## Families
 
-You receive campaign copy, actual graphics only if your assistant can produce and inspect them, a suggested calendar, manual posting instructions, and a measurement plan. Nothing is posted, scheduled, or sent by this pack.
+Each family has a pasteable combined pack and an index of its specialists.
 
-Prefer a download? [Get the starter ZIP](downloads/ai-specialists-starter-pack-0.1.zip?raw=1), extract it, and open `pack/START-HERE.md`. The ZIP contains the same instructions, attribution, and content license.
+| Family | Specialists | Index | Combined pack |
+| --- | --- | --- | --- |
+| Marketing and growth | 10 | [index](catalog/marketing-growth/INDEX.md) | [pack](dist/packs/marketing-growth.md) |
+| Content and creative | 8 | [index](catalog/content-creative/INDEX.md) | [pack](dist/packs/content-creative.md) |
+| Sales and customer | 8 | [index](catalog/sales-customer/INDEX.md) | [pack](dist/packs/sales-customer.md) |
+| Business operations | 8 | [index](catalog/business-operations/INDEX.md) | [pack](dist/packs/business-operations.md) |
+| Product and design | 7 | [index](catalog/product-design/INDEX.md) | [pack](dist/packs/product-design.md) |
+| Software engineering | 11 | [index](catalog/software-engineering/INDEX.md) | [pack](dist/packs/software-engineering.md) |
+| AI and machine learning | 3 | [index](catalog/ai-ml/INDEX.md) | [pack](dist/packs/ai-ml.md) |
+| IT operations | 5 | [index](catalog/it-operations/INDEX.md) | [pack](dist/packs/it-operations.md) |
+| Data and research | 8 | [index](catalog/data-research/INDEX.md) | [pack](dist/packs/data-research.md) |
+| Education and training | 6 | [index](catalog/education-training/INDEX.md) | [pack](dist/packs/education-training.md) |
+| Public sector and nonprofit | 5 | [index](catalog/public-nonprofit/INDEX.md) | [pack](dist/packs/public-nonprofit.md) |
+| Personal and career | 5 | [index](catalog/personal-career/INDEX.md) | [pack](dist/packs/personal-career.md) |
+| Orchestration and meta | 5 | [index](catalog/orchestration/INDEX.md) | [pack](dist/packs/orchestration.md) |
+| Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | [pack](dist/packs/security.md) |
+| Finance (sensitive) | 8 | [index](catalog/finance/INDEX.md) | [pack](dist/packs/finance.md) |
+| People and HR (sensitive) | 5 | [index](catalog/people-hr/INDEX.md) | [pack](dist/packs/people-hr.md) |
+| Legal and compliance (sensitive) | 8 | [index](catalog/legal-compliance/INDEX.md) | [pack](dist/packs/legal-compliance.md) |
 
-## The specialists
-
-| Specialist | Contribution |
-| --- | --- |
-| [Marketing strategist](pack/specialists/marketing-strategist.md) | One goal, a feasible package, and a way to measure it |
-| [Copywriter](pack/specialists/copywriter.md) | Clear campaign text using approved facts |
-| [Graphic designer](pack/specialists/graphic-designer.md) | Actual visuals and alt text when host tools support them |
-| [Quality reviewer](pack/specialists/quality-reviewer.md) | Checks the assembled materials against the brief and evidence |
-
-The [Coordinator](pack/COORDINATOR.md) keeps decisions, scope, versions, and handoffs consistent. The [marketing workflow](pack/MARKETING-WORKFLOW.md) connects the roles from intake to delivery.
-
-You can [customize a specialist](pack/CUSTOM-SPECIALISTS.md) in plain language and preview it before enabling it. A [reviewed business profile](pack/BUSINESS-PROFILE.md) is optional; saving and future reuse depend on your assistant's actual capabilities.
+The [marketing Coordinator](pack/COORDINATOR.md) and [marketing workflow](pack/MARKETING-WORKFLOW.md) keep campaign decisions and handoffs consistent; the [family coordinator](pack/FAMILY-COORDINATOR.md) does the same for every other family. You can [customize a specialist](pack/CUSTOM-SPECIALISTS.md) in plain language and preview it before enabling it. A [reviewed business profile](pack/BUSINESS-PROFILE.md) is optional.
 
 ## Know the limits
 
 - These are advisory instructions, not an enforced permission system. Your assistant's rules and tools still govern its behavior.
+- Security, finance, people and HR, and legal and compliance cards are defensive or educational support for material you supply. They are not professional advice and make no claim of compliance or certification. Consult a qualified person for consequential decisions.
 - Research, image generation, file exports, memory, and separate review contexts depend on the host. Missing capabilities should produce a smaller agreed package, not pretend outputs.
 - Switching roles in one chat is self-review, not independent multi-agent review.
-- No specific host compatibility, improved performance, or marketing outcome is established. [Validation status](docs/VALIDATION.md) distinguishes checks from pending user trials.
-- The project has no accounts, connectors, telemetry, or model service. Your chosen host may process business information in the cloud and has its own usage limits and data policies. Never supply credentials or private customer lists to this pack.
+- No host compatibility, improved performance, or outcome is established. The cards have passed structural checks and a paper review; fresh-host trials and subject-expert review are pending. See [Validation status](docs/VALIDATION.md).
+- The project has no accounts, connectors, telemetry, or model service. Your chosen host may process information in the cloud and has its own usage limits and data policies. Never supply credentials or private customer data to this pack.
 
 ## Explore and contribute
 
-Read [Start here](pack/START-HERE.md) for setup details, the [roadmap](docs/ROADMAP.md) for future work, and [Contributing](CONTRIBUTING.md) to suggest improvements or edit the pack. The four shipped specialists are the current starting point; the wider catalog remains planned.
+Humans and AI agents should begin with the [repository map](REPO-MAP.md), which routes each task to the few files that matter. Read [Start here](pack/START-HERE.md) for setup details, the [card guide](docs/CARD-GUIDE.md) to write a role, the [roadmap](docs/ROADMAP.md) for future work, and [Contributing](CONTRIBUTING.md) to suggest or make changes.
 
 ## License
 

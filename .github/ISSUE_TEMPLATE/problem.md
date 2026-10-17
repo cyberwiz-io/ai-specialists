@@ -10,7 +10,7 @@ assignees: ''
 
 ## What happened, and what did you expect?
 
-## Pack version and affected file
+## Pack version and affected file (for example catalog/security/threat-modeler.md)
 
 ## Small fictional or redacted example
 
