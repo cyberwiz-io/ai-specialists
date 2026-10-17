@@ -21,9 +21,9 @@ Candidate next steps, after validation: a bounded developer feature-change workf
 
 ## Consider host-specific support
 
-Add an adapter only when a selected host needs one. Document the exact tested host/version, setup path, capabilities, limitations, and evidence. Native delegation, reliable persistence, and independent review require their own checks.
+Add host support only when a selected host needs it. Document the exact tested host/version, setup path, capabilities, limitations, and evidence. Native delegation, reliable persistence, and independent review require their own checks.
 
-Status: an experimental [Claude Code adapter](../adapters/claude-code/README.md) generates read-only subagents from the cards. It is untested in a live host and is not part of the pack or the release archive. The [card evals](../evals/README.md) are the route to that evidence, and no run is recorded yet.
+Status: the build generates a Claude Code marketplace and one plugin per family, each with a skill (the cards as on-demand references) and read-only subagents. It also zips each skill for upload to claude.ai. See the [install guide](INSTALL.md). These ship in the repository and the release archive so users need not paste a pack, but they are structurally checked, pass `claude plugin validate` and have one local smoke test; no install-from-GitHub, claude.ai or user trial is recorded, and the [card evals](../evals/README.md) are the route to that evidence. Candidate next steps: record a fresh-host install and delegation trial for the Claude Code plugin and the claude.ai skill upload, and submit the marketplace to Anthropic's directories once that evidence exists.
 
 ## External actions remain future work
 

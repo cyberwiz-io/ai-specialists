@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Generate the experimental Claude Code adapter: one read-only subagent file per specialist card."""
+"""Render one read-only Claude Code subagent per specialist card; the plugin generator places them in each family plugin."""
 import json
 import re
 
 from . import cards
-from .config import ADAPTER_AGENTS, read
+from .config import PLUGINS_DIR, read
 
 TOOLS = "Read, Grep, Glob"
 NOTE = (
@@ -19,7 +19,7 @@ def agent_name(role):
 
 
 def agent_path(role):
-    return f"{ADAPTER_AGENTS}/{agent_name(role)}.md"
+    return f"{PLUGINS_DIR}/{role['family']}/agents/{agent_name(role)}.md"
 
 
 def _sections(text):

@@ -9,7 +9,11 @@
     "catalog/REGISTRY.jsonl",
     "config/module-map.json",
     "dist/packs/*.md",
-    "adapters/claude-code/agents/*.md",
+    ".claude-plugin/marketplace.json",
+    "plugins/*/.claude-plugin/plugin.json",
+    "plugins/*/skills/*/SKILL.md",
+    "plugins/*/skills/*/references/*.md",
+    "plugins/*/agents/*.md",
     "pack/STARTER-PACK.md"
   ],
   "modules": [
@@ -68,12 +72,17 @@
     },
     {
       "dependencies": ["catalog-manifest", "maintenance"],
-      "guide": "adapters/claude-code/README.md",
-      "id": "claude-code-adapter",
-      "interfaces": ["adapters/claude-code/agents/*.md"],
-      "invariants": ["Experimental and outside the shipped pack: read-only tools, generated from the cards, never edited by hand."],
-      "paths": ["adapters/claude-code/README.md", "adapters/claude-code/agents/*.md"],
-      "purpose": "Claude Code subagents generated from the catalog cards, kept apart from the pack until evidence supports them."
+      "guide": "docs/INSTALL.md",
+      "id": "claude-plugins",
+      "interfaces": [".claude-plugin/marketplace.json", "plugins/*/skills/*/SKILL.md"],
+      "invariants": ["Generated from the cards and never edited by hand; subagents are read-only; host status stays honest until eval evidence exists."],
+      "paths": [
+        ".claude-plugin/marketplace.json",
+        "plugins/*/.claude-plugin/plugin.json",
+        "plugins/*/skills/*/SKILL.md", "plugins/*/skills/*/references/*.md",
+        "plugins/*/agents/*.md"
+      ],
+      "purpose": "Claude Code marketplace and one plugin per family (a skill with the cards as references, plus read-only subagents), also zipped as upload-ready skills for claude.ai."
     }
   ]
 }

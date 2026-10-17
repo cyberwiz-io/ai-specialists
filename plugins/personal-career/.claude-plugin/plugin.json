@@ -1,0 +1,16 @@
+{
+  "name": "personal-career",
+  "version": "1.0.0",
+  "description": "Personal and career: 5 materials-only specialists as one skill and read-only subagents. Help individuals with applications, interviews, career thinking and personal projects.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "personal-career"
+  ]
+}

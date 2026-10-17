@@ -1,0 +1,16 @@
+{
+  "name": "software-engineering",
+  "version": "1.0.0",
+  "description": "Software engineering: 11 materials-only specialists as one skill and read-only subagents. Planning, review and documentation of software changes from supplied code, requirements and notes.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "software-engineering"
+  ]
+}

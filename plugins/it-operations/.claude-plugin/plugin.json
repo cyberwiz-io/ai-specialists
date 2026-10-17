@@ -1,0 +1,16 @@
+{
+  "name": "it-operations",
+  "version": "1.0.0",
+  "description": "IT operations: 5 materials-only specialists as one skill and read-only subagents. Documentation and planning for everyday IT support and infrastructure upkeep.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "it-operations"
+  ]
+}

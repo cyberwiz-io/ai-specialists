@@ -1,0 +1,199 @@
+{
+  "name": "ai-specialists",
+  "owner": {
+    "name": "cyberwiz-io"
+  },
+  "metadata": {
+    "description": "Materials-only specialist skills and subagents, one plugin per family.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "security",
+      "source": "./plugins/security",
+      "description": "Security: Defensive security planning, review and documentation of materials the user supplies.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "security"
+      ]
+    },
+    {
+      "name": "it-operations",
+      "source": "./plugins/it-operations",
+      "description": "IT operations: Documentation and planning for everyday IT support and infrastructure upkeep.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "it-operations"
+      ]
+    },
+    {
+      "name": "software-engineering",
+      "source": "./plugins/software-engineering",
+      "description": "Software engineering: Planning, review and documentation of software changes from supplied code, requirements and notes.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "software-engineering"
+      ]
+    },
+    {
+      "name": "ai-ml",
+      "source": "./plugins/ai-ml",
+      "description": "AI and machine learning: Designing prompts, evaluations and experiments for AI and machine learning work.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "ai-ml"
+      ]
+    },
+    {
+      "name": "product-design",
+      "source": "./plugins/product-design",
+      "description": "Product and design: Product definition, user research planning, interface writing and design review.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "product-design"
+      ]
+    },
+    {
+      "name": "content-creative",
+      "source": "./plugins/content-creative",
+      "description": "Content and creative: Writing and planning of articles, scripts, newsletters and other creative content.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "content-creative"
+      ]
+    },
+    {
+      "name": "marketing-growth",
+      "source": "./plugins/marketing-growth",
+      "description": "Marketing and growth: Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "marketing-growth"
+      ]
+    },
+    {
+      "name": "sales-customer",
+      "source": "./plugins/sales-customer",
+      "description": "Sales and customer: Drafts and plans for selling, supporting and onboarding customers.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "sales-customer"
+      ]
+    },
+    {
+      "name": "business-operations",
+      "source": "./plugins/business-operations",
+      "description": "Business operations: Process, planning and decision documents for running a small organization.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "business-operations"
+      ]
+    },
+    {
+      "name": "finance",
+      "source": "./plugins/finance",
+      "description": "Finance: Educational drafts, explanations and checks of financial figures the user supplies.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "finance"
+      ]
+    },
+    {
+      "name": "data-research",
+      "source": "./plugins/data-research",
+      "description": "Data and research: Planning and reviewing research, surveys and data analysis from supplied sources and data.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "data-research"
+      ]
+    },
+    {
+      "name": "people-hr",
+      "source": "./plugins/people-hr",
+      "description": "People and HR: Drafts for hiring, onboarding, reviews and workplace policies, for human decision.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "people-hr"
+      ]
+    },
+    {
+      "name": "legal-compliance",
+      "source": "./plugins/legal-compliance",
+      "description": "Legal and compliance: Plain-language reading, drafting and checklists from documents and rules the user supplies.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "legal-compliance"
+      ]
+    },
+    {
+      "name": "education-training",
+      "source": "./plugins/education-training",
+      "description": "Education and training: Designing courses, lessons, assessments and study support.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "education-training"
+      ]
+    },
+    {
+      "name": "public-nonprofit",
+      "source": "./plugins/public-nonprofit",
+      "description": "Public sector and nonprofit: Grant, program, policy and community materials for public-benefit organizations.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "public-nonprofit"
+      ]
+    },
+    {
+      "name": "personal-career",
+      "source": "./plugins/personal-career",
+      "description": "Personal and career: Help individuals with applications, interviews, career thinking and personal projects.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "personal-career"
+      ]
+    },
+    {
+      "name": "orchestration",
+      "source": "./plugins/orchestration",
+      "description": "Orchestration and meta: Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "materials-only",
+        "orchestration"
+      ]
+    }
+  ]
+}
