@@ -35,7 +35,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "dc46ddc02885b86850a7c7ff807fa11714b993eef5f9f6e30eb242ea4ec73e99",
+      "digest": "4f32b91a81908c919970db6aeb0bc0084010b723b9b941234db0bb7ae64a3821",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -127,7 +127,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "e8a5f76c72d8caa8c50cef815b4186a826a26cca23f7276d37c143158c6d31a9",
+      "digest": "faade7da37ffcd689c5bb287906a88b3d24dec59503e255c2779daffaf2f89b1",
       "files": 25,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -219,8 +219,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "4b9dd3519bd45e61094fa0df14ced3ac737e61828bd9440c020fdc8fcf5f89e1",
-      "files": 286,
+      "digest": "5bb6ee8f615c157c420a0c8170067c5cf29e22031932473388f47b0f9052a99e",
+      "files": 303,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
       "interfaces": [
@@ -228,7 +228,7 @@
         "plugins/*/skills/*/SKILL.md"
       ],
       "invariants": [
-        "Generated from the cards and never edited by hand; subagents are read-only; host status stays honest until eval evidence exists."
+        "Generated from the cards and never edited by hand; subagents have no write or command tools and delegate only to specialist subagents; host status stays honest until eval evidence exists."
       ],
       "paths": [
         ".claude-plugin/marketplace.json",

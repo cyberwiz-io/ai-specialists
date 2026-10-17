@@ -1,7 +1,7 @@
 {
   "name": "it-operations",
   "version": "1.0.0",
-  "description": "IT operations: 5 materials-only specialists as one skill and read-only subagents. Documentation and planning for everyday IT support and infrastructure upkeep.",
+  "description": "IT operations: 5 materials-only specialists as one skill, specialist subagents and a team orchestrator. Documentation and planning for everyday IT support and infrastructure upkeep.",
   "author": {
     "name": "cyberwiz-io"
   },

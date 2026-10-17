@@ -20,17 +20,45 @@ class PluginTests(FixtureCase):
         return {path.name: path.read_text(encoding="utf-8")
                 for path in sorted((self.root / config.PLUGINS_DIR).glob("*/agents/*.md"))}
 
-    def test_one_valid_read_only_agent_per_card(self):
-        files = self.agents()
+    def specialists(self):
+        return {name: text for name, text in self.agents().items() if not name.endswith("-orchestrator.md")}
+
+    def test_one_valid_delegating_agent_per_card(self):
+        files = self.specialists()
         self.assertEqual(len(files), 124)
         for name, text in files.items():
-            front, _ = split(text)
+            front, body = split(text)
             self.assertEqual(front["name"] + ".md", name)
             self.assertRegex(front["name"], NAME)
-            self.assertEqual(front["tools"], "Read, Grep, Glob", name)
+            self.assertEqual(front["tools"], "Read, Grep, Glob, Agent", name)
             self.assertEqual(front["model"], "inherit")
             self.assertTrue(front["description"].startswith('"Materials-only specialist. '), name)
             self.assertNotIn("proactively", front["description"].lower())
+            self.assertIn("Never delegate to a general-purpose agent", body, name)
+
+    def test_every_family_has_an_orchestrator_that_can_only_call_its_roster(self):
+        files = self.agents()
+        for family in manifest.load(self.root):
+            front, body = split(files[adapter.orchestrator_name(family) + ".md"])
+            self.assertEqual(front["name"], adapter.orchestrator_name(family))
+            self.assertRegex(front["name"], NAME)
+            allowed = ", ".join(adapter.agent_type(role) for role in family["roles"])
+            self.assertEqual(front["tools"], f"Agent({allowed}), Read, Grep, Glob", family["id"])
+            self.assertTrue(front["description"].startswith('"Materials-only team orchestrator. '), family["id"])
+            for role in family["roles"]:
+                self.assertIn(f"`{adapter.agent_type(role)}`", body)
+            self.assertIn("## Boundaries", body)
+            self.assertIn("## Sensitive domains" if family["id"] != "marketing-growth" else "## Start small", body)
+
+    def test_agent_types_carry_the_plugin_prefix_the_agent_tool_needs(self):
+        role = manifest.load(self.root)[0]["roles"][0]
+        self.assertEqual(adapter.agent_type(role), f"{role['family']}:{role['family']}-{role['slug']}")
+
+    def test_orchestrator_name_collision_fails_build(self):
+        family = manifest.load(self.root)[0]
+        clash = dict(family["roles"][0], slug="orchestrator", id=family["id"] + "/orchestrator")
+        with self.assertRaisesRegex(ValueError, "collides with the orchestrator"):
+            adapter.outputs(self.root, [dict(family, roles=[clash])])
 
     def test_agent_body_embeds_card_and_boundaries(self):
         files = self.agents()
@@ -47,7 +75,8 @@ class PluginTests(FixtureCase):
     def test_agents_live_in_their_family_plugin(self):
         for family in manifest.load(self.root):
             found = {path.name for path in (self.root / plugin.plugin_dir(family) / "agents").glob("*.md")}
-            self.assertEqual(found, {adapter.agent_name(role) + ".md" for role in family["roles"]})
+            self.assertEqual(found, {adapter.agent_name(role) + ".md" for role in family["roles"]}
+                             | {adapter.orchestrator_name(family) + ".md"})
 
     def test_marketplace_lists_every_family_plugin(self):
         market = json.loads((self.root / config.MARKETPLACE).read_text())
@@ -106,6 +135,15 @@ class PluginTests(FixtureCase):
     def test_missing_plugin_file_fails(self):
         (self.root / "plugins/marketing-growth/agents/core-copywriter.md").unlink()
         self.assertFails("core-copywriter.md is missing")
+
+    def test_missing_orchestrator_fails(self):
+        (self.root / "plugins/finance/agents/finance-orchestrator.md").unlink()
+        self.assertFails("finance-orchestrator.md is missing")
+
+    def test_orchestrator_with_extra_tool_fails_check(self):
+        self.edit("plugins/finance/agents/finance-orchestrator.md",
+                  lambda text: text.replace("Read, Grep, Glob\n", "Read, Grep, Glob, Bash\n", 1))
+        self.assertFails("finance-orchestrator.md differs from sources")
 
     def test_missing_marketplace_fails(self):
         (self.root / config.MARKETPLACE).unlink()

@@ -1,7 +1,7 @@
 {
   "name": "finance",
   "version": "1.0.0",
-  "description": "Finance: 8 materials-only specialists as one skill and read-only subagents. Educational drafts, explanations and checks of financial figures the user supplies.",
+  "description": "Finance: 8 materials-only specialists as one skill, specialist subagents and a team orchestrator. Educational drafts, explanations and checks of financial figures the user supplies.",
   "author": {
     "name": "cyberwiz-io"
   },

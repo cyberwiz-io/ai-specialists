@@ -1,7 +1,7 @@
 {
   "name": "education-training",
   "version": "1.0.0",
-  "description": "Education and training: 6 materials-only specialists as one skill and read-only subagents. Designing courses, lessons, assessments and study support.",
+  "description": "Education and training: 6 materials-only specialists as one skill, specialist subagents and a team orchestrator. Designing courses, lessons, assessments and study support.",
   "author": {
     "name": "cyberwiz-io"
   },

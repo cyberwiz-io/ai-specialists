@@ -1,7 +1,7 @@
 {
   "name": "public-nonprofit",
   "version": "1.0.0",
-  "description": "Public sector and nonprofit: 5 materials-only specialists as one skill and read-only subagents. Grant, program, policy and community materials for public-benefit organizations.",
+  "description": "Public sector and nonprofit: 5 materials-only specialists as one skill, specialist subagents and a team orchestrator. Grant, program, policy and community materials for public-benefit organizations.",
   "author": {
     "name": "cyberwiz-io"
   },

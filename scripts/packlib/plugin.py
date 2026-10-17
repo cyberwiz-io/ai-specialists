@@ -82,7 +82,7 @@ def skill_md(root, family):
 def plugin_json(root, family):
     return _json({
         "name": family["id"], "version": semver(root),
-        "description": f"{family['name']}: {len(family['roles'])} materials-only specialists as one skill and read-only subagents. "
+        "description": f"{family['name']}: {len(family['roles'])} materials-only specialists as one skill, specialist subagents and a team orchestrator. "
                        f"{family['purpose']}",
         "author": OWNER, "homepage": REPOSITORY, "repository": REPOSITORY, "license": "CC-BY-4.0",
         "keywords": ["specialists", "materials-only", family["id"]]})
@@ -91,7 +91,7 @@ def plugin_json(root, family):
 def marketplace(root, families):
     return _json({
         "name": MARKETPLACE_NAME, "owner": OWNER,
-        "metadata": {"description": "Materials-only specialist skills and subagents, one plugin per family.",
+        "metadata": {"description": "Materials-only specialist skills, subagents and team orchestrators, one plugin per family.",
                      "version": semver(root)},
         "plugins": [{"name": family["id"], "source": "./" + plugin_dir(family),
                      "description": f"{family['name']}: {family['purpose']}", "version": semver(root),
@@ -108,6 +108,7 @@ def outputs(root, families):
         for role in family["roles"]:
             files[f"{skill_dir(family)}/references/{role['slug']}.md"] = read(root, role["path"])
             files[adapter.agent_path(role)] = adapter.render(root, family, role)
+        files[adapter.orchestrator_path(family)] = adapter.render_orchestrator(root, family)
         for name in _references(family):
             files[f"{skill_dir(family)}/references/{name.rsplit('/', 1)[-1]}"] = read(root, name)
     return files

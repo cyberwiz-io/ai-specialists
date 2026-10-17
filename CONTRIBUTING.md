@@ -28,7 +28,7 @@ Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and e
 
 ## Claude Code
 
-`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-plugins`. The build also generates the Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a skill with the cards as references, and a read-only subagent per card. The release archive includes them, plus one upload-ready skill ZIP per family for claude.ai. Never edit them by hand; they change when a card, a coordinator or `scripts/packlib/plugin.py` changes.
+`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-plugins`. The build also generates the Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a skill with the cards as references, a read-only subagent per card (with the `Agent` tool so specialists can delegate), and a `<family>-orchestrator` agent that runs the team. The release archive includes them, plus one upload-ready skill ZIP per family for claude.ai. Never edit them by hand; they change when a card, a coordinator or `scripts/packlib/plugin.py` changes.
 
 ## Release
 

@@ -1,7 +1,7 @@
 {
   "name": "people-hr",
   "version": "1.0.0",
-  "description": "People and HR: 5 materials-only specialists as one skill and read-only subagents. Drafts for hiring, onboarding, reviews and workplace policies, for human decision.",
+  "description": "People and HR: 5 materials-only specialists as one skill, specialist subagents and a team orchestrator. Drafts for hiring, onboarding, reviews and workplace policies, for human decision.",
   "author": {
     "name": "cyberwiz-io"
   },

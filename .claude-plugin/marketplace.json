@@ -4,7 +4,7 @@
     "name": "cyberwiz-io"
   },
   "metadata": {
-    "description": "Materials-only specialist skills and subagents, one plugin per family.",
+    "description": "Materials-only specialist skills, subagents and team orchestrators, one plugin per family.",
     "version": "1.0.0"
   },
   "plugins": [

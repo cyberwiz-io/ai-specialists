@@ -1,7 +1,7 @@
 {
   "name": "sales-customer",
   "version": "1.0.0",
-  "description": "Sales and customer: 8 materials-only specialists as one skill and read-only subagents. Drafts and plans for selling, supporting and onboarding customers.",
+  "description": "Sales and customer: 8 materials-only specialists as one skill, specialist subagents and a team orchestrator. Drafts and plans for selling, supporting and onboarding customers.",
   "author": {
     "name": "cyberwiz-io"
   },

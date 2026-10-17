@@ -75,7 +75,7 @@
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
       "interfaces": [".claude-plugin/marketplace.json", "plugins/*/skills/*/SKILL.md"],
-      "invariants": ["Generated from the cards and never edited by hand; subagents are read-only; host status stays honest until eval evidence exists."],
+      "invariants": ["Generated from the cards and never edited by hand; subagents have no write or command tools and delegate only to specialist subagents; host status stays honest until eval evidence exists."],
       "paths": [
         ".claude-plugin/marketplace.json",
         "plugins/*/.claude-plugin/plugin.json",

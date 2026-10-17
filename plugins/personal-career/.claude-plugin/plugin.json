@@ -1,7 +1,7 @@
 {
   "name": "personal-career",
   "version": "1.0.0",
-  "description": "Personal and career: 5 materials-only specialists as one skill and read-only subagents. Help individuals with applications, interviews, career thinking and personal projects.",
+  "description": "Personal and career: 5 materials-only specialists as one skill, specialist subagents and a team orchestrator. Help individuals with applications, interviews, career thinking and personal projects.",
   "author": {
     "name": "cyberwiz-io"
   },

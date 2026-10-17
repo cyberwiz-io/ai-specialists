@@ -1,7 +1,7 @@
 {
   "name": "orchestration",
   "version": "1.0.0",
-  "description": "Orchestration and meta: 5 materials-only specialists as one skill and read-only subagents. Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.",
+  "description": "Orchestration and meta: 5 materials-only specialists as one skill, specialist subagents and a team orchestrator. Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.",
   "author": {
     "name": "cyberwiz-io"
   },

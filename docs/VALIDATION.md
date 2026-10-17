@@ -48,7 +48,7 @@ On 2026-10-17 four separate subagents with no shared context, one each for secur
 
 ## Pending evidence
 
-- Live installation of the Claude Code plugins and the claude.ai skill upload: whether the skills trigger on a plain task description, whether cards load on demand, and whether subagents are chosen by name. Only a local smoke test is recorded (Claude Code 2.1.302, `--plugin-dir`, plugin loaded and a card read on demand); marketplace install from GitHub, claude.ai upload and unaided users have not been observed.
+- Live installation of the Claude Code plugins and the claude.ai skill upload: whether the skills trigger on a plain task description, whether cards load on demand, and whether subagents are chosen by name. Only a local smoke test is recorded (Claude Code 2.1.302, `--plugin-dir`, plugin loaded and a card read on demand) and one orchestrator-to-specialist-to-specialist delegation in the orchestration plugin with the nesting depth set to 3; delegation across other families, sensitive families and deeper chains is unobserved; marketplace install from GitHub, claude.ai upload and unaided users have not been observed.
 - Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. The evaluation harness can now produce this evidence, but no run is recorded.
 - Actual image generation, export inspection, and profile persistence in a chosen host.
 - Unaided nontechnical-user trials.
