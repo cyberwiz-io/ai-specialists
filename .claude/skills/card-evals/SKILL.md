@@ -35,6 +35,8 @@ Rules:
 - If a subagent fails or writes nothing, start a fresh one for that fixture once. If it fails again, leave the fixture and report it as missing.
 - Check `status` again until no lines remain, or until only fixtures that failed twice are left.
 
+For a whole family or the whole catalog, `scripts/evals_headless.sh <run> [parallel]` does this step without subagents: it starts one fresh `claude -p` session per reply and per grade, outside the repository, with memory and settings off and only these two agents' instructions, and retries each step once. Record `--host` as "Claude Code <version> (cloud), one fresh claude -p session per reply and per grade" when you prepare such a run. The 2026-10-17 full-catalog run took about an hour at six to eight sessions.
+
 ## 3. Report
 
 ```sh
@@ -50,7 +52,7 @@ Give the user the totals and the fixtures that did not pass. Do not describe the
 A scheduled task runs this unattended. It never edits the baseline or the repository.
 
 1. If `evals/baseline.json` has `"run": null`, there is nothing to compare with. Stop and say so; do not run the evals.
-2. Run the whole catalog with the steps above, named `<date>-weekly`, recording the model as the host reports it.
+2. Run the whole catalog with the steps above, named `<date>-weekly`, recording the model as the host reports it. Use `scripts/evals_headless.sh <date>-weekly` for step 2, and `--model claude-opus-5-5` unless the baseline's model is no longer available, in which case say so in the issue.
 3. Run `python3 -B scripts/evals.py compare --run <run>`. Exit 0 means no card fell: stop without opening an issue. Exit 3 means at least one fell.
 4. On exit 3, search open issues for the label or title `Card eval regression`. If one is open, add the new `REGRESSION.md` as a comment; otherwise open an issue titled `Card eval regression: <date>` with its contents, noting any model change it reports. Do not paste replies or grades.
 5. If the run itself fails (missing fixtures after one retry), open or comment on an issue saying which fixtures are missing; do not compare a partial run to the baseline as if complete.
