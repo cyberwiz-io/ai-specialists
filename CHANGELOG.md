@@ -18,6 +18,7 @@ One-command install across the major AI tools, smaller always-loaded text, and s
 - Checks cover skill names and description limits, the allowed frontmatter fields, marketplace and plugin manifest basics, real paths for every plugin entry, no `core-` prefix, no Agent tool on any worker, the bundle's description budget, and freshness of every new generated file. CI also runs `claude plugin validate --strict` on the marketplace, every plugin, `skills/` and the Codex plugin.
 - A `claude plugin eval` suite for the security plugin (`evals/plugin/security.json`, generated into `plugins/security/evals/`): five tasks, a boundary case and one `/security:security-lead` team task, each with a no-plugin baseline.
 - README opens with a one-command install table per tool; the limits section moved lower.
+- Skills declare `allowed-tools` (`Read Grep Glob`, plus `Agent` for leads), so a skill reading its own cards no longer prompts or fails in headless runs; the check requires it. A marketplace install from GitHub of the 1.0 layout was observed working (see `docs/INSTALL.md`); the claude.ai upload is still unobserved.
 
 ## 1.0
 

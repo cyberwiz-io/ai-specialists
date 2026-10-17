@@ -34,6 +34,7 @@ Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linke
 | Run | Scope | Host and model | Outcome |
 | --- | --- | --- | --- |
 | [2026-10-17-marketing-growth](../evals/reports/2026-10-17-marketing-growth.md) | Marketing and growth family, 11 fixtures (10 task, 1 boundary) | Claude Code (cloud), claude-opus-5-5 graded by claude-opus-5-5 | 6 pass, 3 partial, 2 fail |
+| [2026-10-17-security-plugin-pilot](../evals/reports/2026-10-17-security-plugin-pilot.md) | Security plugin via `claude plugin eval`, 7 cases (5 task, 1 boundary, 1 team), with and without the plugin | Claude Code 2.1.302 (cloud), host default model, LLM judge | With plugin 1 of 7, without 0 of 7; the plugin fired on 3 of 7 plain prompts |
 
 This run is also the regression baseline in `evals/baseline.json`. The report keeps the role IDs of its commit; the four `core/` roles it names were later renamed `marketing-growth/` without other card changes, and the baseline uses the new IDs. It covers one family only; the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
 
@@ -62,7 +63,7 @@ On 2026-10-17 four separate subagents with no shared context, one each for secur
 
 ## Pending evidence
 
-- Live installation of the Claude Code plugins and the claude.ai skill upload. Two local runs are recorded, both with `--plugin-dir` on Claude Code 2.1.302: a 1.0 smoke test that loaded a plugin and read a card on demand, and a 1.1 team run of `/security:security-lead` (below). Marketplace install from GitHub, the `ai-specialists-all` bundle install, claude.ai upload, the other 16 leads and unaided users have not been observed.
+- Live installation of the Claude Code plugins and the claude.ai skill upload. Two local runs are recorded, both with `--plugin-dir` on Claude Code 2.1.302: a 1.0 smoke test that loaded a plugin and read a card on demand, and a 1.1 team run of `/security:security-lead` (below). A marketplace install from GitHub of the 1.0 layout (marketing-growth and orchestration) and a headless card read from an installed plugin were observed on 2026-10-17; see [the install guide](INSTALL.md). A GitHub install of the 1.1 layout, the `ai-specialists-all` bundle install, claude.ai upload, the other 16 leads and unaided users have not been observed.
 - Codex, Gemini CLI, GitHub Copilot, Cursor and `npx skills`: the generated files follow each tool's published format but none has been installed or run in that tool. Whether Codex honors `shell_tool = false` per agent, and whether `effort` changes anything on `haiku`, is unverified.
 - Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. One run is recorded, for the marketing and growth cards one fixture at a time (see Recorded evaluations); the end-to-end marketing workflow and the other 16 families have no recorded run.
 - Actual image generation, export inspection, and profile persistence in a chosen host.
