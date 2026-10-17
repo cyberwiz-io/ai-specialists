@@ -35,7 +35,7 @@ Reviewed reports go in [evals/reports](../evals/reports/README.md) and are linke
 
 The two software-engineering runs cover the roles that gained allowlisted test commands. Their subagents had only Read and Write (the harness limits), so the evals do not exercise the command access; that was checked separately with one local Claude Code smoke test (the code reviewer ran an allowlisted `python3 -m unittest` command once pre-approved, and a command outside the allowlist was blocked). They are not part of the regression baseline, and each result is a single model-graded run.
 
-This run is also the regression baseline in `evals/baseline.json`. The report keeps the role IDs of its commit; the four `core/` roles it names were later renamed `marketing-growth/` without other card changes, and the baseline uses the new IDs. It covers one family only; the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
+This run is also the regression baseline in `evals/baseline.json`. The report keeps the role IDs of its commit; the four `core/` roles it names were later renamed `marketing-growth/` without other card changes, and the baseline uses the new IDs. It covers one family only; apart from the two single-role software-engineering runs above, the other families have no recorded run, so their fresh-host evidence below is still pending. Each result is a single model-graded run on fictional inputs, as the report's Limits section says.
 
 ## Paper review
 
@@ -59,7 +59,7 @@ On 2026-10-17 four separate subagents with no shared context, one each for secur
 ## Pending evidence
 
 - Live installation of the Claude Code plugins and the claude.ai skill upload: whether the skills trigger on a plain task description, whether cards load on demand, and whether subagents are chosen by name. Only a local smoke test is recorded (Claude Code 2.1.302, `--plugin-dir`, plugin loaded and a card read on demand) and one orchestrator-to-specialist-to-specialist delegation in the orchestration plugin with the nesting depth set to 3; delegation across other families, sensitive families and deeper chains is unobserved; marketplace install from GitHub, claude.ai upload and unaided users have not been observed.
-- Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. One run is recorded, for the marketing and growth cards one fixture at a time (see Recorded evaluations); the end-to-end marketing workflow and the other 16 families have no recorded run.
+- Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. Three runs are recorded, each one fixture at a time (see Recorded evaluations): the marketing and growth family, and the software-engineering code reviewer and debugging analyst. The end-to-end marketing workflow, the other 16 families and the other software-engineering roles have no recorded run.
 - Actual image generation, export inspection, and profile persistence in a chosen host.
 - Unaided nontechnical-user trials.
 - Subject-expert review of the cards in each family, in particular the sensitive families. The cards describe working perspectives, not professional expertise or certification.
