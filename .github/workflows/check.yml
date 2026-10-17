@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: Apache-2.0
+name: check
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Pack check
+        run: python3 -B scripts/pack.py check
+      - name: Tests
+        run: python3 -B -m unittest discover -s tests
