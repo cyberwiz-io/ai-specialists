@@ -65,20 +65,20 @@ def toml_multiline(text):
     return f'"""\n{text}{tail}"""'
 
 
-def agent_toml(source, name, description, instructions, effort=None, shell=True):
+def agent_toml(source, name, description, instructions, effort=None):
     lines = [f"# Generated from {source} by scripts/pack.py build. Do not edit.",
              f"name = {json.dumps(name)}", f"description = {json.dumps(description)}"]
     if effort:
         lines.append(f"model_reasoning_effort = {json.dumps(EFFORT.get(effort, effort))}")
     lines.append(f"developer_instructions = {toml_multiline(instructions)}")
-    if not shell:
-        lines += ["", "[features]", "shell_tool = false"]
+    # Codex cannot limit the shell to an allowlist, so every agent, code roles included, runs without it.
+    lines += ["", "[features]", "shell_tool = false"]
     return ("\n".join(lines) + "\n").encode("utf-8")
 
 
 def role_instructions(family, role, text):
     sensitive = "\n\n" + skills.SENSITIVE if family["sensitive"] else ""
-    return f"{adapter.note(role)}{sensitive}\n\n---\n\n{text}"
+    return f"{adapter.NOTE}{sensitive}\n\n---\n\n{text}"
 
 
 def agent_path(name):
@@ -98,7 +98,7 @@ def outputs(root, families):
             text = skills.card_text(root, role)
             files[agent_path(skills.role_name(role))] = agent_toml(
                 role["path"], skills.role_name(role), skills.description(role, text),
-                role_instructions(family, role, text), role["effort"], role["commands"])
+                role_instructions(family, role, text), role["effort"])
     files[f"{BASE}/skills/{skills.SPECIALISTS}/SKILL.md"] = skills.specialists_skill(root, families)
     files[agent_path(skills.SPECIALISTS)] = agent_toml(
         "catalog/", skills.SPECIALISTS, skills.SPECIALISTS_DESCRIPTION, skills.specialists_body(root, families),
@@ -119,7 +119,7 @@ def _parse(text):
     return fields
 
 
-def _agent_problems(path, data, role):
+def _agent_problems(path, data):
     text = data.decode("utf-8")
     try:
         fields = _parse(text)
@@ -136,8 +136,10 @@ def _agent_problems(path, data, role):
     tables = [fields] + [value for value in fields.values() if isinstance(value, dict)]
     if any("sandbox_mode" in table or "model" in table for table in tables):
         failures.append(f"{path}: must not set model or sandbox_mode")
-    if role is not None and not role["commands"] and fields.get("features", {}).get("shell_tool") is not False:
-        failures.append(f"{path}: read-only role needs [features] shell_tool = false")
+    if fields.get("features", {}).get("shell_tool") is not False:
+        failures.append(f"{path}: every agent needs [features] shell_tool = false")
+    if adapter.COMMAND_NOTE in str(fields.get("developer_instructions", "")):
+        failures.append(f"{path}: promises commands that Codex agents cannot run")
     if not text.startswith("# Generated from "):
         failures.append(f"{path}: missing the generated marker")
     return failures
@@ -173,7 +175,7 @@ def problems(root, families, generated):
     if agents != expected:
         failures.append(f"{BASE}/agents: missing {sorted(expected - agents)}, unexpected {sorted(agents - expected)}")
     for path in sorted(agents):
-        failures += _agent_problems(path, generated[path], roles.get(path))
+        failures += _agent_problems(path, generated[path])
     for path, data in generated.items():
         if path.startswith(f"{BASE}/skills/") and path.endswith("/SKILL.md"):
             failures += skills.problems(path, data.decode("utf-8"), path.split("/")[-2], spec_only=True)

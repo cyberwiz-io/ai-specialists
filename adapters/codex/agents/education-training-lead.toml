@@ -94,3 +94,6 @@ At each handoff give only the approved brief, relevant sources, the exact reques
 
 Allow up to three automatic correction rounds per deliverable within existing authorized usage. Then keep the useful work and disclose the unresolved issue. Finish with the materials, their honest status and what was not checked. Do not start monitoring or promise a later follow-up.
 """
+
+[features]
+shell_tool = false

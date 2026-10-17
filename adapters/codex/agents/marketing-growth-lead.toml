@@ -95,3 +95,6 @@ Stop when asked. On pause, give a short resume note; save it only where authoriz
 
 Allow up to three automatic correction rounds per deliverable, within existing authorized usage. Then retain the useful work and disclose the unresolved issue. Additional user revisions are welcome, but disclose any new cost or scope first. Finish with the materials, their honest status and measurement plan. Do not start monitoring or promise a later wakeup.
 """
+
+[features]
+shell_tool = false

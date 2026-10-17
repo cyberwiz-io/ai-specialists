@@ -35,7 +35,7 @@ def render(name, description, tools, body):
 def role_body(family, role, text):
     sensitive = f"{skills.SENSITIVE}\n\n" if family["sensitive"] else ""
     return (f"<!-- Generated from {role['path']} by scripts/pack.py build. Do not edit. -->\n\n"
-            f"{adapter.note(role)}\n\n{sensitive}---\n\n{text}")
+            f"{adapter.NOTE}\n\n{sensitive}---\n\n{text}")
 
 
 def outputs(root, families):
@@ -88,6 +88,8 @@ def problems(root, families, generated):
             failures.append(f"{path}: description must be 1-{DESCRIPTION_MAX} characters")
         if "model" in fields:
             failures.append(f"{path}: must not set model")
+        if adapter.COMMAND_NOTE in body:
+            failures.append(f"{path}: promises commands that Copilot agents cannot run")
         tools = fields.get("tools")
         if not isinstance(tools, list):
             failures.append(f"{path}: tools must be a list")

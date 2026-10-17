@@ -198,3 +198,6 @@ If a family's agents are not installed, or the host has no subagents, use that f
 - `orchestration-specialist-builder`: Drafting and reviewing a custom role card at the user's request when no existing role fits.
 - `orchestration-cross-family-reviewer`: Reviewing a combined result that drew on specialists.
 """
+
+[features]
+shell_tool = false

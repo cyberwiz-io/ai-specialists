@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "8d86d61619959a6869dff5ae9b1f4a1ac9fd1fb8fdd35f855da75e23f5361175",
+      "digest": "dfdbe9ab27e670ac9c0c6735d099618dfecce4288c2009ccd05c96edd7ef9b95",
       "files": 33,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -319,7 +319,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "d9e849e07694afe1b2abbbb114ea74cff78ea8aefc22a8529b6ba0594a7a4263",
+      "digest": "a208a97f848970193e83e9858e561e50d47ddc7a51605ba2f88106292af8870b",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",

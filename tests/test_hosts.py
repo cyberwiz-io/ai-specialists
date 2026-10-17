@@ -3,7 +3,7 @@ import json
 import re
 
 from test_pack import FixtureCase
-from packlib import build, codex, config, copilot, cursor, gemini, manifest, plugin_evals, skills, stats
+from packlib import adapter, build, codex, config, copilot, cursor, gemini, manifest, plugin_evals, skills, stats
 import pack as pack_cli
 
 try:
@@ -80,6 +80,19 @@ class HostTests(FixtureCase):
             self.assertEqual(data["features"]["shell_tool"], False)
             self.assertNotIn("model", data)
             self.assertIn("# Threat modeler", data["developer_instructions"])
+
+    def test_code_roles_get_no_shell_and_no_command_promise_outside_claude_code(self):
+        families, generated = self.outputs()
+        codex_path = "adapters/codex/agents/security-secure-code-reviewer.toml"
+        copilot_path = "adapters/copilot/agents/security-secure-code-reviewer.agent.md"
+        self.assertIn(b"shell_tool = false", generated[codex_path])
+        for path in (codex_path, copilot_path):
+            self.assertNotIn(b"allowlisted git and test commands", generated[path])
+        generated[codex_path] = generated[codex_path].replace(b"\n[features]\nshell_tool = false", b"")
+        self.assertTrue([f for f in codex.problems(self.root, families, generated) if "shell_tool" in f])
+        generated[copilot_path] = generated[copilot_path].replace(
+            adapter.NOTE.encode(), adapter.COMMAND_NOTE.encode(), 1)
+        self.assertTrue([f for f in copilot.problems(self.root, families, generated) if "promises commands" in f])
 
     def test_codex_agent_with_sandbox_mode_fails(self):
         families, generated = self.outputs()
