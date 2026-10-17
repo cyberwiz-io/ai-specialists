@@ -1,0 +1,16 @@
+{
+  "name": "sales-customer",
+  "version": "1.0.0",
+  "description": "Sales and customer: 8 materials-only specialists as one skill and read-only subagents. Drafts and plans for selling, supporting and onboarding customers.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "sales-customer"
+  ]
+}

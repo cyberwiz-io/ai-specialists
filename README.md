@@ -8,6 +8,10 @@ These are editable instruction files. One assistant can work through the special
 
 ## Start
 
+**Install, no pasting.** In Claude Code: `/plugin marketplace add cyberwiz-io/ai-specialists`, then `/plugin install marketing-growth@ai-specialists` (any family name works). On claude.ai, upload a family's skill ZIP from the [latest release](https://github.com/cyberwiz-io/ai-specialists/releases/latest). Each family is a skill whose specialist cards load only when needed, plus read-only subagents in Claude Code. See the [install guide](docs/INSTALL.md), including its status: validated and smoke-tested locally in Claude Code, not yet observed through a GitHub install or a claude.ai upload.
+
+**Or paste a pack, in any assistant.**
+
 1. Pick a family below and open its combined pack under `dist/packs/` (select **Raw**), or open [the marketing starter pack](pack/STARTER-PACK.md). Copy it into a new conversation with an AI assistant you trust, or supply the file with that assistant's file feature.
 2. Describe your task. For marketing: *Use this starter pack. My business is [short description]. My website is [optional]. Help me create a marketing campaign. First confirm that you can read all eight instruction sections.* For another family: *Use this pack. My task is [description]. Here is the material I can supply: [...]. First confirm that you can read all the sections.*
 3. Confirm the plan, review the materials, and accept or revise.
@@ -51,7 +55,7 @@ The [marketing Coordinator](pack/COORDINATOR.md) and [marketing workflow](pack/M
 
 ## Explore and contribute
 
-Humans and AI agents should begin with the [repository map](REPO-MAP.md), which routes each task to the few files that matter. Read [Start here](pack/START-HERE.md) for setup details, the [card guide](docs/CARD-GUIDE.md) to write a role, the [roadmap](docs/ROADMAP.md) for future work, and [Contributing](CONTRIBUTING.md) to suggest or make changes.
+Humans and AI agents should begin with the [repository map](REPO-MAP.md), which routes each task to the few files that matter. Read [Install](docs/INSTALL.md) and [Start here](pack/START-HERE.md) for setup details, the [card guide](docs/CARD-GUIDE.md) to write a role, the [roadmap](docs/ROADMAP.md) for future work, and [Contributing](CONTRIBUTING.md) to suggest or make changes.
 
 ## License
 

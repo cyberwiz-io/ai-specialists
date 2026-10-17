@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Assemble the release archive in memory, write it outside the tracked tree and verify the written copy."""
+"""Assemble the release archives in memory, write them outside the tracked tree and verify the written copies."""
 from io import BytesIO
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
-from .config import (ADAPTER_DIR, ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_SOURCES, archive_name,
+from . import plugin
+from .config import (ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_SOURCES, archive_name,
                      read, version)
 
 
@@ -13,7 +14,7 @@ def members(root, families, generated):
     names += [role["path"] for family in families for role in family["roles"]]
     data = {prefix + name: read(root, name) for name in names}
     for name, payload in generated.items():
-        if name != MODULE_MAP and not name.startswith(ADAPTER_DIR + "/"):
+        if name != MODULE_MAP:
             data[prefix + name] = payload
     return data
 
@@ -39,16 +40,20 @@ def compare(archive, expected):
 
 
 def release(root, families, generated, out, tag=None):
-    """Write the archive into out, verify it and return its path. A tag must name this VERSION, such as v1.0."""
+    """Write the release archive and one upload-ready skill ZIP per family into out, verify them and return the release path. A tag must name this VERSION, such as v1.0."""
     if tag is not None and tag != f"v{version(root)}":
         raise ValueError(f"tag {tag!r} does not match VERSION {version(root)}; expected v{version(root)}")
-    expected = members(root, families, generated)
+    expected = {archive_name(root): members(root, families, generated)}
+    for family in families:
+        expected[plugin.skill_archive_name(root, family)] = plugin.skill_members(family, generated)
     out.mkdir(parents=True, exist_ok=True)
-    archive = out / archive_name(root)
-    if archive.is_symlink():
-        raise ValueError(f"Unsafe archive destination: {archive}")
-    archive.write_bytes(pack(expected))
-    failures = compare(archive, expected)
+    paths = {name: out / name for name in expected}
+    if any(path.is_symlink() for path in paths.values()):
+        raise ValueError(f"Unsafe archive destination in {out}")
+    failures = []
+    for name, payloads in expected.items():
+        paths[name].write_bytes(pack(payloads))
+        failures += compare(paths[name], payloads)
     if failures:
         raise ValueError("\n".join(failures))
-    return archive
+    return paths[archive_name(root)]

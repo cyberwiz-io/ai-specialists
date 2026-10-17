@@ -1,0 +1,16 @@
+{
+  "name": "data-research",
+  "version": "1.0.0",
+  "description": "Data and research: 8 materials-only specialists as one skill and read-only subagents. Planning and reviewing research, surveys and data analysis from supplied sources and data.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "data-research"
+  ]
+}

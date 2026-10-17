@@ -4,9 +4,9 @@ from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
 
-from . import bundle, cards, evals, manifest, modmap
-from .build import outputs
-from .config import ADAPTER_AGENTS, PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, read, safe_path, version
+from . import bundle, cards, evals, manifest, modmap, plugin
+from .build import outputs, stale_files
+from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, read, safe_path, version
 
 VERSION_MENTION = re.compile(r"\bVersion:?\s+([0-9]+\.[0-9]+)")
 LINK = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
@@ -59,11 +59,7 @@ def check_generated(root, generated):
                             else f"{name} differs from sources; run build")
         if name.startswith(PACK_DIR) and len(data) > PACK_MAX:
             failures.append(f"{name}: combined pack exceeds {PACK_MAX} bytes; split the family with \"packs\"")
-    for folder in (PACK_DIR, ADAPTER_AGENTS):
-        directory = root / folder
-        for path in sorted(directory.glob("*.md")) if directory.is_dir() else []:
-            if path.relative_to(root).as_posix() not in generated:
-                failures.append(f"{path.relative_to(root).as_posix()}: stale generated file; run build")
+    failures += [f"{name}: stale generated file; run build" for name in stale_files(root, generated)]
     return failures
 
 
@@ -119,6 +115,7 @@ def check(root):
     families, generated = outputs(root)
     failures += check_versions(root, generated, current)
     failures += check_generated(root, generated)
+    failures += plugin.problems(root, families, generated)
     failures += check_links(root)
     failures += check_navigation(root, families, generated)
     failures += check_archives(root)

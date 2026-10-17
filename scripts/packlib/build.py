@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Compute every generated file in memory, then write them together."""
-from . import adapter, generate, manifest, modmap
-from .config import ADAPTER_AGENTS, MODULE_MAP, PACK_DIR, REGISTRY, STARTER, read, safe_path
+from . import generate, manifest, modmap, plugin
+from .config import MODULE_MAP, PACK_DIR, PLUGINS_DIR, REGISTRY, STARTER, read, safe_path
 
 
 def outputs(root):
@@ -17,7 +17,7 @@ def outputs(root):
     for family in families:
         for pack in family["packs"]:
             generated[generate.pack_path(pack)] = generate.family_pack(root, family, pack, generated)
-    generated.update(adapter.outputs(root, families))
+    generated.update(plugin.outputs(root, families))
     generated[MODULE_MAP] = modmap.generate(root, families, generated)
     return families, generated
 
@@ -28,9 +28,21 @@ def build(root):
     for path, data in destinations.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
-    for folder in (PACK_DIR, ADAPTER_AGENTS):
-        directory = root / folder
-        if directory.is_dir():
-            for stale in directory.glob("*.md"):
-                if stale.relative_to(root).as_posix() not in generated:
-                    safe_path(root, stale.relative_to(root).as_posix()).unlink()
+    for stale in stale_files(root, generated):
+        safe_path(root, stale).unlink()
+    plugins = root / PLUGINS_DIR
+    for folder in sorted(plugins.rglob("*"), reverse=True) if plugins.is_dir() else []:
+        if folder.is_dir() and not any(folder.iterdir()):
+            folder.rmdir()
+
+
+def stale_files(root, generated):
+    """Generated-looking files that no longer have a source: old packs and anything left in plugins/."""
+    found = []
+    pack_dir, plugins = root / PACK_DIR, root / PLUGINS_DIR
+    for path in sorted(pack_dir.glob("*.md")) if pack_dir.is_dir() else []:
+        found.append(path.relative_to(root).as_posix())
+    for path in sorted(plugins.rglob("*")) if plugins.is_dir() else []:
+        if path.is_file() or path.is_symlink():
+            found.append(path.relative_to(root).as_posix())
+    return [name for name in found if name not in generated]

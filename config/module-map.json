@@ -1,12 +1,16 @@
 {
   "entry": "REPO-MAP.md",
   "generated": [
-    "adapters/claude-code/agents/*.md",
+    ".claude-plugin/marketplace.json",
     "catalog/*/INDEX.md",
     "catalog/REGISTRY.jsonl",
     "config/module-map.json",
     "dist/packs/*.md",
-    "pack/STARTER-PACK.md"
+    "pack/STARTER-PACK.md",
+    "plugins/*/.claude-plugin/plugin.json",
+    "plugins/*/agents/*.md",
+    "plugins/*/skills/*/SKILL.md",
+    "plugins/*/skills/*/references/*.md"
   ],
   "modules": [
     {
@@ -31,8 +35,8 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "3f9309104c966af9809ff062adda740a009d5d7341fadfcffbb83d4a04463b99",
-      "files": 19,
+      "digest": "73dd52bdc36d6e216fe8768604bc7d0da130aecbca96b62903116fb359deca00",
+      "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
       "interfaces": [
@@ -123,8 +127,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "c11a90aaa682f0ad1b3d89fb87e8d0436f9aca07984e1d868b9efe38433aa0c1",
-      "files": 24,
+      "digest": "04810da77099b4a1f39f7a2ba7b44cb56dba6ca2680333296fffb2f20e9370ba",
+      "files": 25,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -215,21 +219,25 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "4afc72864c1571ecd3bc1543d2a12f8f4c4b0461b0b77459ac524524b2416712",
-      "files": 125,
-      "guide": "adapters/claude-code/README.md",
-      "id": "claude-code-adapter",
+      "digest": "660da5ae111ef2192a5f69632194ba092ad75b4970118799b2eebfd519194530",
+      "files": 286,
+      "guide": "docs/INSTALL.md",
+      "id": "claude-plugins",
       "interfaces": [
-        "adapters/claude-code/agents/*.md"
+        ".claude-plugin/marketplace.json",
+        "plugins/*/skills/*/SKILL.md"
       ],
       "invariants": [
-        "Experimental and outside the shipped pack: read-only tools, generated from the cards, never edited by hand."
+        "Generated from the cards and never edited by hand; subagents are read-only; host status stays honest until eval evidence exists."
       ],
       "paths": [
-        "adapters/claude-code/README.md",
-        "adapters/claude-code/agents/*.md"
+        ".claude-plugin/marketplace.json",
+        "plugins/*/.claude-plugin/plugin.json",
+        "plugins/*/agents/*.md",
+        "plugins/*/skills/*/SKILL.md",
+        "plugins/*/skills/*/references/*.md"
       ],
-      "purpose": "Claude Code subagents generated from the catalog cards, kept apart from the pack until evidence supports them."
+      "purpose": "Claude Code marketplace and one plugin per family (a skill with the cards as references, plus read-only subagents), also zipped as upload-ready skills for claude.ai."
     },
     {
       "checks": [

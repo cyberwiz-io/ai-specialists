@@ -13,8 +13,9 @@ MODULES = "config/modules.json"
 MODULE_MAP = "config/module-map.json"
 REPO_MAP = "REPO-MAP.md"
 PACK_DIR = "dist/packs"
-ADAPTER_DIR = "adapters/claude-code"
-ADAPTER_AGENTS = ADAPTER_DIR + "/agents"
+PLUGINS_DIR = "plugins"
+MARKETPLACE = ".claude-plugin/marketplace.json"
+REPOSITORY = "https://github.com/cyberwiz-io/ai-specialists"
 RELEASE_DIR = "work/release"
 GUIDE = "docs/CARD-GUIDE.md"
 DEFAULT_COORDINATOR = ("pack/FAMILY-COORDINATOR.md",)
@@ -29,7 +30,10 @@ STARTER_SECTIONS = (
 PACK_SOURCES = (
     "pack/START-HERE.md", "pack/COORDINATOR.md", "pack/MARKETING-WORKFLOW.md",
     "pack/FAMILY-COORDINATOR.md", "pack/CUSTOM-SPECIALISTS.md", "pack/BUSINESS-PROFILE.md",
+    "docs/INSTALL.md",
 )
+# Marketing keeps its workflow and optional-extras files beside the coordinator as skill references.
+SKILL_EXTRAS = {"marketing-growth": ("pack/CUSTOM-SPECIALISTS.md", "pack/BUSINESS-PROFILE.md")}
 LICENSE_FILES = ("NOTICE.md", "LICENSE.md", "LICENSES/CC-BY-4.0.txt", "LICENSES/Apache-2.0.txt")
 
 CARD_MAX = 3500

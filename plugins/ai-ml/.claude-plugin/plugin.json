@@ -1,0 +1,16 @@
+{
+  "name": "ai-ml",
+  "version": "1.0.0",
+  "description": "AI and machine learning: 3 materials-only specialists as one skill and read-only subagents. Designing prompts, evaluations and experiments for AI and machine learning work.",
+  "author": {
+    "name": "cyberwiz-io"
+  },
+  "homepage": "https://github.com/cyberwiz-io/ai-specialists",
+  "repository": "https://github.com/cyberwiz-io/ai-specialists",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "specialists",
+    "materials-only",
+    "ai-ml"
+  ]
+}

@@ -14,7 +14,8 @@ Run `python3 -B scripts/pack.py check` and the test command in [Contributing](..
 - generated files (indexes, registry, combined packs, module map) match their sources, each combined pack is under 32 KB, local links resolve, every source file belongs to a module, and no archive is committed;
 - the release command rebuilds the archive and verifies its members and bytes before CI attaches it to a tagged release.
 
-- every card has an evaluation fixture and every family a boundary fixture, with fictional data only.
+- every card has an evaluation fixture and every family a boundary fixture, with fictional data only;
+- each family's plugin has a valid skill name and description length, working links from its `SKILL.md` to its references, one read-only subagent per card, and an entry in the marketplace and the install guide; the release also writes and verifies one upload-ready skill ZIP per family.
 
 These are structural checks of the written instructions.
 
@@ -43,6 +44,7 @@ The written instructions were reviewed against these scenarios. They are content
 
 ## Pending evidence
 
+- Live installation of the Claude Code plugins and the claude.ai skill upload: whether the skills trigger on a plain task description, whether cards load on demand, and whether subagents are chosen by name. Only a local smoke test is recorded (Claude Code 2.1.302, `--plugin-dir`, plugin loaded and a card read on demand); marketplace install from GitHub, claude.ai upload and unaided users have not been observed.
 - Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. The evaluation harness can now produce this evidence, but no run is recorded.
 - Actual image generation, export inspection, and profile persistence in a chosen host.
 - Unaided nontechnical-user trials.

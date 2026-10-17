@@ -2,6 +2,10 @@
 
 Get finished written materials, plans and reviews from the AI system you already use. The marketing starter below is the best-developed path; 16 other families are in `dist/packs/`. No app, Terminal, Node, account connection or installation is required by this pack.
 
+## Install instead of pasting
+
+If you use Claude Code or claude.ai, you can install a family as a skill and skip the paste: see the [install guide](../docs/INSTALL.md). In other hosts, continue below.
+
 ## Start in one conversation
 
 1. Open **STARTER-PACK.md**, copy its contents, and paste them into a new AI conversation. If you prefer your host's supported file feature, you may supply that file yourself. This pack does not upload or install itself.
