@@ -1,6 +1,6 @@
 ---
 name: business-operations-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Business operations specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Process, planning and decision documents for running a small organization."
+description: "Runs the Business operations specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(business-operations:business-operations-process-mapper, business-operations:business-operations-sop-writer, business-operations:business-operations-project-planner, business-operations:business-operations-meeting-facilitator, business-operations:business-operations-vendor-comparer, business-operations:business-operations-business-plan-drafter, business-operations:business-operations-okr-coach, business-operations:business-operations-contingency-planner), Read, Grep, Glob
 model: inherit
 ---

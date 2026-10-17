@@ -1,6 +1,6 @@
 ---
 name: marketing-growth-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Marketing and growth specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack."
+description: "Runs the Marketing and growth specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(marketing-growth:core-marketing-strategist, marketing-growth:core-copywriter, marketing-growth:core-graphic-designer, marketing-growth:core-quality-reviewer, marketing-growth:marketing-growth-seo-strategist, marketing-growth:marketing-growth-email-campaign-planner, marketing-growth:marketing-growth-brand-voice-guide, marketing-growth:marketing-growth-market-researcher, marketing-growth:marketing-growth-landing-page-planner, marketing-growth:marketing-growth-growth-experiment-designer), Read, Grep, Glob
 model: inherit
 ---

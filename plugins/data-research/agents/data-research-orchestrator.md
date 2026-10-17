@@ -1,6 +1,6 @@
 ---
 name: data-research-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Data and research specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Planning and reviewing research, surveys and data analysis from supplied sources and data."
+description: "Runs the Data and research specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(data-research:data-research-research-planner, data-research:data-research-literature-summarizer, data-research:data-research-data-cleaning-planner, data-research:data-research-data-analyst, data-research:data-research-dashboard-specifier, data-research:data-research-survey-designer, data-research:data-research-statistical-reviewer, data-research:data-research-competitive-intelligence-analyst), Read, Grep, Glob
 model: inherit
 ---

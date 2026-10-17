@@ -1,6 +1,6 @@
 ---
 name: education-training-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Education and training specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Designing courses, lessons, assessments and study support."
+description: "Runs the Education and training specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(education-training:education-training-curriculum-designer, education-training:education-training-lesson-planner, education-training:education-training-quiz-writer, education-training:education-training-study-coach, education-training:education-training-training-developer, education-training:education-training-rubric-designer), Read, Grep, Glob
 model: inherit
 ---

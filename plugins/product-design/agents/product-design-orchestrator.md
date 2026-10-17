@@ -1,6 +1,6 @@
 ---
 name: product-design-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Product and design specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Product definition, user research planning, interface writing and design review."
+description: "Runs the Product and design specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(product-design:product-design-product-manager, product-design:product-design-ux-researcher, product-design:product-design-ux-writer, product-design:product-design-ui-designer, product-design:product-design-accessibility-reviewer, product-design:product-design-roadmap-planner, product-design:product-design-design-system-documenter), Read, Grep, Glob
 model: inherit
 ---

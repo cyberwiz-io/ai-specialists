@@ -1,6 +1,6 @@
 ---
 name: public-nonprofit-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the Public sector and nonprofit specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Grant, program, policy and community materials for public-benefit organizations."
+description: "Runs the Public sector and nonprofit specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(public-nonprofit:public-nonprofit-grant-writer, public-nonprofit:public-nonprofit-program-evaluator, public-nonprofit:public-nonprofit-policy-brief-writer, public-nonprofit:public-nonprofit-volunteer-planner, public-nonprofit:public-nonprofit-outreach-planner), Read, Grep, Glob
 model: inherit
 ---

@@ -1,6 +1,6 @@
 ---
 name: it-operations-orchestrator
-description: "Materials-only team orchestrator. Orchestrator for the IT operations specialist team. Use when a task needs more than one specialist in this family, or needs their work assembled and reviewed. Documentation and planning for everyday IT support and infrastructure upkeep."
+description: "Runs the IT operations specialists as a team when a task needs several, assembled and reviewed."
 tools: Agent(it-operations:it-operations-support-documenter, it-operations:it-operations-runbook-writer, it-operations:it-operations-change-planner, it-operations:it-operations-backup-recovery-planner, it-operations:it-operations-asset-inventory-analyst), Read, Grep, Glob
 model: inherit
 ---
