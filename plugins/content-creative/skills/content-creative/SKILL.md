@@ -1,5 +1,6 @@
 ---
 name: content-creative
+allowed-tools: Read Grep Glob
 description: "Content and creative specialist perspectives. Writing and planning of articles, scripts, newsletters and other creative content. Specialists: Editor, Blog writer, Scriptwriter, Social media writer, Newsletter writer, Storyteller, Podcast planner, Storyboard planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

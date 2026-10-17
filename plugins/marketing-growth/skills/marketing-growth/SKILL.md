@@ -1,5 +1,6 @@
 ---
 name: marketing-growth
+allowed-tools: Read Grep Glob
 description: "Marketing and growth specialist perspectives. Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack. Specialists: Marketing strategist, Copywriter, Graphic designer, Quality reviewer, SEO strategist, Email campaign planner, Brand voice guide, Market researcher, Landing page planner, Growth experiment designer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

@@ -1,5 +1,6 @@
 ---
 name: it-operations
+allowed-tools: Read Grep Glob
 description: "IT operations specialist perspectives. Documentation and planning for everyday IT support and infrastructure upkeep. Specialists: Support documenter, Runbook writer, Change planner, Backup and recovery planner, Asset inventory analyst. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

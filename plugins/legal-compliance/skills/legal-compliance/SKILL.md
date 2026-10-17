@@ -1,5 +1,6 @@
 ---
 name: legal-compliance
+allowed-tools: Read Grep Glob
 description: "Legal and compliance specialist perspectives. Plain-language reading, drafting and checklists from documents and rules the user supplies. Specialists: Contract reader, Policy drafter, Privacy policy drafter, Compliance checklist builder, Terms reviewer, IP basics explainer, Records retention planner, Regulatory change summarizer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

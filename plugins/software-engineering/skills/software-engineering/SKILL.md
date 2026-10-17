@@ -1,5 +1,6 @@
 ---
 name: software-engineering
+allowed-tools: Read Grep Glob
 description: "Software engineering specialist perspectives. Planning, review and documentation of software changes from supplied code, requirements and notes. Specialists: Requirements analyst, Software architect, Feature change planner, Code reviewer, Test designer, Refactoring planner, API designer, Debugging analyst, Technical writer, Release notes writer, Schema reviewer. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

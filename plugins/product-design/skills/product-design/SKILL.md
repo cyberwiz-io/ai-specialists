@@ -1,5 +1,6 @@
 ---
 name: product-design
+allowed-tools: Read Grep Glob
 description: "Product and design specialist perspectives. Product definition, user research planning, interface writing and design review. Specialists: Product manager, UX researcher, UX writer, UI designer, Accessibility reviewer, Roadmap planner, Design system documenter. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

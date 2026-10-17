@@ -57,7 +57,7 @@ def skill_md(root, family):
         rows.append(f"| [{role['name']}](references/{role['slug']}.md) | `{role['id']}` | {summary} |")
     extras = _references(family)
     lines = [
-        "---", f"name: {family['id']}", f"description: {json.dumps(description(family))}", "---", "",
+        "---", f"name: {family['id']}", "allowed-tools: Read Grep Glob", f"description: {json.dumps(description(family))}", "---", "",
         f"<!-- Generated from catalog/{family['id']}/ and {family['coordinator'][0]} by scripts/pack.py build. Do not edit. -->",
         "", f"# {family['name']} specialists", "",
         f"Version {version(root)}. Use this skill when the user asks for work in this area. First ask for their task and "
@@ -136,6 +136,8 @@ def problems(root, families, generated):
             failures.append(f"{fid}: not a valid skill name")
         text = generated[f"{skill_dir(family)}/SKILL.md"].decode("utf-8")
         front = text.split("---\n", 2)[1]
+        if "allowed-tools: Read Grep Glob\n" not in front:
+            failures.append(f"{skill_dir(family)}/SKILL.md: missing allowed-tools, so card reads would prompt for permission")
         if f"name: {fid}\n" not in front or len(json.loads(front.split("description: ", 1)[1])) > DESCRIPTION_MAX:
             failures.append(f"{skill_dir(family)}/SKILL.md: bad name or description")
         for target in re.findall(r"\]\((references/[^)]+)\)", text):

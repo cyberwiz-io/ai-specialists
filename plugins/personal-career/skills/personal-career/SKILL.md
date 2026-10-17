@@ -1,5 +1,6 @@
 ---
 name: personal-career
+allowed-tools: Read Grep Glob
 description: "Personal and career specialist perspectives. Help individuals with applications, interviews, career thinking and personal projects. Specialists: Resume editor, Cover letter writer, Interview coach, Career planner, Personal project planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

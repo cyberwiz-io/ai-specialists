@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Nothing yet.
+- Skills declare `allowed-tools: Read Grep Glob`, so reading a specialist card from an installed plugin no longer prompts or fails in headless runs; the check requires it. A marketplace install from GitHub was observed working (see `docs/INSTALL.md`); the claude.ai upload is still unobserved.
 
 ## 1.0
 

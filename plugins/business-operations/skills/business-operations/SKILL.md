@@ -1,5 +1,6 @@
 ---
 name: business-operations
+allowed-tools: Read Grep Glob
 description: "Business operations specialist perspectives. Process, planning and decision documents for running a small organization. Specialists: Process mapper, SOP writer, Project planner, Meeting facilitator, Vendor comparer, Business plan drafter, OKR coach, Contingency planner. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 

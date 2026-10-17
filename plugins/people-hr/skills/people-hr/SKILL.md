@@ -1,5 +1,6 @@
 ---
 name: people-hr
+allowed-tools: Read Grep Glob
 description: "People and HR specialist perspectives. Drafts for hiring, onboarding, reviews and workplace policies, for human decision. Specialists: Job description writer, Interview guide designer, Onboarding plan writer, Performance review drafter, Handbook drafter. Use when the user asks for this kind of work. Materials only: it prepares text, plans and reviews and never publishes, sends, runs or changes anything."
 ---
 
