@@ -240,6 +240,7 @@ class RunTests(FixtureCase):
     def test_compare_needs_a_baseline(self):
         record = self.prepare(role=ROLE)
         self.answer(record)
+        (self.root / evals.BASELINE).write_text('{"schema": 1, "run": null, "roles": {}}\n')
         self.cli_fails(["compare", "--run", "t1"], "holds no baseline yet")
 
     def test_report_needs_a_prepared_run(self):

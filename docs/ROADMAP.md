@@ -1,8 +1,8 @@
 # Roadmap
 
-Version 1.1 is a portable instruction pack of 124 specialists in 17 families, with a marketing starter, combined packs per family and generated install files for several AI tools. All items below are planned work, not promises of implemented capabilities or release dates.
+Version 1.1 builds on the 1.0 catalog of 124 specialists in 17 families: pasteable packs, Agent Skills, Claude Code plugins with team leads, claude.ai skill ZIPs and generated install files for Codex, Copilot, Gemini CLI and Cursor. It grew out of the 0.1 marketing instruction pack. All items below are planned work, not promises of implemented capabilities or release dates.
 
-## Validate the current pack
+## Validate the current release
 
 - Run a fictional campaign in a fresh conversation with an existing host. Record research, image, file-export, profile-storage, and review capabilities actually observed.
 - Test one custom-specialist preview and enablement, and a profile export or verified save.
