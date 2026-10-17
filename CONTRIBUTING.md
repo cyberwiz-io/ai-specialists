@@ -32,7 +32,15 @@ Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and e
 
 ## Release
 
-The release ZIP is not kept in Git, because every committed version would stay in the history. To release, update `VERSION` and the changelog, merge, then push a tag named `v` plus the version, such as `v1.1`. The release workflow runs the check and tests, builds the archive with `python3 -B scripts/pack.py release --tag v1.1`, and attaches it to the GitHub Release for that tag. Run the same command locally to inspect the archive; it is written to the ignored `work/release/` folder.
+The release ZIP is not kept in Git, because every committed version would stay in the history. To release:
+
+1. Set `VERSION` and give the changelog a `## <version>` section holding the notes (move entries out of `## Unreleased`). That section becomes the GitHub Release text, and the workflow fails if it is missing.
+2. Run `python3 -B scripts/pack.py build`, `check` and the tests, and `python3 -B scripts/pack.py release --tag v<version>` to inspect the archive.
+3. Merge to `main` and confirm the check workflow is green there.
+4. Push a tag named `v` plus the version, such as `v1.1`.
+5. Confirm the release workflow attached the archive and one skill ZIP per family to the GitHub Release.
+
+The release workflow runs the check and tests, builds the archive with `python3 -B scripts/pack.py release --tag v1.1`, and attaches it to the GitHub Release for that tag. Every action in `.github/workflows/` must be pinned to a full commit SHA, which the organization requires; with a tag or branch reference the run fails at startup. Run the same command locally to inspect the archive; it is written to the ignored `work/release/` folder.
 
 Public content is organized in `catalog/`, `pack/` and `docs/`. Maintenance code lives in `scripts/` (the `packlib` package, one module per concern) and its checks in `tests/`. `config/modules.json` defines the modules that `config/module-map.json` reports. Keep any contributed examples fictional. Add no runtime framework, host dependency, or installation step for users of the pack.
 

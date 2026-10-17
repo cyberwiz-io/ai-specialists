@@ -4,7 +4,7 @@
 
 - Nothing yet.
 
-## 1.1 (not yet tagged)
+## 1.1
 
 One-command install across the major AI tools, smaller always-loaded text, and specialists that work as a team through subagents.
 
