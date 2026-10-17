@@ -214,7 +214,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "e16b7c69c3f888b002d9c31dc5a421f91ace7695f5399fdad1e3235200a6c588",
+      "digest": "2b3dc441043234ddc12332a4bedf8174213d5d44f48fdb31da371547ab63107b",
       "files": 125,
       "guide": "adapters/claude-code/README.md",
       "id": "claude-code-adapter",
@@ -252,7 +252,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "b573cf4cc87b70203d8e2cae57d19f73d54387bf1954eb0f127b0ada802c248c",
+      "digest": "c8c62d24f6e1dda83f926001661e14a79ebe6e29e9fa977a0dbe99f67ad02a50",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
