@@ -7,14 +7,14 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
-from zipfile import ZipFile
+from zipfile import BadZipFile, ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import pack as pack_cli  # noqa: E402
-from packlib import build, cards, check, config, manifest  # noqa: E402
+from packlib import build, bundle, cards, check, config, manifest  # noqa: E402
 
-COPY_SKIP = shutil.ignore_patterns(".git", "work", "__pycache__", "downloads", "dist")
+COPY_SKIP = shutil.ignore_patterns(".git", "work", "__pycache__", "dist")
 
 
 class FixtureCase(unittest.TestCase):
@@ -31,6 +31,10 @@ class FixtureCase(unittest.TestCase):
         path = self.root / name
         path.write_text(change(path.read_text()))
 
+    def release(self, tag=None):
+        families, generated = check.check(self.root)
+        return bundle.release(self.root, families, generated, self.root / config.RELEASE_DIR, tag)
+
     def assertFails(self, pattern):
         with self.assertRaisesRegex(ValueError, pattern):
             check.check(self.root)
@@ -38,11 +42,9 @@ class FixtureCase(unittest.TestCase):
 
 class BuildTests(FixtureCase):
     def test_build_is_valid_and_reproducible(self):
-        check.check(self.root)
-        archive = self.root / config.archive_name(self.root)
-        first = archive.read_bytes()
+        first = self.release().read_bytes()
         build.build(self.root)
-        self.assertEqual(first, archive.read_bytes())
+        self.assertEqual(first, self.release().read_bytes())
 
     def test_repository_ships_the_full_catalog(self):
         families, generated = check.check(self.root)
@@ -70,25 +72,29 @@ class BuildTests(FixtureCase):
     def test_stale_generated_files_fail_and_are_removed(self):
         stale = self.root / "dist/packs/old-family.md"
         stale.write_text("old")
-        zipped = self.root / "downloads/ai-specialists-0.1.zip"
-        zipped.write_bytes(b"old")
         self.assertFails("old-family.md: stale generated file")
         build.build(self.root)
-        self.assertFalse(stale.exists() or zipped.exists())
+        self.assertFalse(stale.exists())
         check.check(self.root)
 
     def test_pack_size_cap(self):
         with mock.patch.object(check, "PACK_MAX", 100):
-            self.assertFails("combined pack exceeds 100 bytes")
+            self.assertFails("combined pack exceeds 100 bytes; split the family")
+
+    def test_every_pack_fits_a_small_context_window(self):
+        _, generated = check.check(self.root)
+        packs = {name: len(data) for name, data in generated.items() if name.startswith(config.PACK_DIR)}
+        self.assertLessEqual(config.PACK_MAX, 32000)
+        self.assertEqual([name for name, size in packs.items() if size > config.PACK_MAX], [])
 
     def test_missing_license_does_not_replace_outputs(self):
         before = (self.root / config.STARTER).read_bytes()
-        archive = (self.root / config.archive_name(self.root)).read_bytes()
+        self.edit("pack/COORDINATOR.md", lambda text: text + "\nA changed instruction.\n")
         (self.root / "LICENSES/CC-BY-4.0.txt").unlink()
-        with self.assertRaises(FileNotFoundError):
-            build.build(self.root)
-        self.assertEqual(before, (self.root / config.STARTER).read_bytes())
-        self.assertEqual(archive, (self.root / config.archive_name(self.root)).read_bytes())
+        self.assertFails("release archive input is unreadable")
+        build.build(self.root)
+        self.assertNotEqual(before, (self.root / config.STARTER).read_bytes())
+        self.assertFails("release archive input is unreadable")
 
     def test_missing_card_stops_build_and_check(self):
         (self.root / "catalog/finance/budget-planner.md").unlink()
@@ -104,7 +110,7 @@ class BuildTests(FixtureCase):
             build.build(self.root)
 
     def test_destination_symlink_is_rejected(self):
-        path = self.root / config.archive_name(self.root)
+        path = self.root / config.STARTER
         path.unlink()
         path.symlink_to(self.root / "LICENSE.md")
         with self.assertRaisesRegex(ValueError, "Unsafe source path"):
@@ -241,33 +247,126 @@ class NavigationTests(FixtureCase):
 
 
 class ArchiveTests(FixtureCase):
+    def test_release_writes_verified_archive_outside_tracked_tree(self):
+        archive = self.release("v1.0")
+        self.assertEqual(archive, self.root / config.RELEASE_DIR / "ai-specialists-1.0.zip")
+        check.check(self.root)  # work/ is ignored, so a local release never fails the check
+
+    def test_release_rejects_mismatched_tag(self):
+        with self.assertRaisesRegex(ValueError, "tag 'v2.0' does not match VERSION 1.0"):
+            self.release("v2.0")
+        self.assertFalse((self.root / config.RELEASE_DIR).exists())
+
+    def test_release_rejects_symlinked_destination(self):
+        out = self.root / config.RELEASE_DIR
+        out.mkdir(parents=True)
+        (out / config.archive_name(self.root)).symlink_to(self.root / "LICENSE.md")
+        with self.assertRaisesRegex(ValueError, "Unsafe archive destination"):
+            self.release()
+
+    def test_committed_archive_fails_check(self):
+        for name in ("downloads/ai-specialists-1.0.zip", "docs/extra.zip"):
+            with self.subTest(name=name):
+                path = self.root / name
+                path.parent.mkdir(exist_ok=True)
+                path.write_bytes(b"old")
+                self.assertFails(f"{name}: archives are not committed")
+                path.unlink()
+
     def test_zip_rejects_extra_file(self):
-        with ZipFile(self.root / config.archive_name(self.root), "a") as bundle:
-            bundle.writestr("private-profile.md", "Not an approved member")
-        self.assertFails("ZIP membership differs")
+        archive = self.release()
+        with ZipFile(archive, "a") as bundled:
+            bundled.writestr("private-profile.md", "Not an approved member")
+        families, generated = check.check(self.root)
+        self.assertEqual(bundle.compare(archive, bundle.members(self.root, families, generated)),
+                         ["ZIP membership differs from the approved files"])
 
     def test_zip_rejects_changed_bytes(self):
-        archive = self.root / config.archive_name(self.root)
-        with ZipFile(archive) as bundle:
-            members = {name: bundle.read(name) for name in bundle.namelist()}
+        archive = self.release()
+        with ZipFile(archive) as bundled:
+            members = {name: bundled.read(name) for name in bundled.namelist()}
         first = sorted(members)[0]
-        with ZipFile(archive, "w") as bundle:
+        with ZipFile(archive, "w") as bundled:
             for name, data in members.items():
-                bundle.writestr(name, b"changed" if name == first else data)
-        self.assertFails("ZIP bytes differ")
+                bundled.writestr(name, b"changed" if name == first else data)
+        families, generated = check.check(self.root)
+        self.assertEqual(bundle.compare(archive, bundle.members(self.root, families, generated)),
+                         [f"ZIP bytes differ: {first}"])
 
     def test_unreadable_zip_fails_cleanly(self):
-        (self.root / config.archive_name(self.root)).write_bytes(b"not a zip")
-        self.assertFails("cannot read archive")
+        archive = self.release()
+        archive.write_bytes(b"not a zip")
+        with self.assertRaises(BadZipFile):
+            bundle.compare(archive, {})
 
     def test_archive_contains_cards_packs_and_licenses(self):
-        with ZipFile(self.root / config.archive_name(self.root)) as bundle:
-            names = bundle.namelist()
+        with ZipFile(self.release()) as bundled:
+            names = bundled.namelist()
         prefix = "ai-specialists-1.0/"
         for required in ("catalog/security/threat-modeler.md", "dist/packs/finance.md",
+                         "dist/packs/security-engineering.md", "dist/packs/security-governance.md",
                          "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):
             self.assertIn(prefix + required, names)
         self.assertFalse([name for name in names if "/work/" in name or "/profiles/" in name])
+        self.assertNotIn(prefix + "dist/packs/security.md", names)
+
+
+class SplitPackTests(FixtureCase):
+    def change_manifest(self, change):
+        path = self.root / config.MANIFEST
+        data = json.loads(path.read_text())
+        change(next(family for family in data["families"] if family["id"] == "security")["packs"])
+        path.write_text(json.dumps(data))
+
+    def test_security_cards_each_appear_in_exactly_one_pack(self):
+        families, generated = check.check(self.root)
+        security = next(family for family in families if family["id"] == "security")
+        packs = {name: data.decode("utf-8") for name, data in generated.items()
+                 if name.startswith(config.PACK_DIR + "/security")}
+        self.assertEqual(sorted(packs), ["dist/packs/security-engineering.md", "dist/packs/security-governance.md"])
+        for role in security["roles"]:
+            holders = [name for name, text in packs.items() if f"<!-- Source: {role['path']} -->" in text]
+            self.assertEqual(len(holders), 1, role["path"])
+        for text in packs.values():
+            self.assertIn("pack/FAMILY-COORDINATOR.md", text)
+            self.assertIn("catalog/security/INDEX.md", text)
+            self.assertIn("When a handoff names a role outside this pack", text)
+
+    def test_unsplit_family_keeps_single_pack(self):
+        _, generated = check.check(self.root)
+        text = generated["dist/packs/finance.md"].decode("utf-8")
+        self.assertIn("the user asks for this family pack", text)
+        self.assertNotIn("outside this pack", text)
+
+    def test_role_in_no_pack_fails(self):
+        self.change_manifest(lambda packs: packs[1]["roles"].remove("privacy-engineer"))
+        with self.assertRaisesRegex(ValueError, "roles in no pack: privacy-engineer"):
+            manifest.load(self.root)
+
+    def test_role_in_two_packs_fails(self):
+        self.change_manifest(lambda packs: packs[1]["roles"].append("threat-modeler"))
+        with self.assertRaisesRegex(ValueError, "role threat-modeler is in more than one pack"):
+            manifest.load(self.root)
+
+    def test_unknown_role_fails(self):
+        self.change_manifest(lambda packs: packs[1]["roles"].append("nobody"))
+        with self.assertRaisesRegex(ValueError, "unknown role nobody"):
+            manifest.load(self.root)
+
+    def test_pack_id_must_extend_family_id(self):
+        self.change_manifest(lambda packs: packs[0].update(id="finance"))
+        with self.assertRaisesRegex(ValueError, "must be a slug starting with security-"):
+            manifest.load(self.root)
+
+    def test_duplicate_pack_id_fails(self):
+        self.change_manifest(lambda packs: packs[1].update(id="security-engineering"))
+        with self.assertRaisesRegex(ValueError, "pack id security-engineering already used"):
+            manifest.load(self.root)
+
+    def test_single_pack_split_fails(self):
+        self.change_manifest(lambda packs: packs.pop())
+        with self.assertRaisesRegex(ValueError, "at least two packs"):
+            manifest.load(self.root)
 
 
 class FindTests(FixtureCase):

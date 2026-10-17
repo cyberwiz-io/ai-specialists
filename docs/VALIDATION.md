@@ -11,7 +11,8 @@ Run `python3 -B scripts/pack.py check` and the test command in [Contributing](..
 - sensitive-family cards carry a Safeguards paragraph covering sources, uncertainty, authorization, escalation and "not advice";
 - restricted words (publish, deploy, credential, connect, certified and similar) appear only where a card rules them out, and no card names a law, standard or framework;
 - every handoff names a real role ID, cards and combined packs stay under their size limits, and no two cards share a deliverable;
-- generated files (indexes, registry, combined packs, module map, archive) match their sources, local links resolve, and every source file belongs to a module.
+- generated files (indexes, registry, combined packs, module map) match their sources, each combined pack is under 32 KB, local links resolve, every source file belongs to a module, and no archive is committed;
+- the release command rebuilds the archive and verifies its members and bytes before CI attaches it to a tagged release.
 
 These are structural checks of the written instructions.
 

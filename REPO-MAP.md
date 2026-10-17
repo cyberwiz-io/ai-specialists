@@ -50,15 +50,15 @@ Each family folder has a generated `INDEX.md` listing its specialists with one-l
 | `catalog/REGISTRY.jsonl` | One line per specialist; grep it | No, generated |
 | `pack/*.md` | Coordinators, workflow, templates, start guide | Yes, except `STARTER-PACK.md` |
 | `pack/STARTER-PACK.md` | Marketing starter, pasted as one file | No, generated |
-| `dist/packs/<family>.md` | Pasteable combined pack per family | No, generated |
-| `downloads/*.zip` | Release archive | No, generated |
+| `dist/packs/<pack>.md` | Pasteable combined pack per family, or per part where `families.json` lists `packs` | No, generated |
+| `work/release/*.zip` | Release archive from `pack.py release`; CI attaches it to tagged GitHub Releases | No, generated and never committed |
 | `config/modules.json` | Module definitions | Yes |
 | `config/module-map.json` | Module map with digests | No, generated |
 | `docs/` | Guides, roadmap, validation status | Yes |
 | `scripts/`, `tests/` | Build, check, search; their tests | Yes |
 | `LICENSES/`, `NOTICE.md`, `LICENSE.md` | License text and coverage | Rarely |
 
-Skip `dist/`, `downloads/` and `LICENSES/` when exploring: they are generated copies or license text.
+Skip `dist/`, `work/` and `LICENSES/` when exploring: they are generated copies or license text.
 
 ## Rules that apply everywhere
 

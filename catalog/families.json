@@ -9,6 +9,15 @@
       "purpose": "Defensive security planning, review and documentation of materials the user supplies.",
       "flow": "Clarify the asset and decision, review only supplied material, rank findings with stated uncertainty, then hand a written result to the people who own the system.",
       "notes": "Defensive work on supplied material only. No offensive tooling, exploitation steps, evasion or probing of systems. Findings stay provisional until the system owner verifies them. A suspected live incident goes to the user's responsible people at once.",
+      "packs": [
+        {"id": "security-engineering", "name": "Security engineering",
+         "roles": ["security-architect", "threat-modeler", "appsec-reviewer", "secure-code-reviewer",
+                   "vulnerability-triage-analyst", "incident-response-planner", "cloud-security-reviewer",
+                   "detection-rule-reviewer"]},
+        {"id": "security-governance", "name": "Security governance and privacy",
+         "roles": ["security-policy-writer", "risk-register-analyst", "access-review-analyst",
+                   "security-awareness-trainer", "privacy-engineer", "vendor-security-assessor"]}
+      ],
       "roles": [
         {"slug": "security-architect", "name": "Security architect"},
         {"slug": "threat-modeler", "name": "Threat modeler"},

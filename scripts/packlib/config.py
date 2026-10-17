@@ -13,7 +13,7 @@ MODULES = "config/modules.json"
 MODULE_MAP = "config/module-map.json"
 REPO_MAP = "REPO-MAP.md"
 PACK_DIR = "dist/packs"
-DOWNLOADS = "downloads"
+RELEASE_DIR = "work/release"
 GUIDE = "docs/CARD-GUIDE.md"
 DEFAULT_COORDINATOR = ("pack/FAMILY-COORDINATOR.md",)
 
@@ -31,7 +31,9 @@ PACK_SOURCES = (
 LICENSE_FILES = ("NOTICE.md", "LICENSE.md", "LICENSES/CC-BY-4.0.txt", "LICENSES/Apache-2.0.txt")
 
 CARD_MAX = 3500
-PACK_MAX = 60000
+# About 8,000 tokens at roughly four bytes per token, so a combined pack leaves at least half of a
+# 16,000-token context window for the user's material and the reply. Families above it declare "packs".
+PACK_MAX = 32000
 ARCHIVE_PREFIX = "ai-specialists-"
 
 
@@ -57,4 +59,5 @@ def version(root):
 
 
 def archive_name(root):
-    return f"{DOWNLOADS}/{ARCHIVE_PREFIX}{version(root)}.zip"
+    """File name of the release archive; CI attaches it to the GitHub Release rather than committing it."""
+    return f"{ARCHIVE_PREFIX}{version(root)}.zip"

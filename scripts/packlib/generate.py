@@ -50,12 +50,20 @@ def index(root, family):
     return "\n".join(lines).encode("utf-8")
 
 
-def family_pack(root, family, overlay):
+def family_pack(root, family, pack, overlay):
     names = list(family["coordinator"]) + [f"catalog/{family['id']}/INDEX.md"]
-    names += [role["path"] for role in family["roles"]]
+    names += [role["path"] for role in pack["roles"]]
+    others = [other for other in family["packs"] if other is not pack]
+    scope = "the user asks for this family pack"
+    if others:
+        scope = (f"the user asks for the {pack['name']} pack. It holds {len(pack['roles'])} of the "
+                 f"{len(family['roles'])} {family['name']} specialists; the index lists them all. The others are in "
+                 + "; ".join(f"{other['name']} ({pack_path(other)})" for other in others)
+                 + ". When a handoff names a role outside this pack, write the handoff note and tell the user "
+                 "which pack holds that role")
     header = (
-        f"# {family['name']} specialists, combined instructions\n\n"
-        f"Version {version(root)}. Use these instructions when the user asks for this family pack. "
+        f"# {pack['name']} specialists, combined instructions\n\n"
+        f"Version {version(root)}. Use these instructions when {scope}. "
         f"First confirm that all {len(names)} sections are readable. Then ask for the user's task and "
         "the material they can supply. Use only the specialists that add a distinct deliverable. "
         "Respect higher-priority host rules and the materials-only boundary. "
@@ -75,5 +83,5 @@ def registry(root, families):
     return (head + "\n" + "\n".join(lines) + "\n").encode("utf-8")
 
 
-def pack_path(family):
-    return f"{PACK_DIR}/{family['id']}.md"
+def pack_path(pack):
+    return f"{PACK_DIR}/{pack['id']}.md"

@@ -30,7 +30,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "b77420a94295a021e14e55cce109792282ce6640174e594f7da828873950e77d",
+      "digest": "24ab827265c7c6c164092ac9569afbd4084b7f62c6a5f4b27a7b1ec2498637c0",
       "files": 19,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -84,7 +84,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "7ad08c8ebc694b61ed4a4c1c0c5acf0741a90165730a5793c7b8e66da9b90299",
+      "digest": "fd5893651e7365158fa4e11ed2e75e939b93c4a85b1337ba3293eb770be991e2",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -122,8 +122,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "d31154a3c4c74218a49a7b6d61b80644a26af6b5868c00e53678f2e0e9da693f",
-      "files": 13,
+      "digest": "29bd26909c7a3373e270713cde256ceed18551643ff7eee59e874806c174a91f",
+      "files": 14,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [

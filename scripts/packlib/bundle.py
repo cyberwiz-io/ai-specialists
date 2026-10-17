@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Assemble the downloadable archive in memory and compare it with the one on disk."""
+"""Assemble the release archive in memory, write it outside the tracked tree and verify the written copy."""
 from io import BytesIO
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
-from .config import (ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_DIR, PACK_SOURCES,
-                     REGISTRY, STARTER, read, version)
+from .config import (ARCHIVE_PREFIX, GUIDE, LICENSE_FILES, MANIFEST, MODULE_MAP, PACK_SOURCES, archive_name,
+                     read, version)
 
 
 def members(root, families, generated):
@@ -36,3 +36,19 @@ def compare(archive, expected):
         if len(names) != len(expected) or set(names) != set(expected):
             return ["ZIP membership differs from the approved files"]
         return [f"ZIP bytes differ: {name}" for name, data in expected.items() if bundle.read(name) != data]
+
+
+def release(root, families, generated, out, tag=None):
+    """Write the archive into out, verify it and return its path. A tag must name this VERSION, such as v1.0."""
+    if tag is not None and tag != f"v{version(root)}":
+        raise ValueError(f"tag {tag!r} does not match VERSION {version(root)}; expected v{version(root)}")
+    expected = members(root, families, generated)
+    out.mkdir(parents=True, exist_ok=True)
+    archive = out / archive_name(root)
+    if archive.is_symlink():
+        raise ValueError(f"Unsafe archive destination: {archive}")
+    archive.write_bytes(pack(expected))
+    failures = compare(archive, expected)
+    if failures:
+        raise ValueError("\n".join(failures))
+    return archive

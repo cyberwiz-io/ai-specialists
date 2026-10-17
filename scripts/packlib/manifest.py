@@ -19,7 +19,7 @@ def load(root):
     except json.JSONDecodeError as error:
         raise ValueError(f"{MANIFEST}: invalid JSON ({error})")
     _require(data.get("schema") == 1, "schema must be 1")
-    families, seen_families, seen_ids = [], set(), set()
+    families, seen_families, seen_ids, seen_packs = [], set(), set(), set()
     for family in data.get("families", []):
         fid = family.get("id", "")
         _require(SLUG.fullmatch(fid) is not None, f"bad family id {fid!r}")
@@ -43,15 +43,44 @@ def load(root):
                           "family_name": family["name"], "sensitive": family["sensitive"],
                           "path": f"catalog/{fid}/{slug}.md"})
         _require(roles, f"{fid}: no roles")
+        packs = _packs(fid, family, roles, seen_packs)
         families.append({"id": fid, "name": family["name"], "sensitive": family["sensitive"],
                          "purpose": family["purpose"], "flow": family["flow"],
                          "notes": family.get("notes", ""),
                          "coordinator": tuple(family.get("coordinator", DEFAULT_COORDINATOR)),
-                         "roles": roles})
+                         "roles": roles, "packs": packs})
     _require(families, "no families")
     total = sum(len(f["roles"]) for f in families)
     _require(total == data.get("total"), f"total says {data.get('total')} but roster has {total}")
     return families
+
+
+def _packs(fid, family, roles, seen):
+    """Split a family into named combined packs; one pack named after the family when none are listed."""
+    listed = family.get("packs")
+    if listed is None:
+        _require(fid not in seen, f"{fid}: pack id already used")
+        seen.add(fid)
+        return [{"id": fid, "name": family["name"], "roles": roles}]
+    _require(isinstance(listed, list) and len(listed) >= 2, f"{fid}: packs must list at least two packs")
+    by_slug, placed, packs = {role["slug"]: role for role in roles}, set(), []
+    for pack in listed:
+        pid = pack.get("id", "")
+        _require(SLUG.fullmatch(pid) is not None and pid.startswith(fid + "-"),
+                 f"{fid}: pack id {pid!r} must be a slug starting with {fid}-")
+        _require(pid not in seen, f"{fid}: pack id {pid} already used")
+        seen.add(pid)
+        _require(isinstance(pack.get("name"), str) and pack["name"], f"{fid}/{pid}: missing pack name")
+        slugs = pack.get("roles") or []
+        _require(slugs, f"{fid}/{pid}: pack has no roles")
+        for slug in slugs:
+            _require(slug in by_slug, f"{fid}/{pid}: unknown role {slug}")
+            _require(slug not in placed, f"{fid}: role {slug} is in more than one pack")
+            placed.add(slug)
+        packs.append({"id": pid, "name": pack["name"], "roles": [r for r in roles if r["slug"] in slugs]})
+    missing = sorted(set(by_slug) - placed)
+    _require(not missing, f"{fid}: roles in no pack: {', '.join(missing)}")
+    return packs
 
 
 def roles(families):

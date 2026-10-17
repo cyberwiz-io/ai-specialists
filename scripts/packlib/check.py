@@ -1,14 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Verify cards, generated files, links, size limits and the archive. Raises ValueError listing every failure."""
+"""Verify cards, generated files, links, size limits and archive inputs. Raises ValueError listing every failure."""
 from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
-from zipfile import BadZipFile
 
 from . import bundle, cards, manifest, modmap
 from .build import outputs
-from .config import (DOWNLOADS, PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, archive_name, read, safe_path,
-                     version)
+from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, read, safe_path, version
 
 VERSION_MENTION = re.compile(r"\bVersion:?\s+([0-9]+\.[0-9]+)")
 LINK = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
@@ -60,13 +58,22 @@ def check_generated(root, generated):
             failures.append("Combined instructions differ from sources; run build" if name == STARTER
                             else f"{name} differs from sources; run build")
         if name.startswith(PACK_DIR) and len(data) > PACK_MAX:
-            failures.append(f"{name}: combined pack exceeds {PACK_MAX} bytes")
-    archive = archive_name(root)
-    for folder, pattern, keep in ((PACK_DIR, "*.md", set(generated)), (DOWNLOADS, "*.zip", {archive})):
-        directory = root / folder
-        for path in sorted(directory.glob(pattern)) if directory.is_dir() else []:
-            if path.relative_to(root).as_posix() not in keep:
-                failures.append(f"{path.relative_to(root).as_posix()}: stale generated file; run build")
+            failures.append(f"{name}: combined pack exceeds {PACK_MAX} bytes; split the family with \"packs\"")
+    directory = root / PACK_DIR
+    for path in sorted(directory.glob("*.md")) if directory.is_dir() else []:
+        if path.relative_to(root).as_posix() not in generated:
+            failures.append(f"{path.relative_to(root).as_posix()}: stale generated file; run build")
+    return failures
+
+
+def check_archives(root):
+    """Release archives are attached to GitHub Releases by CI, never committed."""
+    failures = []
+    for path in sorted(root.rglob("*.zip")):
+        relative = path.relative_to(root)
+        if not set(relative.parts) & SKIP_DIRS:
+            failures.append(f"{relative.as_posix()}: archives are not committed; "
+                            "run release, and let CI attach it to the GitHub Release")
     return failures
 
 
@@ -113,11 +120,11 @@ def check(root):
     failures += check_generated(root, generated)
     failures += check_links(root)
     failures += check_navigation(root, families, generated)
-    archive = archive_name(root)
+    failures += check_archives(root)
     try:
-        failures += bundle.compare(safe_path(root, archive), bundle.members(root, families, generated))
-    except (OSError, BadZipFile) as error:
-        failures.append(f"{archive}: cannot read archive ({error})")
+        bundle.members(root, families, generated)
+    except OSError as error:
+        failures.append(f"release archive input is unreadable ({error})")
     if failures:
         raise ValueError("\n".join(failures))
     return families, generated

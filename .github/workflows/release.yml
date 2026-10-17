@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+# Builds the release ZIP for a v<VERSION> tag and attaches it to that tag's GitHub Release.
+# The archive is never committed, so the Git history does not grow with every version.
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pack check
+        run: python3 -B scripts/pack.py check
+      - name: Tests
+        run: python3 -B -m unittest discover -s tests
+      - name: Build archive
+        run: python3 -B scripts/pack.py release --tag "$GITHUB_REF_NAME" --out work/release
+      - name: Attach archive to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" work/release/*.zip --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" work/release/*.zip --verify-tag \
+              --title "AI Specialists ${GITHUB_REF_NAME#v}" \
+              --notes "See CHANGELOG.md for the changes in version ${GITHUB_REF_NAME#v}. Open pack/START-HERE.md inside the archive to begin."
+          fi

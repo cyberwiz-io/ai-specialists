@@ -12,11 +12,11 @@ These are editable instruction files. One assistant can work through the special
 2. Describe your task. For marketing: *Use this starter pack. My business is [short description]. My website is [optional]. Help me create a marketing campaign. First confirm that you can read all eight instruction sections.* For another family: *Use this pack. My task is [description]. Here is the material I can supply: [...]. First confirm that you can read all the sections.*
 3. Confirm the plan, review the materials, and accept or revise.
 
-Prefer a download? [Get the release ZIP](downloads/ai-specialists-1.0.zip?raw=1) with every card, every combined pack, attribution and licenses, then open `pack/START-HERE.md`.
+Prefer a download? [Get the release ZIP](https://github.com/cyberwiz-io/ai-specialists/releases/latest) from the latest release, with every card, every combined pack, attribution and licenses, then open `pack/START-HERE.md`.
 
 ## Families
 
-Each family has a pasteable combined pack and an index of its specialists.
+Each family has a pasteable combined pack and an index of its specialists. Every pack stays under 32 KB, about 8,000 tokens, so it fits in a 16,000-token context window with room to work; Security is split into two packs to stay under that limit.
 
 | Family | Specialists | Index | Combined pack |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ Each family has a pasteable combined pack and an index of its specialists.
 | Public sector and nonprofit | 5 | [index](catalog/public-nonprofit/INDEX.md) | [pack](dist/packs/public-nonprofit.md) |
 | Personal and career | 5 | [index](catalog/personal-career/INDEX.md) | [pack](dist/packs/personal-career.md) |
 | Orchestration and meta | 5 | [index](catalog/orchestration/INDEX.md) | [pack](dist/packs/orchestration.md) |
-| Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | [pack](dist/packs/security.md) |
+| Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | Two packs: [engineering](dist/packs/security-engineering.md) (8), [governance and privacy](dist/packs/security-governance.md) (6) |
 | Finance (sensitive) | 8 | [index](catalog/finance/INDEX.md) | [pack](dist/packs/finance.md) |
 | People and HR (sensitive) | 5 | [index](catalog/people-hr/INDEX.md) | [pack](dist/packs/people-hr.md) |
 | Legal and compliance (sensitive) | 8 | [index](catalog/legal-compliance/INDEX.md) | [pack](dist/packs/legal-compliance.md) |
