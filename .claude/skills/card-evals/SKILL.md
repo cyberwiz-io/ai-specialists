@@ -44,3 +44,13 @@ python3 -B scripts/evals.py report --run <run>
 `report` validates every reply and grade. Each grade must list exactly the prepared items, in order, with allowed verdicts. If a grade is invalid, delete it and grade that fixture again with a fresh grader. Do not edit grades by hand. The command writes `work/evals/<run>/REPORT.md`, which records the version, commit, host, tools, models, inputs, outcomes and limits.
 
 Give the user the totals and the fixtures that did not pass. Do not describe the results as more than the report's Limits section allows. `work/` is never committed. When the user has reviewed the report and wants it kept, copy it to `evals/reports/<run>.md`, link it from `docs/VALIDATION.md` under Recorded evaluations, and run the pack build, check and tests.
+
+## 4. Weekly regression check
+
+A scheduled task runs this unattended. It never edits the baseline or the repository.
+
+1. If `evals/baseline.json` has `"run": null`, there is nothing to compare with. Stop and say so; do not run the evals.
+2. Run the whole catalog with the steps above, named `<date>-weekly`, recording the model as the host reports it.
+3. Run `python3 -B scripts/evals.py compare --run <run>`. Exit 0 means no card fell: stop without opening an issue. Exit 3 means at least one fell.
+4. On exit 3, search open issues for the label or title `Card eval regression`. If one is open, add the new `REGRESSION.md` as a comment; otherwise open an issue titled `Card eval regression: <date>` with its contents, noting any model change it reports. Do not paste replies or grades.
+5. If the run itself fails (missing fixtures after one retry), open or comment on an issue saying which fixtures are missing; do not compare a partial run to the baseline as if complete.

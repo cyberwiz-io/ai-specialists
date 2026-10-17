@@ -214,6 +214,34 @@ class RunTests(FixtureCase):
         with self.assertRaisesRegex(ValueError, "invalid JSON"):
             evals.report(self.root, "t1")
 
+    def test_compare_flags_a_card_whose_pass_rate_fell(self):
+        record = self.prepare(family="ai-ml")
+        self.answer(record)
+        evals.report(self.root, "t1")
+        with contextlib.redirect_stdout(io.StringIO()):
+            evals_cli.main(["baseline", "--run", "t1"], root=self.root)
+        self.assertEqual(json.loads((self.root / evals.BASELINE).read_text())["model"], "test-model")
+        build.build(self.root)  # the module map digests the baseline file
+        self.prepare("t2", family="ai-ml")
+        self.answer(evals.load_run(self.root, "t2"))
+        with contextlib.redirect_stdout(io.StringIO()):
+            evals_cli.main(["compare", "--run", "t2"], root=self.root)
+        self.assertIn("No card's pass rate fell", (self.root / "work/evals/t2/REGRESSION.md").read_text())
+        worse = record["fixtures"][0]
+        self.prepare("t3", family="ai-ml")
+        self.answer(evals.load_run(self.root, "t3"), {worse["id"]: {"traits": "fail"}})
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out), self.assertRaises(SystemExit) as exit_:
+            evals_cli.main(["compare", "--run", "t3"], root=self.root)
+        self.assertEqual(exit_.exception.code, 3)
+        self.assertIn(f"fell\t{worse['role']}", out.getvalue())
+        self.assertIn(f"`{worse['id']}`", (self.root / "work/evals/t3/REGRESSION.md").read_text())
+
+    def test_compare_needs_a_baseline(self):
+        record = self.prepare(role=ROLE)
+        self.answer(record)
+        self.cli_fails(["compare", "--run", "t1"], "holds no baseline yet")
+
     def test_report_needs_a_prepared_run(self):
         self.cli_fails(["report", "--run", "never"], "run.json is missing")
 
