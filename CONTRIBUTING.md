@@ -32,7 +32,7 @@ Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and e
 
 ## Security checks
 
-Checks and scans run on pull requests only, not on pushes to `main` or on a schedule, so a change is checked once, before it merges. Each pull request runs:
+Checks and scans run on pull requests only, not on pushes to `main` or on a schedule, so a change is checked once, before it merges; the release workflow reruns the pack check and tests on a version tag. Each pull request runs:
 
 - `check`: the pack check, the unit tests and `claude plugin validate --strict`.
 - `codeql`: CodeQL for Python and for the workflows.

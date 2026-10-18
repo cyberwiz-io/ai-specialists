@@ -4,7 +4,7 @@ You do not have to paste a pack into a chat. Each family is also an installable 
 
 Nothing here adds a capability. A skill is advisory instructions, and the plugins are materials only: they do not publish, send, schedule, connect or run anything.
 
-Pick your tool below. Claude Code is the host where these files have been checked most; Antigravity CLI also ran a lead. Every other path is generated to that host's published format but not tested.
+Pick your tool below. Claude Code is the host where these files have been checked most; Antigravity CLI also loaded a lead. Every other path is generated to that host's published format but not tested.
 
 ## What gets installed
 
@@ -66,7 +66,7 @@ Then enable the `ai-specialists` plugin. It carries the 17 leads and `specialist
 gemini extensions install https://github.com/cyberwiz-io/ai-specialists
 ```
 
-The repository root is the extension (`gemini-extension.json`), and it loads the root `skills/`. Gemini CLI itself is not tested. The same extension installed and ran a lead in Antigravity CLI 1.4.2 (clone the repository, then `agy plugin install <folder>`). Details: [Gemini CLI adapter](../adapters/gemini/README.md).
+The repository root is the extension (`gemini-extension.json`), and it loads the root `skills/`. Gemini CLI itself is not tested. The same extension installed in Antigravity CLI 1.4.2, where a plan-mode run loaded a lead (clone the repository, then `agy plugin install <folder>`). Details: [Gemini CLI adapter](../adapters/gemini/README.md).
 
 ## GitHub Copilot
 

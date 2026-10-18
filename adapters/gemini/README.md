@@ -2,7 +2,7 @@
 
 The repository root is a Gemini CLI extension. `gemini-extension.json` names it, and Gemini loads every skill in the root `skills/` folder: 124 role skills, 17 family leads and the cross-family `specialists` lead (142 in all). `python3 -B scripts/pack.py build` generates the manifest and the skills; only this README is written by hand.
 
-Tested host: Gemini CLI itself is not tested; it was not installed where this was checked. The same extension was installed and run in Antigravity CLI 1.4.2 (see below). `gemini extensions validate .` passed on Gemini CLI 0.64.0 in an earlier cloud-container check that installed nothing from GitHub and ran no model.
+Tested host: no Gemini CLI install or model run is recorded; Gemini CLI was not installed where this was checked. `gemini extensions validate .` passed on Gemini CLI 0.64.0 in an earlier cloud-container check that installed nothing from GitHub and ran no model. The same extension was installed in Antigravity CLI 1.4.2 and a lead was loaded there (see below).
 
 ## Antigravity CLI
 
