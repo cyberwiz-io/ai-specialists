@@ -2,16 +2,6 @@
 
 ## Unreleased
 
-- Host install checks recorded: Antigravity CLI 1.4.2 installed the extension from a GitHub clone and loaded the security lead in one headless run. The Codex install was blocked by a local wrapper, Gemini CLI was not installed, and Copilot and Cursor are marked not tested because the maintainer cannot test them. See "Other host installs" in docs/VALIDATION.md.
-- Checks and scans run on pull requests only. A new `security` workflow runs Gitleaks, Semgrep CE, Trivy and, for sensitive paths, an AI security review; CodeQL moves from default setup to a pull-request-only workflow. See "Security checks" in CONTRIBUTING.md.
-- Card fixes from the first full-catalog eval: the graphic designer delivers captions, build sheets and provisional alt text when the host cannot make images; the task router names only enabled role IDs; the storyteller adds no unsupplied framing and meets the length from supplied moments; the cover letter writer uses a bracketed recipient and reaches the length without stock openings; the meeting facilitator's agenda checks apply only to agendas; the contract reader gives no example dates; the privacy policy drafter waits for confirmed practices before drafting.
-- A text-only third review of the sensitive-family cards: about 70 wording fixes, no new rules.
-- Team lead descriptions say which requests should start them, from a new `triggers` field per family in `catalog/families.json`; the lead description limit is 400 characters. Leads send review fixes back to the owning role and list choices a specialist left to the user as decisions.
-- Security is split into three combined packs: engineering (5), operations (3) and governance and privacy (6).
-- Plugin eval suites for finance, people-hr and legal-compliance, each with a team task that chains three specialists; team tasks may set `min_agents`.
-- The first full-catalog eval run (141 fixtures on claude-opus-5-5) and its re-runs are recorded, and `evals/baseline.json` holds every card. `evals.py baseline` accepts several `--run` values, and `scripts/evals_headless.sh` carries out a prepared run with one fresh `claude -p` session per reply and per grade.
-- The Codex plugin's `interface.shortDescription` fits the documented 30 characters, and the check enforces it.
-
 ## 1.1
 
 One-command install across the major AI tools, smaller always-loaded text, and specialists that work as a team through subagents.
@@ -27,6 +17,15 @@ One-command install across the major AI tools, smaller always-loaded text, and s
 - A `claude plugin eval` suite for the security plugin (`evals/plugin/security.json`, generated into `plugins/security/evals/`): five tasks, a boundary case and one `/security:security-lead` team task, each with a no-plugin baseline.
 - README opens with a one-command install table per tool; the limits section moved lower.
 - Skills declare `allowed-tools` (`Read Grep Glob`, plus `Agent` for leads), so a skill reading its own cards no longer prompts or fails in headless runs; the check requires it. A marketplace install from GitHub of the 1.0 layout was observed working (see `docs/INSTALL.md`); the claude.ai upload is still unobserved.
+- Host install checks recorded: Antigravity CLI 1.4.2 installed the extension from a GitHub clone and loaded the security lead in one headless run. The Codex install was blocked by a local wrapper, Gemini CLI was not installed, and Copilot and Cursor are marked not tested because the maintainer cannot test them. See "Other host installs" in docs/VALIDATION.md.
+- Checks and scans run on pull requests only. A new `security` workflow runs Gitleaks, Semgrep CE, Trivy and, for sensitive paths, an AI security review; CodeQL has a pull-request-only workflow that runs once an organization admin turns default setup off and the `CODEQL_ADVANCED` variable is set. The AI review fails, rather than passes, when the API key is missing or the verdict line is absent, and it updates only its own comment. See "Security checks" in CONTRIBUTING.md.
+- Card fixes from the first full-catalog eval: the graphic designer delivers captions, build sheets and provisional alt text when the host cannot make images; the task router names only enabled role IDs; the storyteller adds no unsupplied framing and meets the length from supplied moments; the cover letter writer uses a bracketed recipient and reaches the length without stock openings; the meeting facilitator's agenda checks apply only to agendas; the contract reader gives no example dates; the privacy policy drafter waits for confirmed practices before drafting.
+- A text-only third review of the sensitive-family cards: about 70 wording fixes, no new rules.
+- Team lead descriptions say which requests should start them, from a new `triggers` field per family in `catalog/families.json`; the lead description limit is 400 characters. Leads send review fixes back to the owning role and list choices a specialist left to the user as decisions.
+- Security is split into three combined packs: engineering (5), operations (3) and governance and privacy (6).
+- Plugin eval suites for finance, people-hr and legal-compliance, each with a team task that chains three specialists; team tasks may set `min_agents`.
+- The first full-catalog eval run (141 fixtures on claude-opus-5-5) and its re-runs are recorded, and `evals/baseline.json` holds every card. `evals.py baseline` accepts several `--run` values, and `scripts/evals_headless.sh` carries out a prepared run with one fresh `claude -p` session per reply and per grade.
+- The Codex plugin's `interface.shortDescription` fits the documented 30 characters, and the check enforces it.
 
 ## 1.0
 

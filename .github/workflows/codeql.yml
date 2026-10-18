@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # CodeQL scanning on pull requests only. This replaces GitHub's default setup, which also scans every push
-# to main and on a weekly schedule; default setup must be off for this workflow's results to upload.
+# to main and on a weekly schedule. Results cannot upload while default setup is on, and the organization
+# controls that setting, so the job runs only when the repository variable CODEQL_ADVANCED is 'true'. Set it
+# after an organization admin turns default setup off (see "Security checks" in CONTRIBUTING.md).
 name: codeql
 on:
   pull_request:
@@ -8,6 +10,7 @@ permissions:
   contents: read
 jobs:
   analyze:
+    if: vars.CODEQL_ADVANCED == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read

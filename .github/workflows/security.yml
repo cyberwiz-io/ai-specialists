@@ -41,7 +41,7 @@ jobs:
           cat changed.txt
           code=false; sensitive=false
           grep -qvE '\.md$|^docs/|^LICENSES/' changed.txt && code=true
-          grep -qE '^catalog/(security|finance|people-hr|legal-compliance)/|^catalog/families\.json$|^\.github/|^\.claude/|^scripts/|^config/|^VERSION$' changed.txt && sensitive=true
+          grep -qE '^catalog/(security|finance|people-hr|legal-compliance)/|^catalog/families\.json$|^pack/FAMILY-COORDINATOR\.md$|^\.engineering/|^\.github/|^\.claude/|^scripts/|^config/|^VERSION$' changed.txt && sensitive=true
           echo "code=$code" >> "$GITHUB_OUTPUT"
           echo "sensitive=$sensitive" >> "$GITHUB_OUTPUT"
   gitleaks:
@@ -93,7 +93,8 @@ jobs:
   ai-review:
     # A targeted AI security review, only for changes to sensitive paths: the security, finance, HR and legal
     # families, workflows, scripts, configuration and release settings. Needs the ANTHROPIC_API_KEY repository
-    # secret; without it (and on forks, which get no secrets) the review is skipped and the job still passes.
+    # secret. Without it (and on forks, which get no secrets) the job fails, so a missing review is never
+    # reported as a pass.
     needs: changes
     if: needs.changes.outputs.sensitive == 'true'
     runs-on: ubuntu-latest
@@ -103,9 +104,11 @@ jobs:
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
-      - name: Skip without an API key
+      - name: Fail without an API key
         if: env.ANTHROPIC_API_KEY == ''
-        run: echo "::notice::AI security review skipped; add the ANTHROPIC_API_KEY repository secret to enable it."
+        run: |
+          echo "::error::AI security review not run: add the ANTHROPIC_API_KEY repository secret. A skipped review is not a passed review."
+          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         if: env.ANTHROPIC_API_KEY != ''
         with:
@@ -133,9 +136,23 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
         run: |
-          { echo "### AI security review"; echo; cat review.md; } > comment.md
-          gh pr comment "$PR" --edit-last --body-file comment.md || gh pr comment "$PR" --body-file comment.md
-          if tail -n 3 review.md | grep -q '^VERDICT: BLOCKING'; then
-            echo "::error::The AI security review found blocking issues; see the pull request comment."
-            exit 1
+          { echo "<!-- ai-security-review -->"; echo "### AI security review"; echo; cat review.md; } > comment.md
+          # Update only this job's earlier comment, found by its marker; other workflows share the bot identity.
+          id=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate \
+            --jq '[.[] | select(.user.login == "github-actions[bot]" and (.body | startswith("<!-- ai-security-review -->")))] | last | .id // empty' | tail -n 1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -F body=@comment.md > /dev/null
+          else
+            gh pr comment "$PR" --body-file comment.md
           fi
+          # The last non-empty line must be exactly one verdict; truncated or malformed output fails the gate.
+          verdict=$(grep -v '^[[:space:]]*$' review.md | tail -n 1)
+          case "$verdict" in
+            "VERDICT: PASS") ;;
+            "VERDICT: BLOCKING")
+              echo "::error::The AI security review found blocking issues; see the pull request comment."
+              exit 1 ;;
+            *)
+              echo "::error::The AI security review ended without a valid verdict line; treating it as not reviewed."
+              exit 1 ;;
+          esac
