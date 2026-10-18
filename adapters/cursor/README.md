@@ -2,7 +2,7 @@
 
 Cursor reuses the Claude Code family plugin folders in `plugins/`. Each folder gets a `.cursor-plugin/plugin.json`, and the repository root gets `.cursor-plugin/marketplace.json` listing the 17 family plugins. Cursor finds `skills/<name>/SKILL.md` and `agents/*.md` in each plugin by default. `python3 -B scripts/pack.py build` generates these files; only this README is written by hand.
 
-Tested host: not yet tested.
+Tested host: not tested. The maintainer cannot test Cursor, so these files have not been loaded in Cursor.
 
 ## Install
 

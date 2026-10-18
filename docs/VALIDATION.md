@@ -47,6 +47,15 @@ The regression baseline in `evals/baseline.json` is the full-catalog run with th
 
 On 2026-10-17, `claude -p "/security:security-lead ..." --plugin-dir plugins/security` (Claude Code 2.1.302, cloud container, session model claude-sonnet-5-5) was given a fictional app review. The lead started the threat modeler and the cloud security reviewer as two parallel subagents with handoff packets, then started a fresh cross-family reviewer subagent. The reviewer found 5 blocking items and the lead sent one correction round. The final deliverable carried the standing "draft support, not advice" header and named the contributors as separate subagents. All three roles are set to `opus`, and they ran on claude-opus-5-5 while the session ran on sonnet, which fits the per-role `model` setting; `haiku` roles were not exercised. Total cost was about 1.09 USD. In that run the lead could not read its card files (non-interactive permission prompt), so the reviewer judged against role scope; the lead now carries the Acceptance lines in its own body. This is one run on fictional input, not a measure of quality.
 
+## Other host installs
+
+On 2026-10-17 on a Mac Studio (macOS), with the `release` branch at 7dccdee:
+
+- **Antigravity CLI 1.4.2.** `git clone --branch release https://github.com/cyberwiz-io/ai-specialists`, then `agy plugin install <clone>` printed `ai-specialists: 142 skills processed` (agents, commands, MCP servers and hooks skipped, none exist). `agy plugin list` showed `ai-specialists (enabled, 1.1.0)`, source `gemini-cli`, 142 skills. `agy -p "Use the security-lead skill to draft a one-page threat model for a fictional to-do web app. ..." --mode plan --model gemini-3.8-flash-low` loaded `skills/security-lead/SKILL.md`, read `references/threat-modeler.md` and `references/cross-family-reviewer.md`, started no subagent and ended with a plan artifact and a request for confirmation (plan mode is read-only), not the finished threat model. `agy plugin uninstall ai-specialists` removed it. One run, one prompt, one model.
+- **Codex 0.163.0.** Not completed. With a temporary `CODEX_HOME` under the home folder, `codex plugin marketplace add cyberwiz-io/ai-specialists@release` and `codex plugin list` were refused by the maintainer's local launch wrapper ("CODEX_HOME does not redirect the validated instruction source"). The wrapper was not bypassed, the maintainer's real Codex config was not touched, and the credentials file was not copied. No plugin install and no lead run are recorded for Codex.
+- **Gemini CLI.** Not installed on the machine, so `gemini extensions install` was not run.
+- **GitHub Copilot and Cursor.** Not tested; the maintainer cannot test them.
+
 ## Paper review
 
 The written instructions were reviewed against these scenarios. They are content-review criteria, not an executed host safety evaluation.
@@ -69,7 +78,7 @@ On 2026-10-17 four separate subagents with no shared context, one each for secur
 ## Pending evidence
 
 - Live installation of the Claude Code plugins and the claude.ai skill upload. Two local runs are recorded, both with `--plugin-dir` on Claude Code 2.1.302: a 1.0 smoke test that loaded a plugin and read a card on demand, and a 1.1 team run of `/security:security-lead` (below). A marketplace install from GitHub of the 1.0 layout (marketing-growth and orchestration) and a headless card read from an installed plugin were observed on 2026-10-17; see [the install guide](INSTALL.md). A GitHub install of the 1.1 layout, the `ai-specialists-all` bundle install, claude.ai upload, the other 16 leads and unaided users have not been observed.
-- Codex, Gemini CLI, GitHub Copilot, Cursor and `npx skills`: the generated files follow each tool's published format but none has been installed or run in that tool. Whether Codex honors `shell_tool = false` per agent, and whether `effort` changes anything on `haiku`, is unverified.
+- Codex, Gemini CLI, GitHub Copilot, Cursor and `npx skills`: the generated files follow each tool's published format but none has been installed or run in that tool (Antigravity CLI is the only other host recorded; see Other host installs). Copilot and Cursor are not tested because the maintainer cannot test them. Whether Codex honors `shell_tool = false` per agent, and whether `effort` changes anything on `haiku`, is unverified.
 - Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. Every card has a recorded run, one fixture at a time (see Recorded evaluations). Those sessions had only Read and Write, so the runs do not exercise the code roles' test-command access, and the end-to-end marketing workflow has no recorded run. Team leads are recorded through `claude plugin eval` for security, finance, people-hr and legal-compliance only.
 - Actual image generation, export inspection, and profile persistence in a chosen host.
 - Unaided nontechnical-user trials.

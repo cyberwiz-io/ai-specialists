@@ -6,7 +6,7 @@
 - `agents/*.toml`: 142 Codex custom agents, one per role, one per team lead and `specialists`.
 - `.agents/plugins/marketplace.json` at the repository root: the marketplace that points Codex at this plugin.
 
-Tested host: not yet tested. No Codex host is available where this was built, so neither the plugin nor the agents have run in Codex.
+Tested host: not tested. On 2026-10-17 a GitHub install on Codex 0.163.0 (macOS) was attempted from the release branch with a temporary `CODEX_HOME`, but the maintainer's local launch wrapper refused the redirected `CODEX_HOME` ("CODEX_HOME does not redirect the validated instruction source") before `codex plugin marketplace add` ran, so the plugin, the agents and the lead skill have not run in Codex. An earlier cloud-container run added the marketplace and installed the plugin from a local checkout on 0.163.0; that is not a GitHub install and ran no model.
 
 ## Install
 
