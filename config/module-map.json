@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "ce2e2f2446854c023d42985f0ca1fde77529586871e1df952a677bcccf3b5334",
+      "digest": "bcf23c71555d3caf353467887cfe00b8a112c6f3a2810bdd373c7a17e434c4f1",
       "files": 20,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -139,8 +139,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "08ed59c37e8fc0ee71af5d8f77805bdf1336985c1923809a9f66e453c906cf48",
-      "files": 40,
+      "digest": "b29b7da237a8ead2c130c7f7949aac6c75d3ffad164772823af852689b1fcb96",
+      "files": 42,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -321,7 +321,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "c2fc8127a15c41b499baf641a38d820f73da8e81da748ad8ba3ac0ac6ce23571",
+      "digest": "2c3d3933cd7d994a91c050e6ad775577e30c52b8a496cd48db7dbfab54338f40",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",

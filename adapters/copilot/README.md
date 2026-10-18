@@ -2,7 +2,7 @@
 
 `python3 -B scripts/pack.py build` generates `agents/*.agent.md` from the cards; only this README is written by hand. There are 142 custom agents: one per role, one per family team lead and the cross-family `specialists` lead.
 
-Tested host: not yet tested. No Copilot host is available where this was built, so these agents have not run in Copilot.
+Tested host: not tested. The maintainer cannot test Copilot, so these agents have not run in Copilot.
 
 ## Install
 

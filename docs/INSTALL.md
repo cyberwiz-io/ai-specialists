@@ -4,7 +4,7 @@ You do not have to paste a pack into a chat. Each family is also an installable 
 
 Nothing here adds a capability. A skill is advisory instructions, and the plugins are materials only: they do not publish, send, schedule, connect or run anything.
 
-Pick your tool below. Claude Code is the only host where these files have been checked; every other path is generated to that host's published format but not yet tested.
+Pick your tool below. Claude Code is the host where these files have been checked most; Antigravity CLI also loaded a lead. Every other path is generated to that host's published format but not tested.
 
 ## What gets installed
 
@@ -58,7 +58,7 @@ Or copy one `skills/<name>/` folder into your host's skills folder. Not yet test
 codex plugin marketplace add cyberwiz-io/ai-specialists
 ```
 
-Then enable the `ai-specialists` plugin. It carries the 17 leads and `specialists`. For worker agents, copy the TOML files from a clone into your project: `cp adapters/codex/agents/*.toml .codex/agents/`. Not yet tested. Details: [Codex adapter](../adapters/codex/README.md).
+Then enable the `ai-specialists` plugin. It carries the 17 leads and `specialists`. For worker agents, copy the TOML files from a clone into your project: `cp adapters/codex/agents/*.toml .codex/agents/`. Not tested: the local attempt was blocked before the install ran. Details: [Codex adapter](../adapters/codex/README.md).
 
 ## Gemini CLI
 
@@ -66,15 +66,15 @@ Then enable the `ai-specialists` plugin. It carries the 17 leads and `specialist
 gemini extensions install https://github.com/cyberwiz-io/ai-specialists
 ```
 
-The repository root is the extension (`gemini-extension.json`), and it loads the root `skills/`. Not yet tested. Details: [Gemini CLI adapter](../adapters/gemini/README.md).
+The repository root is the extension (`gemini-extension.json`), and it loads the root `skills/`. Gemini CLI itself is not tested. The same extension installed in Antigravity CLI 1.4.2, where a plan-mode run loaded a lead (clone the repository, then `agy plugin install <folder>`). Details: [Gemini CLI adapter](../adapters/gemini/README.md).
 
 ## GitHub Copilot
 
-From a clone, copy the agents into your repository: `cp adapters/copilot/agents/*.agent.md .github/agents/`. Not yet tested. Details: [Copilot adapter](../adapters/copilot/README.md).
+From a clone, copy the agents into your repository: `cp adapters/copilot/agents/*.agent.md .github/agents/`. Not tested; the maintainer cannot test Copilot. Details: [Copilot adapter](../adapters/copilot/README.md).
 
 ## Cursor
 
-In Cursor, open Customize, choose From GitHub Repository and enter `cyberwiz-io/ai-specialists`. The root `.cursor-plugin/marketplace.json` lists the family plugins in `plugins/<family>/`. Not yet tested. Details: [Cursor adapter](../adapters/cursor/README.md).
+In Cursor, open Customize, choose From GitHub Repository and enter `cyberwiz-io/ai-specialists`. The root `.cursor-plugin/marketplace.json` lists the family plugins in `plugins/<family>/`. Not tested; the maintainer cannot test Cursor. Details: [Cursor adapter](../adapters/cursor/README.md).
 
 ## Plain chat
 
@@ -110,8 +110,10 @@ All the files above are generated from the cards by the build and checked for st
 
 On 2026-10-17, with the 1.0 layout on Claude Code 2.1.302 and a clean config folder, `claude plugin marketplace add cyberwiz-io/ai-specialists` and `claude plugin install marketing-growth@ai-specialists` (and `orchestration@ai-specialists`) succeeded from GitHub, and a headless `claude -p` run with only `--allowedTools "Skill"` read a card from the installed plugin with no denials once `allowed-tools` was added. The 1.1 layout (leads, role skills, bundle) has not yet been installed from GitHub; that needs this branch on the default branch.
 
-Only Claude Code has been checked. On Claude Code 2.1.302, `claude plugin validate --strict` passes for the marketplace, all 17 plugins, `skills/` and `adapters/codex`. A local `--plugin-dir` lead run is recorded separately; see [Validation](VALIDATION.md).
+Claude Code has been checked most. On Claude Code 2.1.302, `claude plugin validate --strict` passes for the marketplace, all 17 plugins, `skills/` and `adapters/codex`. A local `--plugin-dir` lead run is recorded separately; see [Validation](VALIDATION.md).
 
-Not yet tested: Codex, Gemini CLI, GitHub Copilot, Cursor and other Agent Skills hosts. No host for them was available. Their generated files were checked against each vendor's current documentation on 2026-10-17 (see [Validation](VALIDATION.md)). No 1.1 install from GitHub, no claude.ai upload, no `npx skills` run and no unaided-user trial is recorded; card evaluation runs are recorded for every card. Release links work only after the maintainer tags v1.1. Skill triggering, how a lead picks roles and upload availability may differ from what is described here. Report what you see in a GitHub issue.
+On 2026-10-17 Antigravity CLI 1.4.2 installed the 1.1 extension from a fresh clone of the `release` branch (142 skills processed) and a headless `--mode plan` run with `gemini-3.8-flash-low` loaded `security-lead` and read two of its cards, then stopped at a plan for confirmation. Codex 0.163.0 was attempted the same day but a local wrapper blocked the temporary `CODEX_HOME` before the install ran, and Gemini CLI was not installed on the test machine.
+
+Not tested: Codex, Gemini CLI, GitHub Copilot, Cursor and other Agent Skills hosts. The maintainer cannot test Copilot or Cursor. Their generated files were checked against each vendor's current documentation on 2026-10-17 (see [Validation](VALIDATION.md)). No 1.1 install of the Claude Code plugins from GitHub, no claude.ai upload, no `npx skills` run and no unaided-user trial is recorded; card evaluation runs are recorded for every card. Release links work only after the maintainer tags v1.1. Skill triggering, how a lead picks roles and upload availability may differ from what is described here. Report what you see in a GitHub issue.
 
 The files in `skills/`, `plugins/`, `adapters/` (except each README), `.claude-plugin/`, `.cursor-plugin/`, `.agents/plugins/` and `gemini-extension.json` are generated. To change a specialist, edit its card in `catalog/` and rebuild; see [Contributing](../CONTRIBUTING.md).

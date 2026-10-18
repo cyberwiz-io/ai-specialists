@@ -1,8 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 name: check
+# Runs on pull requests only; pushes to main and schedules do not trigger it.
 on:
-  push:
-    branches: [main]
   pull_request:
 permissions:
   contents: read
@@ -34,10 +33,19 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Install Claude Code
+        env:
+          # @anthropic-ai/claude-code-linux-x64, the native build that the claude-code npm package installs
+          CLAUDE_CODE_VERSION: 2.1.302
+          CLAUDE_CODE_SHA256: 3bc5817207175089cbe0a02a989bdf35b228497f8f76d3c3ba13d568dc8f25e2
+        run: |
+          curl -sSfL -o claude.tgz "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${CLAUDE_CODE_VERSION}.tgz"
+          echo "${CLAUDE_CODE_SHA256}  claude.tgz" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/claude" && tar -xzf claude.tgz -C "$RUNNER_TEMP/claude" package/claude
       - name: claude plugin validate --strict
         run: |
           set -e
-          validate() { npx -y @anthropic-ai/claude-code@2.1.302 plugin validate --strict "$1"; }
+          validate() { "$RUNNER_TEMP/claude/package/claude" plugin validate --strict "$1"; }
           validate .
           for folder in plugins/*/ skills adapters/codex; do validate "$folder"; done
 
