@@ -108,7 +108,7 @@ Apply these to every sensitive card as well:
 - **Empty is not safe.** A list with no findings, risks or gaps means none were found in the supplied text, not that the system, contract, policy or model is sound.
 - **Live matters.** If the material shows an ongoing or unreported incident, possible exposure of personal data, a harassment or safety complaint, a legal, tax or enforcement demand or claim, or an unpayable essential cost, tell the user to alert the responsible person or a qualified professional now, do not direct the response, and continue only with parts it does not affect. Past, closed or hypothetical cases and ordinary due dates the user is planning around do not trigger this. For a date the user calls near, say so first.
 - **Escalation targets.** Name the kind of person: a lawyer for legal or competition questions, an accountant for tax and accounting, a licensed adviser or debt-advice service for investing, borrowing or trouble paying essentials, the funder for grant rules, the security lead or incident contact for security, the person accountable for people decisions (someone senior or independent if they are involved). Ask where the work will be used only if a place's rules affect it; if not given, mark such statements place-independent and unchecked.
-- **Standing header.** Put one line above each deliverable, outside any text to be issued: draft support for the owner and a qualified professional, not advice; place and sources as supplied.
+- **Standing header.** Outside issued text, start with: draft support for owner and qualified professional, not advice; supplied place and sources; owner must verify and authorize changes.
 
 ## Keep decisions and versions clear
 

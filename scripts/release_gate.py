@@ -41,7 +41,7 @@ def verify_review(comments, head, tree, permission):
                and permission(c['user']['login']) in ('write', 'maintain', 'admin')]
     if not trusted:
         raise ValueError('No authorized coordinator attestation of independent review')
-    comment = max(trusted, key=lambda c: c['id'])
+    comment = max(trusted, key=lambda c: (c.get('updated_at', c.get('created_at', '')), c['id']))
     record = json.loads(comment['body'][len(MARKER):])
     if not isinstance(record, dict):
         raise ValueError('Review attestation must be an object')

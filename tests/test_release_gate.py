@@ -49,6 +49,13 @@ class ReleaseGateTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.verify([self.comment, revoked])
 
+    def test_editing_older_attestation_can_revoke_newer_pass(self):
+        revoked = dict(self.comment, id=11, updated_at='2026-10-22T12:00:00Z',
+                       body=gate.MARKER + '{bad json')
+        earlier_pass = dict(self.comment, updated_at='2026-10-22T11:00:00Z')
+        with self.assertRaises(ValueError):
+            self.verify([revoked, earlier_pass])
+
     def test_untrusted_comments_cannot_revoke_trusted_review(self):
         other = dict(self.comment, id=13, user={'login': 'outsider'}, body=gate.MARKER + '{}')
         result = gate.verify_review([self.comment, other], self.sha, self.tree,

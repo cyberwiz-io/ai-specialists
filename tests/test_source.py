@@ -7,10 +7,15 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from packlib import build, config, source
+from packlib import build, check, config, source
 
 
 class SourceTests(unittest.TestCase):
+    def test_tracked_archive_in_runtime_directory_is_rejected(self):
+        self.write("work/committed.zip", "fixture")
+        self.git("add", "work/committed.zip")
+        self.assertTrue(check.check_archives(self.root))
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)

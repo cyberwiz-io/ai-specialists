@@ -118,9 +118,8 @@ def check_archives(root):
         relative = Path(name)
         if relative.suffix != ".zip":
             continue
-        if not set(relative.parts) & SKIP_DIRS:
-            failures.append(f"{relative.as_posix()}: archives are not committed; "
-                            "run release, and let CI attach it to the GitHub Release")
+        failures.append(f"{relative.as_posix()}: archives are not committed; "
+                        "run release, and let CI attach it to the GitHub Release")
     return failures
 
 
@@ -176,6 +175,10 @@ def check(root):
     failures += check_navigation(root, families, generated)
     failures += check_archives(root)
     failures += evals.problems(root, families)[1]
+    try:
+        evals.heldout(root, families)
+    except (ValueError, OSError) as error:
+        failures.append(str(error))
     try:
         bundle.members(root, families, generated)
     except OSError as error:

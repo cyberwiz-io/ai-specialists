@@ -17,6 +17,11 @@ ROLE = "security/access-review-analyst"
 
 
 class FixtureFileTests(FixtureCase):
+    def test_frozen_heldout_bytes_cannot_change(self):
+        path = self.root / "evals/heldout/release.json"
+        path.write_bytes(path.read_bytes() + b"\n")
+        self.assertFails("frozen held-out")
+
     def change(self, family, change):
         path = self.root / evals.FIXTURE_DIR / f"{family}.json"
         data = json.loads(path.read_text())
@@ -104,6 +109,13 @@ class FixtureFileTests(FixtureCase):
 
 
 class RunTests(FixtureCase):
+    def test_prepare_rejects_duplicate_ids_before_writing(self):
+        families, generated = check.check(self.root)
+        fixture = evals.load(self.root, families)[0]
+        with self.assertRaisesRegex(ValueError, "distinct"):
+            evals.prepare(self.root, families, generated, [fixture, fixture], "duplicate", {})
+        self.assertFalse((self.root / "work/evals/duplicate").exists())
+
     def prepare(self, run="t1", **selection):
         argv = ["prepare", "--run", run, "--host", "Test host", "--model", "test-model"]
         for name, value in selection.items():
@@ -298,6 +310,25 @@ class RunTests(FixtureCase):
         self.answer(second)
         with self.assertRaisesRegex(ValueError, "incomparable baseline"):
             evals.compare(self.root, "t2")
+
+    def test_changed_harness_is_incomparable(self):
+        record = self.prepare(role=ROLE)
+        self.answer(record)
+        evals.save_baseline(self.root, "t1")
+        record["harness_sha256"]["scripts/evals_runner.py"] = "0" * 64
+        (self.root / "work/evals/t1/run.json").write_text(json.dumps(record))
+        with self.assertRaisesRegex(ValueError, "harness"):
+            evals.compare(self.root, "t1")
+
+    def test_baseline_cannot_mix_harnesses(self):
+        first = self.prepare(role=ROLE)
+        second = self.prepare(run="t2", role=ROLE)
+        self.answer(first)
+        self.answer(second)
+        second["harness_sha256"]["scripts/evals_runner.py"] = "0" * 64
+        (self.root / "work/evals/t2/run.json").write_text(json.dumps(second))
+        with self.assertRaisesRegex(ValueError, "harness"):
+            evals.save_baseline(self.root, ["t1", "t2"])
 
     def test_compare_needs_a_baseline(self):
         record = self.prepare(role=ROLE)

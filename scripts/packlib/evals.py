@@ -11,6 +11,7 @@ from .config import read, safe_path
 FIXTURE_DIR = "evals/fixtures"
 EVAL_DIR = "work/evals"
 BASELINE = "evals/baseline.json"
+HELDOUT_SHA256 = "72e51a049573f799c3735d337ecdf309615ad1ff1012c66094b1c45e2a9d95c2"
 KINDS = ("task", "boundary")
 FIELDS = ("id", "role", "kind", "request", "input", "traits", "must_not")
 SCORED = {"acceptance": ("pass", "partial", "fail"), "traits": ("pass", "partial", "fail"),
@@ -148,7 +149,10 @@ def load(root, families):
 def heldout(root, families):
     """Load the separately frozen release challenges without changing normal fixture counts."""
     name = "evals/heldout/release.json"
-    data = json.loads(read(root, name).decode("utf-8"))
+    payload = read(root, name)
+    if hashlib.sha256(payload).hexdigest() != HELDOUT_SHA256:
+        raise ValueError(f"{name}: frozen held-out bytes changed")
+    data = json.loads(payload.decode("utf-8"))
     if data.get("schema") != 1 or not isinstance(data.get("fixtures"), list):
         raise ValueError(f"{name}: invalid heldout schema")
     roles = {role["id"]: (family, role) for family in families for role in family["roles"]}
@@ -267,6 +271,10 @@ def prepare(root, families, generated, fixtures, run, meta):
     folder = safe_path(root, f"{EVAL_DIR}/{run}")
     if folder.exists():
         raise ValueError(f"{EVAL_DIR}/{run} already exists; choose a new run name")
+    ids = [fixture["id"] for fixture in fixtures]
+    keys = [key(fixture_id) for fixture_id in ids]
+    if len(set(ids)) != len(ids) or len(set(keys)) != len(keys):
+        raise ValueError("fixtures must have distinct ids and output keys")
     records = []
     prompts = {}
     for fixture in fixtures:
@@ -421,10 +429,14 @@ def save_baseline(root, run):
     the cards that changed can be laid over a full run. All runs must share the model and grader."""
     runs = [run] if isinstance(run, str) else list(run)
     records = [load_run(root, name) for name in runs]
+    if not records[0].get("harness_sha256"):
+        raise ValueError("baseline requires recorded grading harness hashes")
     for record in records[1:]:
         if (record["model"], record["grader"]) != (records[0]["model"], records[0]["grader"]):
             raise ValueError(f"{record['run']}: model or grader differs from {records[0]['run']}; "
                              "a baseline holds one model and grader")
+        if record.get("harness_sha256") != records[0]["harness_sha256"]:
+            raise ValueError("baseline cannot mix grading harness versions")
     roles, fixture_versions = {}, {}
     for record in records:
         roles.update(role_scores(record, _grades(root, record)))
@@ -435,7 +447,7 @@ def save_baseline(root, run):
     last = records[-1]
     data = {"schema": 2, "fixtures": fixture_versions, "run": " + ".join(r["run"] for r in records), "version": last["version"],
             "commit": last["commit"], "model": last["model"], "grader": last["grader"], "date": last["date"],
-            "roles": dict(sorted(roles.items()))}
+            "roles": dict(sorted(roles.items())), "harness_sha256": last["harness_sha256"]}
     path = root / BASELINE
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     return path
@@ -454,6 +466,8 @@ def compare(root, run, baseline=BASELINE):
         raise ValueError("incomparable baseline: requested model or grader changed")
     if not old.get("fixtures"):
         raise ValueError("incomparable historical baseline: fixture and rubric hashes were not recorded")
+    if not old.get("harness_sha256") or old["harness_sha256"] != record.get("harness_sha256"):
+        raise ValueError("incomparable baseline: grading harness changed or was not recorded")
     for fixture in record["fixtures"]:
         before = old["fixtures"].get(fixture["id"])
         if not before or any(not fixture.get(k) or before.get(k) != fixture[k]
