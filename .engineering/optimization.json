@@ -28,6 +28,29 @@
           "python3 - <<'PYGATE'\nimport json, os, sys\nresults = json.loads(os.environ[\"RESULTS\"])\nbad = {name: item.get(\"result\") for name, item in results.items() if item.get(\"result\") != \"success\"}\nprint(\"Required job results:\", {name: item.get(\"result\") for name, item in results.items()})\nsys.exit(bool(bad))\nPYGATE\n"
         ]
       }
+    },
+    ".github/workflows/release.yml": {
+      "mode": "deployment",
+      "required_jobs": [
+        "provenance",
+        "candidate-checks",
+        "candidate-security",
+        "policy",
+        "publish"
+      ],
+      "max_timeout_minutes": 15
+    },
+    ".github/workflows/security.yml": {
+      "mode": "validation",
+      "required_jobs": [
+        "changes",
+        "gitleaks",
+        "semgrep",
+        "trivy",
+        "independent-review",
+        "security-acceptance"
+      ],
+      "max_timeout_minutes": 20
     }
   },
   "retry": {

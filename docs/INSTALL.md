@@ -4,15 +4,15 @@ You do not have to paste a pack into a chat. Each family is also an installable 
 
 Nothing here adds a capability. A skill is advisory instructions, and the plugins are materials only: they do not publish, send, schedule, connect or run anything.
 
-Pick your tool below. Claude Code is the host where these files have been checked most; Antigravity CLI also loaded a lead. Every other path is generated to that host's published format but not tested.
+The commands below describe candidate install paths. Current host acceptance for Claude Code and Codex on macOS and Windows is pending, and no 1.1 release has been published. The release download links are retained for the planned assets; working downloads require actual publication and post-publication verification. Older trials below are historical evidence only.
 
 ## What gets installed
 
 - **Role skills.** The root `skills/` folder has one skill per specialist, `skills/<family>-<slug>/`, 124 in all. They use only the open Agent Skills fields, so they can also be uploaded to claude.ai.
 - **Team leads.** `skills/<family>-lead/` runs one family's team, with that family's cards in `references/`. `skills/specialists/` is the cross-family lead.
-- **Worker agents.** In hosts with subagents, each card is also a worker agent. Workers do one role's job and cannot start other agents. Only the lead, running in the main conversation, starts them.
+- **Worker agents.** In hosts with subagents, each card is also a worker agent. In Claude Code, workers receive exactly `Read`, `Grep`, and `Glob`, with no `Bash` or automatic skill tool. Leads pass approved methods explicitly in task handoffs. Do not treat written limits as host enforcement without observing the host enforce them. Codex no-spawn directions are advisory.
 
-A lead reads the roster and picks one to three roles. It writes a handoff packet for each, starts them as parallel subagents, and sends the merged result to the cross-family reviewer in a fresh subagent. You get one deliverable that says what was reviewed. Without subagents, as in plain chat or claude.ai, the lead reads the cards from `references/` itself and labels the result "specialist perspectives, self-reviewed".
+A lead uses advisory routing instructions to suggest roles. A task-specific cheapest-suitable model override, where a host supports one, is separate from that role-routing advice. Actual role selection, model use, delegation and review depend on the host and must be verified there. Without subagents, as in plain chat or claude.ai, the lead can work through the roles itself and should label the result "specialist perspectives, self-reviewed".
 
 ## Claude Code
 
@@ -30,15 +30,13 @@ Then run a family lead with your task, for example `/security:security-lead Revi
 
 Skills declare `allowed-tools` (`Read Grep Glob`, plus `Agent` for the leads), and each lead carries its roster's Acceptance lines in its own body, so a team run does not need to open the cards. With `allowed-tools`, reading a skill's own cards inside the installed plugin does not prompt. In non-interactive `claude -p` runs, Claude Code still asks before it calls the skill itself, and that prompt cannot be answered, so allow it up front, for example `claude -p "..." --allowedTools "Skill"`.
 
-Worker agents have read-only file tools (`Read`, `Grep`, `Glob`) and `disallowedTools: Agent`. A worker can read files you point to. It cannot run commands, edit files, browse, contact anyone or start other agents. Four code roles are the exception for commands: the code reviewer, debugging analyst, test designer and secure code reviewer also get `Bash` limited to `git diff`, `git log`, `git show`, `git status` and common test runners, so their findings can rest on real test output. Your host's permission prompts still apply.
-
-Each worker also has a model and effort. Most use `sonnet`. Writing and formatting roles use `haiku`, never in the four sensitive families. Architects, the threat modeler and the reviewers, including the cross-family reviewer, use `opus`. Effort follows the role's tier: low, medium or high. Both are set per role in `catalog/families.json`.
+Workers receive exactly the read tools `Read`, `Grep`, and `Glob`; they have no `Bash` or automatic skill tool. Approved methods are passed explicitly by leads in task handoffs. These are configured instructions, not proof that the host enforces a boundary. Verify actual tools and permissions during host acceptance.
 
 To try a plugin from a downloaded checkout without the marketplace, run `claude --plugin-dir plugins/security`. Details: [Claude Code adapter](../adapters/claude-code/README.md).
 
 ## Claude.ai and Claude Desktop
 
-Download the skill ZIP for a family from the [latest release](https://github.com/cyberwiz-io/ai-specialists/releases/latest). The files are named `ai-specialists-<version>-skill-<family>.zip`, and each holds the lead skill folder `<family>-lead/` with its cards. In Settings, open Capabilities, then Skills, and upload the ZIP. Then describe your task in a new chat. To add a single role, zip its folder `skills/<family>-<slug>/` and upload that.
+After publication and download verification, get a family skill ZIP from the [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest). Planned files are named `ai-specialists-<version>-skill-<family>.zip`, each holding the lead skill folder `<family>-lead/` with its cards. In Settings, open Capabilities, then Skills, and upload the ZIP. The 1.1 candidate's ZIP is not currently available. To add a single role from a checkout, zip its folder `skills/<family>-<slug>/` and upload that.
 
 Availability depends on your plan and on skills being enabled for your account or organization. claude.ai has no subagents here, so the lead labels its result "specialist perspectives, self-reviewed".
 
@@ -108,12 +106,6 @@ The lead skill for a family is `<family>-lead`, for example `security-lead`. Sec
 
 All the files above are generated from the cards by the build and checked for structure: names, description limits, links and freshness. `python3 -B scripts/pack.py stats` estimates the tokens each output and plugin adds.
 
-On 2026-10-17, with the 1.0 layout on Claude Code 2.1.302 and a clean config folder, `claude plugin marketplace add cyberwiz-io/ai-specialists` and `claude plugin install marketing-growth@ai-specialists` (and `orchestration@ai-specialists`) succeeded from GitHub, and a headless `claude -p` run with only `--allowedTools "Skill"` read a card from the installed plugin with no denials once `allowed-tools` was added. The 1.1 layout (leads, role skills, bundle) has not yet been installed from GitHub; that needs this branch on the default branch.
-
-Claude Code has been checked most. On Claude Code 2.1.302, `claude plugin validate --strict` passes for the marketplace, all 17 plugins, `skills/` and `adapters/codex`. A local `--plugin-dir` lead run is recorded separately; see [Validation](VALIDATION.md).
-
-On 2026-10-17 Antigravity CLI 1.4.2 installed the 1.1 extension from a fresh clone of the `release` branch (142 skills processed) and a headless `--mode plan` run with `gemini-3.8-flash-low` loaded `security-lead` and read two of its cards, then stopped at a plan for confirmation. Codex 0.163.0 was attempted the same day but a local wrapper blocked the temporary `CODEX_HOME` before the install ran, and Gemini CLI was not installed on the test machine.
-
-Not tested: Codex, Gemini CLI, GitHub Copilot, Cursor and other Agent Skills hosts. The maintainer cannot test Copilot or Cursor. Their generated files were checked against each vendor's current documentation on 2026-10-17 (see [Validation](VALIDATION.md)). No 1.1 install of the Claude Code plugins from GitHub, no claude.ai upload, no `npx skills` run and no unaided-user trial is recorded; card evaluation runs are recorded for every card. Release links work only after the maintainer tags v1.1. Skill triggering, how a lead picks roles and upload availability may differ from what is described here. Report what you see in a GitHub issue.
+Current acceptance is pending for Claude Code and Codex on both required devices (macOS and Windows); see [host acceptance](HOST-ACCEPTANCE.md). Inventory versions are not test results. Historical 1.0 Claude Code marketplace installs, Claude Code 2.1.302 validation and local smoke tests, the Antigravity CLI plan-mode run, and earlier Codex attempts are described in [Validation](VALIDATION.md); none establishes current acceptance. No 1.1 release, release download, claude.ai upload, or unaided-user trial is recorded. Other hosts remain unaccepted. Report observed behavior with the exact host, version, device and source ref.
 
 The files in `skills/`, `plugins/`, `adapters/` (except each README), `.claude-plugin/`, `.cursor-plugin/`, `.agents/plugins/` and `gemini-extension.json` are generated. To change a specialist, edit its card in `catalog/` and rebuild; see [Contributing](../CONTRIBUTING.md).

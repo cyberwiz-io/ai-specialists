@@ -164,3 +164,27 @@ class StatsAndEvalTests(FixtureCase):
             "security/threat-modeler/library-lending-app", "security/threat-modeler/no-such-fixture"))
         with self.assertRaisesRegex(ValueError, "no-such-fixture is not a security fixture"):
             plugin_evals.outputs(self.root, manifest.load(self.root))
+
+
+class ReleaseCodexTests(FixtureCase):
+    def test_workers_reduce_capabilities_without_overriding_user_model(self):
+        families, generated = build.outputs(self.root)
+        for name, data in generated.items():
+            if name.startswith("adapters/codex/agents/"):
+                self.assertNotIn(b"model_reasoning_effort =", data, name)
+                self.assertNotIn(b"model =", data, name)
+                if not name.endswith("-lead.toml") and not name.endswith("/specialists.toml"):
+                    for feature in ("shell_tool", "apps", "plugins", "memories", "request_permissions_tool"):
+                        self.assertIn((feature + " = false").encode(), data, name)
+
+    def test_worker_checker_rejects_reenabled_capabilities(self):
+        families, generated = build.outputs(self.root)
+        name = "adapters/codex/agents/security-threat-modeler.toml"
+        for feature in codex.WORKER_FEATURES:
+            changed = generated[name].replace((feature + " = false").encode(), (feature + " = true").encode())
+            self.assertTrue(codex._agent_problems(name, changed), feature)
+
+    def test_leads_retain_plugin_discovery(self):
+        families, generated = build.outputs(self.root)
+        data = generated["adapters/codex/agents/security-lead.toml"]
+        self.assertNotIn(b"plugins = false", data)

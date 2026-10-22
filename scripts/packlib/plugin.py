@@ -219,6 +219,6 @@ def agent_problems(path, text):
         failures.append(f"{path}: worker agents may not have the Agent tool")
     if fields.get("disallowedTools") != adapter.DISALLOWED:
         failures.append(f"{path}: worker agents must set disallowedTools: {adapter.DISALLOWED}")
-    if {"Edit", "Write", "WebFetch", "WebSearch", "Bash"} & set(tools):
-        failures.append(f"{path}: worker agents may not edit, browse or run unrestricted commands")
+    if set(tools) != set(adapter.TOOLS.split(", ")) or len(tools) != 3:
+        failures.append(f"{path}: worker tools must be exactly {adapter.TOOLS}")
     return failures

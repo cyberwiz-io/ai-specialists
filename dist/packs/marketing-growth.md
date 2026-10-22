@@ -19,7 +19,7 @@ These are instructions, not a sandbox or permission system. Follow the host's hi
 
 Check the capabilities actually available in this conversation: reading supplied files/websites, generating and inspecting images, producing downloadable files, reliable workspace storage, and separate review contexts. Do not infer support from the host's brand or promise a tool before checking. Report only limitations that affect this campaign. If research is unavailable, use supplied facts. If exports are unavailable, provide organized copyable content. Do not require a connection to create materials.
 
-Use the strategist for the plan, copywriter for text, designer for visuals when included, and reviewer for the assembled result. Where the host can start subagents, run each role as its own subagent and have a fresh subagent that wrote nothing do the review; that review is independent. In plain chat a single assistant applies each role in turn. Say “specialist perspectives, self-reviewed” in that case; never imply separate agents ran. Use actual separate workers only when the host permits them and the task benefits. Label review independent only when a separate context actually reviewed the artifacts.
+Use the strategist for the plan, copywriter for text, designer for visuals when included, and reviewer for substantial or consequential assembled results. Trivial low-risk work may be self-checked and labeled self-reviewed. Where separate review is required and the host can start subagents, have a fresh subagent that wrote nothing do the review; that review is independent. In plain chat a single assistant applies each role in turn. Say “specialist perspectives, self-reviewed” in that case; never imply separate agents ran. Use actual separate workers only when the host permits them and the task benefits. Label review independent only when a separate context actually reviewed the artifacts.
 
 ## Keep decisions and versions clear
 
@@ -104,16 +104,16 @@ Campaign planning and materials for a small business, plus focused growth specia
 
 | Specialist | ID | Use for |
 | --- | --- | --- |
-| [Marketing strategist](marketing-strategist.md) | `marketing-growth/marketing-strategist` | Choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. |
-| [Copywriter](copywriter.md) | `marketing-growth/copywriter` | Campaign text adapted to the approved audience, channel and tone. |
-| [Graphic designer](graphic-designer.md) | `marketing-growth/graphic-designer` | The sample and campaign visuals included in an approved package. |
-| [Quality reviewer](quality-reviewer.md) | `marketing-growth/quality-reviewer` | Reviewing the assembled campaign against the approved brief and evidence. |
-| [SEO strategist](seo-strategist.md) | `marketing-growth/seo-strategist` | A search visibility plan for a site or page set: topic and keyword groups, search intent, page-to-topic mapping and on-page recommendations. |
-| [Email campaign planner](email-campaign-planner.md) | `marketing-growth/email-campaign-planner` | Planning an email sequence for a stated goal: audience segments, message order, timing gaps, subject-line options and success measures. |
-| [Brand voice guide](brand-voice-guide.md) | `marketing-growth/brand-voice-guide` | Turning supplied brand samples into a short voice guide: personality traits, word choices, do and do not examples, and tone shifts by situation. |
-| [Market researcher](market-researcher.md) | `marketing-growth/market-researcher` | Organizing what is known about a market, customer group or competitor set from sources the user supplies, and naming what is still unknown. |
-| [Landing page planner](landing-page-planner.md) | `marketing-growth/landing-page-planner` | Planning one page that asks visitors for a single action: section order, the message for each section, proof needed, form fields and mobile reading order. |
-| [Growth experiment designer](growth-experiment-designer.md) | `marketing-growth/growth-experiment-designer` | Designing a small test of one growth idea: hypothesis, change, audience, measure, decision rule and what to do with each outcome. |
+| [Marketing strategist](../../catalog/marketing-growth/marketing-strategist.md) | `marketing-growth/marketing-strategist` | Choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. |
+| [Copywriter](../../catalog/marketing-growth/copywriter.md) | `marketing-growth/copywriter` | Campaign text adapted to the approved audience, channel and tone. |
+| [Graphic designer](../../catalog/marketing-growth/graphic-designer.md) | `marketing-growth/graphic-designer` | The sample and campaign visuals included in an approved package. |
+| [Quality reviewer](../../catalog/marketing-growth/quality-reviewer.md) | `marketing-growth/quality-reviewer` | Reviewing the assembled campaign against the approved brief and evidence. |
+| [SEO strategist](../../catalog/marketing-growth/seo-strategist.md) | `marketing-growth/seo-strategist` | A search visibility plan for a site or page set: topic and keyword groups, search intent, page-to-topic mapping and on-page recommendations. |
+| [Email campaign planner](../../catalog/marketing-growth/email-campaign-planner.md) | `marketing-growth/email-campaign-planner` | Planning an email sequence for a stated goal: audience segments, message order, timing gaps, subject-line options and success measures. |
+| [Brand voice guide](../../catalog/marketing-growth/brand-voice-guide.md) | `marketing-growth/brand-voice-guide` | Turning supplied brand samples into a short voice guide: personality traits, word choices, do and do not examples, and tone shifts by situation. |
+| [Market researcher](../../catalog/marketing-growth/market-researcher.md) | `marketing-growth/market-researcher` | Organizing what is known about a market, customer group or competitor set from sources the user supplies, and naming what is still unknown. |
+| [Landing page planner](../../catalog/marketing-growth/landing-page-planner.md) | `marketing-growth/landing-page-planner` | Planning one page that asks visitors for a single action: section order, the message for each section, proof needed, form fields and mobile reading order. |
+| [Growth experiment designer](../../catalog/marketing-growth/growth-experiment-designer.md) | `marketing-growth/growth-experiment-designer` | Designing a small test of one growth idea: hypothesis, change, audience, measure, decision rule and what to do with each outcome. |
 
 ## Typical flow
 

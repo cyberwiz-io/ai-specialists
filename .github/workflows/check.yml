@@ -1,31 +1,51 @@
 # SPDX-License-Identifier: Apache-2.0
 name: check
-# Runs on pull requests only; pushes to main and schedules do not trigger it.
+# PR validation, also reused for an explicitly dispatched exact-commit release.
 on:
   pull_request:
+  workflow_call:
+    inputs:
+      sha:
+        required: true
+        type: string
 permissions:
   contents: read
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-checks-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     strategy:
       max-parallel: 2
       matrix:
-        python: ["3.9", "3.12"]
+        include:
+          - {os: ubuntu-24.04, python: '3.9'}
+          - {os: ubuntu-24.04, python: '3.12'}
+          - {os: macos-14, python: '3.12'}
+          - {os: windows-2022, python: '3.12'}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ inputs.sha || github.sha }}
+          persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: ${{ matrix.python }}
+      - name: Generated output consistency
+        run: |
+          python -B scripts/pack.py build
+          git diff --exit-code
       - name: Pack check
-        run: python3 -B scripts/pack.py check
+        run: python -B scripts/pack.py check
       - name: Tests
-        run: python3 -B -m unittest discover -s tests
+        run: python -B -m unittest discover -s tests
+      - name: Independent candidate artifact check
+        run: |
+          python -B scripts/pack.py release --out work/release
+          python -B scripts/verify_release.py work/release
   validate:
     # Claude Code's own validator for the marketplace, every plugin and the skill folders. The CLI version is pinned
     # so a new release cannot change the verdict silently; it needs no account to validate.
@@ -33,6 +53,9 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ inputs.sha || github.sha }}
+          persist-credentials: false
       - name: Install Claude Code
         env:
           # @anthropic-ai/claude-code-linux-x64, the native build that the claude-code npm package installs

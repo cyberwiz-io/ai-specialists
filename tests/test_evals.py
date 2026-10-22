@@ -127,7 +127,7 @@ class RunTests(FixtureCase):
             chosen = (verdicts or {}).get(fixture["id"], {})
             grade = {"fixture": fixture["id"], "notes": ""}
             for section, allowed in evals.SCORED.items():
-                grade[section] = [{"item": item, "verdict": chosen.get(section, allowed[0]), "evidence": "quote"}
+                grade[section] = [{"item": item, "verdict": chosen.get(section, allowed[0]), "evidence": "quote", "quote": "A reply."}
                                   for item in fixture[section]]
             (self.root / fixture["grade"]).write_text(json.dumps(grade))
 
@@ -249,6 +249,43 @@ class RunTests(FixtureCase):
         self.assertEqual(data["run"], "t1 + t2")
         self.assertEqual(data["roles"][worse["role"]]["passed"], data["roles"][worse["role"]]["total"])
         self.assertEqual(sorted(data["roles"]), sorted({f["role"] for f in record["fixtures"]}))
+
+    def test_heldout_is_valid_and_distinct(self):
+        families = manifest.load(self.root)
+        challenges = evals.heldout(self.root, families)
+        self.assertEqual(len(challenges), 6)
+        self.assertFalse({f["id"] for f in challenges} & {f["id"] for f in evals.load(self.root, families)})
+
+    def test_changed_prompt_is_rejected(self):
+        record = self.prepare(role=ROLE)
+        self.answer(record)
+        (self.root / record["fixtures"][0]["subject_prompt"]).write_text("changed")
+        with self.assertRaisesRegex(ValueError, "prompt hash mismatch"):
+            evals.report(self.root, "t1")
+
+    def test_empty_evidence_is_rejected(self):
+        record = self.prepare(role=ROLE)
+        self.answer(record)
+        path = self.root / record["fixtures"][0]["grade"]
+        grade = json.loads(path.read_text())
+        grade["acceptance"][0]["evidence"] = "  "
+        path.write_text(json.dumps(grade))
+        with self.assertRaisesRegex(ValueError, "non-empty text"):
+            evals.report(self.root, "t1")
+
+    def test_changed_rubric_or_models_are_incomparable(self):
+        record = self.prepare(role=ROLE)
+        self.answer(record)
+        evals.save_baseline(self.root, "t1")
+        baseline = json.loads((self.root / evals.BASELINE).read_text())
+        baseline["fixtures"][record["fixtures"][0]["id"]]["rubric_sha256"] = "different"
+        (self.root / evals.BASELINE).write_text(json.dumps(baseline))
+        with self.assertRaisesRegex(ValueError, "incomparable baseline"):
+            evals.compare(self.root, "t1")
+        baseline["model"] = "another-model"
+        (self.root / evals.BASELINE).write_text(json.dumps(baseline))
+        with self.assertRaisesRegex(ValueError, "requested model"):
+            evals.compare(self.root, "t1")
 
     def test_compare_needs_a_baseline(self):
         record = self.prepare(role=ROLE)

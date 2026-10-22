@@ -12,9 +12,7 @@ from zipfile import BadZipFile, ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import pack as pack_cli  # noqa: E402
-from packlib import build, bundle, cards, check, config, manifest  # noqa: E402
-
-COPY_SKIP = shutil.ignore_patterns(".git", "work", "__pycache__", "dist")
+from packlib import build, bundle, cards, check, config, manifest, source  # noqa: E402
 
 
 class FixtureCase(unittest.TestCase):
@@ -24,7 +22,7 @@ class FixtureCase(unittest.TestCase):
         holder = tempfile.TemporaryDirectory()
         self.addCleanup(holder.cleanup)
         self.root = Path(holder.name) / "repo"
-        shutil.copytree(ROOT, self.root, ignore=COPY_SKIP)
+        source.copy(ROOT, self.root)
         build.build(self.root)
 
     def edit(self, name, change):
@@ -41,6 +39,29 @@ class FixtureCase(unittest.TestCase):
 
 
 class BuildTests(FixtureCase):
+    def test_local_installs_do_not_contaminate_check_build_or_fixtures(self):
+        import subprocess
+        subprocess.run(["git", "init", "-q", str(self.root)], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(self.root), "add", "README.md"], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=Fixture",
+                        "-c", "user.email=fixture@example.invalid", "-c", "commit.gpgsign=false",
+                        "commit", "-qm", "Fixture"], check=True, capture_output=True)
+        external = self.root.parent / "private"
+        external.mkdir()
+        (external / "SKILL.md").write_text("[private](missing.md)")
+        installed = self.root / ".claude/skills/agent-architecture-audit"
+        installed.symlink_to(external, target_is_directory=True)
+        build.build(self.root)
+        check.check(self.root)
+        fixture = self.root.parent / "fixture"
+        source.copy(self.root, fixture)
+        self.assertFalse((fixture / ".claude/skills/agent-architecture-audit").exists())
+        check.check(fixture)
+        subprocess.run(["git", "-C", str(self.root), "add", "-f", str(installed)],
+                       check=True, capture_output=True)
+        with self.assertRaisesRegex(ValueError, "Unsafe source path"):
+            check.check(self.root)
+
     def test_build_is_valid_and_reproducible(self):
         first = self.release().read_bytes()
         build.build(self.root)

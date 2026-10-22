@@ -47,8 +47,8 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "bcf23c71555d3caf353467887cfe00b8a112c6f3a2810bdd373c7a17e434c4f1",
-      "files": 20,
+      "digest": "a588f35f1ad24bce2999fac3ad43f8e451e1aafeaaf4652a24717ce05314360d",
+      "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
       "interfaces": [
@@ -101,7 +101,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "47607de4692b5e87d98b67e4d741b3f4a4a1e67a3ef641f0792b1a9c97d5b6e0",
+      "digest": "5cff9d9acdff643ea3ffd90a6264db3ed97958b13fb003b6c67ae1f316da7399",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -139,8 +139,8 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "b29b7da237a8ead2c130c7f7949aac6c75d3ffad164772823af852689b1fcb96",
-      "files": 42,
+      "digest": "1e35f2a8564c4b67831549a122dad5d2fe8a185d215bb39588234b9c5dc83f8f",
+      "files": 51,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
@@ -157,8 +157,11 @@
         ".github/workflows/*.yml",
         "CLAUDE.md",
         "config/modules.json",
+        "config/requirements.txt",
         "scripts/pack.py",
         "scripts/packlib/*.py",
+        "scripts/release_gate.py",
+        "scripts/verify_release.py",
         "tests/*.py"
       ],
       "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
@@ -188,8 +191,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "be5587e0ef9625312602a6b0566e84d856f3c086e342c0ac7f89809f32fdad79",
-      "files": 36,
+      "digest": "509fdcc4046fc7603a08b91bb64d16b96915a686d2a68fe5e9ab25b9da24e2f2",
+      "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
@@ -202,13 +205,17 @@
       ],
       "paths": [
         ".claude/agents/*.md",
-        ".claude/skills/*/SKILL.md",
+        ".claude/skills/card-evals/SKILL.md",
         "evals/*.md",
         "evals/baseline.json",
+        "evals/calibration/*.json",
         "evals/fixtures/*.json",
+        "evals/heldout/*.json",
         "evals/plugin/*.json",
         "evals/reports/*.md",
-        "scripts/evals.py"
+        "scripts/evals.py",
+        "scripts/evals_headless.sh",
+        "scripts/evals_runner.py"
       ],
       "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     },
@@ -235,7 +242,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "2a417bd5ab226e4f0d3c2483b82314d7fc7411fa3de8a735a7a4e4a3b982491c",
+      "digest": "8e77285f81529cc5fd04f8ffa077f61ed4d59c13d3f47c418836b09e6c0e3cb6",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -244,7 +251,7 @@
         "plugins/*/skills/*/SKILL.md"
       ],
       "invariants": [
-        "Generated from the cards and never edited by hand; worker subagents are read-only, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
+        "Generated from the cards and never edited by hand; worker subagents have only Read, Grep and Glob, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
       ],
       "paths": [
         ".claude-plugin/marketplace.json",
@@ -282,7 +289,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "10d297b0970b2db64a926aace4a3ae848ee7600ba156818245c0ac88b307b69e",
+      "digest": "1c0c3eb410c2550f6a410a006f57181c6734f486e8f875bcc163d687197fb5f8",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -321,7 +328,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "2c3d3933cd7d994a91c050e6ad775577e30c52b8a496cd48db7dbfab54338f40",
+      "digest": "eca4bd8de1df0abb87cb2522a5af221d5cf046a765e22a91ae9f278d82526ab0",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -443,7 +450,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "34b92617c5071581bf33fe50516b507000b888c8bd5ff6f4822c783ebbecbad3",
+      "digest": "fff3d1c67414eb786dd1d4f3ca304f46f5f3ce0fd758915b83d10bc0aee8d3ff",
       "files": 12,
       "guide": "catalog/software-engineering/INDEX.md",
       "id": "family-software-engineering",
@@ -961,7 +968,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "0c8c9b5a4c7032335883e907e85a176e6478af7ae673d41ebaf03b74ed20c3e3",
+      "digest": "4b080760d84b2c451662eb80887169d6f01e0f9f54a636af9c5ab15be4a11fda",
       "files": 6,
       "guide": "catalog/orchestration/INDEX.md",
       "id": "family-orchestration",

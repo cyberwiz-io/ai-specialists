@@ -1,48 +1,133 @@
 # SPDX-License-Identifier: Apache-2.0
-# Builds the release ZIPs for a v<VERSION> tag and attaches them to that tag's GitHub Release,
-# using the matching CHANGELOG.md section as the release notes.
-# The archive is never committed, so the Git history does not grow with every version.
 name: release
+# Dispatch only after explicit owner authorization, at the exact candidate ref.
 on:
-  push:
-    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: Full reviewed main commit SHA (must equal the dispatch ref)
+        required: true
+        type: string
+      tag:
+        description: Existing version tag, for example v1.1
+        required: true
+        type: string
+      pr:
+        description: Merged PR with authorized independent-review attestation
+        required: true
+        type: string
 permissions:
-  contents: write
+  contents: read
+  pull-requests: read
+  checks: read
 concurrency:
-  group: release-${{ github.ref_name }}
+  group: release-${{ inputs.tag }}
   cancel-in-progress: false
 jobs:
-  release:
-    runs-on: ubuntu-latest
+  provenance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      base: ${{ steps.pr.outputs.base }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          python-version: "3.12"
-      - name: Pack check
-        run: python3 -B scripts/pack.py check
-      - name: Tests
-        run: python3 -B -m unittest discover -s tests
-      - name: Build archive
-        run: python3 -B scripts/pack.py release --tag "$GITHUB_REF_NAME" --out work/release
-      - name: Release notes from the changelog
-        run: |
-          version="${GITHUB_REF_NAME#v}"
-          awk -v head="## $version" '$0 == head {on=1; next} on && /^## / {exit} on' CHANGELOG.md \
-            | sed "s#](docs/#](https://github.com/$GITHUB_REPOSITORY/blob/$GITHUB_REF_NAME/docs/#g" > work/release-notes.md
-          if ! grep -q '[^[:space:]]' work/release-notes.md; then
-            echo "CHANGELOG.md has no '## $version' section" >&2
-            exit 1
-          fi
-      - name: Attach archive to the release
+          ref: ${{ inputs.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Bind dispatch, tag, reviewed tree and main history
+        id: pr
         env:
           GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ inputs.sha }}
+          TAG: ${{ inputs.tag }}
+          PR: ${{ inputs.pr }}
+          DISPATCH_SHA: ${{ github.sha }}
         run: |
-          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" work/release/*.zip --clobber
-            gh release edit "$GITHUB_REF_NAME" --notes-file work/release-notes.md
-          else
-            gh release create "$GITHUB_REF_NAME" work/release/*.zip --verify-tag \
-              --title "AI Specialists ${GITHUB_REF_NAME#v}" \
-              --notes-file work/release-notes.md
-          fi
+          test "$SHA" = "$DISPATCH_SHA"
+          python3 -B scripts/release_gate.py provenance --repo "$REPO" --pr "$PR" --sha "$SHA" --tag "$TAG"
+          base=$(gh api "repos/$REPO/pulls/$PR" --jq .base.sha)
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+  candidate-checks:
+    needs: provenance
+    uses: ./.github/workflows/check.yml
+    with:
+      sha: ${{ inputs.sha }}
+  candidate-security:
+    needs: provenance
+    uses: ./.github/workflows/security.yml
+    with:
+      sha: ${{ inputs.sha }}
+      base: ${{ needs.provenance.outputs.base }}
+      pr: ${{ inputs.pr }}
+  policy:
+    name: policy-compliance
+    needs: provenance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check -r config/requirements.txt
+      - run: python .engineering/check.py
+      - run: python -m unittest discover -s .engineering -p 'test_*.py'
+  publish:
+    needs: [provenance, candidate-checks, candidate-security, policy]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: read
+      checks: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Recheck provenance and all exact-commit evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ inputs.sha }}
+          TAG: ${{ inputs.tag }}
+          PR: ${{ inputs.pr }}
+        run: python3 -B scripts/release_gate.py release --repo "$REPO" --pr "$PR" --sha "$SHA" --tag "$TAG"
+      - name: Build and independently verify final assets
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          python3 -B scripts/pack.py release --tag "$TAG" --out work/release
+          python3 -B scripts/verify_release.py work/release
+      - name: Read versioned release notes
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          python3 - <<'PY'
+          import os, pathlib, re
+          version = os.environ['TAG'][1:]
+          text = pathlib.Path('CHANGELOG.md').read_text()
+          sections = re.split(r'^## ', text, flags=re.M)
+          notes = next((s.split('\n', 1)[1].strip() for s in sections[1:] if s.split('\n', 1)[0] == version), '')
+          if not notes:
+              raise SystemExit('Missing versioned changelog notes')
+          repo = os.environ['GITHUB_REPOSITORY']
+          notes = notes.replace('](docs/', f'](https://github.com/{repo}/blob/{os.environ["TAG"]}/docs/')
+          pathlib.Path('work/release-notes.md').write_text(notes + '\n')
+          PY
+      - name: Create release once, never overwrite
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          gh release create "$TAG" work/release/*.zip work/release/SHA256SUMS work/release/RELEASE.json \
+            --verify-tag --title "AI Specialists ${TAG#v}" --notes-file work/release-notes.md

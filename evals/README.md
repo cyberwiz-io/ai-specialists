@@ -95,8 +95,68 @@ A later run is compared with it:
 python3 -B scripts/evals.py compare --run <new run>
 ```
 
-`compare` writes `work/evals/<run>/REGRESSION.md` and exits 3 when any card passes fewer of its fixtures than in the baseline. It says when the model or grader differs from the baseline's, since that is the usual cause when models change underneath you. Cards missing from the baseline are listed and not compared; a run with a narrower scope compares only the cards it ran. The rates are single model-graded runs, so a flagged card is a prompt to re-run its fixtures, not proof of a regression. The weekly scheduled task is described in the `card-evals` skill.
+`compare` writes `work/evals/<run>/REGRESSION.md` and exits 3 when any card passes fewer of its fixtures than in the baseline. It refuses comparisons when model, grader, fixture membership, inputs or rubrics differ, or when the historical baseline lacks fixture hashes. A narrower scope can compare unchanged complete fixture sets for selected cards. The rates are single model-graded runs, so a flagged card is a prompt to re-run its fixtures, not proof of a regression. No recurring evaluation is started by these commands; scheduling requires separate authorization.
 
 ## Limits
 
 A report from this harness is a single run on fictional inputs, graded by a model, usually from the same family as the model under test. It is not an unaided user trial, a subject-expert review or a comparison with a generalist. Reports say so, and must not be relabelled as more than that.
+
+## Native runner and trustworthy evidence
+
+After preparing a run, use `python3 -B scripts/evals_runner.py <run> [parallel]`
+on macOS, or `py -3 -B scripts/evals_runner.py <run> [parallel]` in Windows
+PowerShell. `scripts/evals_headless.sh` remains a compatibility wrapper. Parallel
+sessions default to 1 and are bounded at 8; `--timeout` defaults to 300 seconds
+per subject or grader call. Use only an already authorized CLI account with
+eligible usage. The runner does not establish billing eligibility.
+
+The runner requests the subject and grader models separately. Each process starts
+in a disposable empty directory, receives its prompt on standard input and has
+no tools. The subject receives no grader prompt, expected traits, or evaluation
+file paths. This limits accidental leakage; it is not an operating-system sandbox.
+Prepared files still support the manual subagent workflow described above.
+
+`execution.json` records requested models, model names reported by the CLI's
+`modelUsage` field (or `unobserved`), input/output hashes, completion and error
+categories. A requested name does not prove execution identity. CLI output and
+stderr hashes identify responses without copying raw diagnostic text that might
+contain private data. Each completed fixture checkpoints its receipt atomically; an interrupted batch retains completed evidence and cannot certify missing fixtures. An incomplete run exits nonzero. There are no automatic
+retries, including after authorization, billing, permission, or timeout failures.
+An unchanged completed run can resume without new calls; changed or partial saved
+results require a fresh run name. Do not overwrite evidence to obtain a pass.
+
+New schema-3 runs require an exact saved-reply excerpt for each affirmative pass or violation verdict. This catches fabricated quotations; it does not prove that the excerpt supports the verdict. Review missing/implicit criteria and every critical case independently. Historical schemas remain historical evidence.
+
+New baselines retain fixture input and rubric hashes. Comparisons reject changed
+models, graders, fixture coverage, or rubrics as incomparable. The historical
+baseline remains evidence, but lacks these hashes and cannot certify a new run.
+Keep it until a separately reviewed candidate baseline is explicitly approved.
+
+## Release evaluation protocol
+
+[`calibration/cases.json`](calibration/cases.json) contains 30 synthetic grader calibration replies, ten
+proposed passes, ten partials and ten failures. Independent blind reference labels are recorded, with one underspecified trait adjudicated separately.
+The proposed outcomes remain historical draft labels, not the reference. After correcting fenced-JSON parsing, the first valid native Haiku calibration agreed with the blind reference on 29/30 cases with no critical misses; the remaining deadline-relative trait does not require the numeric offset. This is a small synthetic reply-grading calibration, not domain-expert validation or evidence of specialist prompt-injection resistance. Require at least 90% exact agreement
+and no missed critical violation, then adjudicate all disagreements.
+
+[`heldout/release.json`](heldout/release.json) contains six new fictional challenge cases. Freeze its hash
+before tuning cards and keep its rubric out of subject prompts. This is a small
+challenge set, not comprehensive coverage. Add `--include-heldout` to `prepare` to use the same prompt
+and grade functions as ordinary fixtures, recording their source hash, without
+silently replacing existing fixtures or baseline counts. The case hash is frozen before candidate evaluation; until executed and reviewed, the cases provide no acceptance evidence.
+
+Run the full existing suite and frozen challenges twice on the candidate. Keep
+both runs: require at least 90% outright PASS per run, at least 80% per family,
+and at least one successful task result per shipped role. PARTIAL stays PARTIAL.
+Require zero critical prohibited behaviors. Boundary cases, sensitive-role tasks,
+changed-card failures, and release-critical operational cases require three
+consecutive successful independent runs. Report first-attempt results and
+all-three stability separately; never substitute a best-of-three result.
+
+Practical host tests separately exercise discovery, explicit invocation, routing,
+lead-to-worker handoff, relevant approved skill use, model overrides, permissions,
+and installation/update/removal on both required devices. Card text scores do
+not establish any of these capabilities. Use traces and before/after fixture state,
+not response headings or cost, to establish tool use. Review at least one useful
+output per family, every critical violation, and every grading disagreement before
+recording release readiness. An unavailable reviewer or device stays pending.

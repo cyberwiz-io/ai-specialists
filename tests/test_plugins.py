@@ -32,7 +32,7 @@ class PluginTests(FixtureCase):
             role = roles.get(name) or self.roles()["orchestration/cross-family-reviewer"]
             self.assertEqual(front["name"] + ".md", name.rsplit("/", 1)[-1])
             self.assertRegex(front["name"], NAME)
-            self.assertEqual(front["tools"], adapter.COMMAND_TOOLS if role["commands"] else "Read, Grep, Glob", name)
+            self.assertEqual(front["tools"], "Read, Grep, Glob", name)
             self.assertNotIn("Agent", front["tools"].split(", "))
             self.assertEqual(front["disallowedTools"], "Agent", name)
             self.assertEqual(front["model"], role["model"], name)
@@ -64,18 +64,8 @@ class PluginTests(FixtureCase):
             if role["sensitive"]:
                 self.assertNotEqual(role["model"], "haiku", role["id"])
 
-    def test_only_code_roles_run_commands_and_only_from_the_allowlist(self):
-        runners = {role_id for role_id, role in self.roles().items() if role["commands"]}
-        self.assertEqual(runners, {"software-engineering/code-reviewer", "software-engineering/debugging-analyst",
-                                   "software-engineering/test-designer", "security/secure-code-reviewer"})
-        for pattern in adapter.COMMAND_PATTERNS:
-            self.assertRegex(pattern, r"^[a-z0-9 -]+:\*$|^python3 -m [a-z]+:\*$")
-        tools = adapter.COMMAND_TOOLS.split(", ")
-        self.assertEqual([tool for tool in tools if tool.startswith("Bash") and not tool.endswith(":*)")], [])
-        self.assertFalse({"Edit", "Write", "WebFetch", "Bash", "Agent"} & set(tools))
-
     def test_bad_manifest_values_fail(self):
-        for old, new, message in (('"commands": true', '"commands": "yes"', "commands must be true or false"),
+        for old, new, message in (('"model": "opus"', '"model": "opus", "commands": true', "unknown key commands"),
                                   ('"model": "opus"', '"model": "gpt"', "model must be one of"),
                                   ('"model": "opus"', '"model": "opus", "effort": "huge"', "effort must be one of"),
                                   ('"model": "opus"', '"model": "opus", "prefix": "core"', "unknown key prefix")):
@@ -243,3 +233,16 @@ class PluginTests(FixtureCase):
         self.assertIn("finance-lead/SKILL.md", names)
         self.assertTrue(all(name.startswith("finance-lead/") for name in names))
         self.assertEqual(len([n for n in names if "/references/" in n]), 9)
+
+
+class ReleaseWorkerTests(FixtureCase):
+    agents = PluginTests.agents
+    def test_all_workers_have_exact_inspection_tools(self):
+        for name, text in self.agents().items():
+            self.assertEqual(split(text)[0]["tools"], "Read, Grep, Glob", name)
+
+    def test_worker_checker_rejects_any_extra_tool(self):
+        name, text = next(iter(self.agents().items()))
+        for tool in ("Bash(git status:*)", "Skill", "mcp__example__read", "NotebookEdit"):
+            changed = text.replace("tools: Read, Grep, Glob", "tools: Read, Grep, Glob, " + tool)
+            self.assertTrue(plugin.agent_problems(name, changed), tool)

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- The 1.1 tree is a candidate; no 1.1 release or working release download is claimed. The retained release links become usable only after publication and asset verification.
+- Claude Code workers receive exactly `Read`, `Grep`, and `Glob`, with no `Bash` or automatic skill tool. Leads pass approved methods explicitly in task handoffs. Codex no-spawn directions are advisory, not host enforcement.
+- Role routing remains advisory and is separate from a host-supported, task-specific cheapest-suitable model override. No fixed model tiers are claimed.
+- Current Claude Code and Codex acceptance on macOS and Windows is pending in all four combinations. Prior trials remain historical evidence and do not establish current support.
+- Release publication uses an explicitly dispatched workflow after reviewed-candidate checks. Pushing a tag alone does not publish; there are no scheduled release runs.
+
 ## 1.1
 
 One-command install across the major AI tools, smaller always-loaded text, and specialists that work as a team through subagents.
@@ -9,7 +15,7 @@ One-command install across the major AI tools, smaller always-loaded text, and s
 - Agent Skills: `skills/<family>-<slug>/SKILL.md` for all 124 cards, plus `skills/<family>-lead/` for each family and `skills/specialists/`. Frontmatter uses only the six fields in the Agent Skills specification; descriptions start from the card's Use for line and stay near 200 characters. Install with `npx skills add cyberwiz-io/ai-specialists`.
 - Claude Code plugins: each family plugin now holds a team lead skill (`/<family>:<family>-lead`), one role skill per card (invoked by name only, `disable-model-invocation: true`), one worker agent per card and a copy of the cross-family reviewer. The marketplace adds an `ai-specialists-all` bundle with the 17 leads, `/specialists` and all 124 workers. The per-family orchestrator agents are replaced by the lead skills.
 - Team leads read the roster, pick one to three roles by the task-router rules, write handoff packets in the handoff-packager format, run the specialists as parallel subagents, send the merged result to a fresh cross-family reviewer subagent, and return one deliverable that names what was reviewed. Without subagents they label the result "specialist perspectives, self-reviewed". The orchestration cards and coordinators now separate independent review from self-review, and the claim that subagents cannot start subagents is gone.
-- Per-role model and effort: `haiku` and low effort for 24 writing and formatting roles, `sonnet` and medium by default, `opus` and high for architects, the threat modeler and reviewers. Workers get read-only tools and `disallowedTools: Agent`; the code reviewer, debugging analyst, test designer and secure code reviewer also get allowlisted `git` and test commands.
+- Claude Code workers use the tool set and handoff methods documented above; no role-specific model tier is promised. Host routing and model overrides remain separate behaviors.
 - Shorter worker preamble: about 350 characters instead of about 1,300 (sensitive families about 760 instead of about 2,400). `python3 -B scripts/pack.py stats` reports always-loaded and on-demand size per output, estimated as characters divided by 4.
 - Other tools, generated from the same cards and not yet tested: a Codex plugin (`adapters/codex/` with `.codex-plugin/plugin.json`, skills and agent TOML, listed in `.agents/plugins/marketplace.json`), a Gemini CLI extension (`gemini-extension.json`), GitHub Copilot custom agents (`adapters/copilot/agents/*.agent.md`) and Cursor plugins (`.cursor-plugin/` manifests). Each adapter README states its tested status, install command and limits.
 - START-HERE offers a one-role minimal paste: one `SKILL.md`, about a tenth of a family pack.

@@ -47,7 +47,10 @@ ARCHIVE_PREFIX = "ai-specialists-"
 
 def safe_path(root, name):
     path = root / name
-    if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):
+    relative = Path(name)
+    if relative.is_absolute() or ".." in relative.parts or any(
+            (root / Path(*relative.parts[:i])).is_symlink() for i in range(1, len(relative.parts) + 1)) \
+            or not path.resolve().is_relative_to(root.resolve()):
         raise ValueError(f"Unsafe source path: {name}")
     return path
 

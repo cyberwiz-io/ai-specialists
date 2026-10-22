@@ -116,7 +116,10 @@
         "scripts/packlib/*.py",
         "tests/*.py",
         ".engineering/*",
-        "CLAUDE.md"
+        "CLAUDE.md",
+        "scripts/release_gate.py",
+        "scripts/verify_release.py",
+        "config/requirements.txt"
       ],
       "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
     },
@@ -140,13 +143,17 @@
       ],
       "paths": [
         ".claude/agents/*.md",
-        ".claude/skills/*/SKILL.md",
+        ".claude/skills/card-evals/SKILL.md",
         "evals/*.md",
         "evals/baseline.json",
         "evals/fixtures/*.json",
         "evals/reports/*.md",
         "scripts/evals.py",
-        "evals/plugin/*.json"
+        "evals/plugin/*.json",
+        "scripts/evals_runner.py",
+        "scripts/evals_headless.sh",
+        "evals/calibration/*.json",
+        "evals/heldout/*.json"
       ],
       "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     },
@@ -162,7 +169,7 @@
         "plugins/*/skills/*/SKILL.md"
       ],
       "invariants": [
-        "Generated from the cards and never edited by hand; worker subagents are read-only, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
+        "Generated from the cards and never edited by hand; worker subagents have only Read, Grep and Glob, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
       ],
       "paths": [
         ".claude-plugin/marketplace.json",
@@ -226,5 +233,20 @@
       ],
       "purpose": "Install files for Codex, GitHub Copilot, Gemini CLI and Cursor, built from the same cards and skills."
     }
-  ]
+  ],
+  "local_material": {
+    "directories": [
+      ".claude/skills",
+      ".agents/skills",
+      ".codex/agents"
+    ],
+    "files": [
+      ".claude/settings.local.json",
+      ".codex/hooks.json",
+      ".codex/config.toml"
+    ],
+    "sources": [
+      ".claude/skills/card-evals"
+    ]
+  }
 }

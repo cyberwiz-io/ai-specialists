@@ -3,8 +3,10 @@
 import fnmatch
 import hashlib
 import json
+from pathlib import Path
 
 from .config import MODULES, SKIP_DIRS, read, safe_path, version
+from . import source
 
 COVERED_SUFFIXES = {".md", ".py", ".json", ".jsonl", ".yml", ".yaml", ".toml"}
 UNTRACKED_DIRS = {"LICENSES", "dist"}
@@ -12,15 +14,10 @@ IGNORED = ("plugins/*/evals/results/*",)  # local `claude plugin eval` output, g
 FAMILY_INVARIANT = "Materials only: no external actions, no capability promises, fictional examples."
 
 
-def expand(root, patterns, overlay):
+def expand(root, patterns, overlay, inventory=None):
     """Sorted repository-relative files matching glob patterns (including pending generated files)."""
-    found = set()
-    for pattern in patterns:
-        for path in root.glob(pattern):
-            if path.is_file():
-                found.add(path.relative_to(root).as_posix())
-        found.update(name for name in overlay if fnmatch.fnmatchcase(name, pattern))
-    return sorted(found)
+    names = set(source.files(root) if inventory is None else inventory) | set(overlay)
+    return sorted(name for name in names if any(fnmatch.fnmatchcase(name, p) for p in patterns))
 
 
 def digest(root, files, overlay):
@@ -60,12 +57,13 @@ def modules(root, families, overlay):
 
 def generate(root, families, overlay):
     spec, records = modules(root, families, overlay)
+    inventory = source.files(root)
     covered = set()
     for record in records:
         for pattern in record["paths"]:
-            if not expand(root, [pattern], overlay):
+            if not expand(root, [pattern], overlay, inventory):
                 raise ValueError(f"module {record['id']}: pattern {pattern} matches no files")
-        files = expand(root, record["paths"], overlay)
+        files = expand(root, record["paths"], overlay, inventory)
         covered.update(files)
         record["files"] = len(files)
         record["digest"] = digest(root, files, overlay)
@@ -76,19 +74,19 @@ def generate(root, families, overlay):
 
 def uncovered(root, families, overlay):
     spec, records = modules(root, families, overlay)
+    inventory = source.files(root)
     covered = set()
     for record in records:
-        covered.update(expand(root, record["paths"], overlay))
+        covered.update(expand(root, record["paths"], overlay, inventory))
     generated = spec.get("generated", [])
     missing = []
-    for path in sorted(root.rglob("*")):
-        relative = path.relative_to(root)
-        if set(relative.parts) & (SKIP_DIRS | UNTRACKED_DIRS) or not path.is_file():
+    for name in inventory:
+        relative = Path(name)
+        if set(relative.parts) & (SKIP_DIRS | UNTRACKED_DIRS):
             continue
-        name = relative.as_posix()
         if any(fnmatch.fnmatchcase(name, pattern) for pattern in IGNORED):
             continue
-        if path.suffix in COVERED_SUFFIXES and name not in covered \
+        if relative.suffix in COVERED_SUFFIXES and name not in covered \
                 and not any(fnmatch.fnmatchcase(name, pattern) for pattern in generated):
             missing.append(name)
     return missing

@@ -28,11 +28,11 @@ Every card has a fictional task fixture in `evals/fixtures/<family>.json`, and e
 
 ## Claude Code
 
-`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-plugins`. The build also generates the Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a team lead skill with the cards as references, the role skills, and a worker agent per card. Workers are read-only and cannot start other agents; only the lead, in the main conversation, starts them. `commands`, `model` and the tier in `catalog/families.json` opt a role into an allowlisted test runner and set its model and effort. The build also writes the root `skills/` folder, the files in `adapters/` (except each `README.md`, which is written by hand) and the root manifests for other hosts (`.agents/plugins/marketplace.json`, `.cursor-plugin/marketplace.json`, `gemini-extension.json`). The release archive includes them, plus one upload-ready skill ZIP per family for claude.ai. Never edit them by hand; they change when a card, a coordinator or a module in `scripts/packlib/` changes. `python3 -B scripts/pack.py stats` estimates their token cost.
+`.claude/` also holds a SessionStart hook that runs the check, and the commands `/new-specialist`, `/review-card`, `/verify` and `/build-plugins`. The build also generates the Claude Code marketplace (`.claude-plugin/marketplace.json`) and one plugin per family in `plugins/`: a team lead skill with the cards as references, the role skills, and a worker agent per card. Claude Code workers receive exactly `Read`, `Grep`, and `Glob`; they have no `Bash` or automatic skill tool. Leads pass approved methods explicitly in task handoffs. Do not describe these instruction limits as host-enforced boundaries. The build also writes the root `skills/` folder, the files in `adapters/` (except each `README.md`, which is written by hand) and the root manifests for other hosts (`.agents/plugins/marketplace.json`, `.cursor-plugin/marketplace.json`, `gemini-extension.json`). Codex no-spawn directions are advisory and depend on host controls. The release archive is designed to include these files and one skill ZIP per family for claude.ai; downloads remain pending until an actual release is published and its assets verified. Never edit generated files by hand; they change when a card, a coordinator or a module in `scripts/packlib/` changes. `python3 -B scripts/pack.py stats` estimates their token cost.
 
 ## Security checks
 
-Checks and scans run on pull requests only, not on pushes to `main` or on a schedule, so a change is checked once, before it merges; the release workflow reruns the pack check and tests on a version tag. Each pull request runs:
+Checks and scans run on pull requests. The release workflow is a separate explicit manual dispatch that reruns candidate checks; there are no scheduled release runs. Each pull request runs:
 
 - `check`: the pack check, the unit tests and `claude plugin validate --strict`.
 - `codeql`: CodeQL for Python and for the workflows. It runs only when the repository variable `CODEQL_ADVANCED` is `true`, because GitHub rejects its results while the organization-controlled default setup is on. Until an organization admin turns default setup off in Settings, Code security and the variable is set, CodeQL runs through default setup instead, which also scans pushes to `main` and weekly.
@@ -42,21 +42,13 @@ These tools cover different things: CodeQL and Semgrep look at code patterns, Gi
 
 ## Release
 
-The release ZIP is not kept in Git, because every committed version would stay in the history. To release:
-
-1. Set `VERSION` and give the changelog a `## <version>` section holding the notes (move entries out of `## Unreleased`). That section becomes the GitHub Release text, and the workflow fails if it is missing.
-2. Run `python3 -B scripts/pack.py build`, `check` and the tests, and `python3 -B scripts/pack.py release --tag v<version>` to inspect the archive.
-3. Open a pull request, confirm the check workflow is green on it, and merge to `main`. Checks and CodeQL run on pull requests only, not on pushes to `main` or on a schedule.
-4. Push a tag named `v` plus the version, such as `v1.1`.
-5. Confirm the release workflow attached the archive and one skill ZIP per family to the GitHub Release.
-
-The release workflow runs the check and tests, builds the archive with `python3 -B scripts/pack.py release --tag v1.1`, and attaches it to the GitHub Release for that tag. Every action in `.github/workflows/` must be pinned to a full commit SHA, which the organization requires; with a tag or branch reference the run fails at startup. Run the same command locally to inspect the archive; it is written to the ignored `work/release/` folder.
+Release archives are not committed. Follow the reviewed, explicitly authorized procedure in [docs/RELEASE.md](docs/RELEASE.md). In brief: prepare and verify a candidate, obtain an independent review bound to the exact PR head, merge without changing the reviewed tree, then after explicit release authorization create the matching tag and manually dispatch the release workflow at that exact commit with the SHA, tag, and merged PR number. Pushing a tag alone does not publish, and no scheduled release exists. The workflow verifies provenance and required checks before creating a release; afterward, download the assets, verify their checksums and contents, and repeat the promised installation path. No release download is working until that publication and verification has happened. Every workflow action must be pinned to a full commit SHA. Local archives are written to ignored `work/release/`.
 
 Public content is organized in `catalog/`, `pack/` and `docs/`. Maintenance code lives in `scripts/` (the `packlib` package, one module per concern) and its checks in `tests/`. `config/modules.json` defines the modules that `config/module-map.json` reports. Keep any contributed examples fictional. Add no runtime framework, host dependency, or installation step for users of the pack.
 
 ## Submit a change
 
-Use a branch and a pull request. Explain the problem, the resulting behavior, the checks you ran, and any unchecked assumptions. Update the changelog for user-visible changes. Run the build, check and tests before submitting; continuous integration repeats the check and tests. Claims about compatibility, usability, or performance need actual evidence and must identify their limits.
+Use a branch and a pull request. Explain the problem, the resulting behavior, the checks you ran, and any unchecked assumptions. Update the changelog for user-visible changes. Run the build, check and tests before submitting; continuous integration repeats the check and tests. Claims about compatibility, usability, or performance need actual evidence and must identify their limits. Current macOS and Windows host acceptance for Claude Code and Codex is pending; historical trials do not establish current support.
 
 By contributing, you agree to license your changes under the license applying to the affected files. Preserve attribution for reused material and disclose its origin and license.
 

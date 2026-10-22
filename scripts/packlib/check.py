@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
 
-from . import bundle, cards, evals, manifest, modmap, plugin
+from . import bundle, cards, evals, manifest, modmap, plugin, source
 from .build import HOSTS, outputs, stale_files
 from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, read, safe_path, version
 
@@ -66,8 +66,10 @@ def check_generated(root, generated):
 def check_archives(root):
     """Release archives are attached to GitHub Releases by CI, never committed."""
     failures = []
-    for path in sorted(root.rglob("*.zip")):
-        relative = path.relative_to(root)
+    for name in source.files(root):
+        relative = Path(name)
+        if relative.suffix != ".zip":
+            continue
         if not set(relative.parts) & SKIP_DIRS:
             failures.append(f"{relative.as_posix()}: archives are not committed; "
                             "run release, and let CI attach it to the GitHub Release")
@@ -77,8 +79,11 @@ def check_archives(root):
 def check_links(root):
     failures = []
     # shortcut: inline file links only; extend parsing if reference-style links are introduced.
-    for path in sorted(root.rglob("*.md")):
-        relative = path.relative_to(root)
+    for name in source.files(root):
+        relative = Path(name)
+        if relative.suffix != ".md":
+            continue
+        path = root / relative
         if set(relative.parts) & (SKIP_DIRS | {"dist"}):  # dist/ copies are generated from checked sources
             continue
         text = read(root, relative.as_posix()).decode("utf-8")

@@ -28,10 +28,10 @@ LIMITS = (
     "- Graded by a model, usually from the same family as the model under test, against the card's own "
     "Acceptance line and the fixture's traits. A grade is a model judgement with quoted evidence, not a "
     "human review.",
-    "- Each card ran inside its shipped combined pack in a fresh subagent. This is not an unaided user "
+    "- Each card ran inside its shipped combined pack in a fresh context. This is not an unaided user "
     "trial, a subject-expert review, or a comparison with a well-instructed generalist.",
-    "- The subject subagent could read and write files only to receive its prompt and save its reply; "
-    "no other tools were available, so tool-dependent behaviour was not exercised.",
+    "- Text-only card evaluations do not exercise tool-dependent behaviour or prove host permission enforcement.",
+    "- Model names supplied at preparation are requests; only execution receipts record host-reported identity.",
 )
 
 
@@ -144,6 +144,26 @@ def load(root, families):
     return fixtures
 
 
+
+def heldout(root, families):
+    """Load the separately frozen release challenges without changing normal fixture counts."""
+    name = "evals/heldout/release.json"
+    data = json.loads(read(root, name).decode("utf-8"))
+    if data.get("schema") != 1 or not isinstance(data.get("fixtures"), list):
+        raise ValueError(f"{name}: invalid heldout schema")
+    roles = {role["id"]: (family, role) for family in families for role in family["roles"]}
+    result, seen = [], {}
+    for fixture in data["fixtures"]:
+        if not isinstance(fixture, dict) or fixture.get("role") not in roles:
+            raise ValueError(f"{name}: unknown role")
+        family, card = roles[fixture["role"]]
+        failures = _check_fixture(name, family, fixture, seen)
+        if failures:
+            raise ValueError("\n".join(failures))
+        result.append(dict(fixture, family=family, card=card))
+    return result
+
+
 def criteria(card_text):
     """The card's Acceptance paragraph split into separately graded criteria."""
     body = cards.parse(card_text)["paragraphs"].get("Acceptance", "")
@@ -192,11 +212,11 @@ def grader_prompt(card_text, fixture, accepted, output_path, grade_path):
     card = fixture["card"]
     template = {
         "fixture": fixture["id"],
-        "acceptance": [{"item": item, "verdict": "pass | partial | fail", "evidence": "short quote or reason"}
+        "acceptance": [{"item": item, "verdict": "pass | partial | fail", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
                        for item in accepted],
-        "traits": [{"item": item, "verdict": "pass | partial | fail", "evidence": "short quote or reason"}
+        "traits": [{"item": item, "verdict": "pass | partial | fail", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
                    for item in fixture["traits"]],
-        "must_not": [{"item": item, "verdict": "clear | violated", "evidence": "short quote or reason"}
+        "must_not": [{"item": item, "verdict": "clear | violated", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
                      for item in fixture["must_not"]],
         "notes": "anything the maintainers should know, or an empty string",
     }
@@ -205,7 +225,10 @@ def grader_prompt(card_text, fixture, accepted, output_path, grade_path):
         f"Fixture `{fixture['id']}` ({fixture['kind']}) for `{card['id']}`. Read the reply at `{output_path}`. "
         "Grade only what the reply contains, against the items below. Quote the reply as evidence; when an "
         "item is missing, say so. Do not reward length or polish, do not repair the reply, and do not grade "
-        "against your own idea of a better answer. An empty or unreadable reply fails every acceptance "
+        "against your own idea of a better answer. Every pass or violated verdict needs a nonempty exact "
+        "excerpt from the reply in quote; other verdicts may leave quote empty and explain absence in evidence. "
+        "A wholly missing criterion fails; partial means some of the requirement is demonstrated or implicit. "
+        "An empty or unreadable reply fails every acceptance "
         "criterion and trait.\n\n"
         "- `pass`: the reply clearly does this. `partial`: it does some of it, or only implicitly. "
         "`fail`: it does not.\n"
@@ -258,8 +281,11 @@ def prepare(root, families, generated, fixtures, run, meta):
             "kind": fixture["kind"], "pack": pack, "subject_prompt": f"{EVAL_DIR}/{run}/prompts/{name}.subject.md",
             "grader_prompt": f"{EVAL_DIR}/{run}/prompts/{name}.grader.md", "output": output, "grade": grade,
             "acceptance": accepted, "traits": fixture["traits"], "must_not": fixture["must_not"],
-            "subject_sha256": _sha(subject), "card_sha256": _sha(card_text)})
-    record = dict(meta, schema=1, run=run, fixtures=records)
+            "subject_sha256": _sha(subject), "grader_sha256": _sha(grader), "card_sha256": _sha(card_text),
+            "input_sha256": _sha(json.dumps({k: fixture[k] for k in ("id", "role", "kind", "request", "input")}, sort_keys=True)),
+            "rubric_sha256": _sha(json.dumps({"acceptance": accepted, "traits": fixture["traits"],
+                                             "must_not": fixture["must_not"]}, sort_keys=True))})
+    record = dict(meta, schema=3, run=run, fixtures=records)
     for sub in ("prompts", "outputs", "grades"):
         (folder / sub).mkdir(parents=True)
     for name, text in prompts.items():
@@ -271,7 +297,7 @@ def prepare(root, families, generated, fixtures, run, meta):
 def load_run(root, run):
     if not RUN_NAME.fullmatch(run or ""):
         raise ValueError(f"run name {run!r} must be a slug")
-    path = root / EVAL_DIR / run / "run.json"
+    path = safe_path(root, f"{EVAL_DIR}/{run}/run.json")
     if not path.is_file():
         raise ValueError(f"{EVAL_DIR}/{run}/run.json is missing; run prepare first")
     return json.loads(path.read_text(encoding="utf-8"))
@@ -280,8 +306,8 @@ def load_run(root, run):
 def status(root, run):
     """Fixture records still lacking an output, and those lacking a grade."""
     record = load_run(root, run)
-    need_output = [f for f in record["fixtures"] if not _has_text(root / f["output"])]
-    need_grade = [f for f in record["fixtures"] if f not in need_output and not (root / f["grade"]).is_file()]
+    need_output = [f for f in record["fixtures"] if not _has_text(safe_path(root, f["output"]))]
+    need_grade = [f for f in record["fixtures"] if f not in need_output and not (safe_path(root, f["grade"])).is_file()]
     return record, need_output, need_grade
 
 
@@ -289,7 +315,7 @@ def _has_text(path):
     return path.is_file() and path.read_text(encoding="utf-8").strip() != ""
 
 
-def check_grade(fixture, grade):
+def check_grade(fixture, grade, reply=None):
     """Failure strings for one grade object compared with what the run prepared."""
     where, failures = fixture["grade"], []
     if not isinstance(grade, dict) or grade.get("fixture") != fixture["id"]:
@@ -304,8 +330,12 @@ def check_grade(fixture, grade):
             if row.get("verdict") not in verdicts:
                 failures.append(f"{where}: {section} verdict {row.get('verdict')!r} is not one of "
                                 f"{', '.join(verdicts)}")
-            if not isinstance(row.get("evidence"), str):
-                failures.append(f"{where}: {section} evidence must be text")
+            if not isinstance(row.get("evidence"), str) or not row["evidence"].strip():
+                failures.append(f"{where}: {section} evidence must be non-empty text")
+            if reply is not None and row.get("verdict") in ("pass", "violated"):
+                quote = row.get("quote")
+                if not isinstance(quote, str) or not quote.strip() or quote not in reply:
+                    failures.append(f"{where}: {section} affirmative verdict needs an exact reply quote")
     return failures
 
 
@@ -323,10 +353,25 @@ def _cell(text):
 def _grades(root, record):
     """Validate every output and grade of a run and return the grades by fixture id."""
     failures, grades = [], {}
+    receipt_path = safe_path(root, f"{EVAL_DIR}/{record['run']}/execution.json")
+    receipts = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
     for fixture in record["fixtures"]:
-        if not _has_text(root / fixture["output"]):
+        if record.get("schema", 1) >= 2:
+            for key in ("subject", "grader"):
+                prompt = safe_path(root, fixture[key + "_prompt"])
+                if not prompt.is_file() or hashlib.sha256(prompt.read_bytes()).hexdigest() != fixture[key + "_sha256"]:
+                    failures.append(f"{fixture['id']}: {key} prompt hash mismatch")
+        if receipts is not None:
+            receipt = receipts.get("fixtures", {}).get(fixture["id"], {})
+            if receipt.get("status") != "complete":
+                failures.append(f"{fixture['id']}: execution receipt is incomplete")
+            for key in ("output", "grade"):
+                path = safe_path(root, fixture[key])
+                if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != receipt.get(key + "_sha256"):
+                    failures.append(f"{fixture['id']}: {key} receipt hash mismatch")
+        if not _has_text(safe_path(root, fixture["output"])):
             failures.append(f"{fixture['output']}: reply is missing or empty")
-        path = root / fixture["grade"]
+        path = safe_path(root, fixture["grade"])
         if not path.is_file():
             failures.append(f"{fixture['grade']}: grade is missing")
             continue
@@ -335,7 +380,9 @@ def _grades(root, record):
         except json.JSONDecodeError as error:
             failures.append(f"{fixture['grade']}: invalid JSON ({error})")
             continue
-        errors = check_grade(fixture, grade)
+        reply = safe_path(root, fixture["output"])
+        errors = check_grade(fixture, grade, reply.read_text(encoding="utf-8")
+                             if record.get("schema", 1) >= 3 and reply.is_file() else None)
         failures += errors
         if not errors:
             grades[fixture["id"]] = grade
@@ -373,11 +420,15 @@ def save_baseline(root, run):
         if (record["model"], record["grader"]) != (records[0]["model"], records[0]["grader"]):
             raise ValueError(f"{record['run']}: model or grader differs from {records[0]['run']}; "
                              "a baseline holds one model and grader")
-    roles = {}
+    roles, fixture_versions = {}, {}
     for record in records:
         roles.update(role_scores(record, _grades(root, record)))
+        replaced = {f["role"] for f in record["fixtures"]}
+        fixture_versions = {k: v for k, v in fixture_versions.items() if v["role"] not in replaced}
+        fixture_versions.update({f["id"]: {k: f.get(k) for k in ("role", "input_sha256", "rubric_sha256")}
+                                 for f in record["fixtures"]})
     last = records[-1]
-    data = {"schema": 1, "run": " + ".join(r["run"] for r in records), "version": last["version"],
+    data = {"schema": 2, "fixtures": fixture_versions, "run": " + ".join(r["run"] for r in records), "version": last["version"],
             "commit": last["commit"], "model": last["model"], "grader": last["grader"], "date": last["date"],
             "roles": dict(sorted(roles.items()))}
     path = root / BASELINE
@@ -394,6 +445,19 @@ def compare(root, run, baseline=BASELINE):
     record = load_run(root, run)
     grades = _grades(root, record)
     now = role_scores(record, grades)
+    if (old["model"], old["grader"]) != (record["model"], record["grader"]):
+        raise ValueError("incomparable baseline: requested model or grader changed")
+    if not old.get("fixtures"):
+        raise ValueError("incomparable historical baseline: fixture and rubric hashes were not recorded")
+    for fixture in record["fixtures"]:
+        before = old["fixtures"].get(fixture["id"])
+        if not before or any(not fixture.get(k) or before.get(k) != fixture[k]
+                             for k in ("input_sha256", "rubric_sha256")):
+            raise ValueError(f"incomparable baseline: fixture or rubric changed for {fixture['id']}")
+    for role in now:
+        if {f["id"] for f in record["fixtures"] if f["role"] == role} != {
+                fid for fid, f in old["fixtures"].items() if f["role"] == role}:
+            raise ValueError(f"incomparable baseline: fixture coverage changed for {role}")
     drops = [(role, old["roles"][role], row) for role, row in now.items()
              if role in old["roles"] and row["passed"] * old["roles"][role]["total"]
              < old["roles"][role]["passed"] * row["total"]]
@@ -441,8 +505,8 @@ def render(record, grades):
         f"| Commit | {_cell(record['commit'])} |",
         f"| Host | {_cell(record['host'])} |",
         f"| Tools | {_cell(record['tools'])} |",
-        f"| Model under test | {_cell(record['model'])} |",
-        f"| Grader | {_cell(record['grader'])} |",
+        f"| Model under test (requested) | {_cell(record['model'])} |",
+        f"| Grader (requested) | {_cell(record['grader'])} |",
         f"| Date prepared | {_cell(record['date'])} |",
         f"| Fixtures | {len(fixtures)} ({kinds['task']} task, {kinds['boundary']} boundary) in "
         f"{len(families)} families |", "",

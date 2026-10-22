@@ -6,7 +6,7 @@ from .config import ADAPTERS_DIR, MODULE_MAP, PACK_DIR, PLUGINS_DIR, REGISTRY, S
 # Host formats generated besides the Claude Code plugins, each a module with outputs() and problems().
 HOSTS = (codex, copilot, cursor, gemini)
 # Folders whose every file is generated, so anything else found there is stale. In adapters/ the READMEs are sources.
-GENERATED_DIRS = (PLUGINS_DIR, SKILLS_DIR, ADAPTERS_DIR, ".agents", ".cursor-plugin")
+GENERATED_DIRS = (PLUGINS_DIR, SKILLS_DIR, ADAPTERS_DIR, ".agents/plugins", ".cursor-plugin")
 HAND_WRITTEN = ("README.md",)
 
 
