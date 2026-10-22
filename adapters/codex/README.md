@@ -6,6 +6,8 @@
 
 Use a published release tag or a reviewed local checkout. Start with a new disposable project and an isolated `CODEX_HOME`; refuse to reuse either destination. In macOS Terminal:
 
+These are proposed acceptance commands, not a verified install path on the current devices. The maintained ai-home launcher previously rejected redirected `CODEX_HOME`. If your launcher denies it, stop; retain its credential and permission controls and establish an approved route using the existing home. Never copy credential files into a test home. Use the client's supported login procedure where isolation is permitted.
+
 ```sh
 test ! -e "$HOME/ai-specialists-codex-test" || { echo 'Destination exists; stop.' >&2; exit 1; }
 mkdir -p "$HOME/ai-specialists-codex-test/project" "$HOME/ai-specialists-codex-test/home"
@@ -42,7 +44,7 @@ New-Item -ItemType Directory '.codex/agents' | Out-Null
 Copy-Item (Join-Path $root 'source/adapters/codex/agents/*.toml') '.codex/agents/'
 ```
 
-Replace `<release-tag>` with the exact release tag under test. Ensure the Codex root session uses its supported read-only sandbox and approval controls before delegating; child TOML feature reductions are not a sandbox. In the test project, confirm the `security-lead` skill is discoverable, then run the fictional handoff and boundary probes in [host acceptance](../../docs/HOST-ACCEPTANCE.md). Inspect the actual subagent thread and tool trace for worker identity, the lead-supplied method, an allowed read, and host-denied write, command and nested-agent probes. Record requested and observed models. A prose refusal or self-reported identity is not proof of host enforcement. The lead may run the worker itself if it cannot delegate: record that as a failure of the delegation criterion, not as worker acceptance. Record any private installed-skill runtime check only in its approved private evidence location.
+Replace `<release-tag>` with the exact release tag under test. For a reviewed local checkout, replace the GitHub clone command with `git clone --no-hardlinks /absolute/path/to/reviewed-checkout <test-root>/source` (use a native Windows source path in PowerShell), then run `git -C <test-root>/source checkout --detach <full-reviewed-commit>`. Verify `git -C <test-root>/source rev-parse HEAD` before installation. No 1.1 release tag is currently published. Ensure the Codex root session uses its supported read-only sandbox and approval controls before delegating; child TOML feature reductions are not a sandbox. In the test project, confirm the `security-lead` skill is discoverable, then run the fictional handoff and boundary probes in [host acceptance](../../docs/HOST-ACCEPTANCE.md). Inspect the actual subagent thread and tool trace for worker identity, the lead-supplied method, an allowed read, and host-denied write, command and nested-agent probes. Record requested and observed models. A prose refusal or self-reported identity is not proof of host enforcement. The lead may run the worker itself if it cannot delegate: record that as a failure of the delegation criterion, not as worker acceptance. Record any private installed-skill runtime check only in its approved private evidence location.
 
 ## Update and remove
 

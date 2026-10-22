@@ -47,12 +47,12 @@ python3 -B scripts/evals.py report --run <run>
 
 Give the user the totals and the fixtures that did not pass. Do not describe the results as more than the report's Limits section allows. `work/` is never committed. When the user has reviewed the report and wants it kept, copy it to `evals/reports/<run>.md`, link it from `docs/VALIDATION.md` under Recorded evaluations, and run the pack build, check and tests.
 
-## 4. Weekly regression check
+## 4. Optional regression check
 
-A scheduled task runs this unattended. It never edits the baseline or the repository.
+No recurring evaluation is authorized by this skill. Run a regression check only when requested. The historical baseline lacks fixture and grading-harness hashes and cannot support a current comparison. First obtain approval for a reviewed replacement baseline from complete runs of the current harness. A regression check never edits the baseline or the repository.
 
 1. If `evals/baseline.json` has `"run": null`, there is nothing to compare with. Stop and say so; do not run the evals.
-2. Run the whole catalog with the steps above, named `<date>-weekly`, recording the model as the host reports it. Use `scripts/evals_headless.sh <date>-weekly` for step 2, and `--model claude-opus-5-5` unless the baseline's model is no longer available, in which case say so in the issue.
+2. Run the whole catalog with the steps above under a new run name, recording requested and host-observed model identities. The native runner is `python3 -B scripts/evals_runner.py <run> [parallel]`; use the model and grader recorded in the reviewed baseline. Stop if they are unavailable or the harness hashes differ.
 3. Run `python3 -B scripts/evals.py compare --run <run>`. Exit 0 means no card fell: stop without opening an issue. Exit 3 means at least one fell.
 4. On exit 3, search open issues for the label or title `Card eval regression`. If one is open, add the new `REGRESSION.md` as a comment; otherwise open an issue titled `Card eval regression: <date>` with its contents, noting any model change it reports. Do not paste replies or grades.
 5. If the run itself fails (missing fixtures after one retry), open or comment on an issue saying which fixtures are missing; do not compare a partial run to the baseline as if complete.

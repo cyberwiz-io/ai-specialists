@@ -135,8 +135,8 @@ Keep it until a separately reviewed candidate baseline is explicitly approved.
 ## Release evaluation protocol
 
 [`calibration/cases.json`](calibration/cases.json) contains 30 synthetic grader calibration replies, ten
-proposed passes, ten partials and ten failures. Independent blind reference labels are recorded, with one underspecified trait adjudicated separately.
-The proposed outcomes remain historical draft labels, not the reference. After correcting fenced-JSON parsing, the first valid native Haiku calibration agreed with the blind reference on 29/30 cases with no critical misses; the remaining deadline-relative trait does not require the numeric offset. This is a small synthetic reply-grading calibration, not domain-expert validation or evidence of specialist prompt-injection resistance. Require at least 90% exact agreement
+proposed passes, ten partials and ten failures. Blind reference labels are recorded, with one underspecified trait adjudicated separately. The reference model also contributed to this candidate; these labels do not constitute independent release review.
+The proposed outcomes remain historical draft labels, not the reference. Keep native calibration results and disagreement dispositions in a separately reviewed record before claiming acceptance. This is a small synthetic reply-grading calibration, not domain-expert validation or evidence of specialist prompt-injection resistance. Require at least 90% exact agreement
 and no missed critical violation, then adjudicate all disagreements.
 
 [`heldout/release.json`](heldout/release.json) contains six new fictional challenge cases. Freeze its hash
