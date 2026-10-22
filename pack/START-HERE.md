@@ -43,7 +43,7 @@ STARTER-PACK.md and the family packs combine those instructions for convenience.
 
 ## What this version does and does not establish
 
-In plain chat one assistant uses these specialist perspectives in turn and reviews its own work. That is not isolated multi-agent execution; hosts with subagents, such as the Claude Code plugins, can run each specialist and the final review in separate contexts. Research, actual images, downloadable files, persistent storage and independent review depend on available host capabilities. Missing capabilities should lead to a smaller approved package, not fake outputs.
+In plain chat one assistant may apply specialist perspectives inline; this does not mean agents ran. Hosts with subagents can delegate suitable independent work. Nontrivial deliverables require review by a different actual model from all authors, bound to a manifest of the exact final versions and byte hashes; changed bytes void review. A fresh same-model context does not qualify; unavailable review is BLOCKED_REVIEW. Research, images, files, storage and review depend on actual host capabilities. Missing capabilities require honest status and a feasible package.
 
 This is a portable instruction pack, not an enforced security boundary or a certified integration with every host. It has been reviewed locally; fresh-host trials, unaided user tests and subject-expert review of the other families remain to be done. No claim of better marketing performance is established. 
 

@@ -56,6 +56,35 @@ class SkillTests(FixtureCase):
         self.assertNotIn("](references/", body)
         self.assertIn(skills.lead_name(family), body)
 
+    def test_generated_leads_require_different_model_review_and_honest_block(self):
+        families = manifest.load(self.root)
+        generated = build.outputs(self.root)[1]
+        leads = [
+            generated["skills/marketing-growth-lead/SKILL.md"].decode(),
+            generated["skills/security-lead/SKILL.md"].decode(),
+            generated["skills/specialists/SKILL.md"].decode(),
+        ]
+        for lead in leads:
+            self.assertIn("different actual model", lead)
+            self.assertIn("BLOCKED_REVIEW", lead)
+            self.assertIn("exact artifact", lead)
+            self.assertIn("cheapest", lead)
+            self.assertIn("BLOCKED_MODEL/COST", lead)
+            self.assertIn("untrusted task data", lead)
+            self.assertIn("general-purpose agent", lead)
+            self.assertIn("edit or network tools", lead)
+            self.assertIn("host-observed model IDs", lead)
+            self.assertIn("supported per-call model override", lead)
+            self.assertIn("prefer eligible local only at equal known cost", lead)
+            self.assertIn("byte hash", lead)
+            self.assertIn("changed bytes void review", lead)
+            self.assertIn("from every author model", lead)
+            self.assertIn("No new charges through model selection or overrides.", lead)
+            self.assertIn("BLOCKED_MODEL/COST; do not claim ready or complete", lead)
+            self.assertIn("or uncertain work is nontrivial", lead)
+            self.assertIn("mechanical formatting needs an exception reason", lead)
+            self.assertNotIn("It wrote none of the work, so its review is independent", lead)
+
 
 class HostTests(FixtureCase):
     def outputs(self):

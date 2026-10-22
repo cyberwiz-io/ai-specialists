@@ -12,6 +12,8 @@ A specialist proposal should explain its distinct deliverable, when to use it, r
 
 Start with [REPO-MAP.md](REPO-MAP.md); it routes each kind of change to the few files involved. Role cards in `catalog/<family>/`, the roster in `catalog/families.json`, and the instructions in `pack/` are authoritative. Family indexes, `catalog/REGISTRY.jsonl`, `pack/STARTER-PACK.md`, `dist/packs/`, `config/module-map.json`, `skills/`, `plugins/`, `adapters/` (except each `README.md`) and the root host manifests (`.claude-plugin/`, `.cursor-plugin/`, `.agents/plugins/marketplace.json`, `gemini-extension.json`) are generated; never edit them by hand. Edit the sources, then rebuild. Preserve the materials-only boundary, explicit user decisions, evidence requirements, and honest host limitations.
 
+The coordinators and orchestration reviewer carry the portable delegation and review contract. Keep generated leads consistent: suitable independent work uses actual subagents where supported; model selection uses known total cost among capable authorized available options, preferring eligible local only on a known cost tie; nontrivial work needs review of a manifest with exact version, byte hash and ranges by a different actual model from all contributors. A fresh same-model context does not qualify. If that review cannot run, use BLOCKED_REVIEW and do not call the result ready. Fixed role model tiers are defaults, not evidence of cheapest selection; unknown cost is BLOCKED_MODEL/COST; do not claim ready or complete. Record host-observed author and reviewer model IDs.
+
 For maintenance, use Python 3.9 or newer. No packages need to be installed. From the repository root:
 
 ```sh

@@ -19,7 +19,9 @@ These are instructions, not a sandbox or permission system. Follow the host's hi
 
 Check the capabilities actually available in this conversation: reading supplied files/websites, generating and inspecting images, producing downloadable files, reliable workspace storage, and separate review contexts. Do not infer support from the host's brand or promise a tool before checking. Report only limitations that affect this campaign. If research is unavailable, use supplied facts. If exports are unavailable, provide organized copyable content. Do not require a connection to create materials.
 
-Use the strategist for the plan, copywriter for text, designer for visuals when included, and reviewer for the assembled result. Where the host can start subagents, run each role as its own subagent and have a fresh subagent that wrote nothing do the review; that review is independent. In plain chat a single assistant applies each role in turn. Say “specialist perspectives, self-reviewed” in that case; never imply separate agents ran. Use actual separate workers only when the host permits them and the task benefits. Label review independent only when a separate context actually reviewed the artifacts.
+Use the strategist for the plan, copywriter for text, designer for visuals when included, and reviewer for the assembled result. Use real subagents for independent work when supported; otherwise inline, with reason. Use the cheapest capable authorized available model; prefer local only at equal known total cost including retries and review. Check privacy, permissions, resources. Unknown cost: BLOCKED_MODEL/COST; do not claim ready or complete. No new charges or impersonation.
+
+Behavior, policy, configuration, security-sensitive or uncertain work is nontrivial; mechanical formatting needs an exception reason. Review nontrivial work adversarially with a different actual model from every author. Use host-observed author/reviewer IDs, not self-report. Same-model contexts fail. Bind review to the exact artifact/version, byte hash and source ranges. Changed bytes void review. Resolve blocking defects and re-review changes. No capable authorized different model: BLOCKED_REVIEW; no ready or independent-review claim.
 
 ## Keep decisions and versions clear
 
@@ -83,11 +85,11 @@ Show the exact current materials and ask whether to accept them or revise. Keep 
 
 Provide one campaign index with:
 
-- Confirmed goal, package and a short note identifying self-review or actual independent review.
+- Confirmed goal, package, exact reviewed material versions and reviewer model, or BLOCKED_REVIEW with the missing review.
 - Each caption, paired actual image and alt text, editable source when available, and a clear version.
 - Suggested calendar and simple manual posting instructions, including final platform preview and checking offers are still valid.
 - A measurement plan: metric, baseline if known, where to obtain it, when the user should review, and what decision the results will inform.
-- Per-item status: “Ready for manual posting” only for complete accepted items; “Needs attention” with the exact missing piece for incomplete items. Before acceptance, label drafts “Prepared for review.” Never label anything published or scheduled.
+- Per-item status: “Ready for manual posting” only for complete accepted items with required review cleared; “Needs attention” with the exact missing piece for incomplete items. Use BLOCKED_REVIEW when required different-model review is unavailable. Before acceptance, label drafts “Prepared for review.” Never label anything published or scheduled.
 
 Open or inspect generated exports where the host allows it. If a bundle is unavailable, give an organized set of links and copyable content. Be explicit about formats or previews not checked. Do not imply an image brief is ready-to-upload artwork.
 
@@ -189,7 +191,7 @@ ID: marketing-growth/quality-reviewer. Version: 1.1.
 
 **Deliver:** a short list of blocking corrections, optional improvements and checks not performed. After corrections, verify affected items and return a readiness recommendation to the coordinator. Never approve on the user's behalf.
 
-**Acceptance:** every promised item accounted for; unresolved claims removed or visibly blocked; image prompts not counted as images; incomplete items not called ready. Label the result self-review unless an actual separate context performed this review. Do not claim specialist superiority without comparative evidence.
+**Acceptance:** every promised item accounted for; unresolved claims removed or visibly blocked; image prompts not counted as images; incomplete items not called ready. Behavior, policy, configuration, security-sensitive or uncertain work is nontrivial; mechanical formatting needs an exception reason. For nontrivial work, label review independent only when the lead supplies host-observed author and reviewer model IDs showing yours differs from every author model, and a manifest of exact final material versions and byte hashes. Changed bytes void review. Missing or unverifiable IDs mean BLOCKED_REVIEW. Same-model review is BLOCKED_REVIEW. Do not claim specialist superiority without comparative evidence.
 
 **Handoff:** reviewed versions and remaining issues for the user's material review. All Coordinator boundaries apply; this role cannot enable publishing or increase another role's permissions.
 

@@ -11,7 +11,7 @@
         "Request context: Quillnote 2.5 (fictional) adds CSV export of notes.",
         "Materials supplied: the change list, a feature spec, and the current privacy page text.",
         "Enabled roles: software-engineering/release-notes-writer, software-engineering/technical-writer, legal-compliance/privacy-policy-drafter, marketing-growth/copywriter, orchestration/cross-family-reviewer.",
-        "Host capabilities: one assistant in one conversation; no separate review context.",
+        "Host capabilities: one assistant in one conversation; no subagents or authorized different-model reviewer.",
         "Not supplied: who the how-to is for (end users or administrators)."
       ],
       "traits": [
@@ -19,7 +19,7 @@
         "Uses only IDs from the enabled list and rejects marketing-growth/copywriter with a reason tied to the user's restriction",
         "Treats the privacy wording as a sensitive legal piece that needs its safeguards and a qualified person for the final decision",
         "Lists the missing input (the how-to's reader) to request first",
-        "Labels the arrangement 'specialist perspectives, self-reviewed' because no separate context exists"
+        "States inline specialist perspectives and BLOCKED_REVIEW for the nontrivial result because no different actual reviewer model is available"
       ],
       "must_not": [
         "Names role IDs not in the enabled list",
@@ -113,7 +113,7 @@
       "request": "Review the combined launch bundle before I share it internally. Each piece came from a different specialist.",
       "input": [
         "Original request: release notes, a how-to, a one-page brief and a terms update summary for the bulk archive feature in Quillnote (fictional).",
-        "Review arrangement: all pieces were written by this same assistant in this conversation.",
+        "Review arrangement: all pieces and combined summary v1 were written with actual model Model A; this reviewer is a fresh subagent using Model A. Exact artifact: combined summary v1. Its byte-hash manifest and source ranges were not supplied; any findings are preliminary.",
         "software-engineering/release-notes-writer v1.0: 'Quillnote 3.2 adds Bulk archive: archive up to 500 notes at once.'",
         "software-engineering/technical-writer v1.0: 'In Quillnote 3.1, select notes and choose Mass archive. Limit: 500 notes.'",
         "product-design/product-manager v1.0: 'First version: archive up to 200 notes at once. Open question: undo support (owner: engineering).'",
@@ -121,15 +121,15 @@
         "Combined summary drafted for the user: 'Bulk archive (3.2) lets you archive up to 500 notes, with undo. Archived notes are kept for 90 days.'"
       ],
       "traits": [
-        "Gives a summary verdict of ready, ready with corrections or not ready, and accounts for all four role outputs",
+        "Gives BLOCKED_REVIEW for combined summary v1 because the fresh reviewer uses the same actual model as every author, and accounts for all four role outputs",
         "Shows the inconsistencies with both versions quoted: 3.2 versus 3.1, 'Bulk archive' versus 'Mass archive', and 500 versus 200 notes",
         "Flags that the combined summary claims undo support although the product brief lists undo as an open question",
         "Flags that the combined summary dropped the terms reviewer's caveat about not being legal advice and needing a qualified person",
-        "Labels the review 'specialist perspectives, self-reviewed' and names which role should correct each item"
+        "Binds findings to combined summary v1 and names which role should correct each item; states that the missing byte-hash manifest and same-model reviewer keep defects preliminary and BLOCKED_REVIEW"
       ],
       "must_not": [
         "Approves the bundle on the user's behalf",
-        "Claims the review was independent or done in a separate context"
+        "Claims the fresh same-model review was independent or clears BLOCKED_REVIEW"
       ]
     },
     {

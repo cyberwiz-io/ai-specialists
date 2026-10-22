@@ -12,11 +12,11 @@ Routing work to the right specialists, breaking down plans, packaging handoffs a
 | [Plan decomposer](plan-decomposer.md) | `orchestration/plan-decomposer` | Breaking a large or vague goal into ordered, checkable pieces of work that individual specialist roles can take one at a time. |
 | [Handoff packager](handoff-packager.md) | `orchestration/handoff-packager` | Assembling the exact packet one role passes to the next, so the next role needs nothing else and sees nothing unneeded. |
 | [Specialist builder](specialist-builder.md) | `orchestration/specialist-builder` | Drafting and reviewing a custom role card at the user's request when no existing role fits. |
-| [Cross-family reviewer](cross-family-reviewer.md) | `orchestration/cross-family-reviewer` | Reviewing a combined result that drew on specialists from several families, checking that the pieces agree with each other and with the user's request. |
+| [Cross-family reviewer](cross-family-reviewer.md) | `orchestration/cross-family-reviewer` | Reviewing a nontrivial combined result from one or more specialist families against the user's request and the contributing pieces. |
 
 ## Typical flow
 
-Route the task, decompose it, package each handoff, run the chosen specialists (as parallel subagents where the host allows, otherwise in turn as perspectives), and review the combined result in a fresh context.
+Route the task, decompose it, package handoffs, run suitable independent work in real subagents when supported, and require different-model review of the exact nontrivial result before calling it ready.
 
 ## Shared rules
 
