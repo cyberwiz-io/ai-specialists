@@ -3,6 +3,7 @@ import json
 import re
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -168,6 +169,92 @@ class BuildTests(FixtureCase):
         target.symlink_to(self.root / "coordinator-original.md")
         with self.assertRaisesRegex(ValueError, "Unsafe source path"):
             build.build(self.root)
+
+    def test_external_installed_client_skill_is_not_pack_source(self):
+        with tempfile.TemporaryDirectory() as outside:
+            external = Path(outside) / "SKILL.md"
+            external.write_text("# Installed client skill\n")
+            original = external.read_bytes()
+            subprocess.run(["git", "init", "-q", str(self.root)], check=True)
+            subprocess.run(["git", "-C", str(self.root), "add", "--",
+                            ".claude/skills/card-evals/SKILL.md"], check=True)
+            link = self.root / ".claude/skills/local-helper"
+            link.symlink_to(external.parent, target_is_directory=True)
+            installed = self.root / ".agents/skills/local-helper"
+            installed.mkdir(parents=True)
+            (installed / "SKILL.md").write_text("# Installed agent skill\n")
+            (self.root / ".codex/agents").mkdir(parents=True)
+            (self.root / ".codex/agents/local-helper.md").write_text("# Installed Codex agent\n")
+            with mock.patch("packlib.config.subprocess.check_output", wraps=subprocess.check_output) as git_calls:
+                build.build(self.root)
+                self.assertEqual(git_calls.call_count, 1)
+            self.assertEqual((installed / "SKILL.md").read_text(), "# Installed agent skill\n")
+            self.assertTrue(link.is_symlink())
+            self.assertEqual(link.readlink(), external.parent)
+            self.assertEqual(external.read_bytes(), original)
+            self.assertEqual((self.root / ".codex/agents/local-helper.md").read_text(), "# Installed Codex agent\n")
+            with mock.patch("packlib.config.subprocess.check_output", wraps=subprocess.check_output) as git_calls:
+                check.check(self.root)
+                self.assertEqual(git_calls.call_count, 1)
+
+    def test_tracked_undeclared_client_file_is_not_hidden(self):
+        subprocess.run(["git", "init", "-q", str(self.root)], check=True)
+        rogue = self.root / ".codex/agents/rogue.md"
+        rogue.parent.mkdir(parents=True)
+        rogue.write_text("# Tracked undeclared source\n")
+        check.check(self.root)  # untracked before staging; next check must refresh
+        subprocess.run(["git", "-C", str(self.root), "add", "--", ".codex/agents/rogue.md"], check=True)
+        self.assertFails(".codex/agents/rogue.md is not covered by any module")
+
+    def test_unrelated_agent_file_is_still_stale(self):
+        stale = self.root / ".agents/stale.json"
+        stale.write_text("{}")
+        self.assertFails(".agents/stale.json: stale generated file")
+        build.build(self.root)
+        self.assertFalse(stale.exists())
+        check.check(self.root)
+
+    def test_stale_generated_agent_plugin_is_still_removed(self):
+        stale = self.root / ".agents/plugins/old.json"
+        stale.write_text("{}")
+        self.assertFails("old.json: stale generated file")
+        build.build(self.root)
+        self.assertFalse(stale.exists())
+        check.check(self.root)
+
+    def test_external_catalog_card_symlink_is_rejected(self):
+        with tempfile.TemporaryDirectory() as outside:
+            target = self.root / "catalog/security/threat-modeler.md"
+            external = Path(outside) / "threat-modeler.md"
+            external.write_bytes(target.read_bytes())
+            target.unlink()
+            target.symlink_to(external)
+            with self.assertRaisesRegex(ValueError, "Unsafe source path"):
+                check.check(self.root)
+
+    def test_external_owned_client_skill_symlink_is_rejected(self):
+        with tempfile.TemporaryDirectory() as outside:
+            target = self.root / ".claude/skills/card-evals/SKILL.md"
+            external = Path(outside) / "SKILL.md"
+            external.write_bytes(target.read_bytes())
+            target.unlink()
+            target.symlink_to(external)
+            with self.assertRaisesRegex(ValueError, "Unsafe source path"):
+                check.check(self.root)
+
+    def test_declared_codex_source_symlink_is_rejected(self):
+        with tempfile.TemporaryDirectory() as outside:
+            target = self.root / ".codex/agents/owned.md"
+            target.parent.mkdir(parents=True)
+            external = Path(outside) / "owned.md"
+            external.write_text("# Declared source\n")
+            target.symlink_to(external)
+            spec_path = self.root / config.MODULES
+            spec = json.loads(spec_path.read_text())
+            spec["modules"][0]["paths"].append(".codex/agents/owned.md")
+            spec_path.write_text(json.dumps(spec))
+            with self.assertRaisesRegex(ValueError, "Unsafe source path"):
+                build.build(self.root)
 
     def test_destination_symlink_is_rejected(self):
         path = self.root / config.STARTER

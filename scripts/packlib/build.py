@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Compute every generated file in memory, then write them together."""
 from . import codex, copilot, cursor, gemini, generate, manifest, modmap, plugin, plugin_evals, skills
-from .config import ADAPTERS_DIR, MODULE_MAP, PACK_DIR, PLUGINS_DIR, REGISTRY, SKILLS_DIR, STARTER, read, safe_path
+from .config import ADAPTERS_DIR, MODULE_MAP, PACK_DIR, PLUGINS_DIR, REGISTRY, SKILLS_DIR, STARTER, client_index, is_installed_client_path, is_untracked_client_install, read, safe_path
 
 # Host formats generated besides the Claude Code plugins, each a module with outputs() and problems().
 HOSTS = (codex, copilot, cursor, gemini)
@@ -41,18 +41,22 @@ def build(root):
     for path, data in destinations.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
-    for stale in stale_files(root, generated):
+    index = client_index(root)
+    for stale in stale_files(root, generated, index):
         safe_path(root, stale).unlink()
     for top in GENERATED_DIRS:
         base = root / top
         for folder in sorted(base.rglob("*"), reverse=True) if base.is_dir() else []:
+            if is_installed_client_path(folder.relative_to(root)):
+                continue
             if folder.is_dir() and not any(folder.iterdir()):
                 folder.rmdir()
 
 
-def stale_files(root, generated):
+def stale_files(root, generated, index=None):
     """Generated-looking files that no longer have a source: old packs and anything left in a generated folder."""
     found = []
+    index = index or client_index(root)
     pack_dir = root / PACK_DIR
     for path in sorted(pack_dir.glob("*.md")) if pack_dir.is_dir() else []:
         found.append(path.relative_to(root).as_posix())
@@ -60,6 +64,8 @@ def stale_files(root, generated):
         base = root / top
         for path in sorted(base.rglob("*")) if base.is_dir() else []:
             relative = path.relative_to(root)
+            if is_untracked_client_install(root, relative, generated, index):
+                continue
             if "results" in relative.parts[2:4] and relative.parts[2:3] == ("evals",):
                 continue  # `claude plugin eval` writes its results here; .gitignore keeps them out of Git
             if (path.is_file() or path.is_symlink()) and not (top == ADAPTERS_DIR and len(relative.parts) == 3

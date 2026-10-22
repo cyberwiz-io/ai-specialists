@@ -4,7 +4,7 @@ import fnmatch
 import hashlib
 import json
 
-from .config import MODULES, SKIP_DIRS, read, safe_path, version
+from .config import MODULES, SKIP_DIRS, client_index, is_untracked_client_install, read, safe_path, version
 
 COVERED_SUFFIXES = {".md", ".py", ".json", ".jsonl", ".yml", ".yaml", ".toml"}
 UNTRACKED_DIRS = {"LICENSES", "dist"}
@@ -74,12 +74,19 @@ def generate(root, families, overlay):
     return (json.dumps(result, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
-def uncovered(root, families, overlay):
+def covered_paths(root, families, overlay):
+    """Files explicitly assigned to a repository module, including generated files."""
+    _, records = modules(root, families, overlay)
+    return {name for record in records for name in expand(root, record["paths"], overlay)}
+
+
+def uncovered(root, families, overlay, index=None):
     spec, records = modules(root, families, overlay)
     covered = set()
     for record in records:
         covered.update(expand(root, record["paths"], overlay))
     generated = spec.get("generated", [])
+    index = index or client_index(root)
     missing = []
     for path in sorted(root.rglob("*")):
         relative = path.relative_to(root)
@@ -87,6 +94,8 @@ def uncovered(root, families, overlay):
             continue
         name = relative.as_posix()
         if any(fnmatch.fnmatchcase(name, pattern) for pattern in IGNORED):
+            continue
+        if is_untracked_client_install(root, relative, covered | set(overlay), index):
             continue
         if path.suffix in COVERED_SUFFIXES and name not in covered \
                 and not any(fnmatch.fnmatchcase(name, pattern) for pattern in generated):

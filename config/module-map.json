@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "df1ecc2fd52ca9c286616e7cf7597b60ed9c558dcb2a79feb92801ce14f69074",
+      "digest": "4b488e163b3792b3150068267f6f5a84a2a61888393b0b99bec1279d7eaee178",
       "files": 42,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -202,7 +202,7 @@
       ],
       "paths": [
         ".claude/agents/*.md",
-        ".claude/skills/*/SKILL.md",
+        ".claude/skills/card-evals/SKILL.md",
         "evals/*.md",
         "evals/baseline.json",
         "evals/fixtures/*.json",

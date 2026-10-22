@@ -140,7 +140,7 @@
       ],
       "paths": [
         ".claude/agents/*.md",
-        ".claude/skills/*/SKILL.md",
+        ".claude/skills/card-evals/SKILL.md",
         "evals/*.md",
         "evals/baseline.json",
         "evals/fixtures/*.json",
