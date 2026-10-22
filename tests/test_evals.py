@@ -109,6 +109,22 @@ class FixtureFileTests(FixtureCase):
 
 
 class RunTests(FixtureCase):
+    def test_prepared_prompt_hashes_survive_platform_text_translation(self):
+        from unittest import mock
+        families, generated = check.check(self.root)
+        fixture = evals.load(self.root, families)[0]
+        original = Path.write_text
+        def translated(path, text, *args, **kwargs):
+            return original(path, text.replace("\n", "\r\n"), *args, **kwargs)
+        with mock.patch.object(Path, "write_text", translated):
+            folder = evals.prepare(self.root, families, generated, [fixture], "newline", {})
+        record = json.loads((folder / "run.json").read_bytes())
+        for name in ("subject", "grader"):
+            item = record["fixtures"][0]
+            payload = (self.root / item[name + "_prompt"]).read_bytes()
+            self.assertNotIn(b"\r", payload)
+            self.assertEqual(evals._sha(payload.decode()), item[name + "_sha256"])
+
     def test_prepare_rejects_duplicate_ids_before_writing(self):
         families, generated = check.check(self.root)
         fixture = evals.load(self.root, families)[0]

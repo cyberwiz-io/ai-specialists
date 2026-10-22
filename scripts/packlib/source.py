@@ -29,9 +29,11 @@ def files(root):
     """
     root = Path(root)
     tracked = tracked_files(root)
-    local = json.loads(read(root, MODULES)).get("local_material", {})
+    spec = json.loads(read(root, MODULES))
+    local = spec.get("local_material", {})
     directories = local.get("directories", [])
-    owned = local.get("sources", [])
+    owned = local.get("sources", []) + [name for module in spec.get("modules", [])
+        for name in module.get("paths", []) if not any(char in name for char in "*?[]")]
     local_files = local.get("files", [])
 
     def beneath(name, paths):

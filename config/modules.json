@@ -238,7 +238,7 @@
     "directories": [
       ".claude/skills",
       ".agents/skills",
-      ".codex/agents"
+      ".codex"
     ],
     "files": [
       ".claude/settings.local.json",

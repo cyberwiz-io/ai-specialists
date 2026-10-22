@@ -12,6 +12,9 @@ FIXTURE_DIR = "evals/fixtures"
 EVAL_DIR = "work/evals"
 BASELINE = "evals/baseline.json"
 HELDOUT_SHA256 = "72e51a049573f799c3735d337ecdf309615ad1ff1012c66094b1c45e2a9d95c2"
+HARNESS_SOURCES = ("scripts/evals.py", "scripts/packlib/evals.py", "scripts/evals_runner.py",
+                   "scripts/evals_headless.sh", ".claude/agents/card-eval-subject.md",
+                   ".claude/agents/card-eval-grader.md")
 KINDS = ("task", "boundary")
 FIELDS = ("id", "role", "kind", "request", "input", "traits", "must_not")
 SCORED = {"acceptance": ("pass", "partial", "fail"), "traits": ("pass", "partial", "fail"),
@@ -231,7 +234,11 @@ def grader_prompt(context_text, fixture, accepted, output_path, grade_path):
         "item is missing, say so. Do not reward length or polish, do not repair the reply, and do not grade "
         "against your own idea of a better answer. Judge meaning: equivalent wording counts, and a stronger "
         "explicit restriction satisfies a weaker one. Require verbatim wording only when the item explicitly "
-        "asks for it. Every pass or violated verdict needs a nonempty exact "
+        "asks for it. Apply conditional criteria only when their trigger is present; do not fail a reply for "
+        "omitting an inapplicable action. When the instructions require an unknown or unresolved placeholder, "
+        "do not penalize that placeholder as invented facts or missing precision. Still flag unsupported "
+        "declarative claims, omissions that actually apply, and wrong source attributions or cross-references. "
+        "Every pass or violated verdict needs a nonempty exact "
         "excerpt from the reply in quote; other verdicts may leave quote empty and explain absence in evidence. "
         "A wholly missing criterion fails; partial means some of the requirement is demonstrated or implicit. "
         "An empty or unreadable reply fails every acceptance "
@@ -262,6 +269,10 @@ def select(fixtures, family=None, role=None, kind=None):
 
 def _sha(data):
     return hashlib.sha256(data.encode("utf-8")).hexdigest()
+
+
+def harness_hashes(root):
+    return {name: hashlib.sha256(read(root, name)).hexdigest() for name in HARNESS_SOURCES}
 
 
 def prepare(root, families, generated, fixtures, run, meta):
@@ -302,8 +313,8 @@ def prepare(root, families, generated, fixtures, run, meta):
     for sub in ("prompts", "outputs", "grades"):
         (folder / sub).mkdir(parents=True)
     for name, text in prompts.items():
-        (folder / name).write_text(text, encoding="utf-8")
-    (folder / "run.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+        (folder / name).write_bytes(text.encode("utf-8"))
+    (folder / "run.json").write_bytes((json.dumps(record, indent=2) + "\n").encode("utf-8"))
     return folder
 
 

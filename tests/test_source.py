@@ -86,6 +86,9 @@ class SourceTests(unittest.TestCase):
 
     def test_no_git_does_not_hide_source(self):
         import shutil
+        for path in (self.root / ".git").rglob("*"):
+            if path.is_file():
+                path.chmod(0o600)  # Git objects are read-only on Windows; this fixture owns them.
         shutil.rmtree(self.root / ".git")
         self.write(".agents/skills/unknown/SKILL.md", "source")
         with self.assertRaisesRegex(ValueError, "Unclassified local material"):

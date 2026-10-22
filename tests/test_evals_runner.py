@@ -10,6 +10,10 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import evals_runner
 
+HARNESS_NAMES = ("scripts/evals.py", "scripts/packlib/evals.py", "scripts/evals_runner.py",
+                 "scripts/evals_headless.sh", ".claude/agents/card-eval-subject.md",
+                 ".claude/agents/card-eval-grader.md")
+
 
 class RunnerTests(unittest.TestCase):
     def test_affirmative_grade_requires_quote_from_reply(self):
@@ -64,7 +68,13 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
             self.fixture[key.replace('_prompt', '_sha256')] = hashlib.sha256(content.encode()).hexdigest()
         for key in ['output', 'grade']:
             self.fixture[key] = str((self.folder / key).relative_to(self.root))
-        self.record = {'model': 'subject-model', 'grader': 'grader-model', 'fixtures': [self.fixture]}
+        for name in HARNESS_NAMES:
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((name + '\n').encode())
+        self.record = {'model': 'subject-model', 'grader': 'grader-model', 'fixtures': [self.fixture],
+                       'harness_sha256': {name: hashlib.sha256((self.root / name).read_bytes()).hexdigest()
+                                          for name in HARNESS_NAMES}}
         self.save()
 
     def save(self):
@@ -116,13 +126,69 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
         self.assertEqual(receipt['subject']['reported_models'], [])
         self.assertEqual(receipt['subject']['identity_source'], 'unobserved')
 
-    def test_invalid_grade_does_not_save_partial_output(self):
+    def test_invalid_grades_preserve_reply_and_raw_attempts_without_replay(self):
         path = self.root / self.fixture['grader_prompt']
         path.write_text('INVALIDGRADE')
         self.fixture['grader_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
         self.save()
         self.assertEqual(self.run_fake(), 1)
-        self.assertFalse((self.root / self.fixture['output']).exists())
+        self.assertEqual((self.root / self.fixture['output']).read_bytes(), b'A reply')
+        self.assertFalse((self.root / self.fixture['grade']).exists())
+        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        self.assertEqual(len(receipt['grader_attempts']), 2)
+        for attempt in receipt['grader_attempts']:
+            raw = (self.root / attempt['raw_path']).read_bytes()
+            self.assertEqual(raw, b'{}')
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), attempt['raw_sha256'])
+        self.fake.unlink()
+        self.assertEqual(self.run_fake(), 1)  # Existing evidence cannot be replayed or overwritten.
+        self.assertEqual((self.root / self.fixture['output']).read_bytes(), b'A reply')
+
+    def test_changed_harness_is_refused_before_any_session(self):
+        from unittest import mock
+        (self.root / HARNESS_NAMES[0]).write_bytes(b'changed')
+        with mock.patch.object(evals_runner, 'session') as native:
+            with self.assertRaisesRegex(ValueError, 'harness'):
+                self.run_fake()
+            native.assert_not_called()
+
+    def test_missing_or_incomplete_harness_coverage_is_refused(self):
+        from unittest import mock
+        original = dict(self.record['harness_sha256'])
+        for hashes in (None, {}, {HARNESS_NAMES[0]: original[HARNESS_NAMES[0]]},
+                       dict(original, extra='0' * 64)):
+            self.record['harness_sha256'] = hashes
+            self.save()
+            with mock.patch.object(evals_runner, 'session') as native:
+                with self.assertRaisesRegex(ValueError, 'harness'):
+                    self.run_fake()
+                native.assert_not_called()
+
+    def test_only_invalid_grade_gets_one_fresh_retry(self):
+        from unittest import mock
+        good = json.dumps({'fixture': 'one', 'acceptance': [{'item': 'Useful', 'verdict': 'pass',
+                           'evidence': 'A reply', 'quote': 'A reply'}], 'traits': [], 'must_not': []})
+        with mock.patch.object(evals_runner, 'session', side_effect=[
+                ('A reply', {'requested_model': 'subject-model'}),
+                ('{}', {'requested_model': 'grader-model'}),
+                (good, {'requested_model': 'grader-model'})]) as native:
+            self.assertEqual(self.run_fake(), 0)
+            self.assertEqual(native.call_count, 3)
+        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        self.assertEqual(receipt['status'], 'complete')
+        self.assertEqual(len(receipt['grader_attempts']), 2)
+
+    def test_valid_failing_grade_is_not_retried(self):
+        from unittest import mock
+        failed = json.dumps({'fixture': 'one', 'acceptance': [{'item': 'Useful', 'verdict': 'fail',
+                             'evidence': 'Not useful', 'quote': ''}], 'traits': [], 'must_not': []})
+        with mock.patch.object(evals_runner, 'session', side_effect=[
+                ('A reply', {'requested_model': 'subject-model'}),
+                (failed, {'requested_model': 'grader-model'})]) as native:
+            self.assertEqual(self.run_fake(), 0)
+            self.assertEqual(native.call_count, 2)
+        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        self.assertEqual(len(receipt['grader_attempts']), 1)
 
     def test_multiple_fixtures_all_must_complete(self):
         other = dict(self.fixture, id='two', key='two')

@@ -111,10 +111,10 @@ def check_generated(root, generated):
     return failures
 
 
-def check_archives(root):
+def check_archives(root, inventory=None):
     """Release archives are attached to GitHub Releases by CI, never committed."""
     failures = []
-    for name in source.files(root):
+    for name in source.files(root) if inventory is None else inventory:
         relative = Path(name)
         if relative.suffix != ".zip":
             continue
@@ -123,10 +123,10 @@ def check_archives(root):
     return failures
 
 
-def check_links(root):
+def check_links(root, inventory=None):
     failures = []
     # shortcut: inline file links only; extend parsing if reference-style links are introduced.
-    for name in source.files(root):
+    for name in source.files(root) if inventory is None else inventory:
         relative = Path(name)
         if relative.suffix != ".md":
             continue
@@ -145,7 +145,7 @@ def check_links(root):
     return failures
 
 
-def check_navigation(root, families, generated):
+def check_navigation(root, families, generated, inventory=None):
     failures = []
     if not (root / REPO_MAP).is_file():
         return [f"{REPO_MAP} is missing"]
@@ -154,7 +154,7 @@ def check_navigation(root, families, generated):
         if f"catalog/{family['id']}/INDEX.md" not in text:
             failures.append(f"{REPO_MAP}: does not link catalog/{family['id']}/INDEX.md")
     failures += [f"{name} is not covered by any module in config/modules.json"
-                 for name in modmap.uncovered(root, families, generated)]
+                 for name in modmap.uncovered(root, families, generated, inventory)]
     return failures
 
 
@@ -164,16 +164,17 @@ def check(root):
     failures = check_cards(root, families, current)
     if any("card file is missing" in failure for failure in failures):
         raise ValueError("\n".join(failures))
-    families, generated = outputs(root)
+    inventory = source.files(root)
+    families, generated = outputs(root, inventory)
     failures += check_versions(root, generated, current)
     failures += check_review_contract(root, families, generated)
     failures += check_generated(root, generated)
     failures += plugin.problems(root, families, generated)
     for host in HOSTS:
         failures += host.problems(root, families, generated)
-    failures += check_links(root)
-    failures += check_navigation(root, families, generated)
-    failures += check_archives(root)
+    failures += check_links(root, inventory)
+    failures += check_navigation(root, families, generated, inventory)
+    failures += check_archives(root, inventory)
     failures += evals.problems(root, families)[1]
     try:
         evals.heldout(root, families)

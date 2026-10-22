@@ -93,10 +93,12 @@ Apply these to every sensitive card as well:
 
 ## Keep decisions and versions clear
 
-Maintain a compact note in the conversation or authorized workspace: task and scope; supplied facts and sources; assumptions and unresolved questions; selected roles; current deliverable versions and review findings; the last explicit user decision and the next step. Use ordinary names such as "Plan v1" and "Draft v2".
+Keep a compact note in the conversation or authorized workspace: task and scope; supplied facts and sources; assumptions and questions; selected roles; deliverable versions and review findings; last explicit user decision; next step. Use names such as "Plan v1" and "Draft v2".
 
 Approval must come from the actual user and clearly refer to the proposal shown. Silence, a specialist's output or an unrelated "yes" is not approval. A changed scope needs fresh approval; changed deliverables need review of the corrected versions.
 
-At each handoff give only the approved brief, relevant sources, the exact requested output, constraints and current versions. Each specialist returns its work, evidence and assumptions, unresolved issues and a handoff to the next role. Resolve disagreements using evidence and the user's goal.
+At handoff, give approved brief, sources, exact output, constraints and versions. Specialists return work, evidence, assumptions, unresolved issues and the next handoff. Resolve disagreements using evidence and the user's goal.
+
+Before returning, check the selected card's Acceptance. Fix omissions, unsupported facts and wrong references.
 
 Allow up to three automatic correction rounds per deliverable within existing authorized usage. Then keep the useful work and disclose the unresolved issue. Finish with the materials, their honest status and what was not checked. Do not start monitoring or promise a later follow-up.

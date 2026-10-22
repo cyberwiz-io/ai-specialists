@@ -55,9 +55,9 @@ def modules(root, families, overlay):
     return spec, records
 
 
-def generate(root, families, overlay):
+def generate(root, families, overlay, inventory=None):
     spec, records = modules(root, families, overlay)
-    inventory = source.files(root)
+    inventory = source.files(root) if inventory is None else inventory
     covered = set()
     for record in records:
         for pattern in record["paths"]:
@@ -72,9 +72,9 @@ def generate(root, families, overlay):
     return (json.dumps(result, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
-def uncovered(root, families, overlay):
+def uncovered(root, families, overlay, inventory=None):
     spec, records = modules(root, families, overlay)
-    inventory = source.files(root)
+    inventory = source.files(root) if inventory is None else inventory
     covered = set()
     for record in records:
         covered.update(expand(root, record["paths"], overlay, inventory))

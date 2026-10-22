@@ -121,7 +121,12 @@ Prepared files still support the manual subagent workflow described above.
 categories. A requested name does not prove execution identity. CLI output and
 stderr hashes identify responses without copying raw diagnostic text that might
 contain private data. Each completed fixture checkpoints its receipt atomically; an interrupted batch retains completed evidence and cannot certify missing fixtures. An incomplete run exits nonzero. There are no automatic
-retries, including after authorization, billing, permission, or timeout failures.
+retries after authorization, billing, permission, or timeout failures. An invalid
+grader JSON/schema or non-verbatim affirmative quote gets one fresh grader retry
+on the unchanged reply. Both raw attempts and their validation errors are retained;
+a valid failing grade is never retried. The subject reply is saved before grading,
+including when grading fails. The runner rechecks all six recorded harness source
+hashes before any model call and requires a new run after source changes.
 An unchanged completed run can resume without new calls; changed or partial saved
 results require a fresh run name. Do not overwrite evidence to obtain a pass.
 

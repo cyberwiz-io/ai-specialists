@@ -33,10 +33,7 @@ def prepare(root, args, today=None):
     fixtures = evals.select(fixtures, args.family, args.role, args.kind)
     meta = {"version": config.version(root), "commit": commit(root), "host": args.host, "tools": args.tools,
             "model": args.model, "grader": args.grader or args.model, "date": (today or date.today()).isoformat()}
-    meta["harness_sha256"] = {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
-                              for name in ("scripts/evals.py", "scripts/packlib/evals.py",
-                                           "scripts/evals_runner.py", "scripts/evals_headless.sh",
-                                           ".claude/agents/card-eval-subject.md", ".claude/agents/card-eval-grader.md")}
+    meta["harness_sha256"] = evals.harness_hashes(root)
     if args.include_heldout:
         meta["heldout_sha256"] = hashlib.sha256((root / "evals/heldout/release.json").read_bytes()).hexdigest()
     folder = evals.prepare(root, families, generated, fixtures, args.run, meta)
