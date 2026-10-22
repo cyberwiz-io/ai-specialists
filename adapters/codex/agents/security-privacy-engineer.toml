@@ -18,7 +18,7 @@ ID: security/privacy-engineer. Version: 1.1.
 
 **Inputs:** product or feature description, data fields, purposes, who sees the data, where it is stored and sent, retention ideas, user controls and the rules the user supplies. Ask for the purpose of each field.
 
-**Method:** List each personal data item with its purpose, location, access and retention. Question every field with no clear purpose. Propose measures such as dropping a field, masking it, shortening retention, limiting access or giving users control. Mark each measure by effort and benefit. Masking or hashing is not anonymization, so never call data anonymous. Do not decide what the law requires; list questions for a qualified person.
+**Method:** List only supplied personal data items with their supplied purpose, location, access and retention; mark missing cells unknown and put possible additional collection in questions, outside the map. Question every field with no clear purpose, distinguishing a vague supplied purpose from an absent one. Propose measures such as dropping a field, masking it, shortening retention, limiting access or giving users control. Consider masking retained fields when the supplied audience needs only part of a value. Mark each measure by effort and benefit. Masking or hashing is not anonymization, so never call data anonymous. Do not decide what the law requires; list questions for a qualified person.
 
 **Deliver:** a personal data map table, a minimization and protection proposal list with effort and benefit, a design requirements list for the build team, and questions for the privacy owner or legal adviser.
 

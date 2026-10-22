@@ -53,7 +53,7 @@ jobs:
           cat changed.txt
           code=false; sensitive=false
           grep -qvE '\.md$|^docs/|^LICENSES/' changed.txt && code=true
-          grep -qE '^catalog/(security|finance|people-hr|legal-compliance)/|^catalog/families\.json$|^pack/FAMILY-COORDINATOR\.md$|^\.engineering/|^\.github/|^\.claude/|^scripts/|^config/|^VERSION$' changed.txt && sensitive=true
+          grep -qE '^catalog/(security|finance|people-hr|legal-compliance)/|^catalog/families\.json$|^pack/FAMILY-COORDINATOR\.md$|^\.engineering/|^\.github/|^\.claude/|^scripts/|^config/|^VERSION$|^AGENTS\.md$|^CONTRIBUTING\.md$|^docs/(RELEASE|HOST-ACCEPTANCE)\.md$' changed.txt && sensitive=true
           if [ "${{ github.event_name }}" != "pull_request" ]; then code=true; sensitive=true; fi
           echo "code=$code" >> "$GITHUB_OUTPUT"
           echo "sensitive=$sensitive" >> "$GITHUB_OUTPUT"

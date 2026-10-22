@@ -97,7 +97,7 @@ class PluginTests(FixtureCase):
             self.assertLessEqual(len(front["description"]), skills.LEAD_DESCRIPTION_MAX)
             self.assertEqual(set(front) - set(skills.SPEC_FIELDS), set())
             for phrase in ("orchestration-cross-family-reviewer", "handoff packet", "parallel",
-                           "specialist perspectives, self-reviewed", "## Boundaries"):
+                           "different actual model", "BLOCKED_REVIEW", "## Boundaries"):
                 self.assertIn(phrase, body, family["id"])
             for role in family["roles"]:
                 self.assertIn(f"`{adapter.agent_name(role)}`", body)

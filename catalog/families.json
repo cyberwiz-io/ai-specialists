@@ -309,7 +309,7 @@
       "sensitive": false,
       "purpose": "Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.",
       "triggers": "choosing which specialists fit a request, breaking a large project into tasks, a handoff packet, a new custom specialist role or a review of work from several areas",
-      "flow": "Route the task, decompose it, package each handoff, run the chosen specialists (as parallel subagents where the host allows, otherwise in turn as perspectives), and review the combined result in a fresh context.",
+      "flow": "Route the task, decompose it, package handoffs, run suitable independent work in real subagents when supported, and require different-model review of the exact nontrivial result before calling it ready.",
       "roles": [
         {"slug": "task-router", "name": "Task router"},
         {"slug": "plan-decomposer", "name": "Plan decomposer"},

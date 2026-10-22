@@ -12,7 +12,7 @@ from zipfile import BadZipFile, ZipFile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import pack as pack_cli  # noqa: E402
-from packlib import build, bundle, cards, check, config, manifest, source  # noqa: E402
+from packlib import build, bundle, cards, check, config, manifest, skills, source  # noqa: E402
 
 
 class FixtureCase(unittest.TestCase):
@@ -83,6 +83,66 @@ class BuildTests(FixtureCase):
         self.assertFails("Combined instructions differ")
         build.build(self.root)
         check.check(self.root)
+
+    def test_review_contract_cannot_be_removed_by_rebuild(self):
+        self.edit("pack/FAMILY-COORDINATOR.md", lambda text: text.replace(
+            "different actual model", "fresh reviewer context"))
+        build.build(self.root)
+        self.assertFails("review contract missing 'different actual model'")
+
+    def test_review_contract_rejects_removed_source_guards(self):
+        cases = (
+            ("pack/COORDINATOR.md", "BLOCKED_MODEL/COST", "unknown cost"),
+            ("pack/COORDINATOR.md", "BLOCKED_MODEL/COST; do not claim ready or complete",
+             "BLOCKED_MODEL/COST; no cheapest claim"),
+            ("pack/FAMILY-COORDINATOR.md", "or uncertain work is nontrivial", "or uncertain work is trivial"),
+            ("pack/COORDINATOR.md", "from every author", "from any author"),
+            ("pack/FAMILY-COORDINATOR.md", "from every author", "from any author"),
+            ("catalog/orchestration/cross-family-reviewer.md", "from every author model", "from any author model"),
+            ("catalog/marketing-growth/quality-reviewer.md", "Same-model review is BLOCKED_REVIEW.", "Same-model review may pass."),
+            ("catalog/orchestration/cross-family-reviewer.md", "host-observed", "claimed"),
+            ("catalog/orchestration/cross-family-reviewer.md", "byte hash", "version"),
+            ("pack/FAMILY-COORDINATOR.md", "prefer local only at equal known total cost", "prefer local"),
+            ("catalog/marketing-growth/quality-reviewer.md", "Changed bytes void review", "changes may be accepted"),
+            ("catalog/marketing-growth/quality-reviewer.md", "BLOCKED_REVIEW", "pending"),
+            ("catalog/orchestration/task-router.md", "different actual model", "fresh context"),
+        )
+        for name, phrase, replacement in cases:
+            with self.subTest(name=name):
+                source = (self.root / name).read_text()
+                self.edit(name, lambda text: text.replace(phrase, replacement))
+                build.build(self.root)
+                self.assertFails(f"review contract missing {phrase!r}")
+                (self.root / name).write_text(source)
+                build.build(self.root)
+
+    def test_review_contract_checks_generated_leads(self):
+        with mock.patch.object(skills, "LEAD_STEPS", skills.LEAD_STEPS.replace(
+                "untrusted task data", "ordinary output")):
+            self.assertFails("review contract missing 'untrusted task data'")
+
+    def test_review_contract_checks_generated_model_override_and_manifest(self):
+        definition = ("may stay inline with a stated reason. Behavior, policy, configuration, "
+                      "security-sensitive or uncertain work is nontrivial; mechanical formatting "
+                      "needs an exception reason.")
+        cases = [
+            (phrase, phrase) for phrase in (
+                "supported per-call model override", "host-observed model IDs",
+                "manifest of the exact artifact/version, byte hash",
+                "prefer eligible local only at equal known cost",
+                "from every author model",
+                "No new charges through model selection or overrides.")
+        ]
+        cases += [
+            ("BLOCKED_MODEL/COST; do not claim ready or complete",
+             "mark BLOCKED_MODEL/COST; do not claim ready or complete."),
+            ("or uncertain work is nontrivial", definition),
+            ("mechanical formatting needs an exception reason", definition),
+        ]
+        for phrase, required in cases:
+            with self.subTest(phrase=phrase), mock.patch.object(
+                    skills, "LEAD_STEPS", skills.LEAD_STEPS.replace(phrase, "omitted")):
+                self.assertFails(f"review contract missing {required!r}")
 
     def test_card_edit_makes_index_and_packs_stale(self):
         self.edit("catalog/security/threat-modeler.md", lambda text: text.replace("**Use for:** ", "**Use for:** Edited. "))

@@ -42,11 +42,11 @@ Show the exact current materials and ask whether to accept them or revise. Keep 
 
 Provide one campaign index with:
 
-- Confirmed goal, package and a short note identifying self-review or actual independent review.
+- Confirmed goal, package, exact reviewed material versions and reviewer model, or BLOCKED_REVIEW with the missing review.
 - Each caption, paired actual image and alt text, editable source when available, and a clear version.
 - Suggested calendar and simple manual posting instructions, including final platform preview and checking offers are still valid.
 - A measurement plan: metric, baseline if known, where to obtain it, when the user should review, and what decision the results will inform.
-- Per-item status: “Ready for manual posting” only for complete accepted items; “Needs attention” with the exact missing piece for incomplete items. Before acceptance, label drafts “Prepared for review.” Never label anything published or scheduled.
+- Per-item status: “Ready for manual posting” only for complete accepted items with required review cleared; “Needs attention” with the exact missing piece for incomplete items. Use BLOCKED_REVIEW when required different-model review is unavailable. Before acceptance, label drafts “Prepared for review.” Never label anything published or scheduled.
 
 Open or inspect generated exports where the host allows it. If a bundle is unavailable, give an organized set of links and copyable content. Be explicit about formats or previews not checked. Do not imply an image brief is ready-to-upload artwork.
 

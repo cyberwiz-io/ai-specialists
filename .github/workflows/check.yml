@@ -36,13 +36,14 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Generated output consistency
         run: |
+          python -B scripts/pack.py check
           python -B scripts/pack.py build
-          git diff --exit-code
+          python -c "import subprocess; assert not subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=all']).strip(), 'Generated output differs from committed source'"
       - name: Pack check
         run: python -B scripts/pack.py check
       - name: Tests
         run: python -B -m unittest discover -s tests
-      - name: Independent candidate artifact check
+      - name: Candidate artifact integrity check
         run: |
           python -B scripts/pack.py release --out work/release
           python -B scripts/verify_release.py work/release
