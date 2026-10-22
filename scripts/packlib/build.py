@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Compute every generated file in memory, then write them together."""
 from . import codex, copilot, cursor, gemini, generate, manifest, modmap, plugin, plugin_evals, skills
-from .config import ADAPTERS_DIR, MODULE_MAP, PACK_DIR, PLUGINS_DIR, REGISTRY, SKILLS_DIR, STARTER, read, safe_path
+from .config import ADAPTERS_DIR, MODULE_MAP, PACK_DIR, PLUGINS_DIR, REGISTRY, SKILLS_DIR, STARTER, is_installed_client_path, is_untracked_client_install, read, safe_path
 
 # Host formats generated besides the Claude Code plugins, each a module with outputs() and problems().
 HOSTS = (codex, copilot, cursor, gemini)
@@ -46,6 +46,8 @@ def build(root):
     for top in GENERATED_DIRS:
         base = root / top
         for folder in sorted(base.rglob("*"), reverse=True) if base.is_dir() else []:
+            if is_installed_client_path(folder.relative_to(root)):
+                continue
             if folder.is_dir() and not any(folder.iterdir()):
                 folder.rmdir()
 
@@ -60,6 +62,8 @@ def stale_files(root, generated):
         base = root / top
         for path in sorted(base.rglob("*")) if base.is_dir() else []:
             relative = path.relative_to(root)
+            if is_untracked_client_install(root, relative, set(generated)):
+                continue
             if "results" in relative.parts[2:4] and relative.parts[2:3] == ("evals",):
                 continue  # `claude plugin eval` writes its results here; .gitignore keeps them out of Git
             if (path.is_file() or path.is_symlink()) and not (top == ADAPTERS_DIR and len(relative.parts) == 3

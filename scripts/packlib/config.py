@@ -2,9 +2,30 @@
 """Paths, limits and safe file helpers shared by the pack tools."""
 from pathlib import Path
 import re
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
 SKIP_DIRS = {".git", "work", ".venv", "profiles", "campaigns", "__pycache__"}
+INSTALLED_CLIENT_PREFIXES = ((".claude", "skills"), (".agents", "skills"), (".codex",))
+
+
+def is_installed_client_path(relative):
+    return any(relative.parts[:len(prefix)] == prefix for prefix in INSTALLED_CLIENT_PREFIXES)
+
+
+def is_untracked_client_install(root, relative, owned):
+    """Ignore only undeclared local installs; a tracked client file remains source."""
+    if not is_installed_client_path(relative) or relative.as_posix() in owned:
+        return False
+    try:
+        raw = subprocess.check_output(
+            ["git", "-C", str(root), "ls-files", "-z", "--", ".claude/skills", ".agents/skills", ".codex"],
+            stderr=subprocess.DEVNULL, timeout=5)
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+        raise ValueError("Cannot classify installed client files without a Git index") from error
+    name = relative.as_posix()
+    tracked = (part.decode("utf-8") for part in raw.split(b"\0") if part)
+    return not any(name == part or name.startswith(part + "/") for part in tracked)
 
 MANIFEST = "catalog/families.json"
 REGISTRY = "catalog/REGISTRY.jsonl"
