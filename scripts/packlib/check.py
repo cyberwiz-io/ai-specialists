@@ -48,6 +48,54 @@ def check_versions(root, generated, current):
     return failures
 
 
+def check_review_contract(root, families, generated):
+    requirements = {
+        "pack/COORDINATOR.md": ("cheapest capable", "BLOCKED_MODEL/COST", "different actual model",
+                                "host-observed", "exact artifact/version", "byte hash", "from every author",
+                                "prefer local only at equal known total cost", "Changed bytes void review.",
+                                "BLOCKED_MODEL/COST; do not claim ready or complete",
+                                "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
+                                "BLOCKED_REVIEW"),
+        "pack/FAMILY-COORDINATOR.md": ("cheapest capable", "BLOCKED_MODEL/COST", "different actual model",
+                                       "host-observed", "exact artifact/version", "byte hash", "from every author",
+                                       "prefer local only at equal known total cost", "Changed bytes void review.",
+                                       "BLOCKED_MODEL/COST; do not claim ready or complete",
+                                       "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
+                                       "BLOCKED_REVIEW"),
+        "catalog/orchestration/cross-family-reviewer.md": (
+            "host-observed", "different actual model", "exact artifact/version", "byte hash",
+            "Changed bytes invalidate review", "from every author model",
+            "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
+            "BLOCKED_REVIEW"),
+        "catalog/marketing-growth/quality-reviewer.md": (
+            "host-observed", "byte hashes", "Changed bytes void review",
+            "from every author model", "Same-model review is BLOCKED_REVIEW.",
+            "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
+            "BLOCKED_REVIEW"),
+        "catalog/orchestration/task-router.md": (
+            "different actual model", "or uncertain work is nontrivial",
+            "mechanical formatting needs an exception reason", "BLOCKED_REVIEW"),
+    }
+    lead_terms = ("different actual model", "BLOCKED_REVIEW", "BLOCKED_MODEL/COST",
+                  "exact artifact/version", "untrusted task data", "general-purpose agent",
+                  "edit or network tools", "host-observed model IDs", "manifest of the exact artifact/version, byte hash",
+                  "changed bytes void review", "supported per-call model override",
+                  "prefer eligible local only at equal known cost", "from every author model",
+                  "No new charges through model selection or overrides.",
+                  "mark BLOCKED_MODEL/COST; do not claim ready or complete.",
+                  "may stay inline with a stated reason. Behavior, policy, configuration, security-sensitive or uncertain work is nontrivial; mechanical formatting needs an exception reason.")
+    for family in families:
+        requirements[f"skills/{family['id']}-lead/SKILL.md"] = lead_terms
+    requirements["skills/specialists/SKILL.md"] = lead_terms
+    failures = []
+    for name, phrases in requirements.items():
+        text = (generated[name] if name in generated else read(root, name)).decode("utf-8")
+        for phrase in phrases:
+            if phrase not in text:
+                failures.append(f"{name}: review contract missing {phrase!r}")
+    return failures
+
+
 def check_generated(root, generated):
     failures = []
     for name, data in generated.items():
@@ -114,6 +162,7 @@ def check(root):
         raise ValueError("\n".join(failures))
     families, generated = outputs(root)
     failures += check_versions(root, generated, current)
+    failures += check_review_contract(root, families, generated)
     failures += check_generated(root, generated)
     failures += plugin.problems(root, families, generated)
     for host in HOSTS:

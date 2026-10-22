@@ -12,7 +12,7 @@ Pick your tool below. Claude Code is the host where these files have been checke
 - **Team leads.** `skills/<family>-lead/` runs one family's team, with that family's cards in `references/`. `skills/specialists/` is the cross-family lead.
 - **Worker agents.** In hosts with subagents, each card is also a worker agent. Workers do one role's job and cannot start other agents. Only the lead, running in the main conversation, starts them.
 
-A lead reads the roster and picks one to three roles. It writes a handoff packet for each, starts them as parallel subagents, and sends the merged result to the cross-family reviewer in a fresh subagent. You get one deliverable that says what was reviewed. Without subagents, as in plain chat or claude.ai, the lead reads the cards from `references/` itself and labels the result "specialist perspectives, self-reviewed".
+A lead reads the roster, picks one to three roles and packages each handoff. It uses real subagents for suitable independent work where supported. For nontrivial results, the reviewer must use a different actual model from all authors and inspect the exact artifact/version. A fresh same-model subagent does not qualify. The lead must pass model IDs observed from the host; it cannot rely on a worker's self-report. Fixed plugin tiers may select the same model for authors and reviewer: use a supported per-call model override or another authorized reviewer route, or report BLOCKED_REVIEW. If cost is unavailable, report BLOCKED_MODEL/COST; do not claim ready or complete. Without supported subagents, the lead can apply cards inline as perspectives and state the limit. If different-model review cannot run, it reports BLOCKED_REVIEW and does not call the work ready.
 
 ## Claude Code
 
@@ -40,7 +40,7 @@ To try a plugin from a downloaded checkout without the marketplace, run `claude 
 
 Download the skill ZIP for a family from the [latest release](https://github.com/cyberwiz-io/ai-specialists/releases/latest). The files are named `ai-specialists-<version>-skill-<family>.zip`, and each holds the lead skill folder `<family>-lead/` with its cards. In Settings, open Capabilities, then Skills, and upload the ZIP. Then describe your task in a new chat. To add a single role, zip its folder `skills/<family>-<slug>/` and upload that.
 
-Availability depends on your plan and on skills being enabled for your account or organization. claude.ai has no subagents here, so the lead labels its result "specialist perspectives, self-reviewed".
+Availability depends on your plan and on skills being enabled for your account or organization. This claude.ai path has no subagents here; the lead states that role perspectives ran inline and marks nontrivial output BLOCKED_REVIEW unless an authorized different-model review actually ran.
 
 ## Other Agent Skills hosts
 
