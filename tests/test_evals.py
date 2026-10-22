@@ -145,6 +145,7 @@ class RunTests(FixtureCase):
         self.assertIn(f"`{ROLE}`", subject)
         self.assertNotIn("Acceptance criteria", subject)
         grader = (self.root / fixture["grader_prompt"]).read_text()
+        self.assertIn((self.root / fixture["pack"]).read_text().rstrip(), grader)
         for item in fixture["acceptance"] + fixture["traits"] + fixture["must_not"]:
             self.assertIn(item, grader)
         self.assertIn(fixture["output"], grader)
@@ -286,6 +287,17 @@ class RunTests(FixtureCase):
         (self.root / evals.BASELINE).write_text(json.dumps(baseline))
         with self.assertRaisesRegex(ValueError, "requested model"):
             evals.compare(self.root, "t1")
+
+    def test_changed_shared_instructions_are_incomparable(self):
+        first = self.prepare(role=ROLE)
+        self.answer(first)
+        evals.save_baseline(self.root, "t1")
+        self.edit("pack/FAMILY-COORDINATOR.md", lambda text: text.replace("one task or project", "one job or project"))
+        build.build(self.root)
+        second = self.prepare(run="t2", role=ROLE)
+        self.answer(second)
+        with self.assertRaisesRegex(ValueError, "incomparable baseline"):
+            evals.compare(self.root, "t2")
 
     def test_compare_needs_a_baseline(self):
         record = self.prepare(role=ROLE)

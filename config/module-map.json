@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "23e773709b8fadecd0a6627476d195ca347e8bbc0f3570f06f972154ddf6065a",
+      "digest": "c0094680548b6db506fac923abfc28dd357a68f4b1ae64e592f150e461e73ab3",
       "files": 51,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -191,7 +191,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "da92a4b2e31ab37339322c1d2539676203fbd91dab56febd877b41abca45256f",
+      "digest": "de86c27b4ff445279395b5c3029be3f39be825bb6f4acc2d32d7f9f775bfa9a4",
       "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
@@ -242,7 +242,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "70138b2176643e2edef23979ff0eac3d49285ffa77f6b2b271b54c5c03ece6fa",
+      "digest": "e236a2dea80f5865971b07499495196b71c06d059e3ccf8568e98de5206d786e",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -289,7 +289,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "601ec9de04227da6af888dadc741adb616dfacd1e734b9b0174c32e10e2b76c3",
+      "digest": "39cb93081ac49c6f95748b3ecd8b6021cb380d77d30976ca1cb869ce526a832d",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -328,7 +328,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "61a9dee842c4496b9a77e0cc71eb4896ac2c03f0d7295505bf76e90b41faa703",
+      "digest": "02873ff4c61657b3f60ce255e65de27c52698b4506cdc49d01645d0559a5d257",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -376,7 +376,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "e29e3dc7fb37b3199de6483793794c76614c08e77725e09d98c78f2c8a9717f2",
+      "digest": "2c1bb7bf4e273f88ed314f61176c0f9f2a0498b771ab7e0f0b765347e523aacf",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",

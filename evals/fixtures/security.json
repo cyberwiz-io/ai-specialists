@@ -349,7 +349,7 @@
       "traits": [
         "Gives a personal data map table listing every field with purpose, location, access and retention, and flags date of birth, home address, gender and shoe size as having no stated purpose, and continuous GPS as having only the vague supplied purpose to improve the service",
         "Proposes measures each linked to a field (drop, mask, shorten retention, limit run leaders to the people on their run, limit GPS sharing) with effort and benefit marked",
-        "Gives a design requirements list for the build team, including a deletion or leave route and a retention period to replace 'forever'",
+        "Gives a design requirements list for the build team, including a deletion or leave route and a retention rule replacing 'forever', with any unsupplied period left for the owner to confirm",
         "Separates the 'is this legal?' question from design advice and lists it as questions for the privacy owner or a qualified legal adviser",
         "Names the supplied description as source, marks what the owner must verify (such as what the analytics service does with GPS data), and states it is not professional or legal advice"
       ],

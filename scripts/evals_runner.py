@@ -35,6 +35,7 @@ def session(command, prompt, model, timeout):
         try:
             result = subprocess.run(
                 [*command, '-p', '--model', model, '--tools', '', '--setting-sources', '',
+                 '--strict-mcp-config', '--mcp-config', '{"mcpServers":{}}', '--disable-slash-commands',
                  '--no-session-persistence', '--output-format', 'json'], input=prompt, text=True,
                 encoding='utf-8', capture_output=True, cwd=cwd, timeout=timeout, check=False,
                 env={**os.environ, 'CLAUDE_CODE_DISABLE_AUTO_MEMORY': '1'})

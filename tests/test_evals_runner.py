@@ -42,6 +42,9 @@ model = sys.argv[sys.argv.index('--model') + 1]
 assert sys.argv[sys.argv.index('--tools') + 1] == ''
 assert '--no-session-persistence' in sys.argv
 assert sys.argv[sys.argv.index('--setting-sources') + 1] == ''
+assert '--strict-mcp-config' in sys.argv
+assert json.loads(sys.argv[sys.argv.index('--mcp-config') + 1]) == {'mcpServers': {}}
+assert '--disable-slash-commands' in sys.argv
 if 'TIMEOUT' in prompt: time.sleep(2)
 if 'DENIED' in prompt:
     print('permission denied', file=sys.stderr); sys.exit(7)
