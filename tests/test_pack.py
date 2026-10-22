@@ -185,19 +185,24 @@ class BuildTests(FixtureCase):
             (installed / "SKILL.md").write_text("# Installed agent skill\n")
             (self.root / ".codex/agents").mkdir(parents=True)
             (self.root / ".codex/agents/local-helper.md").write_text("# Installed Codex agent\n")
-            build.build(self.root)
+            with mock.patch("packlib.config.subprocess.check_output", wraps=subprocess.check_output) as git_calls:
+                build.build(self.root)
+                self.assertEqual(git_calls.call_count, 1)
             self.assertEqual((installed / "SKILL.md").read_text(), "# Installed agent skill\n")
             self.assertTrue(link.is_symlink())
             self.assertEqual(link.readlink(), external.parent)
             self.assertEqual(external.read_bytes(), original)
             self.assertEqual((self.root / ".codex/agents/local-helper.md").read_text(), "# Installed Codex agent\n")
-            check.check(self.root)
+            with mock.patch("packlib.config.subprocess.check_output", wraps=subprocess.check_output) as git_calls:
+                check.check(self.root)
+                self.assertEqual(git_calls.call_count, 1)
 
     def test_tracked_undeclared_client_file_is_not_hidden(self):
         subprocess.run(["git", "init", "-q", str(self.root)], check=True)
         rogue = self.root / ".codex/agents/rogue.md"
         rogue.parent.mkdir(parents=True)
         rogue.write_text("# Tracked undeclared source\n")
+        check.check(self.root)  # untracked before staging; next check must refresh
         subprocess.run(["git", "-C", str(self.root), "add", "--", ".codex/agents/rogue.md"], check=True)
         self.assertFails(".codex/agents/rogue.md is not covered by any module")
 

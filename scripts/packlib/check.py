@@ -6,7 +6,7 @@ from urllib.parse import unquote, urlsplit
 
 from . import bundle, cards, evals, manifest, modmap, plugin
 from .build import HOSTS, outputs, stale_files
-from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, is_untracked_client_install, read, safe_path, version
+from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, client_index, is_untracked_client_install, read, safe_path, version
 
 VERSION_MENTION = re.compile(r"\bVersion:?\s+([0-9]+\.[0-9]+)")
 LINK = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
@@ -96,7 +96,7 @@ def check_review_contract(root, families, generated):
     return failures
 
 
-def check_generated(root, generated):
+def check_generated(root, generated, index=None):
     failures = []
     for name, data in generated.items():
         path = root / name
@@ -107,16 +107,17 @@ def check_generated(root, generated):
                             else f"{name} differs from sources; run build")
         if name.startswith(PACK_DIR) and len(data) > PACK_MAX:
             failures.append(f"{name}: combined pack exceeds {PACK_MAX} bytes; split the family with \"packs\"")
-    failures += [f"{name}: stale generated file; run build" for name in stale_files(root, generated)]
+    failures += [f"{name}: stale generated file; run build" for name in stale_files(root, generated, index)]
     return failures
 
 
-def check_archives(root, owned):
+def check_archives(root, owned, index=None):
     """Release archives are attached to GitHub Releases by CI, never committed."""
     failures = []
+    index = index or client_index(root)
     for path in sorted(root.rglob("*.zip")):
         relative = path.relative_to(root)
-        if is_untracked_client_install(root, relative, owned):
+        if is_untracked_client_install(root, relative, owned, index):
             continue
         if not set(relative.parts) & SKIP_DIRS:
             failures.append(f"{relative.as_posix()}: archives are not committed; "
@@ -124,14 +125,15 @@ def check_archives(root, owned):
     return failures
 
 
-def check_links(root, owned):
+def check_links(root, owned, index=None):
     failures = []
+    index = index or client_index(root)
     # shortcut: inline file links only; extend parsing if reference-style links are introduced.
     for path in sorted(root.rglob("*.md")):
         relative = path.relative_to(root)
         if set(relative.parts) & (SKIP_DIRS | {"dist"}):  # dist/ copies are generated from checked sources
             continue
-        if is_untracked_client_install(root, relative, owned):
+        if is_untracked_client_install(root, relative, owned, index):
             continue
         text = read(root, relative.as_posix()).decode("utf-8")
         for target in LINK.findall(text):
@@ -145,7 +147,7 @@ def check_links(root, owned):
     return failures
 
 
-def check_navigation(root, families, generated):
+def check_navigation(root, families, generated, index=None):
     failures = []
     if not (root / REPO_MAP).is_file():
         return [f"{REPO_MAP} is missing"]
@@ -154,7 +156,7 @@ def check_navigation(root, families, generated):
         if f"catalog/{family['id']}/INDEX.md" not in text:
             failures.append(f"{REPO_MAP}: does not link catalog/{family['id']}/INDEX.md")
     failures += [f"{name} is not covered by any module in config/modules.json"
-                 for name in modmap.uncovered(root, families, generated)]
+                 for name in modmap.uncovered(root, families, generated, index)]
     return failures
 
 
@@ -165,16 +167,17 @@ def check(root):
     if any("card file is missing" in failure for failure in failures):
         raise ValueError("\n".join(failures))
     families, generated = outputs(root)
+    index = client_index(root)
     failures += check_versions(root, generated, current)
     failures += check_review_contract(root, families, generated)
-    failures += check_generated(root, generated)
+    failures += check_generated(root, generated, index)
     failures += plugin.problems(root, families, generated)
     for host in HOSTS:
         failures += host.problems(root, families, generated)
     owned = modmap.covered_paths(root, families, generated)
-    failures += check_links(root, owned)
-    failures += check_navigation(root, families, generated)
-    failures += check_archives(root, owned)
+    failures += check_links(root, owned, index)
+    failures += check_navigation(root, families, generated, index)
+    failures += check_archives(root, owned, index)
     failures += evals.problems(root, families)[1]
     try:
         bundle.members(root, families, generated)

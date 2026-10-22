@@ -13,19 +13,33 @@ def is_installed_client_path(relative):
     return any(relative.parts[:len(prefix)] == prefix for prefix in INSTALLED_CLIENT_PREFIXES)
 
 
-def is_untracked_client_install(root, relative, owned):
+def client_index(root):
+    """Lazy tracked-client snapshot, shared within one build or check."""
+    tracked = None
+
+    def get():
+        nonlocal tracked
+        if tracked is None:
+            try:
+                raw = subprocess.check_output(
+                    ["git", "-C", str(root), "ls-files", "-z", "--", ".claude/skills", ".agents/skills", ".codex"],
+                    stderr=subprocess.DEVNULL, timeout=5)
+            except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+                raise ValueError("Cannot classify installed client files without a Git index") from error
+            tracked = frozenset(part.decode("utf-8") for part in raw.split(b"\0") if part)
+        return tracked
+
+    return get
+
+
+def is_untracked_client_install(root, relative, owned, get_tracked=None):
     """Ignore only undeclared local installs; a tracked client file remains source."""
     if not is_installed_client_path(relative) or relative.as_posix() in owned:
         return False
-    try:
-        raw = subprocess.check_output(
-            ["git", "-C", str(root), "ls-files", "-z", "--", ".claude/skills", ".agents/skills", ".codex"],
-            stderr=subprocess.DEVNULL, timeout=5)
-    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
-        raise ValueError("Cannot classify installed client files without a Git index") from error
     name = relative.as_posix()
-    tracked = (part.decode("utf-8") for part in raw.split(b"\0") if part)
+    tracked = (get_tracked or client_index(root))()
     return not any(name == part or name.startswith(part + "/") for part in tracked)
+
 
 MANIFEST = "catalog/families.json"
 REGISTRY = "catalog/REGISTRY.jsonl"
