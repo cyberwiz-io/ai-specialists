@@ -32,10 +32,12 @@ Rules:
 - Use a **new** subagent for every reply and every grade. Never reuse or resume one, never let a subject grade, and never grade a reply yourself.
 - Pass only the paths. Do not paste the card, the fixture or your own hints into the subagent prompt.
 - Run up to about eight subagents at a time. Do not read the replies or grades into this conversation unless something fails.
-- Preserve every subject attempt, including failures and empty results. Never rerun a failed or interrupted subject within the same run; use a new run name.
+- Preserve every subject attempt, including failures and empty results, in the output path and a per-fixture attempt note under the run. Never rerun a failed or interrupted subject within the same run; use a new run name.
 - Check `status` again; report failed or interrupted fixtures as incomplete.
 
 For a whole family or the whole catalog, `python3 -B scripts/evals_runner.py <run> [parallel]` starts one fresh native `claude -p` process per subject and grader in empty disposable directories with no tools. `scripts/evals_headless.sh` only invokes that runner. Only an invalid grader JSON/schema or non-verbatim affirmative quote gets one fresh grader retry on the unchanged reply; both raw attempts are retained. Subject, authorization, billing, permission and timeout failures are never retried. Record the actual native host and Claude Code version rather than assuming a cloud host. Historical 2026-10-17 runs predate this runner.
+
+Release evaluations must use the native runner and its atomic execution receipts; the manual route is diagnostic evidence only.
 
 ## 3. Report
 
@@ -43,7 +45,7 @@ For a whole family or the whole catalog, `python3 -B scripts/evals_runner.py <ru
 python3 -B scripts/evals.py report --run <run>
 ```
 
-`report` validates every reply and grade. Each grade must list exactly the prepared items, in order, with allowed verdicts. Preserve an invalid raw grade and its validation errors; only invalid JSON/schema or a non-verbatim affirmative quote permits one fresh grader retry on the unchanged reply. Retain both attempts. Never delete or edit grades to obtain a pass, or retry a valid failing grade. The command writes `work/evals/<run>/REPORT.md`, which records the version, commit, host, tools, models, inputs, outcomes and limits.
+`report` validates every reply and grade. Each grade must list exactly the prepared items, in order, with allowed verdicts. Preserve an invalid first grade by renaming it to `<grade>.raw-1.txt` and save its validation errors beside it; only invalid JSON/schema or a non-verbatim affirmative quote permits one fresh grader retry on the unchanged reply. Write the sole retry to the original grade path and copy it to `<grade>.raw-2.txt`; if invalid, stop without another retry. Retain both attempts. Never delete or edit grades to obtain a pass, or retry a valid failing grade. The command writes `work/evals/<run>/REPORT.md`, which records the version, commit, host, tools, models, inputs, outcomes and limits.
 
 Give the user the totals, every inapplicable conditional item requiring independent review, and the fixtures that did not pass. Do not describe the results as more than the report's Limits section allows. `work/` is never committed. When the user has reviewed the report and wants it kept, copy it to `evals/reports/<run>.md`, link it from `docs/VALIDATION.md` under Automated and historical evidence, and run the pack build, check and tests.
 

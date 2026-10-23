@@ -2,13 +2,20 @@
 
 ## Unreleased
 
+Current 1.3 native and behavioral acceptance, final review and publication remain pending. Local archives and a signed candidate do not establish release readiness.
+
 ## 1.3
 
-- Candidate 1.3 includes the evidence and instruction corrections below. Native trials already installed 1.2.0, so 1.3.0 provides a higher-version update target. No current host acceptance or publication is implied.
+- Evaluation attempts are reserved before model calls, locked against concurrent runners, and retain failed/interrupted evidence. Queued calls stop after interruption; deleted receipts cannot silently reroll subjects.
+- Subject effort can be requested explicitly without changing the calibrated grader. Receipts and baseline comparisons bind that request; actual effort remains unobserved. Native admission failures stop queued dispatch.
+- Conditional exclusions require a definite opening antecedent and one consequence clause. Excluded cases stay outside outright PASS counts; independent adjudication never rewrites original grades. Reports show native observed models.
+- Shared leads check each factual sentence against supplied evidence. The general, unchecked allowance remains limited to sensitive-card rules. Copywriting starts from a supplied fact list, and missing or conflicting grant amounts stay unresolved for the director.
+- Windows maintenance tests use explicit UTF-8 and portable symlink comparisons; CRLF coordinator headers remain discoverable. Manual grading preserves invalid attempts and permits only one invalid-grade retry; release runs use atomic native receipts.
+- Native update instructions require changed bytes and a higher plugin version. Codex updates separately copied agent TOMLs with verified source commits, collision checks and a retained ownership ledger.
+- Calibration retains historical labels and appends an anonymised missing-work case. Plugin traits require actual different-model review, and ordinary fixtures clarify existing prediction and email-body requirements. The conditional alt-text labelling guard is scored as a prohibition on unmarked alt text, so omitting unrequested alt text is not treated as missing required work.
 
-## 1.2
+## 1.2 (superseded, unpublished candidate)
 
-- Evaluation receipts reserve attempts before model calls and preserve failed subjects. Conditional exclusions require an opening antecedent and exact-byte native different-model adjudication; pending exclusions are counted separately from PASS. Reports show observed models. Codex update instructions cover separately copied agent files.
 - Candidate version advances from 1.1 to 1.2 because Claude Code keeps same-version plugin cache entries. The 1.1.0 candidate remains a recorded trial baseline; 1.2.0 enables a real byte-changing update. No 1.2 host acceptance or publication is implied by the version change.
 - The 1.2 tree is a candidate; no 1.2 release or working release download is claimed. The retained release links become usable only after publication and asset verification.
 - Claude Code workers receive exactly `Read`, `Grep`, and `Glob`, with no `Bash` or automatic skill tool. Leads pass approved methods explicitly in task handoffs. Codex no-spawn directions are advisory, not host enforcement.

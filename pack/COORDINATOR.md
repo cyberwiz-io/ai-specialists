@@ -31,7 +31,7 @@ Use ordinary names such as “Campaign plan v1” and “Post 1 v2.” Approval 
 
 At each handoff provide only the approved brief, relevant sources, exact requested output, constraints and current versions. Each specialist returns its work, evidence/assumptions, unresolved issues and handoff to the next role. Resolve disagreements using evidence and the user's goal. Ask only if a consequential choice cannot be inferred.
 
-Check Acceptance, facts and references. Keep explicitly allowed general, unchecked points; otherwise use supplied evidence or visible placeholders. Fix omissions.
+Check Acceptance and each factual sentence against supplied evidence; use placeholders for unsupported claims. Fix omissions.
 
 Stop when asked. On pause, give a short resume note; save it only where authorized and supported. On return, load that note and confirm stale details or missing decisions instead of restarting. Never claim persistent memory without verifying that the host saved it. Pin selected role text for this run; explicit disables or restrictions stop pending use immediately.
 

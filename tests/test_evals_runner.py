@@ -141,7 +141,7 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
             with self.assertRaises(KeyboardInterrupt):
                 self.run_fake()
         first = (self.folder / 'execution.json').read_bytes()
-        self.assertEqual(json.loads(first)['fixtures']['one']['status'], 'reserved')
+        self.assertEqual(json.loads(first)['fixtures']['one']['status'], 'failed')
         with mock.patch.object(evals_runner, 'session') as native:
             self.assertEqual(self.run_fake(), 1)
             native.assert_not_called()
@@ -265,7 +265,7 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
         self.record['fixtures'].append(other)
         self.save()
         calls = []
-        def session(command, prompt, model, timeout):
+        def session(command, prompt, model, timeout, effort=None):
             calls.append(prompt)
             if len(calls) == 3:
                 deadline = time.monotonic() + 2
@@ -278,10 +278,117 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
                 'evidence': 'Useful', 'quote': 'A reply'}], 'traits': [], 'must_not': []})
             return reply, {'requested_model': model}
         with mock.patch.object(evals_runner, 'session', side_effect=session):
-            with self.assertRaisesRegex(RuntimeError, 'interrupted'):
-                self.run_fake()
+            self.assertEqual(self.run_fake(), 1)
         receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))
         self.assertEqual(receipt['fixtures']['one']['status'], 'complete')
+        self.assertEqual(receipt['fixtures']['two']['error'], 'RuntimeError')
+
+    def test_interruption_cancels_queued_subjects_and_preserves_the_failure(self):
+        from unittest import mock
+        for number in range(2, 5):
+            other = dict(self.fixture, id=str(number), key=str(number))
+            for key in ('output', 'grade'):
+                other[key] += str(number)
+            self.record['fixtures'].append(other)
+        self.save()
+        with mock.patch.object(evals_runner, 'session', side_effect=KeyboardInterrupt) as native:
+            with self.assertRaises(KeyboardInterrupt):
+                self.run_fake(parallel=1)
+            self.assertEqual(native.call_count, 1)
+        receipts = json.loads((self.folder / 'execution.json').read_bytes())['fixtures']
+        self.assertEqual(receipts['one']['error'], 'KeyboardInterrupt')
+        self.assertTrue(all(r['status'] == 'reserved' for fid, r in receipts.items() if fid != 'one'))
+
+    def test_missing_receipt_does_not_erase_a_failed_attempt(self):
+        from unittest import mock
+        self.change_prompt('DENIED')
+        self.assertEqual(self.run_fake(), 1)
+        (self.folder / 'execution.json').unlink()
+        with mock.patch.object(evals_runner, 'session') as native:
+            self.assertEqual(self.run_fake(), 1)
+            native.assert_not_called()
+
+    def test_concurrent_runner_is_rejected_without_calls(self):
+        from unittest import mock
+        (self.folder / 'runner.lock').write_bytes(b'another task process')
+        with mock.patch.object(evals_runner, 'session') as native:
+            with self.assertRaisesRegex(ValueError, 'locked'):
+                self.run_fake()
+            native.assert_not_called()
+
+    def test_attempt_directory_symlink_is_rejected_without_calls_or_writes(self):
+        from unittest import mock
+        external = self.root / 'outside-run'
+        external.mkdir()
+        (self.folder / 'attempts').symlink_to(external, target_is_directory=True)
+        with mock.patch.object(evals_runner, 'session') as native:
+            with self.assertRaisesRegex(ValueError, 'Unsafe source path'):
+                self.run_fake()
+            native.assert_not_called()
+        self.assertEqual(list(external.iterdir()), [])
+
+    def test_completed_attempt_marker_cannot_be_replaced_by_a_symlink(self):
+        from unittest import mock
+        self.assertEqual(self.run_fake(), 0)
+        marker = next((self.folder / 'attempts').iterdir())
+        external = self.root / 'outside-marker.json'
+        external.write_bytes(marker.read_bytes())
+        marker.unlink()
+        marker.symlink_to(external)
+        with mock.patch.object(evals_runner, 'session') as native:
+            self.assertEqual(self.run_fake(), 1)
+            native.assert_not_called()
+
+    def test_native_admission_failure_stops_queued_fixtures(self):
+        from unittest import mock
+        other = dict(self.fixture, id='two', key='two')
+        for key in ('output', 'grade'):
+            other[key] += '2'
+        self.record['fixtures'].append(other)
+        self.save()
+        for category in ('permission', 'billing', 'authentication', 'cli-unavailable', 'invalid-response'):
+            with self.subTest(category=category):
+                receipt = self.folder / 'execution.json'
+                if receipt.exists():
+                    receipt.unlink()
+                for marker in (self.folder / 'attempts').glob('*'):
+                    marker.unlink()
+                with mock.patch.object(evals_runner, 'session', side_effect=evals_runner.RunError(category)) as native:
+                    self.assertEqual(self.run_fake(parallel=1), 1)
+                    self.assertEqual(native.call_count, 1)
+                saved = json.loads(receipt.read_bytes())['fixtures']
+                self.assertEqual(saved['one']['error'], category)
+                self.assertEqual(saved['two']['status'], 'reserved')
+
+    def test_subject_effort_is_explicit_and_grader_keeps_its_calibrated_default(self):
+        calls = self.root / 'calls.jsonl'
+        self.fake.write_text('import pathlib\n' + self.fake.read_text(encoding='utf-8').replace(
+            'prompt = sys.stdin.read()',
+            f'pathlib.Path({str(calls)!r}).open("a", encoding="utf-8").write(json.dumps(sys.argv) + "\\n")\nprompt = sys.stdin.read()'),
+            encoding='utf-8')
+        self.record['subject_effort'] = 'high'
+        self.save()
+        self.assertEqual(self.run_fake(), 0)
+        subject, grader = [json.loads(line) for line in calls.read_text(encoding='utf-8').splitlines()]
+        self.assertEqual(subject[subject.index('--effort') + 1], 'high')
+        self.assertNotIn('--effort', grader)
+        receipt = json.loads((self.folder / 'execution.json').read_bytes())['fixtures']['one']
+        self.assertEqual(receipt['subject']['requested_effort'], 'high')
+        self.record['subject_effort'] = 'max'
+        self.save()
+        from unittest import mock
+        with mock.patch.object(evals_runner, 'session') as native:
+            self.assertEqual(self.run_fake(), 1)
+            native.assert_not_called()
+
+    def test_invalid_subject_effort_is_rejected_before_calls(self):
+        from unittest import mock
+        self.record['subject_effort'] = 'unsupported'
+        self.save()
+        with mock.patch.object(evals_runner, 'session') as native:
+            with self.assertRaisesRegex(ValueError, 'effort'):
+                self.run_fake()
+            native.assert_not_called()
 
     def test_invalid_run_and_parallel(self):
         for name in ['../escape', '']:

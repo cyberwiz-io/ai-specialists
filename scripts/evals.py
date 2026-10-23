@@ -9,6 +9,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from packlib import check as checker, config, evals  # noqa: E402
+from evals_runner import EFFORTS  # noqa: E402
 
 DEFAULT_TOOLS = ("Text-only harness. Native runner requests no tools; manual subagent route uses Read and Write "
                  "for harness files only. See execution receipts for the route actually run.")
@@ -34,6 +35,8 @@ def prepare(root, args, today=None):
     meta = {"version": config.version(root), "commit": commit(root), "host": args.host, "tools": args.tools,
             "model": args.model, "grader": args.grader or args.model, "date": (today or date.today()).isoformat()}
     meta["harness_sha256"] = evals.harness_hashes(root)
+    if args.subject_effort is not None:
+        meta['subject_effort'] = args.subject_effort
     if args.include_heldout:
         meta["heldout_sha256"] = hashlib.sha256((root / "evals/heldout/release.json").read_bytes()).hexdigest()
     folder = evals.prepare(root, families, generated, fixtures, args.run, meta)
@@ -49,6 +52,8 @@ def main(argv=None, root=None):
     first.add_argument("--host", required=True, help="host that runs the subagents, such as 'Claude Code <version> on macOS'")
     first.add_argument("--model", required=True, help="model under test, as the host reports it")
     first.add_argument("--grader", help="grader model, if different from --model")
+    first.add_argument('--subject-effort', choices=EFFORTS,
+                       help='explicit native subject effort; grader keeps its calibrated default')
     first.add_argument("--tools", default=DEFAULT_TOOLS, help="tools available to the subagents")
     first.add_argument("--include-heldout", action="store_true", help="also include frozen release challenges")
     first.add_argument("--family", help="only this family")

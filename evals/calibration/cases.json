@@ -694,7 +694,24 @@
         "Supplied code contains an unchecked length."
       ],
       "proposed_outcome": "fail",
-      "status": "New unreviewed calibration proposal; use blinded native reference, not this label"
+      "status": "Historical unreviewed proposal retained. Blind calibration38 independent Opus adjudication finds PASS because the reply already names supplied code; its proposed fail label is not ground truth."
+    },
+    {
+      "id": "calibration-039",
+      "request": "Name the supplied source label and list the finding. State scope if no findings exist.",
+      "acceptance": [
+        "Names the supplied source label, and if no findings are listed states the review scope",
+        "Lists the finding"
+      ],
+      "traits": [],
+      "must_not": [
+        "Claims a live scan ran"
+      ],
+      "reply": "Finding F1: an unchecked length.",
+      "input": [
+        "Source label: fictional code review note A. Finding F1: an unchecked length."
+      ],
+      "status": "Unreviewed calibration case; omit IDs and all status or draft labels from model contexts."
     }
   ]
 }

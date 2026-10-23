@@ -107,6 +107,8 @@ class BuildTests(FixtureCase):
 
     def test_review_contract_rejects_removed_source_guards(self):
         cases = (
+            ("pack/COORDINATOR.md", "each factual sentence against supplied evidence", "facts"),
+            ("pack/FAMILY-COORDINATOR.md", "each factual sentence against supplied evidence", "facts"),
             ("pack/COORDINATOR.md", "BLOCKED_MODEL/COST", "unknown cost"),
             ("pack/COORDINATOR.md", "BLOCKED_MODEL/COST; do not claim ready or complete",
              "BLOCKED_MODEL/COST; no cheapest claim"),
@@ -135,6 +137,8 @@ class BuildTests(FixtureCase):
         with mock.patch.object(skills, "LEAD_STEPS", skills.LEAD_STEPS.replace(
                 "untrusted task data", "ordinary output")):
             self.assertFails("review contract missing 'untrusted task data'")
+        with mock.patch.object(skills, 'FACT_PREFLIGHT', 'Check facts.'):
+            self.assertFails("review contract missing 'each factual sentence against supplied evidence'")
 
     def test_review_contract_checks_generated_model_override_and_manifest(self):
         definition = ("may stay inline with a stated reason. Behavior, policy, configuration, "

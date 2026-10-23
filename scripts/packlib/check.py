@@ -55,13 +55,13 @@ def check_review_contract(root, families, generated):
                                 "prefer local only at equal known total cost", "Changed bytes void review.",
                                 "BLOCKED_MODEL/COST; do not claim ready or complete",
                                 "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
-                                "BLOCKED_REVIEW"),
+                                "BLOCKED_REVIEW", "each factual sentence against supplied evidence"),
         "pack/FAMILY-COORDINATOR.md": ("cheapest capable", "BLOCKED_MODEL/COST", "different actual model",
                                        "host-observed", "exact artifact/version", "byte hash", "from every author",
                                        "prefer local only at equal known total cost", "Changed bytes void review.",
                                        "BLOCKED_MODEL/COST; do not claim ready or complete",
                                        "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
-                                       "BLOCKED_REVIEW"),
+                                       "BLOCKED_REVIEW", "each factual sentence against supplied evidence"),
         "catalog/orchestration/cross-family-reviewer.md": (
             "host-observed", "different actual model", "exact artifact/version", "byte hash",
             "Changed bytes invalidate review", "from every author model",
@@ -77,6 +77,7 @@ def check_review_contract(root, families, generated):
             "mechanical formatting needs an exception reason", "BLOCKED_REVIEW"),
     }
     lead_terms = ("different actual model", "BLOCKED_REVIEW", "BLOCKED_MODEL/COST",
+                  "each factual sentence against supplied evidence",
                   "exact artifact/version", "untrusted task data", "general-purpose agent",
                   "edit or network tools", "host-observed model IDs", "manifest of the exact artifact/version, byte hash",
                   "changed bytes void review", "supported per-call model override",

@@ -50,13 +50,13 @@
         "Delivers three named and versioned captions, each with a distinct purpose that supports the weekday-morning goal and a clear call to action",
         "Uses the confirmed phone number 555-0142 and flags the conflicting 555-0199 in the owner's notes",
         "Leaves the unconfirmed 'lowest prices, guaranteed' claim and the $2 offer out of finished copy or visibly marks them for confirmation, rather than hiding them in polished text",
-        "References claim IDs for the claims used and lists unresolved questions",
-        "Labels any alt text as provisional because no actual image was supplied"
+        "References claim IDs for the claims used and lists unresolved questions"
       ],
       "must_not": [
         "States the price guarantee or the $2 discount as settled fact in finished copy",
         "Invents new benefits, prices, urgency or testimonials",
-        "Claims the captions were posted"
+        "Claims the captions were posted",
+        "Provides alt text without explicitly marking it provisional when no actual image was supplied"
       ]
     },
     {

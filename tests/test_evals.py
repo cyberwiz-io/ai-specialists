@@ -2,8 +2,6 @@
 import contextlib
 import io
 import json
-import hashlib
-import tempfile
 from pathlib import Path
 import sys
 import unittest
@@ -34,9 +32,8 @@ class ConditionalGradeTests(unittest.TestCase):
     def test_inapplicable_condition_is_explicit_and_does_not_hide_violations(self):
         self.assertEqual(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'), [])
         self.assertEqual(evals.outcome(self.grade), 'CONDITIONAL')
-        self.assertEqual(evals.outcome(self.grade, approved=True), 'PASS')
         self.grade['acceptance'][1]['verdict'] = 'partial'
-        self.assertEqual(evals.outcome(self.grade, approved=True), 'PARTIAL')
+        self.assertEqual(evals.outcome(self.grade), 'PARTIAL')
         self.grade['acceptance'][1]['verdict'] = 'pass'
         self.grade['must_not'][0].update(verdict='violated', quote='F1 in supplied code')
         self.assertEqual(evals.outcome(self.grade), 'FAIL')
@@ -54,6 +51,15 @@ class ConditionalGradeTests(unittest.TestCase):
             row['condition'] = condition
             self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
 
+    def test_exclusion_rejects_sentence_branches_and_uncertain_triggers(self):
+        for item in ('If none are listed, states scope. Always names the source',
+                     'When a deadline is given, schedules it, otherwise flags the gap',
+                     'If none are listed, states scope and always names the source',
+                     'Where possible, names the source', 'If any, names the source',
+                     'When relevant, names the source'):
+            with self.subTest(item=item):
+                self.assertIsNone(evals.antecedent(item))
+
     def test_inapplicable_needs_a_condition_from_the_criterion_and_some_applicable_work(self):
         row = self.grade['acceptance'][0]
         for condition in ('', 'when the grader wants to skip it'):
@@ -62,6 +68,10 @@ class ConditionalGradeTests(unittest.TestCase):
         row['condition'] = 'If no findings are listed'
         self.grade['acceptance'][1].update(verdict='inapplicable', condition='Names the source')
         self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
+
+    def test_opening_condition_may_include_its_literal_separator(self):
+        self.grade['acceptance'][0]['condition'] = 'If no findings are listed,'
+        self.assertEqual(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'), [])
 
     def test_report_lists_every_inapplicable_condition_and_missing_receipt_limit(self):
         fixture = dict(self.fixture, kind='task', family='security', role='security/reviewer',
@@ -84,50 +94,6 @@ class ConditionalGradeTests(unittest.TestCase):
                 self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
             self.grade[section] = original
 
-    def test_exclusion_review_binds_bytes_and_native_different_model(self):
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            folder = root / 'work/evals/conditional'
-            folder.mkdir(parents=True)
-            fixture = dict(self.fixture, output='work/evals/conditional/reply.txt',
-                           grade='work/evals/conditional/grade.json')
-            record = dict(run='conditional', fixtures=[fixture])
-            grades = {'conditional': self.grade}
-            self.assertEqual(evals.exclusion_approvals(root, record, grades), set())
-            (root / fixture['output']).write_bytes(b'F1 in supplied code')
-            (root / fixture['grade']).write_bytes(json.dumps(self.grade).encode())
-            report = folder / 'review.txt'
-            report.write_bytes(b'The listed finding makes the no-findings condition false.')
-            native = dict(identity_source='CLI modelUsage', reported_models=['claude-sonnet-5-5'],
-                          session_id='native-review-session', response_sha256='a' * 64)
-            review = dict(verdict='approve', report=report.relative_to(root).as_posix(),
-                          report_sha256=hashlib.sha256(report.read_bytes()).hexdigest(), native=native,
-                          **{k + '_sha256': hashlib.sha256((root / fixture[k]).read_bytes()).hexdigest()
-                             for k in ('output', 'grade')})
-            (folder / 'execution.json').write_text(json.dumps({'fixtures': {'conditional': {
-                'status': 'complete', 'subject': {'identity_source': 'CLI modelUsage',
-                    'reported_models': ['claude-opus-5-5']},
-                'grader': {'identity_source': 'CLI modelUsage', 'reported_models': ['claude-haiku-5-5']}}}}), encoding="utf-8")
-            def save():
-                (folder / 'exclusion-reviews.json').write_text(json.dumps({
-                    'schema': 1, 'reviews': {'conditional': review}}), encoding="utf-8")
-            save()
-            self.assertEqual(evals.exclusion_approvals(root, record, grades), {'conditional'})
-            for model in ('claude-haiku-5-5', 'provider/claude-opus-5-5',
-                          'claude-opus-5-5-q4_k_m', 'sonnet'):
-                native['reported_models'] = [model]
-                save()
-                with self.assertRaises(ValueError):
-                    evals.exclusion_approvals(root, record, grades)
-            native['reported_models'] = ['claude-sonnet-5-5']
-            save()
-            report.write_bytes(b'Changed review')
-            with self.assertRaisesRegex(ValueError, 'stale'):
-                evals.exclusion_approvals(root, record, grades)
-            review = None
-            save()
-            with self.assertRaises(ValueError):
-                evals.exclusion_approvals(root, record, grades)
 
 
 class FixtureFileTests(FixtureCase):
@@ -249,10 +215,20 @@ class RunTests(FixtureCase):
     def prepare(self, run="t1", **selection):
         argv = ["prepare", "--run", run, "--host", "Test host", "--model", "test-model"]
         for name, value in selection.items():
-            argv += [f"--{name}", value]
+            argv += [f"--{name.replace('_', '-')}", value]
         with contextlib.redirect_stdout(io.StringIO()):
             evals_cli.main(argv, root=self.root)
         return evals.load_run(self.root, run)
+
+    def test_requested_subject_effort_is_recorded_and_baseline_comparison_bound(self):
+        record = self.prepare(role=ROLE, subject_effort='high')
+        self.assertEqual(record['subject_effort'], 'high')
+        self.answer(record)
+        evals.save_baseline(self.root, 't1')
+        record['subject_effort'] = 'max'
+        (self.root / 'work/evals/t1/run.json').write_bytes((json.dumps(record) + '\n').encode())
+        with self.assertRaisesRegex(ValueError, 'subject effort changed'):
+            evals.compare(self.root, 't1')
 
     def cli_fails(self, argv, pattern):
         stderr = io.StringIO()
