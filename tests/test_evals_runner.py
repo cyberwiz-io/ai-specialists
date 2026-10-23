@@ -118,7 +118,7 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
         data = dict(self.fixture, card={'id': 'one', 'name': 'Fixture'}, kind='task', request='GRADE', input=[])
         prompt = evals.grader_prompt('Loaded instructions', data, self.fixture['acceptance'],
                                     self.fixture['output'], self.fixture['grade'])
-        (self.root / self.fixture['grader_prompt']).write_text(prompt, encoding='utf-8')
+        (self.root / self.fixture['grader_prompt']).write_bytes(prompt.encode('utf-8'))
         self.fixture['grader_sha256'] = hashlib.sha256(prompt.encode()).hexdigest()
         self.save()
         self.fake.write_text(self.fake.read_text(encoding='utf-8').replace(
