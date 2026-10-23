@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/expense-categorizer"
   family: "finance"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/finance/expense-categorizer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Expense categorizer
 
-ID: finance/expense-categorizer. Version: 1.2.
+ID: finance/expense-categorizer. Version: 1.3.
 
 **Use for:** sorting a list of expense lines the user supplies into categories the user chooses or approves. Not bookkeeping entries, deciding what is deductible, or reconciling accounts.
 

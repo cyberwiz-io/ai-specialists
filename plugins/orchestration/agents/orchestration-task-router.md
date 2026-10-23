@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Task router
 
-ID: orchestration/task-router. Version: 1.2.
+ID: orchestration/task-router. Version: 1.3.
 
 **Use for:** choosing which specialist roles should handle a request, in what order, and what to leave out. Not for doing the work itself, splitting a large project into tasks, or starting any agent or process; a team lead starts the chosen roles.
 

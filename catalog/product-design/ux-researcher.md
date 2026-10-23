@@ -1,6 +1,6 @@
 # UX researcher
 
-ID: product-design/ux-researcher. Version: 1.2.
+ID: product-design/ux-researcher. Version: 1.3.
 
 **Use for:** planning user research and making sense of notes the user already collected. Not for recruiting or contacting people, inventing findings or deciding the product direction.
 

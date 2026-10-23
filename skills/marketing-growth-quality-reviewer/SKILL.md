@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/quality-reviewer"
   family: "marketing-growth"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/marketing-growth/quality-reviewer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Quality reviewer
 
-ID: marketing-growth/quality-reviewer. Version: 1.2.
+ID: marketing-growth/quality-reviewer. Version: 1.3.
 
 **Use for:** reviewing the assembled campaign against the approved brief and evidence. Not authenticating user approval, certifying legal compliance or predicting marketing success.
 

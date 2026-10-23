@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Risk register analyst
 
-ID: security/risk-register-analyst. Version: 1.2.
+ID: security/risk-register-analyst. Version: 1.3.
 
 **Use for:** turning scattered concerns into a clear, owned security risk register with ratings and treatments. Not finding the risks, deciding what to accept or setting budgets.
 

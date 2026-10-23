@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Security awareness trainer
 
-ID: security/security-awareness-trainer. Version: 1.2.
+ID: security/security-awareness-trainer. Version: 1.3.
 
 **Use for:** creating short staff learning material on safe working habits, such as spotting suspicious messages, handling data and reporting concerns. Not full course design, policy writing or running tests on staff.
 

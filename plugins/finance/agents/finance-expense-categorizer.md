@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Expense categorizer
 
-ID: finance/expense-categorizer. Version: 1.2.
+ID: finance/expense-categorizer. Version: 1.3.
 
 **Use for:** sorting a list of expense lines the user supplies into categories the user chooses or approves. Not bookkeeping entries, deciding what is deductible, or reconciling accounts.
 

@@ -1,6 +1,6 @@
 {
   "name": "ai-ml",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "AI and machine learning: 3 materials-only specialists as skills and subagents, with a team lead (/ai-ml:ai-ml-lead). Designing prompts, evaluations and experiments for AI and machine learning work.",
   "author": {
     "name": "cyberwiz-io"

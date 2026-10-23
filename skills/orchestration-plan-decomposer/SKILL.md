@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "orchestration/plan-decomposer"
   family: "orchestration"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/orchestration/plan-decomposer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Plan decomposer
 
-ID: orchestration/plan-decomposer. Version: 1.2.
+ID: orchestration/plan-decomposer. Version: 1.3.
 
 **Use for:** breaking a large or vague goal into ordered, checkable pieces of work that individual specialist roles can take one at a time. Not for choosing among roles for a single request, doing the pieces, or managing a live project.
 

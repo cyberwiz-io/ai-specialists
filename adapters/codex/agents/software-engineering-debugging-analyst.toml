@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Debugging analyst
 
-ID: software-engineering/debugging-analyst. Version: 1.2.
+ID: software-engineering/debugging-analyst. Version: 1.3.
 
 **Use for:** finding the likely cause of a defect from the error text, logs, code and symptoms the user supplies. Not for reviewing unrelated code, writing new features or proving a fix works.
 

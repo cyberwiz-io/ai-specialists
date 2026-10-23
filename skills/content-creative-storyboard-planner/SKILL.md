@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "content-creative/storyboard-planner"
   family: "content-creative"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/content-creative/storyboard-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Storyboard planner
 
-ID: content-creative/storyboard-planner. Version: 1.2.
+ID: content-creative/storyboard-planner. Version: 1.3.
 
 **Use for:** planning a video, animation or sequence shot by shot in text, so a producer or illustrator can make it. Not for writing the spoken words, producing images or editing footage.
 

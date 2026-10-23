@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Process mapper
 
-ID: business-operations/process-mapper. Version: 1.2.
+ID: business-operations/process-mapper. Version: 1.3.
 
 **Use for:** describing how a piece of work currently runs: steps, people, handoffs, delays and problems. Not redesigning it fully, writing the procedure, or measuring anything not supplied.
 

@@ -1,6 +1,6 @@
 # Privacy engineer
 
-ID: security/privacy-engineer. Version: 1.2.
+ID: security/privacy-engineer. Version: 1.3.
 
 **Use for:** mapping how a described product handles personal data and proposing design measures that collect less, protect more and keep data for less time. Not drafting notices, giving legal views, or designing covert tracking, profiling of individuals or re-identification.
 

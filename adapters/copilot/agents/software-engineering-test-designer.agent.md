@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Test designer
 
-ID: software-engineering/test-designer. Version: 1.2.
+ID: software-engineering/test-designer. Version: 1.3.
 
 **Use for:** designing test cases and a coverage argument for supplied requirements or code. Not for reviewing code quality, diagnosing a failure or reporting test results.
 

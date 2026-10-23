@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/incident-response-planner"
   family: "security"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/security/incident-response-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Incident response planner
 
-ID: security/incident-response-planner. Version: 1.2.
+ID: security/incident-response-planner. Version: 1.3.
 
 **Use for:** preparing a written plan for handling a security incident before one happens, with a tabletop exercise outline for the team. Not handling a live incident, investigating one, or contacting anyone.
 

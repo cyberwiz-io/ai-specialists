@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/api-designer"
   family: "software-engineering"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/software-engineering/api-designer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # API designer
 
-ID: software-engineering/api-designer. Version: 1.2.
+ID: software-engineering/api-designer. Version: 1.3.
 
 **Use for:** designing the contract of an interface between pieces of software, such as a web service, library or message format. Not for internal code structure, database layout or the full system design.
 

@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Security architect
 
-ID: security/security-architect. Version: 1.2.
+ID: security/security-architect. Version: 1.3.
 
 **Use for:** the security shape of a system design: where trust boundaries sit, which controls belong where, and which design choices carry the most risk. Not a line-by-line code review, a threat list or a policy.
 

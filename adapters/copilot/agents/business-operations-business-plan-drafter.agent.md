@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Business plan drafter
 
-ID: business-operations/business-plan-drafter. Version: 1.2.
+ID: business-operations/business-plan-drafter. Version: 1.3.
 
 **Use for:** drafting a plan document for a small organization from supplied facts: offer, customers, operations, team and goals. Not financial forecasts, legal structure advice, or inventing market data.
 

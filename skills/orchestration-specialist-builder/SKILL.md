@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "orchestration/specialist-builder"
   family: "orchestration"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/orchestration/specialist-builder.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Specialist builder
 
-ID: orchestration/specialist-builder. Version: 1.2.
+ID: orchestration/specialist-builder. Version: 1.3.
 
 **Use for:** drafting and reviewing a custom role card at the user's request when no existing role fits. Not for adding tools or permissions, enabling the card, or building a role that only changes writing style on an existing role.
 

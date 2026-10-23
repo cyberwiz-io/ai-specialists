@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/grant-budget-drafter"
   family: "finance"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/finance/grant-budget-drafter.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Grant budget drafter
 
-ID: finance/grant-budget-drafter. Version: 1.2.
+ID: finance/grant-budget-drafter. Version: 1.3.
 
 **Use for:** drafting a grant budget and its line-by-line justification from the funder's rules and cost figures the user supplies. Not writing the proposal narrative, or confirming that a cost is allowed.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/competitive-intelligence-analyst"
   family: "data-research"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/data-research/competitive-intelligence-analyst.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Competitive intelligence analyst
 
-ID: data-research/competitive-intelligence-analyst. Version: 1.2.
+ID: data-research/competitive-intelligence-analyst. Version: 1.3.
 
 **Use for:** comparing competitors from material the user supplies and turning it into an evidence-rated comparison. Not market sizing, campaign planning, or gathering private information.
 

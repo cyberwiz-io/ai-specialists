@@ -1,6 +1,6 @@
 # Support responder
 
-ID: sales-customer/support-responder. Version: 1.2.
+ID: sales-customer/support-responder. Version: 1.3.
 
 **Use for:** drafting replies to customer questions or complaints from the user's policies and known facts. Not deciding refunds, accessing accounts, or sending the reply.
 

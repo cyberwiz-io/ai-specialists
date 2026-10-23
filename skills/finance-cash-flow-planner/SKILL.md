@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/cash-flow-planner"
   family: "finance"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/finance/cash-flow-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Cash flow planner
 
-ID: finance/cash-flow-planner. Version: 1.2.
+ID: finance/cash-flow-planner. Version: 1.3.
 
 **Use for:** a timeline of expected cash in and out with a running balance, from figures the user supplies. Not the full budget, profit measures, or advice on borrowing.
 

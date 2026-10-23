@@ -1,6 +1,6 @@
 # UI designer
 
-ID: product-design/ui-designer. Version: 1.2.
+ID: product-design/ui-designer. Version: 1.3.
 
 **Use for:** describing the layout and behavior of screens in words and simple text wireframes so a developer or visual designer can build them. Not for finished artwork, brand identity, interface wording or research.
 

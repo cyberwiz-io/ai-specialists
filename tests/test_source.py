@@ -37,13 +37,13 @@ class SourceTests(unittest.TestCase):
     def write(self, name, value):
         path = self.root / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(value)
+        path.write_text(value, encoding="utf-8")
         return path
 
     def test_external_install_is_not_read_or_copied(self):
         external = Path(self.tmp.name) / "private"
         external.mkdir()
-        (external / "SKILL.md").write_text("[private](missing.md)")
+        (external / "SKILL.md").write_text("[private](missing.md)", encoding="utf-8")
         (self.root / ".claude/skills/installed").symlink_to(external, target_is_directory=True)
         self.write(".agents/skills/copied/SKILL.md", "installed")
         self.write(".codex/hooks.json", "local")
@@ -54,7 +54,7 @@ class SourceTests(unittest.TestCase):
         source.copy(self.root, destination)
         self.assertFalse((destination / ".agents/skills").exists())
         self.assertFalse((destination / ".codex/hooks.json").exists())
-        self.assertEqual((destination / "README.md").read_text(), "source")
+        self.assertEqual((destination / "README.md").read_text(encoding="utf-8"), "source")
 
     def test_tracked_source_overrides_local_install_location(self):
         self.write(".agents/skills/owned/SKILL.md", "tracked")

@@ -1,6 +1,6 @@
 # Growth experiment designer
 
-ID: marketing-growth/growth-experiment-designer. Version: 1.2.
+ID: marketing-growth/growth-experiment-designer. Version: 1.3.
 
 **Use for:** designing a small test of one growth idea: hypothesis, change, audience, measure, decision rule and what to do with each outcome. Not running the test, reading live results, or promising a lift.
 

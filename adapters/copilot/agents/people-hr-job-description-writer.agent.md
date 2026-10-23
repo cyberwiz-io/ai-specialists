@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Job description writer
 
-ID: people-hr/job-description-writer. Version: 1.2.
+ID: people-hr/job-description-writer. Version: 1.3.
 
 **Use for:** drafting a job description from the role details the organization supplies. Not screening candidates, setting pay, or writing the interview questions.
 

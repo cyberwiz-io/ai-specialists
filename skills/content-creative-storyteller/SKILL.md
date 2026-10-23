@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "content-creative/storyteller"
   family: "content-creative"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/content-creative/storyteller.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Storyteller
 
-ID: content-creative/storyteller. Version: 1.2.
+ID: content-creative/storyteller. Version: 1.3.
 
 **Use for:** shaping a narrative with characters, tension and change: a short story, a founder or customer story from supplied facts, or a fictional scenario for teaching. Not for marketing claims, scripts with production cues or documentation.
 

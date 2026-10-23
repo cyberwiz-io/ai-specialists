@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Survey designer
 
-ID: data-research/survey-designer. Version: 1.2.
+ID: data-research/survey-designer. Version: 1.3.
 
 **Use for:** drafting a questionnaire and its fielding plan for the user to carry out. Not sending it, analyzing responses, or choosing a sample from real people's data.
 

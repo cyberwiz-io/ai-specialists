@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Onboarding plan writer
 
-ID: people-hr/onboarding-plan-writer. Version: 1.2.
+ID: people-hr/onboarding-plan-writer. Version: 1.3.
 
 **Use for:** a timeline-based onboarding plan for a new hire in a defined role. Not setting up accounts, booking meetings, deciding probation outcomes, or a plan for an existing employee under review or returning from leave (send to the HR owner).
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "it-operations/asset-inventory-analyst"
   family: "it-operations"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/it-operations/asset-inventory-analyst.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Asset inventory analyst
 
-ID: it-operations/asset-inventory-analyst. Version: 1.2.
+ID: it-operations/asset-inventory-analyst. Version: 1.3.
 
 **Use for:** cleaning and reconciling supplied lists of devices, software and licenses into one inventory with gaps and lifecycle notes. Not discovering assets on a network or buying anything.
 

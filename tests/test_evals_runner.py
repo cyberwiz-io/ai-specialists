@@ -23,7 +23,7 @@ data = sys.stdin.buffer.read()
 result = {'result': base64.b64encode(data).decode(), 'modelUsage': {'native-model': {}}}
 sys.stdout.buffer.write(json.dumps(result).encode() + b'\\r\\n')
 sys.stderr.buffer.write(b'diagnostic\\r\\n')
-''')
+''', encoding="utf-8")
         prompt = 'First line\nSecond line: café\n'
         reply, receipt = evals_runner.session([sys.executable, str(self.fake)], prompt, 'native-model', 5)
         self.assertEqual(base64.b64decode(reply), prompt.encode('utf-8'))
@@ -75,11 +75,11 @@ if 'GRADE' in prompt:
     result = json.dumps({'fixture': 'one', 'acceptance': [{'item': 'Useful', 'verdict': 'pass', 'evidence': 'A reply', 'quote': 'A reply'}], 'traits': [], 'must_not': []})
 else: result = 'A reply'
 print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model: {}}} if 'UNKNOWN' not in prompt else {})}))
-''')
+''', encoding="utf-8")
         self.fixture = {'id': 'one', 'key': 'one', 'acceptance': ['Useful'], 'traits': [], 'must_not': []}
         for key, content in [('subject_prompt', 'SUBJECT'), ('grader_prompt', 'GRADE')]:
             path = self.folder / (key + '.md')
-            path.write_text(content)
+            path.write_text(content, encoding="utf-8")
             self.fixture[key] = str(path.relative_to(self.root))
             self.fixture[key.replace('_prompt', '_sha256')] = hashlib.sha256(content.encode()).hexdigest()
         for key in ['output', 'grade']:
@@ -94,19 +94,19 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
         self.save()
 
     def save(self):
-        (self.folder / 'run.json').write_text(json.dumps(self.record))
+        (self.folder / 'run.json').write_text(json.dumps(self.record), encoding="utf-8")
 
     def run_fake(self, **kwargs):
         return evals_runner.run(self.root, 'test', command=[sys.executable, str(self.fake)], **kwargs)
 
     def change_prompt(self, value):
-        (self.root / self.fixture['subject_prompt']).write_text(value)
+        (self.root / self.fixture['subject_prompt']).write_text(value, encoding="utf-8")
         self.fixture['subject_sha256'] = hashlib.sha256(value.encode()).hexdigest()
         self.save()
 
     def test_separate_models_and_observed_identity_and_resume(self):
         self.assertEqual(self.run_fake(), 0)
-        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))['fixtures']['one']
         self.assertEqual(receipt['subject']['requested_model'], 'subject-model')
         self.assertEqual(receipt['grader']['reported_models'], ['grader-model'])
         self.assertEqual(receipt['status'], 'complete')
@@ -116,41 +116,79 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
     def test_permission_failure_is_incomplete_and_not_retried(self):
         self.change_prompt('DENIED')
         self.assertEqual(self.run_fake(), 1)
-        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))['fixtures']['one']
         self.assertEqual(receipt['status'], 'failed')
         self.assertEqual(receipt['error'], 'permission')
         self.assertFalse((self.root / self.fixture['grade']).exists())
 
-    def test_timeout_and_malformed_response_fail(self):
+    def test_timeout_failure_requires_a_new_run_and_preserves_first_attempt(self):
+        from unittest import mock
         self.change_prompt('TIMEOUT')
         self.assertEqual(self.run_fake(timeout=0.05), 1)
+        first = (self.folder / 'execution.json').read_bytes()
+        with mock.patch.object(evals_runner, 'session') as native:
+            self.assertEqual(self.run_fake(), 1)
+            native.assert_not_called()
+        self.assertEqual((self.folder / 'execution.json').read_bytes(), first)
+
+    def test_malformed_response_fails(self):
         self.change_prompt('BAD')
         self.assertEqual(self.run_fake(), 1)
 
-    def test_changed_prompt_and_output_refused(self):
-        (self.root / self.fixture['subject_prompt']).write_text('tampered')
-        self.assertEqual(self.run_fake(), 1)
-        self.change_prompt('SUBJECT')
+    def test_interrupted_attempt_is_reserved_before_call_and_cannot_be_replayed(self):
+        from unittest import mock
+        with mock.patch.object(evals_runner, 'session', side_effect=KeyboardInterrupt):
+            with self.assertRaises(KeyboardInterrupt):
+                self.run_fake()
+        first = (self.folder / 'execution.json').read_bytes()
+        self.assertEqual(json.loads(first)['fixtures']['one']['status'], 'reserved')
+        with mock.patch.object(evals_runner, 'session') as native:
+            self.assertEqual(self.run_fake(), 1)
+            native.assert_not_called()
+        self.assertEqual((self.folder / 'execution.json').read_bytes(), first)
+
+    def test_missing_completed_files_cannot_trigger_a_new_subject(self):
+        from unittest import mock
         self.assertEqual(self.run_fake(), 0)
-        (self.root / self.fixture['output']).write_text('changed')
+        original = json.loads((self.folder / 'execution.json').read_bytes())['fixtures']['one']
+        for path in (self.root / self.fixture['output'], self.root / self.fixture['grade'],
+                     self.root / (self.fixture['grade'] + '.raw-1.txt')):
+            path.unlink()
+        with mock.patch.object(evals_runner, 'session') as native:
+            self.assertEqual(self.run_fake(), 1)
+            native.assert_not_called()
+        retained = json.loads((self.folder / 'execution.json').read_bytes())['fixtures']['one']
+        self.assertEqual(retained['output_sha256'], original['output_sha256'])
+
+    def test_changed_prompt_and_output_refused(self):
+        (self.root / self.fixture['subject_prompt']).write_text('tampered', encoding="utf-8")
+        self.assertEqual(self.run_fake(), 1)
+        first = (self.folder / 'execution.json').read_bytes()
+        self.change_prompt('SUBJECT')
+        self.assertEqual(self.run_fake(), 1)
+        self.assertEqual((self.folder / 'execution.json').read_bytes(), first)
+
+    def test_changed_completed_output_is_refused(self):
+        self.assertEqual(self.run_fake(), 0)
+        (self.root / self.fixture['output']).write_text('changed', encoding="utf-8")
         self.assertEqual(self.run_fake(), 1)
 
     def test_missing_identity_is_not_invented(self):
         self.change_prompt('UNKNOWN')
         self.assertEqual(self.run_fake(), 0)
-        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))['fixtures']['one']
         self.assertEqual(receipt['subject']['reported_models'], [])
         self.assertEqual(receipt['subject']['identity_source'], 'unobserved')
 
     def test_invalid_grades_preserve_reply_and_raw_attempts_without_replay(self):
         path = self.root / self.fixture['grader_prompt']
-        path.write_text('INVALIDGRADE')
+        path.write_text('INVALIDGRADE', encoding="utf-8")
         self.fixture['grader_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
         self.save()
         self.assertEqual(self.run_fake(), 1)
         self.assertEqual((self.root / self.fixture['output']).read_bytes(), b'A reply')
         self.assertFalse((self.root / self.fixture['grade']).exists())
-        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))['fixtures']['one']
         self.assertEqual(len(receipt['grader_attempts']), 2)
         for attempt in receipt['grader_attempts']:
             raw = (self.root / attempt['raw_path']).read_bytes()
@@ -190,7 +228,7 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
                 (good, {'requested_model': 'grader-model'})]) as native:
             self.assertEqual(self.run_fake(), 0)
             self.assertEqual(native.call_count, 3)
-        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))['fixtures']['one']
         self.assertEqual(receipt['status'], 'complete')
         self.assertEqual(len(receipt['grader_attempts']), 2)
 
@@ -203,7 +241,7 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
                 (failed, {'requested_model': 'grader-model'})]) as native:
             self.assertEqual(self.run_fake(), 0)
             self.assertEqual(native.call_count, 2)
-        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))['fixtures']['one']
         self.assertEqual(len(receipt['grader_attempts']), 1)
 
     def test_multiple_fixtures_all_must_complete(self):
@@ -214,7 +252,7 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
         self.save()
         # The fake grader names fixture one; fixture two must fail validation.
         self.assertEqual(self.run_fake(parallel=2), 1)
-        statuses = json.loads((self.folder / 'execution.json').read_text())['fixtures']
+        statuses = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))['fixtures']
         self.assertEqual(statuses['one']['status'], 'complete')
         self.assertEqual(statuses['two']['status'], 'failed')
 
@@ -242,7 +280,7 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
         with mock.patch.object(evals_runner, 'session', side_effect=session):
             with self.assertRaisesRegex(RuntimeError, 'interrupted'):
                 self.run_fake()
-        receipt = json.loads((self.folder / 'execution.json').read_text())
+        receipt = json.loads((self.folder / 'execution.json').read_text(encoding="utf-8"))
         self.assertEqual(receipt['fixtures']['one']['status'], 'complete')
 
     def test_invalid_run_and_parallel(self):

@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Support documenter
 
-ID: it-operations/support-documenter. Version: 1.2.
+ID: it-operations/support-documenter. Version: 1.3.
 
 **Use for:** writing help-desk articles and how-to guides that let a non-technical user solve a common IT problem. Not step-by-step operator procedures for staff, change plans or fixing the issue itself.
 

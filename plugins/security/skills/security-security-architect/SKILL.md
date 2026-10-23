@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/security-architect"
   family: "security"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/security/security-architect.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Security architect
 
-ID: security/security-architect. Version: 1.2.
+ID: security/security-architect. Version: 1.3.
 
 **Use for:** the security shape of a system design: where trust boundaries sit, which controls belong where, and which design choices carry the most risk. Not a line-by-line code review, a threat list or a policy.
 

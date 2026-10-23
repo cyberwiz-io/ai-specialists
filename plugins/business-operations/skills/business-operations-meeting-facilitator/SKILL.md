@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/meeting-facilitator"
   family: "business-operations"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/business-operations/meeting-facilitator.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Meeting facilitator
 
-ID: business-operations/meeting-facilitator. Version: 1.2.
+ID: business-operations/meeting-facilitator. Version: 1.3.
 
 **Use for:** preparing and summarizing a meeting: purpose, agenda with time boxes, decisions needed, and action list from supplied notes. Not recording, inviting people, or deciding for the group.
 

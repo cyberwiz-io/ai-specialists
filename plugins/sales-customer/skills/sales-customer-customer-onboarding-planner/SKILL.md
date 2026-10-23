@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "sales-customer/customer-onboarding-planner"
   family: "sales-customer"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/sales-customer/customer-onboarding-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Customer onboarding planner
 
-ID: sales-customer/customer-onboarding-planner. Version: 1.2.
+ID: sales-customer/customer-onboarding-planner. Version: 1.3.
 
 **Use for:** planning the first weeks of a new customer: milestones, who does what, welcome materials and check-in points. Not a company-wide training course or setting up accounts.
 

@@ -62,7 +62,7 @@ Keep inputs small: enough material for the card's method to matter, usually 5 to
 Ask Claude Code to "run the card evals" (the `card-evals` skill), optionally for one family or role. In outline:
 
 ```sh
-python3 -B scripts/evals.py prepare --run 2026-10-17-security --family security --host "Claude Code (cloud)" --model "<model id>"
+python3 -B scripts/evals.py prepare --run 2026-10-17-security --family security --host "<actual client version and native host>" --model "<model id>"
 # Claude Code: for each fixture, one fresh subject subagent writes outputs/<n>.md,
 # then one fresh grader subagent writes grades/<n>.json
 python3 -B scripts/evals.py status --run 2026-10-17-security
@@ -78,7 +78,7 @@ The subject prompt is the combined pack that holds the role, exactly as shipped 
 | Acceptance criterion or trait | `pass`, `partial`, `fail`, `inapplicable` |
 | `must_not` item | `clear`, `violated` |
 
-A fixture **passes** when every applicable criterion and trait passes and nothing is violated. `inapplicable` is permitted only for an explicitly conditional positive item with an absent trigger; copy the exact conditional clause to `condition` and explain the absent trigger in `evidence`. Required missing work, missing inputs, uncertain triggers and prohibited behavior never qualify. Every exclusion is listed separately and requires independent review before release acceptance; no exclusion counts as an affirmative pass. Excluding every positive requirement is invalid. It is **partial** when nothing fails or is violated but something is partial. Otherwise it **fails**. The report counts outcomes per family and lists every non-passing item with its evidence.
+A fixture **passes** when every applicable criterion and trait passes, nothing is violated, and any exclusions have an exact-byte different-model review. An otherwise passing fixture with an unreviewed exclusion is **conditional**, never an outright PASS in family or role counts. `inapplicable` is permitted only for an explicitly conditional positive item with an absent trigger; the whole item must start with If, When or Where and a comma or colon must separate its antecedent from its consequence; copy only that exact opening antecedent to `condition` and explain the absent trigger in `evidence`. Required missing work, missing inputs, uncertain triggers and prohibited behavior never qualify. Every exclusion is listed separately and requires independent review before release acceptance; no exclusion counts as an affirmative pass. Excluding every positive requirement is invalid. It is **partial** when nothing fails or is violated but something is partial. Otherwise it **fails**. The report counts outcomes per family and lists every non-passing item with its evidence.
 
 ## Regression check
 
@@ -120,7 +120,7 @@ Prepared files still support the manual subagent workflow described above.
 `modelUsage` field (or `unobserved`), input/output hashes, completion and error
 categories. A requested name does not prove execution identity. The CLI transport sends UTF-8 bytes without newline translation. Per-session input hashes cover the actual prompt bytes, including the reply appended for grading. Raw CLI output and
 stderr hashes identify responses without copying raw diagnostic text that might
-contain private data. Each completed fixture checkpoints its receipt atomically; an interrupted batch retains completed evidence and cannot certify missing fixtures. An incomplete run exits nonzero. There are no automatic
+contain private data. All attempts are reserved atomically before native calls. Each completed fixture checkpoints its receipt atomically; an interrupted batch retains completed evidence and cannot certify missing fixtures. An incomplete run exits nonzero. There are no automatic
 retries after authorization, billing, permission, or timeout failures. An invalid
 grader JSON/schema or non-verbatim affirmative quote gets one fresh grader retry
 on the unchanged reply. Both raw attempts and their validation errors are retained;
@@ -130,7 +130,9 @@ hashes before any model call and requires a new run after source changes.
 An unchanged completed run can resume without new calls; changed or partial saved
 results require a fresh run name. Do not overwrite evidence to obtain a pass.
 
-New schema-3 runs require an exact saved-reply excerpt for each affirmative pass or violation verdict. Conditional exclusions use an exact clause from their criterion and an explanation, rather than an invented affirmative reply quote. This catches fabricated quotations; it does not prove that the excerpt supports the verdict. Review missing/implicit criteria and every critical case independently. Historical schemas remain historical evidence.
+New schema-3 runs require an exact saved-reply excerpt for each affirmative pass or violation verdict. Conditional exclusions use the exact opening antecedent of a whole conditional criterion and an explanation, rather than an invented affirmative reply quote. This catches fabricated quotations; it does not prove that the excerpt supports the verdict. Review missing/implicit criteria and every critical case independently. Historical schemas remain historical evidence.
+
+An optional `work/evals/<run>/exclusion-reviews.json` records coordinator-observed native adjudications without editing the original grades. Its schema is `{"schema": 1, "reviews": {"<fixture-id>": {"verdict": "approve", "output_sha256": "<64 hex>", "grade_sha256": "<64 hex>", "report": "work/evals/<run>/<review-file>", "report_sha256": "<64 hex>", "native": {"identity_source": "CLI modelUsage", "reported_models": ["<versioned Claude model ID>"], "session_id": "<native session ID>", "response_sha256": "<64 hex>"}}}}`. Use `reject` for a rejected exclusion. The reviewer must inspect every excluded item for that fixture against the complete criteria and reply, and differ from both native subject and grader models. Keep the review report inside the run and bind all three files by SHA-256. Missing reviews remain conditional; stale, malformed or same-model records fail validation. Only the runner's native versioned Claude identities are supported here; aliases and provider/quantization variants cannot establish independence. The coordinator records observations from actual native results; editable metadata does not grant authority or prove that a model ran. Approval cannot upgrade an original PARTIAL or FAIL. Baselines require review of every exclusion.
 
 New baselines retain fixture input and rubric hashes. Comparisons reject changed
 models, graders, fixture coverage, or rubrics as incomparable. The historical
@@ -139,7 +141,7 @@ Keep it until a separately reviewed candidate baseline is explicitly approved.
 
 ## Release evaluation protocol
 
-[`calibration/cases.json`](calibration/cases.json) contains the original 30 synthetic replies (ten proposed passes, ten partials and ten failures), plus seven conditional, missing-work, mixed-violation and embedded-instruction cases. Historical blind labels and the underspecified-trait dispute remain preserved. New calibration must use anonymized case IDs, omit all proposed and historical labels from both candidate-grader and reference contexts, and record every disagreement separately. The reference model also contributed to this candidate; these labels do not constitute independent release review.
+[`calibration/cases.json`](calibration/cases.json) contains the original 30 synthetic replies (ten proposed passes, ten partials and ten failures), plus eight conditional, missing-work, mixed-violation and embedded-instruction cases. Historical blind labels and the underspecified-trait dispute remain preserved. New calibration must use anonymized case IDs, omit all proposed and historical labels from both candidate-grader and reference contexts, and record every disagreement separately. The reference model also contributed to this candidate; these labels do not constitute independent release review.
 The proposed outcomes remain historical draft labels, not the reference. Keep native calibration results and disagreement dispositions in a separately reviewed record before claiming acceptance. This is a small synthetic reply-grading calibration, not domain-expert validation or evidence of specialist prompt-injection resistance. Require at least 90% exact agreement
 and no missed critical violation, then adjudicate all disagreements.
 

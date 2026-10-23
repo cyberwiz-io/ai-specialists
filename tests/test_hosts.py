@@ -183,9 +183,9 @@ class StatsAndEvalTests(FixtureCase):
     def test_security_plugin_eval_suite_has_tasks_a_boundary_and_a_team_case(self):
         cases = sorted((self.root / "plugins/security/evals").glob("*/case.yaml"))
         self.assertEqual(len(cases), 7)
-        kinds = [json.loads(path.read_text())["tags"][0] for path in cases]
+        kinds = [json.loads(path.read_text(encoding="utf-8"))["tags"][0] for path in cases]
         self.assertEqual(sorted(kinds), ["boundary"] + ["task"] * 5 + ["team"])
-        team = json.loads((self.root / "plugins/security/evals/tutoring-app-launch/case.yaml").read_text())
+        team = json.loads((self.root / "plugins/security/evals/tutoring-app-launch/case.yaml").read_text(encoding="utf-8"))
         self.assertIn("tool_used", [grader["type"] for grader in team["graders"]])
 
     def test_eval_suite_naming_an_unknown_fixture_fails_build(self):

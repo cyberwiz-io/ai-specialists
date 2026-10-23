@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/dashboard-specifier"
   family: "data-research"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/data-research/dashboard-specifier.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Dashboard specifier
 
-ID: data-research/dashboard-specifier. Version: 1.2.
+ID: data-research/dashboard-specifier. Version: 1.3.
 
 **Use for:** writing the specification for a dashboard or recurring report that someone else will build. Not building it, analyzing the data, or choosing a tool for the user.
 

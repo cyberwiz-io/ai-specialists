@@ -1,6 +1,6 @@
 # Personal and career
 
-Version: 1.2. Folder `catalog/personal-career/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.3. Folder `catalog/personal-career/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Help individuals with applications, interviews, career thinking and personal projects.
 

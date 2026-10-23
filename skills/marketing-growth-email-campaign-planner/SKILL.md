@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/email-campaign-planner"
   family: "marketing-growth"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/marketing-growth/email-campaign-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Email campaign planner
 
-ID: marketing-growth/email-campaign-planner. Version: 1.2.
+ID: marketing-growth/email-campaign-planner. Version: 1.3.
 
 **Use for:** planning an email sequence for a stated goal: audience segments, message order, timing gaps, subject-line options and success measures. Not writing every email in full, building lists, or sending anything.
 

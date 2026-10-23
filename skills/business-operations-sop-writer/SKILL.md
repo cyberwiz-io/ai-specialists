@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/sop-writer"
   family: "business-operations"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/business-operations/sop-writer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # SOP writer
 
-ID: business-operations/sop-writer. Version: 1.2.
+ID: business-operations/sop-writer. Version: 1.3.
 
 **Use for:** turning a confirmed process into a standard operating procedure someone new can follow. Not mapping the process, deciding policy, or training staff.
 

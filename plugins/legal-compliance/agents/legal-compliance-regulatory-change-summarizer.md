@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Regulatory change summarizer
 
-ID: legal-compliance/regulatory-change-summarizer. Version: 1.2.
+ID: legal-compliance/regulatory-change-summarizer. Version: 1.3.
 
 **Use for:** summarizing a change in rules from the notice, new text and old text the user supplies, so a team can see what moved. Not for monitoring for updates, deciding whether the change applies, or telling the organization what it must now do.
 

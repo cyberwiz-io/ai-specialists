@@ -239,7 +239,9 @@ def grader_prompt(context_text, fixture, accepted, output_path, grade_path):
         "explicit restriction satisfies a weaker one. Require verbatim wording only when the item explicitly "
         "asks for it. Apply conditional criteria only when their trigger is present; do not fail a reply for "
         "omitting an inapplicable action. Use `inapplicable` only for an explicitly conditional acceptance "
-        "criterion or trait whose trigger is absent. Copy its exact conditional clause into `condition` and "
+        "criterion or trait whose trigger is absent. The whole item must begin with If, When or Where, "
+        "followed by an antecedent and a comma or colon before the consequence; a compound item with "
+        "unconditional work cannot be excluded. Copy only the exact opening antecedent into `condition` and "
         "explain why the trigger is absent in `evidence`; `quote` may be empty. Required work, missing inputs, "
         "uncertain triggers and prohibited behaviors never qualify. Every inapplicable item is reported for "
         "independent review, not counted as an affirmative pass. When the instructions require an unknown or unresolved placeholder, "
@@ -346,6 +348,12 @@ def _has_text(path):
     return path.is_file() and path.read_text(encoding="utf-8").strip() != ""
 
 
+def antecedent(item):
+    """Only a whole conditional item can be excluded, never an embedded conditional clause."""
+    match = re.fullmatch(r'((?:If|When|Where)\b[^,;:]+)[,:]\s*([^;]+)', item, re.I)
+    return match[1].strip() if match and match[2].strip() else None
+
+
 def check_grade(fixture, grade, reply=None):
     """Failure strings for one grade object compared with what the run prepared."""
     where, failures = fixture["grade"], []
@@ -368,8 +376,8 @@ def check_grade(fixture, grade, reply=None):
                 failures.append(f"{where}: {section} evidence must be non-empty text")
             if row.get("verdict") == "inapplicable":
                 condition = row.get("condition")
-                if not isinstance(condition, str) or not condition.strip() or condition not in row["item"]:
-                    failures.append(f"{where}: inapplicable needs an exact conditional clause from its item")
+                if not antecedent(row["item"]) or condition != antecedent(row["item"]):
+                    failures.append(f"{where}: inapplicable needs the exact opening conditional antecedent")
             if reply is not None and row.get("verdict") in ("pass", "violated"):
                 quote = row.get("quote")
                 if not isinstance(quote, str) or not quote.strip() or quote not in reply:
@@ -379,11 +387,63 @@ def check_grade(fixture, grade, reply=None):
     return failures
 
 
-def outcome(grade):
+def outcome(grade, approved=False):
     verdicts = [row["verdict"] for section in ("acceptance", "traits") for row in grade[section]]
     if "fail" in verdicts or any(row["verdict"] == "violated" for row in grade["must_not"]):
         return "FAIL"
-    return "PARTIAL" if "partial" in verdicts else "PASS"
+    if "partial" in verdicts:
+        return "PARTIAL"
+    return "CONDITIONAL" if "inapplicable" in verdicts and not approved else "PASS"
+
+
+def _native_models(receipt):
+    models = receipt.get('reported_models') if isinstance(receipt, dict) else None
+    if (not isinstance(models, list) or not models or receipt.get('identity_source') != 'CLI modelUsage'
+            or any(not isinstance(m, str) or not re.fullmatch(
+                r'claude-(?:haiku|sonnet|opus)-[0-9]+-[0-9]+(?:-[0-9]{8})?', m) for m in models)):
+        raise ValueError('exclusion review requires native versioned Claude model identities')
+    return {re.sub(r'-[0-9]{8}$', '', m) for m in models}
+
+
+def exclusion_approvals(root, record, grades):
+    """Validate coordinator-recorded native reviews; these editable receipts are not an authority boundary."""
+    folder = safe_path(root, f"{EVAL_DIR}/{record['run']}")
+    path = folder / 'exclusion-reviews.json'
+    if not path.is_file():
+        return set()
+    data = json.loads(path.read_bytes())
+    if not isinstance(data, dict) or data.get('schema') != 1 or not isinstance(data.get('reviews'), dict):
+        raise ValueError('malformed exclusion reviews')
+    execution = json.loads((folder / 'execution.json').read_bytes())
+    approved = set()
+    fixtures = {f['id']: f for f in record['fixtures']}
+    for fid, review in data['reviews'].items():
+        if fid not in fixtures or not isinstance(review, dict):
+            raise ValueError('malformed exclusion review fixture')
+        fixture = fixtures[fid]
+        if not any(r['verdict'] == 'inapplicable' for s in ('acceptance', 'traits') for r in grades[fid][s]):
+            raise ValueError('exclusion review has no excluded item')
+        for key, name in [('output', fixture['output']), ('grade', fixture['grade']), ('report', review.get('report'))]:
+            if not isinstance(name, str):
+                raise ValueError('exclusion review needs a report path')
+            artifact = safe_path(root, name)
+            if (folder not in artifact.parents or not artifact.is_file()
+                    or hashlib.sha256(artifact.read_bytes()).hexdigest() != review.get(key + '_sha256')):
+                raise ValueError(f'{fid}: stale exclusion review {key} bytes')
+        receipt = execution.get('fixtures', {}).get(fid, {})
+        if receipt.get('status') != 'complete':
+            raise ValueError('exclusion review requires completed native execution')
+        authors = _native_models(receipt.get('subject')) | _native_models(receipt.get('grader'))
+        native = review.get('native')
+        reviewer = _native_models(native)
+        if (len(reviewer) != 1 or reviewer & authors or not native.get('session_id')
+                or not re.fullmatch(r'[0-9a-f]{64}', str(native.get('response_sha256', '')))):
+            raise ValueError('exclusion reviewer must be an observed different model in a native session')
+        if review.get('verdict') not in ('approve', 'reject'):
+            raise ValueError('exclusion review verdict must be approve or reject')
+        if review['verdict'] == 'approve':
+            approved.add(fid)
+    return approved
 
 
 def _cell(text):
@@ -395,6 +455,7 @@ def _grades(root, record):
     failures, grades = [], {}
     receipt_path = safe_path(root, f"{EVAL_DIR}/{record['run']}/execution.json")
     receipts = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
+    record['observed_models'] = {}
     for fixture in record["fixtures"]:
         if record.get("schema", 1) >= 2:
             for key in ("subject", "grader"):
@@ -403,6 +464,8 @@ def _grades(root, record):
                     failures.append(f"{fixture['id']}: {key} prompt hash mismatch")
         if receipts is not None:
             receipt = receipts.get("fixtures", {}).get(fixture["id"], {})
+            record['observed_models'][fixture['id']] = {
+                key: receipt.get(key, {}).get('reported_models', []) for key in ('subject', 'grader')}
             if receipt.get("status") != "complete":
                 failures.append(f"{fixture['id']}: execution receipt is incomplete")
             for key in ("output", "grade"):
@@ -421,7 +484,7 @@ def _grades(root, record):
             failures.append(f"{fixture['grade']}: invalid JSON ({error})")
             continue
         reply = safe_path(root, fixture["output"])
-        errors = check_grade(fixture, grade, reply.read_text(encoding="utf-8")
+        errors = check_grade(fixture, grade, reply.read_bytes().decode("utf-8")
                              if record.get("schema", 1) >= 3 and reply.is_file() else None)
         failures += errors
         if not errors:
@@ -438,17 +501,18 @@ def report(root, run):
     record["execution_evidence"] = ("Execution receipt present; completion and output hashes checked"
                                     if receipt.is_file() else "no execution receipt; native route and model identities unverified")
     path = root / EVAL_DIR / run / "REPORT.md"
-    path.write_bytes(render(record, _grades(root, record)).encode("utf-8"))
+    grades = _grades(root, record)
+    path.write_bytes(render(record, grades, exclusion_approvals(root, record, grades)).encode("utf-8"))
     return path
 
 
-def role_scores(record, grades):
+def role_scores(record, grades, approved=()):
     """Per role, how many of its fixtures passed outright and how many ran."""
     scores = {}
     for fixture in record["fixtures"]:
         row = scores.setdefault(fixture["role"], {"passed": 0, "total": 0})
         row["total"] += 1
-        row["passed"] += outcome(grades[fixture["id"]]) == "PASS"
+        row["passed"] += outcome(grades[fixture["id"]], fixture["id"] in approved) == "PASS"
     return dict(sorted(scores.items()))
 
 
@@ -469,7 +533,13 @@ def save_baseline(root, run):
             raise ValueError("baseline cannot mix grading harness versions")
     roles, fixture_versions = {}, {}
     for record in records:
-        roles.update(role_scores(record, _grades(root, record)))
+        grades = _grades(root, record)
+        approved = exclusion_approvals(root, record, grades)
+        if any(fid not in approved and any(row['verdict'] == 'inapplicable'
+                for section in ('acceptance', 'traits') for row in grade[section])
+                for fid, grade in grades.items()):
+            raise ValueError('baseline requires review of every conditional exclusion')
+        roles.update(role_scores(record, grades, approved))
         replaced = {f["role"] for f in record["fixtures"]}
         fixture_versions = {k: v for k, v in fixture_versions.items() if v["role"] not in replaced}
         fixture_versions.update({f["id"]: {k: f.get(k) for k in ("role", "input_sha256", "rubric_sha256")}
@@ -491,7 +561,8 @@ def compare(root, run, baseline=BASELINE):
         raise ValueError(f"{baseline} holds no baseline yet; review a run, then save it with the baseline command")
     record = load_run(root, run)
     grades = _grades(root, record)
-    now = role_scores(record, grades)
+    approved = exclusion_approvals(root, record, grades)
+    now = role_scores(record, grades, approved)
     if (old["model"], old["grader"]) != (record["model"], record["grader"]):
         raise ValueError("incomparable baseline: requested model or grader changed")
     if not old.get("fixtures"):
@@ -526,7 +597,7 @@ def compare(root, run, baseline=BASELINE):
         lines += ["| Role | Baseline | This run | Fixtures not passed |", "| --- | --- | --- | --- |"]
         for role, before, after in drops:
             missed = [f["id"] for f in record["fixtures"]
-                      if f["role"] == role and outcome(grades[f["id"]]) != "PASS"]
+                      if f["role"] == role and outcome(grades[f["id"]], f['id'] in approved) != "PASS"]
             lines.append(f"| `{role}` | {before['passed']}/{before['total']} | {after['passed']}/{after['total']} | "
                          + ", ".join(f"`{i}`" for i in missed) + " |")
     else:
@@ -540,9 +611,9 @@ def compare(root, run, baseline=BASELINE):
     return out, [role for role, _, _ in drops]
 
 
-def render(record, grades):
+def render(record, grades, approved=()):
     fixtures = record["fixtures"]
-    outcomes = {f["id"]: outcome(grades[f["id"]]) for f in fixtures}
+    outcomes = {f["id"]: outcome(grades[f["id"]], f["id"] in approved) for f in fixtures}
     families = sorted({f["family"] for f in fixtures})
     kinds = {kind: sum(f["kind"] == kind for f in fixtures) for kind in KINDS}
     lines = [
@@ -560,16 +631,16 @@ def render(record, grades):
         f"| Date prepared | {_cell(record['date'])} |",
         f"| Fixtures | {len(fixtures)} ({kinds['task']} task, {kinds['boundary']} boundary) in "
         f"{len(families)} families |", "",
-        "## Summary", "", "| Family | Fixtures | Pass | Partial | Fail |", "| --- | --- | --- | --- | --- |",
+        "## Summary", "", "| Family | Fixtures | Pass | Partial | Fail | Conditional |", "| --- | --- | --- | --- | --- | --- |",
     ]
-    totals = {"PASS": 0, "PARTIAL": 0, "FAIL": 0}
+    totals = {"PASS": 0, "PARTIAL": 0, "FAIL": 0, "CONDITIONAL": 0}
     for family in families:
         ids = [f["id"] for f in fixtures if f["family"] == family]
         counts = {label: sum(outcomes[i] == label for i in ids) for label in totals}
         for label in totals:
             totals[label] += counts[label]
-        lines.append(f"| {family} | {len(ids)} | {counts['PASS']} | {counts['PARTIAL']} | {counts['FAIL']} |")
-    lines += [f"| **Total** | {len(fixtures)} | {totals['PASS']} | {totals['PARTIAL']} | {totals['FAIL']} |", "",
+        lines.append(f"| {family} | {len(ids)} | {counts['PASS']} | {counts['PARTIAL']} | {counts['FAIL']} | {counts['CONDITIONAL']} |")
+    lines += [f"| **Total** | {len(fixtures)} | {totals['PASS']} | {totals['PARTIAL']} | {totals['FAIL']} | {totals['CONDITIONAL']} |", "",
               "## Results", "",
               "| Fixture | Kind | Outcome | Acceptance passed | Traits passed | Must not clear |",
               "| --- | --- | --- | --- | --- | --- |"]
@@ -603,11 +674,22 @@ def render(record, grades):
     excluded = [(f, section, row) for f in fixtures for section in ("acceptance", "traits")
                 for row in grades[f["id"]][section] if row["verdict"] == "inapplicable"]
     for f, section, row in excluded:
-        lines.append(f"- `{f['id']}`, {section}: {_cell(row['item'])}. "
+        lines.append(f"- `{f['id']}`, {section}, {'reviewed' if f['id'] in approved else 'pending review'}: {_cell(row['item'])}. "
                      f"Condition: {_cell(row['condition'])}. Evidence: {_cell(row['evidence'])}")
     if not excluded:
         lines.append("None.")
     lines.append("")
+    lines += ['## Observed model identities', '',
+              '| Fixture | Subject (native) | Grader (native) | Requested identity match |',
+              '| --- | --- | --- | --- |']
+    for fixture in fixtures:
+        native = record.get('observed_models', {}).get(fixture['id'], {})
+        subject, grader = native.get('subject', []), native.get('grader', [])
+        match = ('unobserved' if not subject or not grader else
+                 'yes' if subject == [record['model']] and grader == [record['grader']] else 'mismatch')
+        lines.append(f"| `{fixture['id']}` | {_cell(', '.join(subject) or 'unobserved')} | "
+                     f"{_cell(', '.join(grader) or 'unobserved')} | {match} |")
+    lines.append('')
     lines += ["## Inputs", "",
               "Fixtures come from `evals/fixtures/<family>.json` at the commit above. Each subject prompt is the "
               "combined pack that holds the role, as shipped in `dist/packs/`, followed by the fixture's request "

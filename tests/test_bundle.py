@@ -13,7 +13,7 @@ class ArchiveBoundaryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             (root / "catalog/family").mkdir(parents=True)
-            (root / "catalog/family/INDEX.md").write_text("[Role](role.md)\n")
+            (root / "catalog/family/INDEX.md").write_text("[Role](role.md)\n", encoding="utf-8")
             combined = generate._combine("header", root, ["catalog/family/INDEX.md"], {}, "dist/packs/family.md")
             self.assertIn(b"](../../catalog/family/role.md)", combined)
 

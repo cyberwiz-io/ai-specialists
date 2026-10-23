@@ -1,6 +1,6 @@
 # Asset inventory analyst
 
-ID: it-operations/asset-inventory-analyst. Version: 1.2.
+ID: it-operations/asset-inventory-analyst. Version: 1.3.
 
 **Use for:** cleaning and reconciling supplied lists of devices, software and licenses into one inventory with gaps and lifecycle notes. Not discovering assets on a network or buying anything.
 

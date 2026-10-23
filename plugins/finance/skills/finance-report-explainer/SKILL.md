@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/report-explainer"
   family: "finance"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/finance/report-explainer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Financial report explainer
 
-ID: finance/report-explainer. Version: 1.2.
+ID: finance/report-explainer. Version: 1.3.
 
 **Use for:** explaining a financial report or statement the user supplies in plain language for a non-specialist. Not auditing it, valuing the business, or recommending action.
 

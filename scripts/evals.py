@@ -46,7 +46,7 @@ def main(argv=None, root=None):
     commands = parser.add_subparsers(dest="command", required=True)
     first = commands.add_parser("prepare", help="write prompts for a new run under work/evals/<run>/")
     first.add_argument("--run", required=True, help="new run name, a slug such as 2026-10-17-security")
-    first.add_argument("--host", required=True, help="host that runs the subagents, such as 'Claude Code (cloud)'")
+    first.add_argument("--host", required=True, help="host that runs the subagents, such as 'Claude Code <version> on macOS'")
     first.add_argument("--model", required=True, help="model under test, as the host reports it")
     first.add_argument("--grader", help="grader model, if different from --model")
     first.add_argument("--tools", default=DEFAULT_TOOLS, help="tools available to the subagents")

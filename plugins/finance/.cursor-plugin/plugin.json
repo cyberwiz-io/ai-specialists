@@ -1,6 +1,6 @@
 {
   "name": "finance",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Finance: 8 materials-only specialists as skills and agents, with a team lead (finance-lead). Educational drafts, explanations and checks of financial figures the user supplies.",
   "author": {
     "name": "cyberwiz-io"

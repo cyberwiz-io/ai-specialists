@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/literature-summarizer"
   family: "data-research"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/data-research/literature-summarizer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Literature summarizer
 
-ID: data-research/literature-summarizer. Version: 1.2.
+ID: data-research/literature-summarizer. Version: 1.3.
 
 **Use for:** summarizing and comparing papers, articles or reports the user supplies in full or in excerpt. Not finding new sources, judging statistics in depth, or inventing citations.
 

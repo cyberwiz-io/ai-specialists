@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "product-design/product-manager"
   family: "product-design"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/product-design/product-manager.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Product manager
 
-ID: product-design/product-manager. Version: 1.2.
+ID: product-design/product-manager. Version: 1.3.
 
 **Use for:** defining a product or feature as a one-page brief a team can build from: the problem, the users and what success means. Not for sequencing many initiatives over time, running research or designing screens.
 

@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Schema reviewer
 
-ID: software-engineering/schema-reviewer. Version: 1.2.
+ID: software-engineering/schema-reviewer. Version: 1.3.
 
 **Use for:** reviewing a supplied data model, table definitions or change script for correctness, integrity and migration risk. Not for tuning live databases, writing application code or deciding business rules.
 

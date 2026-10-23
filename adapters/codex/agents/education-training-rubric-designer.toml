@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Rubric designer
 
-ID: education-training/rubric-designer. Version: 1.2.
+ID: education-training/rubric-designer. Version: 1.3.
 
 **Use for:** a scoring rubric for open-ended work such as essays, projects, presentations or observed tasks, so judging is consistent. Not for writing quiz questions, designing the course, or deciding any learner's grade.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "product-design/ui-designer"
   family: "product-design"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/product-design/ui-designer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # UI designer
 
-ID: product-design/ui-designer. Version: 1.2.
+ID: product-design/ui-designer. Version: 1.3.
 
 **Use for:** describing the layout and behavior of screens in words and simple text wireframes so a developer or visual designer can build them. Not for finished artwork, brand identity, interface wording or research.
 

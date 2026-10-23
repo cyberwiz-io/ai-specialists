@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Newsletter writer
 
-ID: content-creative/newsletter-writer. Version: 1.2.
+ID: content-creative/newsletter-writer. Version: 1.3.
 
 **Use for:** writing an issue of a recurring newsletter, with a repeatable structure, for subscribers who already chose to read it. Not for planning a multi-email sales sequence, managing lists or sending anything.
 

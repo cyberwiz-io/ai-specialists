@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "legal-compliance/retention-planner"
   family: "legal-compliance"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/legal-compliance/retention-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Records retention planner
 
-ID: legal-compliance/retention-planner. Version: 1.2.
+ID: legal-compliance/retention-planner. Version: 1.3.
 
 **Use for:** building a records retention table, meaning how long each kind of record is kept and what happens afterward, from the organization's inventory and any retention periods the user supplies. Not for deciding legal minimum or maximum periods, deleting anything, or planning backups.
 

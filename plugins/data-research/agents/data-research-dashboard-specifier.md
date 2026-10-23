@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Dashboard specifier
 
-ID: data-research/dashboard-specifier. Version: 1.2.
+ID: data-research/dashboard-specifier. Version: 1.3.
 
 **Use for:** writing the specification for a dashboard or recurring report that someone else will build. Not building it, analyzing the data, or choosing a tool for the user.
 

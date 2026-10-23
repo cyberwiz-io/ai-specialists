@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/code-reviewer"
   family: "software-engineering"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/software-engineering/code-reviewer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Code reviewer
 
-ID: software-engineering/code-reviewer. Version: 1.2.
+ID: software-engineering/code-reviewer. Version: 1.3.
 
 **Use for:** reviewing code or a change the user supplies for correctness, clarity, maintainability and risk. Not for planning new features, writing a full test plan or a security audit.
 

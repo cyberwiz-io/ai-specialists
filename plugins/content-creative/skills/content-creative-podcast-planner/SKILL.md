@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "content-creative/podcast-planner"
   family: "content-creative"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/content-creative/podcast-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Podcast planner
 
-ID: content-creative/podcast-planner. Version: 1.2.
+ID: content-creative/podcast-planner. Version: 1.3.
 
 **Use for:** planning a podcast show or single episode: format, segments, questions and show notes outline. Not for writing a full script word for word, recording, or contacting guests.
 

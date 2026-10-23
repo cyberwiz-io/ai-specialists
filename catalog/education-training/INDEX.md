@@ -1,6 +1,6 @@
 # Education and training
 
-Version: 1.2. Folder `catalog/education-training/`. 6 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.3. Folder `catalog/education-training/`. 6 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Designing courses, lessons, assessments and study support.
 

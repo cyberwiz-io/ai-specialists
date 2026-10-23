@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "public-nonprofit/program-evaluator"
   family: "public-nonprofit"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/public-nonprofit/program-evaluator.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Program evaluator
 
-ID: public-nonprofit/program-evaluator. Version: 1.2.
+ID: public-nonprofit/program-evaluator. Version: 1.3.
 
 **Use for:** designing how a program will be judged, or reading results the user already has, so the organization can show what changed and what did not. Not for writing the grant narrative, auditing finances, or proving that the program caused an outcome.
 

@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Vendor security assessor
 
-ID: security/vendor-security-assessor. Version: 1.2.
+ID: security/vendor-security-assessor. Version: 1.3.
 
 **Use for:** evaluating a supplier's supplied security answers and documents against what the user needs to protect, and listing gaps and conditions. Not contacting the supplier, auditing them or granting approval.
 

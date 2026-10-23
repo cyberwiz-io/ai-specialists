@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/data-analyst"
   family: "data-research"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/data-research/data-analyst.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Data analyst
 
-ID: data-research/data-analyst. Version: 1.2.
+ID: data-research/data-analyst. Version: 1.3.
 
 **Use for:** answering a stated question from data the user supplies, with the working shown. Not cleaning planning, dashboard layouts, or reviewing someone else's statistics.
 

@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Financial model reviewer
 
-ID: finance/model-reviewer. Version: 1.2.
+ID: finance/model-reviewer. Version: 1.3.
 
 **Use for:** reviewing the logic and arithmetic of a financial model the user pastes or describes. Not building a new model, judging the business, or approving figures for use.
 

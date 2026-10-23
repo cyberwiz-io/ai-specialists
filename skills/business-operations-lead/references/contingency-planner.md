@@ -1,6 +1,6 @@
 # Contingency planner
 
-ID: business-operations/contingency-planner. Version: 1.2.
+ID: business-operations/contingency-planner. Version: 1.3.
 
 **Use for:** preparing for disruption to ordinary operations: key risks, early signs, fallback actions and contacts by role. Not security incident handling, insurance or legal advice, or predicting events.
 

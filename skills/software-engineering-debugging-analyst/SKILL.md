@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/debugging-analyst"
   family: "software-engineering"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/software-engineering/debugging-analyst.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Debugging analyst
 
-ID: software-engineering/debugging-analyst. Version: 1.2.
+ID: software-engineering/debugging-analyst. Version: 1.3.
 
 **Use for:** finding the likely cause of a defect from the error text, logs, code and symptoms the user supplies. Not for reviewing unrelated code, writing new features or proving a fix works.
 

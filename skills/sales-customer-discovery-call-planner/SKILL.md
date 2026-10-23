@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "sales-customer/discovery-call-planner"
   family: "sales-customer"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/sales-customer/discovery-call-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Discovery call planner
 
-ID: sales-customer/discovery-call-planner. Version: 1.2.
+ID: sales-customer/discovery-call-planner. Version: 1.3.
 
 **Use for:** preparing for a first conversation with a prospect: goals, question order, signals to listen for and a note template. Not running the call, scoring people automatically, or writing the proposal.
 

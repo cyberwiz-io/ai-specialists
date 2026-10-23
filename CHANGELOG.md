@@ -2,8 +2,13 @@
 
 ## Unreleased
 
+## 1.3
+
+- Candidate 1.3 includes the evidence and instruction corrections below. Native trials already installed 1.2.0, so 1.3.0 provides a higher-version update target. No current host acceptance or publication is implied.
+
 ## 1.2
 
+- Evaluation receipts reserve attempts before model calls and preserve failed subjects. Conditional exclusions require an opening antecedent and exact-byte native different-model adjudication; pending exclusions are counted separately from PASS. Reports show observed models. Codex update instructions cover separately copied agent files.
 - Candidate version advances from 1.1 to 1.2 because Claude Code keeps same-version plugin cache entries. The 1.1.0 candidate remains a recorded trial baseline; 1.2.0 enables a real byte-changing update. No 1.2 host acceptance or publication is implied by the version change.
 - The 1.2 tree is a candidate; no 1.2 release or working release download is claimed. The retained release links become usable only after publication and asset verification.
 - Claude Code workers receive exactly `Read`, `Grep`, and `Glob`, with no `Bash` or automatic skill tool. Leads pass approved methods explicitly in task handoffs. Codex no-spawn directions are advisory, not host enforcement.
@@ -23,7 +28,7 @@ One-command install across the major AI tools, smaller always-loaded text, and s
 - Checks cover skill names and description limits, the allowed frontmatter fields, marketplace and plugin manifest basics, real paths for every plugin entry, no `core-` prefix, no Agent tool on any worker, the bundle's description budget, and freshness of every new generated file. CI also runs `claude plugin validate --strict` on the marketplace, every plugin, `skills/` and the Codex plugin.
 - A `claude plugin eval` suite for the security plugin (`evals/plugin/security.json`, generated into `plugins/security/evals/`): five tasks, a boundary case and one `/security:security-lead` team task, with baseline-comparison fields for the host eval tool; no completed comparison is claimed here.
 - README opens with a one-command install table per tool; the limits section moved lower.
-- Skills declare `allowed-tools` (`Read Grep Glob`, plus `Agent` for leads), so a skill can request reads of its own cards; the check requires the field. The current partial 1.1 Mac and Windows branch installs are recorded in `docs/VALIDATION.md`; full host acceptance and the claude.ai upload remain pending.
+- Skills declare `allowed-tools` (`Read Grep Glob`, plus `Agent` for leads), so a skill can request reads of its own cards; the check requires the field. The historical partial 1.1 Mac and Windows branch installs are recorded in `docs/VALIDATION.md`; full host acceptance and the claude.ai upload remain pending.
 - Host install checks recorded: Antigravity CLI 1.4.2 installed the extension from a GitHub clone and loaded the security lead in one headless run. The Codex install was blocked by a local wrapper, Gemini CLI was not installed, and Copilot and Cursor are marked not tested because the maintainer cannot test them. See "Other host installs" in docs/VALIDATION.md.
 - Pull-request and manually dispatched release checks run Gitleaks, Semgrep CE and Trivy. Sensitive changes require a coordinator attestation of separate AI review bound to the exact candidate and report hash; missing or blocking evidence fails. CI makes no paid model calls. CodeQL uses the organization-controlled default setup unless an administrator enables the advanced workflow. See "Security checks" in CONTRIBUTING.md.
 - Card fixes from the first full-catalog eval: the graphic designer delivers captions, build sheets and provisional alt text when the host cannot make images; the task router names only enabled role IDs; the storyteller adds no unsupplied framing and meets the length from supplied moments; the cover letter writer uses a bracketed recipient and reaches the length without stock openings; the meeting facilitator's agenda checks apply only to agendas; the contract reader gives no example dates; the privacy policy drafter waits for confirmed practices before drafting.

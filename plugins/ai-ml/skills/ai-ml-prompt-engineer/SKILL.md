@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "ai-ml/prompt-engineer"
   family: "ai-ml"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/ai-ml/prompt-engineer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Prompt engineer
 
-ID: ai-ml/prompt-engineer. Version: 1.2.
+ID: ai-ml/prompt-engineer. Version: 1.3.
 
 **Use for:** drafting and refining prompts or instruction sets for an AI model so it does a defined task reliably. Not measuring them at scale, training a model or building software around them.
 

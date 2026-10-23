@@ -2,6 +2,8 @@
 import contextlib
 import io
 import json
+import hashlib
+import tempfile
 from pathlib import Path
 import sys
 import unittest
@@ -31,11 +33,26 @@ class ConditionalGradeTests(unittest.TestCase):
 
     def test_inapplicable_condition_is_explicit_and_does_not_hide_violations(self):
         self.assertEqual(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'), [])
-        self.assertEqual(evals.outcome(self.grade), 'PASS')
+        self.assertEqual(evals.outcome(self.grade), 'CONDITIONAL')
+        self.assertEqual(evals.outcome(self.grade, approved=True), 'PASS')
+        self.grade['acceptance'][1]['verdict'] = 'partial'
+        self.assertEqual(evals.outcome(self.grade, approved=True), 'PARTIAL')
+        self.grade['acceptance'][1]['verdict'] = 'pass'
         self.grade['must_not'][0].update(verdict='violated', quote='F1 in supplied code')
         self.assertEqual(evals.outcome(self.grade), 'FAIL')
         self.grade['must_not'][0]['verdict'] = 'inapplicable'
         self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
+
+    def test_exclusion_cannot_skip_an_unconditional_or_compound_requirement(self):
+        row = self.grade['acceptance'][0]
+        for item, condition in (
+                ('Names the source', 'Names the source'),
+                (self.item, self.item),
+                ('Names the source; if no findings are listed, states scope', 'if no findings are listed'),
+                ('If no findings are listed, states scope; names the source', 'If no findings are listed')):
+            self.fixture['acceptance'][0] = row['item'] = item
+            row['condition'] = condition
+            self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
 
     def test_inapplicable_needs_a_condition_from_the_criterion_and_some_applicable_work(self):
         row = self.grade['acceptance'][0]
@@ -56,6 +73,8 @@ class ConditionalGradeTests(unittest.TestCase):
         self.assertIn('If no findings are listed', report)
         self.assertIn('no execution receipt', report)
         self.assertIn('The reply lists finding F1', report)
+        self.assertIn('CONDITIONAL', report)
+        self.assertEqual(evals.role_scores(record, {'conditional': self.grade})['security/reviewer']['passed'], 0)
 
     def test_malformed_sections_fail_validation_without_crashing(self):
         for section in ('acceptance', 'traits', 'must_not'):
@@ -64,6 +83,51 @@ class ConditionalGradeTests(unittest.TestCase):
                 self.grade[section] = bad
                 self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
             self.grade[section] = original
+
+    def test_exclusion_review_binds_bytes_and_native_different_model(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            folder = root / 'work/evals/conditional'
+            folder.mkdir(parents=True)
+            fixture = dict(self.fixture, output='work/evals/conditional/reply.txt',
+                           grade='work/evals/conditional/grade.json')
+            record = dict(run='conditional', fixtures=[fixture])
+            grades = {'conditional': self.grade}
+            self.assertEqual(evals.exclusion_approvals(root, record, grades), set())
+            (root / fixture['output']).write_bytes(b'F1 in supplied code')
+            (root / fixture['grade']).write_bytes(json.dumps(self.grade).encode())
+            report = folder / 'review.txt'
+            report.write_bytes(b'The listed finding makes the no-findings condition false.')
+            native = dict(identity_source='CLI modelUsage', reported_models=['claude-sonnet-5-5'],
+                          session_id='native-review-session', response_sha256='a' * 64)
+            review = dict(verdict='approve', report=report.relative_to(root).as_posix(),
+                          report_sha256=hashlib.sha256(report.read_bytes()).hexdigest(), native=native,
+                          **{k + '_sha256': hashlib.sha256((root / fixture[k]).read_bytes()).hexdigest()
+                             for k in ('output', 'grade')})
+            (folder / 'execution.json').write_text(json.dumps({'fixtures': {'conditional': {
+                'status': 'complete', 'subject': {'identity_source': 'CLI modelUsage',
+                    'reported_models': ['claude-opus-5-5']},
+                'grader': {'identity_source': 'CLI modelUsage', 'reported_models': ['claude-haiku-5-5']}}}}), encoding="utf-8")
+            def save():
+                (folder / 'exclusion-reviews.json').write_text(json.dumps({
+                    'schema': 1, 'reviews': {'conditional': review}}), encoding="utf-8")
+            save()
+            self.assertEqual(evals.exclusion_approvals(root, record, grades), {'conditional'})
+            for model in ('claude-haiku-5-5', 'provider/claude-opus-5-5',
+                          'claude-opus-5-5-q4_k_m', 'sonnet'):
+                native['reported_models'] = [model]
+                save()
+                with self.assertRaises(ValueError):
+                    evals.exclusion_approvals(root, record, grades)
+            native['reported_models'] = ['claude-sonnet-5-5']
+            save()
+            report.write_bytes(b'Changed review')
+            with self.assertRaisesRegex(ValueError, 'stale'):
+                evals.exclusion_approvals(root, record, grades)
+            review = None
+            save()
+            with self.assertRaises(ValueError):
+                evals.exclusion_approvals(root, record, grades)
 
 
 class FixtureFileTests(FixtureCase):
@@ -74,9 +138,9 @@ class FixtureFileTests(FixtureCase):
 
     def change(self, family, change):
         path = self.root / evals.FIXTURE_DIR / f"{family}.json"
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding="utf-8"))
         change(data["fixtures"])
-        path.write_text(json.dumps(data))
+        path.write_text(json.dumps(data), encoding="utf-8")
 
     def first(self, family="security", role=ROLE):
         def apply(fixtures):
@@ -107,7 +171,7 @@ class FixtureFileTests(FixtureCase):
         self.assertFails("ai-ml.json: fixture file is missing")
 
     def test_unknown_family_file_fails(self):
-        (self.root / evals.FIXTURE_DIR / "astrology.json").write_text("{}")
+        (self.root / evals.FIXTURE_DIR / "astrology.json").write_text("{}", encoding="utf-8")
         self.assertFails("astrology.json: not a manifest family")
 
     def test_unknown_role_fails(self):
@@ -132,7 +196,7 @@ class FixtureFileTests(FixtureCase):
         self.assertFails("missing must_not")
 
     def test_invalid_json_fails(self):
-        (self.root / evals.FIXTURE_DIR / "ai-ml.json").write_text("{")
+        (self.root / evals.FIXTURE_DIR / "ai-ml.json").write_text("{", encoding="utf-8")
         self.assertFails("ai-ml.json: invalid JSON")
 
     def test_real_looking_email_fails_and_example_passes(self):
@@ -201,13 +265,13 @@ class RunTests(FixtureCase):
         for fixture in record["fixtures"]:
             if fixture["id"] in skip:
                 continue
-            (self.root / fixture["output"]).write_text("A reply.\n")
+            (self.root / fixture["output"]).write_text("A reply.\n", encoding="utf-8")
             chosen = (verdicts or {}).get(fixture["id"], {})
             grade = {"fixture": fixture["id"], "notes": ""}
             for section, allowed in evals.SCORED.items():
                 grade[section] = [{"item": item, "verdict": chosen.get(section, allowed[0]), "evidence": "quote", "quote": "A reply."}
                                   for item in fixture[section]]
-            (self.root / fixture["grade"]).write_text(json.dumps(grade))
+            (self.root / fixture["grade"]).write_text(json.dumps(grade), encoding="utf-8")
 
     def test_prepare_writes_prompts_for_one_role(self):
         record = self.prepare(role=ROLE)
@@ -215,15 +279,15 @@ class RunTests(FixtureCase):
         self.assertEqual((record["host"], record["model"], record["grader"]), ("Test host", "test-model", "test-model"))
         fixture = record["fixtures"][0]
         self.assertEqual(fixture["pack"], "dist/packs/security-governance.md")
-        card = (self.root / "catalog/security/access-review-analyst.md").read_text()
+        card = (self.root / "catalog/security/access-review-analyst.md").read_text(encoding="utf-8")
         self.assertEqual(fixture["acceptance"], evals.criteria(card))
         self.assertEqual(len(fixture["acceptance"]), 4)
-        subject = (self.root / fixture["subject_prompt"]).read_text()
-        self.assertIn((self.root / "dist/packs/security-governance.md").read_text().rstrip(), subject)
+        subject = (self.root / fixture["subject_prompt"]).read_text(encoding="utf-8")
+        self.assertIn((self.root / "dist/packs/security-governance.md").read_text(encoding="utf-8").rstrip(), subject)
         self.assertIn(f"`{ROLE}`", subject)
         self.assertNotIn("Acceptance criteria", subject)
-        grader = (self.root / fixture["grader_prompt"]).read_text()
-        self.assertIn((self.root / fixture["pack"]).read_text().rstrip(), grader)
+        grader = (self.root / fixture["grader_prompt"]).read_text(encoding="utf-8")
+        self.assertIn((self.root / fixture["pack"]).read_text(encoding="utf-8").rstrip(), grader)
         for item in fixture["acceptance"] + fixture["traits"] + fixture["must_not"]:
             self.assertIn(item, grader)
         self.assertIn(fixture["output"], grader)
@@ -258,7 +322,7 @@ class RunTests(FixtureCase):
         record = self.prepare(family="ai-ml")
         ids = [f["id"] for f in record["fixtures"]]
         self.answer(record, {ids[1]: {"traits": "partial"}, ids[2]: {"must_not": "violated"}})
-        text = evals.report(self.root, "t1").read_text()
+        text = evals.report(self.root, "t1").read_text(encoding="utf-8")
         self.assertIn(f"| `{ids[0]}` | {record['fixtures'][0]['kind']} | PASS |", text)
         self.assertIn(f"| `{ids[1]}` | {record['fixtures'][1]['kind']} | PARTIAL |", text)
         self.assertIn(f"| `{ids[2]}` | {record['fixtures'][2]['kind']} | FAIL |", text)
@@ -279,17 +343,17 @@ class RunTests(FixtureCase):
         record = self.prepare(role=ROLE)
         self.answer(record)
         path = self.root / record["fixtures"][0]["grade"]
-        grade = json.loads(path.read_text())
+        grade = json.loads(path.read_text(encoding="utf-8"))
         grade["acceptance"][0]["item"] = "Something easier"
-        path.write_text(json.dumps(grade))
+        path.write_text(json.dumps(grade), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "acceptance items must match the prepared list"):
             evals.report(self.root, "t1")
         grade["acceptance"][0]["item"] = record["fixtures"][0]["acceptance"][0]
         grade["must_not"][0]["verdict"] = "pass"
-        path.write_text(json.dumps(grade))
+        path.write_text(json.dumps(grade), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "must_not verdict 'pass' is not one of clear, violated"):
             evals.report(self.root, "t1")
-        path.write_text("not json")
+        path.write_text("not json", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "invalid JSON"):
             evals.report(self.root, "t1")
 
@@ -299,13 +363,13 @@ class RunTests(FixtureCase):
         evals.report(self.root, "t1")
         with contextlib.redirect_stdout(io.StringIO()):
             evals_cli.main(["baseline", "--run", "t1"], root=self.root)
-        self.assertEqual(json.loads((self.root / evals.BASELINE).read_text())["model"], "test-model")
+        self.assertEqual(json.loads((self.root / evals.BASELINE).read_text(encoding="utf-8"))["model"], "test-model")
         build.build(self.root)  # the module map digests the baseline file
         self.prepare("t2", family="ai-ml")
         self.answer(evals.load_run(self.root, "t2"))
         with contextlib.redirect_stdout(io.StringIO()):
             evals_cli.main(["compare", "--run", "t2"], root=self.root)
-        self.assertIn("No card's pass rate fell", (self.root / "work/evals/t2/REGRESSION.md").read_text())
+        self.assertIn("No card's pass rate fell", (self.root / "work/evals/t2/REGRESSION.md").read_text(encoding="utf-8"))
         worse = record["fixtures"][0]
         self.prepare("t3", family="ai-ml")
         self.answer(evals.load_run(self.root, "t3"), {worse["id"]: {"traits": "fail"}})
@@ -314,7 +378,7 @@ class RunTests(FixtureCase):
             evals_cli.main(["compare", "--run", "t3"], root=self.root)
         self.assertEqual(exit_.exception.code, 3)
         self.assertIn(f"fell\t{worse['role']}", out.getvalue())
-        self.assertIn(f"`{worse['id']}`", (self.root / "work/evals/t3/REGRESSION.md").read_text())
+        self.assertIn(f"`{worse['id']}`", (self.root / "work/evals/t3/REGRESSION.md").read_text(encoding="utf-8"))
 
     def test_baseline_lays_a_later_run_over_an_earlier_one(self):
         record = self.prepare(family="ai-ml")
@@ -324,7 +388,7 @@ class RunTests(FixtureCase):
         self.answer(evals.load_run(self.root, "t2"))
         with contextlib.redirect_stdout(io.StringIO()):
             evals_cli.main(["baseline", "--run", "t1", "--run", "t2"], root=self.root)
-        data = json.loads((self.root / evals.BASELINE).read_text())
+        data = json.loads((self.root / evals.BASELINE).read_text(encoding="utf-8"))
         self.assertEqual(data["run"], "t1 + t2")
         self.assertEqual(data["roles"][worse["role"]]["passed"], data["roles"][worse["role"]]["total"])
         self.assertEqual(sorted(data["roles"]), sorted({f["role"] for f in record["fixtures"]}))
@@ -338,7 +402,7 @@ class RunTests(FixtureCase):
     def test_changed_prompt_is_rejected(self):
         record = self.prepare(role=ROLE)
         self.answer(record)
-        (self.root / record["fixtures"][0]["subject_prompt"]).write_text("changed")
+        (self.root / record["fixtures"][0]["subject_prompt"]).write_text("changed", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "prompt hash mismatch"):
             evals.report(self.root, "t1")
 
@@ -346,9 +410,9 @@ class RunTests(FixtureCase):
         record = self.prepare(role=ROLE)
         self.answer(record)
         path = self.root / record["fixtures"][0]["grade"]
-        grade = json.loads(path.read_text())
+        grade = json.loads(path.read_text(encoding="utf-8"))
         grade["acceptance"][0]["evidence"] = "  "
-        path.write_text(json.dumps(grade))
+        path.write_text(json.dumps(grade), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "non-empty text"):
             evals.report(self.root, "t1")
 
@@ -356,13 +420,13 @@ class RunTests(FixtureCase):
         record = self.prepare(role=ROLE)
         self.answer(record)
         evals.save_baseline(self.root, "t1")
-        baseline = json.loads((self.root / evals.BASELINE).read_text())
+        baseline = json.loads((self.root / evals.BASELINE).read_text(encoding="utf-8"))
         baseline["fixtures"][record["fixtures"][0]["id"]]["rubric_sha256"] = "different"
-        (self.root / evals.BASELINE).write_text(json.dumps(baseline))
+        (self.root / evals.BASELINE).write_text(json.dumps(baseline), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "incomparable baseline"):
             evals.compare(self.root, "t1")
         baseline["model"] = "another-model"
-        (self.root / evals.BASELINE).write_text(json.dumps(baseline))
+        (self.root / evals.BASELINE).write_text(json.dumps(baseline), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "requested model"):
             evals.compare(self.root, "t1")
 
@@ -382,7 +446,7 @@ class RunTests(FixtureCase):
         self.answer(record)
         evals.save_baseline(self.root, "t1")
         record["harness_sha256"]["scripts/evals_runner.py"] = "0" * 64
-        (self.root / "work/evals/t1/run.json").write_text(json.dumps(record))
+        (self.root / "work/evals/t1/run.json").write_text(json.dumps(record), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "harness"):
             evals.compare(self.root, "t1")
 
@@ -392,14 +456,14 @@ class RunTests(FixtureCase):
         self.answer(first)
         self.answer(second)
         second["harness_sha256"]["scripts/evals_runner.py"] = "0" * 64
-        (self.root / "work/evals/t2/run.json").write_text(json.dumps(second))
+        (self.root / "work/evals/t2/run.json").write_text(json.dumps(second), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "harness"):
             evals.save_baseline(self.root, ["t1", "t2"])
 
     def test_compare_needs_a_baseline(self):
         record = self.prepare(role=ROLE)
         self.answer(record)
-        (self.root / evals.BASELINE).write_text('{"schema": 1, "run": null, "roles": {}}\n')
+        (self.root / evals.BASELINE).write_text('{"schema": 1, "run": null, "roles": {}}\n', encoding="utf-8")
         self.cli_fails(["compare", "--run", "t1"], "holds no baseline yet")
 
     def test_report_needs_a_prepared_run(self):

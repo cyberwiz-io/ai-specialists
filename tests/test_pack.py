@@ -28,7 +28,7 @@ class FixtureCase(unittest.TestCase):
 
     def edit(self, name, change):
         path = self.root / name
-        path.write_text(change(path.read_text()))
+        path.write_bytes(change(path.read_bytes().decode('utf-8')).encode('utf-8'))
 
     def release(self, tag=None):
         families, generated = check.check(self.root)
@@ -40,6 +40,13 @@ class FixtureCase(unittest.TestCase):
 
 
 class BuildTests(FixtureCase):
+    def test_crlf_coordinator_keeps_boundaries_in_generated_lead(self):
+        path = self.root / 'pack/FAMILY-COORDINATOR.md'
+        path.write_bytes(path.read_bytes().replace(b'\n', b'\r\n'))
+        build.build(self.root)
+        text = (self.root / 'skills/finance-lead/SKILL.md').read_bytes().decode('utf-8')
+        self.assertIn('## Boundaries', text)
+
     def init_git(self):
         subprocess.run(["git", "init", "-q", str(self.root)], check=True)
         subprocess.run(["git", "-C", str(self.root), "-c", "commit.gpgsign=false",
@@ -56,7 +63,7 @@ class BuildTests(FixtureCase):
                         "commit", "-qm", "Fixture"], check=True, capture_output=True)
         external = self.root.parent / "private"
         external.mkdir()
-        (external / "SKILL.md").write_text("[private](missing.md)")
+        (external / "SKILL.md").write_text("[private](missing.md)", encoding="utf-8")
         installed = self.root / ".claude/skills/agent-architecture-audit"
         installed.symlink_to(external, target_is_directory=True)
         build.build(self.root)
@@ -79,7 +86,7 @@ class BuildTests(FixtureCase):
         families, generated = check.check(self.root)
         self.assertEqual(len(families), 17)
         self.assertEqual(sum(len(f["roles"]) for f in families), 124)
-        lines = (self.root / config.REGISTRY).read_text().splitlines()
+        lines = (self.root / config.REGISTRY).read_text(encoding="utf-8").splitlines()
         rows = [json.loads(line) for line in lines[1:]]
         self.assertEqual(json.loads(lines[0])["count"], 124)
         self.assertEqual(len({row["id"] for row in rows}), 124)
@@ -117,11 +124,11 @@ class BuildTests(FixtureCase):
         )
         for name, phrase, replacement in cases:
             with self.subTest(name=name):
-                source = (self.root / name).read_text()
+                source = (self.root / name).read_text(encoding="utf-8")
                 self.edit(name, lambda text: text.replace(phrase, replacement))
                 build.build(self.root)
                 self.assertFails(f"review contract missing {phrase!r}")
-                (self.root / name).write_text(source)
+                (self.root / name).write_text(source, encoding="utf-8")
                 build.build(self.root)
 
     def test_review_contract_checks_generated_leads(self):
@@ -160,7 +167,7 @@ class BuildTests(FixtureCase):
 
     def test_stale_generated_files_fail_and_are_removed(self):
         stale = self.root / "dist/packs/old-family.md"
-        stale.write_text("old")
+        stale.write_text("old", encoding="utf-8")
         self.assertFails("old-family.md: stale generated file")
         build.build(self.root)
         self.assertFalse(stale.exists())
@@ -201,7 +208,7 @@ class BuildTests(FixtureCase):
     def test_external_installed_client_skill_is_not_pack_source(self):
         with tempfile.TemporaryDirectory() as outside:
             external = Path(outside) / "SKILL.md"
-            external.write_text("# Installed client skill\n")
+            external.write_text("# Installed client skill\n", encoding="utf-8")
             original = external.read_bytes()
             self.init_git()
             subprocess.run(["git", "-C", str(self.root), "add", "--",
@@ -210,17 +217,17 @@ class BuildTests(FixtureCase):
             link.symlink_to(external.parent, target_is_directory=True)
             installed = self.root / ".agents/skills/local-helper"
             installed.mkdir(parents=True)
-            (installed / "SKILL.md").write_text("# Installed agent skill\n")
+            (installed / "SKILL.md").write_text("# Installed agent skill\n", encoding="utf-8")
             (self.root / ".codex/agents").mkdir(parents=True)
-            (self.root / ".codex/agents/local-helper.md").write_text("# Installed Codex agent\n")
+            (self.root / ".codex/agents/local-helper.md").write_text("# Installed Codex agent\n", encoding="utf-8")
             with mock.patch("packlib.source.tracked_files", wraps=source.tracked_files) as git_calls:
                 build.build(self.root)
                 self.assertEqual(git_calls.call_count, 1)
-            self.assertEqual((installed / "SKILL.md").read_text(), "# Installed agent skill\n")
+            self.assertEqual((installed / "SKILL.md").read_text(encoding="utf-8"), "# Installed agent skill\n")
             self.assertTrue(link.is_symlink())
-            self.assertEqual(link.readlink(), external.parent)
+            self.assertTrue(link.samefile(external.parent))
             self.assertEqual(external.read_bytes(), original)
-            self.assertEqual((self.root / ".codex/agents/local-helper.md").read_text(), "# Installed Codex agent\n")
+            self.assertEqual((self.root / ".codex/agents/local-helper.md").read_text(encoding="utf-8"), "# Installed Codex agent\n")
             with mock.patch("packlib.source.tracked_files", wraps=source.tracked_files) as git_calls:
                 check.check(self.root)
                 self.assertEqual(git_calls.call_count, 1)
@@ -229,14 +236,14 @@ class BuildTests(FixtureCase):
         self.init_git()
         rogue = self.root / ".codex/agents/rogue.md"
         rogue.parent.mkdir(parents=True)
-        rogue.write_text("# Tracked undeclared source\n")
+        rogue.write_text("# Tracked undeclared source\n", encoding="utf-8")
         check.check(self.root)  # untracked before staging; next check must refresh
         subprocess.run(["git", "-C", str(self.root), "add", "--", ".codex/agents/rogue.md"], check=True)
         self.assertFails(".codex/agents/rogue.md is not covered by any module")
 
     def test_unrelated_agent_file_is_preserved_and_reported(self):
         stale = self.root / ".agents/stale.json"
-        stale.write_text("{}")
+        stale.write_text("{}", encoding="utf-8")
         self.assertFails(".agents/stale.json is not covered by any module")
         build.build(self.root)
         self.assertTrue(stale.exists())
@@ -244,7 +251,7 @@ class BuildTests(FixtureCase):
 
     def test_stale_generated_agent_plugin_is_still_removed(self):
         stale = self.root / ".agents/plugins/old.json"
-        stale.write_text("{}")
+        stale.write_text("{}", encoding="utf-8")
         self.assertFails("old.json: stale generated file")
         build.build(self.root)
         self.assertFalse(stale.exists())
@@ -275,12 +282,12 @@ class BuildTests(FixtureCase):
             target = self.root / ".codex/agents/owned.md"
             target.parent.mkdir(parents=True)
             external = Path(outside) / "owned.md"
-            external.write_text("# Declared source\n")
+            external.write_text("# Declared source\n", encoding="utf-8")
             target.symlink_to(external)
             spec_path = self.root / config.MODULES
-            spec = json.loads(spec_path.read_text())
+            spec = json.loads(spec_path.read_text(encoding="utf-8"))
             spec["modules"][0]["paths"].append(".codex/agents/owned.md")
-            spec_path.write_text(json.dumps(spec))
+            spec_path.write_text(json.dumps(spec), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Unsafe source path"):
                 build.build(self.root)
 
@@ -315,14 +322,16 @@ class CardRuleTests(FixtureCase):
         self.rebuild_and_fail("more than one label")
 
     def test_wrong_card_version_and_id_fail(self):
-        self.edit(self.CARD, lambda text: text.replace("Version: 1.2.", "Version: 0.9."))
-        self.rebuild_and_fail("expected one Version 1.2")
+        version = config.version(self.root)
+        self.edit(self.CARD, lambda text: text.replace(f"Version: {version}.", "Version: 0.9."))
+        self.rebuild_and_fail(f"expected one Version {version}")
         self.edit(self.CARD, lambda text: text.replace("software-engineering/code-reviewer", "software-engineering/other"))
         self.rebuild_and_fail("header must read")
 
     def test_wrong_document_version_fails(self):
-        self.edit("pack/COORDINATOR.md", lambda text: text.replace("Version: 1.2", "Version: 0.2"))
-        self.rebuild_and_fail("pack/COORDINATOR.md: expected one Version 1.2")
+        version = config.version(self.root)
+        self.edit("pack/COORDINATOR.md", lambda text: text.replace(f"Version: {version}", "Version: 0.2"))
+        self.rebuild_and_fail(f"pack/COORDINATOR.md: expected one Version {version}")
 
     def test_sensitive_card_needs_safeguards(self):
         self.edit(self.SENSITIVE, lambda text: text.replace("**Safeguards:**", "**Notes:**"))
@@ -356,7 +365,7 @@ class CardRuleTests(FixtureCase):
         self.rebuild_and_fail("card exceeds")
 
     def test_unlisted_card_file_fails(self):
-        (self.root / "catalog/finance/surprise.md").write_text("# Surprise\n")
+        (self.root / "catalog/finance/surprise.md").write_text("# Surprise\n", encoding="utf-8")
         self.assertFails("surprise.md: not in finance manifest")
 
     def test_unlisted_family_folder_fails(self):
@@ -364,10 +373,10 @@ class CardRuleTests(FixtureCase):
         self.assertFails("catalog/extras: folder is not a manifest family")
 
     def test_duplicate_deliverable_fails(self):
-        source = (self.root / self.CARD).read_text()
+        source = (self.root / self.CARD).read_text(encoding="utf-8")
         deliver = cards.parse(source)["paragraphs"]["Deliver"]
         other = "catalog/software-engineering/test-designer.md"
-        current = cards.parse((self.root / other).read_text())["paragraphs"]["Deliver"]
+        current = cards.parse((self.root / other).read_text(encoding="utf-8"))["paragraphs"]["Deliver"]
         self.edit(other, lambda text: text.replace(current, deliver))
         self.rebuild_and_fail("Deliver duplicates")
 
@@ -375,9 +384,9 @@ class CardRuleTests(FixtureCase):
 class ManifestTests(FixtureCase):
     def change_manifest(self, change):
         path = self.root / config.MANIFEST
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding="utf-8"))
         change(data)
-        path.write_text(json.dumps(data))
+        path.write_text(json.dumps(data), encoding="utf-8")
 
     def test_total_mismatch_fails(self):
         self.change_manifest(lambda data: data.update(total=123))
@@ -395,7 +404,7 @@ class ManifestTests(FixtureCase):
             manifest.load(self.root)
 
     def test_invalid_json_fails(self):
-        (self.root / config.MANIFEST).write_text("{")
+        (self.root / config.MANIFEST).write_text("{", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "invalid JSON"):
             manifest.load(self.root)
 
@@ -404,7 +413,7 @@ class NavigationTests(FixtureCase):
     def test_broken_or_escaping_link_fails(self):
         for target in ("missing.md", "../outside.md"):
             with self.subTest(target=target):
-                (self.root / "docs/ROADMAP.md").write_text(f"[Bad]({target})")
+                (self.root / "docs/ROADMAP.md").write_text(f"[Bad]({target})", encoding="utf-8")
                 self.assertFails("invalid local link")
 
     def test_repo_map_must_link_every_family(self):
@@ -412,13 +421,13 @@ class NavigationTests(FixtureCase):
         self.assertFails("REPO-MAP.md: does not link catalog/finance/INDEX.md")
 
     def test_file_outside_every_module_fails(self):
-        (self.root / "notes.md").write_text("# Notes\n")
+        (self.root / "notes.md").write_text("# Notes\n", encoding="utf-8")
         self.assertFails("notes.md is not covered by any module")
 
     def test_local_plugin_eval_results_are_ignored(self):
         results = self.root / "plugins/security/evals/results/2026-10-17T00-00-00-000Z"
         results.mkdir(parents=True)
-        (results / "aggregate-result.json").write_text("{}\n")
+        (results / "aggregate-result.json").write_text("{}\n", encoding="utf-8")
         check.check(self.root)
 
     def test_module_map_edit_is_detected(self):
@@ -433,12 +442,13 @@ class NavigationTests(FixtureCase):
 
 class ArchiveTests(FixtureCase):
     def test_release_writes_verified_archive_outside_tracked_tree(self):
-        archive = self.release("v1.2")
-        self.assertEqual(archive, self.root / config.RELEASE_DIR / "ai-specialists-1.2.zip")
+        version = config.version(self.root)
+        archive = self.release(f"v{version}")
+        self.assertEqual(archive, self.root / config.RELEASE_DIR / f"ai-specialists-{version}.zip")
         check.check(self.root)  # work/ is ignored, so a local release never fails the check
 
     def test_release_rejects_mismatched_tag(self):
-        with self.assertRaisesRegex(ValueError, "tag 'v2.0' does not match VERSION 1.2"):
+        with self.assertRaisesRegex(ValueError, f"tag 'v2.0' does not match VERSION {config.version(self.root)}"):
             self.release("v2.0")
         self.assertFalse((self.root / config.RELEASE_DIR).exists())
 
@@ -487,7 +497,7 @@ class ArchiveTests(FixtureCase):
     def test_archive_contains_cards_packs_and_licenses(self):
         with ZipFile(self.release()) as bundled:
             names = bundled.namelist()
-        prefix = "ai-specialists-1.2/"
+        prefix = f"ai-specialists-{config.version(self.root)}/"
         for required in ("catalog/security/threat-modeler.md", "dist/packs/finance.md",
                          "dist/packs/security-engineering.md", "dist/packs/security-governance.md",
                          "dist/packs/security-operations.md", "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):
@@ -499,9 +509,9 @@ class ArchiveTests(FixtureCase):
 class SplitPackTests(FixtureCase):
     def change_manifest(self, change):
         path = self.root / config.MANIFEST
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding="utf-8"))
         change(next(family for family in data["families"] if family["id"] == "security")["packs"])
-        path.write_text(json.dumps(data))
+        path.write_text(json.dumps(data), encoding="utf-8")
 
     def test_security_cards_each_appear_in_exactly_one_pack(self):
         families, generated = check.check(self.root)

@@ -1,6 +1,6 @@
 # Project planner
 
-ID: business-operations/project-planner. Version: 1.2.
+ID: business-operations/project-planner. Version: 1.3.
 
 **Use for:** breaking a defined goal into tasks, order, owners, effort ranges and risks. Not tracking progress, assigning real people without being told, or promising dates.
 

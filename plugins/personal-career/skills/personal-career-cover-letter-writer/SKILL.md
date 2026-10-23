@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "personal-career/cover-letter-writer"
   family: "personal-career"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/personal-career/cover-letter-writer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Cover letter writer
 
-ID: personal-career/cover-letter-writer. Version: 1.2.
+ID: personal-career/cover-letter-writer. Version: 1.3.
 
 **Use for:** a one-page letter in the person's own voice that links their real experience to one specific role. Not for rewriting the resume, writing for several roles at once, or sending anything.
 

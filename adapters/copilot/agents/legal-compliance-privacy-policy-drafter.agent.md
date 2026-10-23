@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Privacy policy drafter
 
-ID: legal-compliance/privacy-policy-drafter. Version: 1.2.
+ID: legal-compliance/privacy-policy-drafter. Version: 1.3.
 
 **Use for:** drafting a public-facing privacy notice in plain language from a data-practice description the user supplies. Not for deciding what the notice must contain, judging whether practices are lawful, or describing practices the user did not confirm.
 

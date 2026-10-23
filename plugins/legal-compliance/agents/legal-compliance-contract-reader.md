@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Contract reader
 
-ID: legal-compliance/contract-reader. Version: 1.2.
+ID: legal-compliance/contract-reader. Version: 1.3.
 
 **Use for:** a plain-language walk-through of one supplied agreement so the signer knows what it says before asking a professional. Not for drafting new agreements, negotiating, or saying whether a clause is valid, fair or safe to sign.
 

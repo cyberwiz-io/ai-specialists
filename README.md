@@ -2,17 +2,17 @@
 
 A library of 124 specialist instruction cards in 17 families, plus a coordinator, for the AI assistant you already have. Describe a task, and the coordinator guides the right specialist perspectives through it. The best-developed path is a small-business marketing campaign.
 
-**Version 1.2 candidate · Materials only · [Validation status](docs/VALIDATION.md)**
+**Version 1.3 candidate · Materials only · [Validation status](docs/VALIDATION.md)**
 
 ## Install options
 
-These are candidate install instructions. Current Claude Code and Codex acceptance on macOS and Windows is pending, and no 1.2 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
+These are candidate install instructions. Current Claude Code and Codex acceptance on macOS and Windows is pending, and no 1.3 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
 
 | Tool | Command or step |
 | --- | --- |
 | Claude Code (all families) | `/plugin install ai-specialists-all --marketplace cyberwiz-io/ai-specialists` |
 | Claude Code (one family) | `/plugin marketplace add cyberwiz-io/ai-specialists`, then `/plugin install security@ai-specialists` |
-| claude.ai and Claude Desktop | Planned: upload `ai-specialists-1.1-skill-<family>.zip` from the [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) in Settings, Capabilities, Skills (pending publication) |
+| claude.ai and Claude Desktop | Planned: upload `ai-specialists-1.3-skill-<family>.zip` from the [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) in Settings, Capabilities, Skills (pending publication) |
 | Any Agent Skills host | `npx skills add cyberwiz-io/ai-specialists` |
 | Codex | `codex plugin marketplace add cyberwiz-io/ai-specialists` |
 | Gemini CLI | `gemini extensions install https://github.com/cyberwiz-io/ai-specialists` |
@@ -34,7 +34,7 @@ These are editable instruction files: one card per specialist, a team lead per f
 2. Describe your task. For marketing: *Use this starter pack. My business is [short description]. My website is [optional]. Help me create a marketing campaign. First confirm that you can read all eight instruction sections.* For another family: *Use this pack. My task is [description]. Here is the material I can supply: [...]. First confirm that you can read all the sections.*
 3. Confirm the plan, review the materials, and accept or revise.
 
-Prefer a download? The planned [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) will contain a ZIP with every card, pack, skill and install file, attribution and licenses after publication and checksum verification. No current 1.2 download is available; open `pack/START-HERE.md` in this candidate checkout.
+Prefer a download? The planned [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) will contain a ZIP with every card, pack, skill and install file, attribution and licenses after publication and checksum verification. No current 1.3 download is available; open `pack/START-HERE.md` in this candidate checkout.
 
 ## Families
 

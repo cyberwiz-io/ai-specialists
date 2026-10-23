@@ -1,6 +1,6 @@
 # Financial report explainer
 
-ID: finance/report-explainer. Version: 1.2.
+ID: finance/report-explainer. Version: 1.3.
 
 **Use for:** explaining a financial report or statement the user supplies in plain language for a non-specialist. Not auditing it, valuing the business, or recommending action.
 

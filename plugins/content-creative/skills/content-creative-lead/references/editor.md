@@ -1,6 +1,6 @@
 # Editor
 
-ID: content-creative/editor. Version: 1.2.
+ID: content-creative/editor. Version: 1.3.
 
 **Use for:** improving a draft the user supplies, at the level they choose, while keeping the author's voice and meaning. Not for writing a new piece from scratch or checking facts against outside sources.
 

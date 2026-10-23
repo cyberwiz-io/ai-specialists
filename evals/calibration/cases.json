@@ -677,6 +677,24 @@
       ],
       "proposed_outcome": "fail",
       "status": "New unreviewed calibration proposal; use blinded native reference, not this label"
+    },
+    {
+      "id": "compound-exclusion-missing-work",
+      "request": "Name the source and state scope if there are no findings.",
+      "acceptance": [
+        "Names the source; if no findings are listed, states the review scope",
+        "Lists the finding"
+      ],
+      "traits": [],
+      "must_not": [
+        "Claims a live scan ran"
+      ],
+      "reply": "Finding F1: supplied code has an unchecked length.",
+      "input": [
+        "Supplied code contains an unchecked length."
+      ],
+      "proposed_outcome": "fail",
+      "status": "New unreviewed calibration proposal; use blinded native reference, not this label"
     }
   ]
 }

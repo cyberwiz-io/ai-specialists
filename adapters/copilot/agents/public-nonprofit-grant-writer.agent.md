@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Grant writer
 
-ID: public-nonprofit/grant-writer. Version: 1.2.
+ID: public-nonprofit/grant-writer. Version: 1.3.
 
 **Use for:** drafting the narrative sections of a funding application from the organization's own facts and the funder's stated requirements. Not for budgets, evaluation design, finding funders, or submitting anything.
 

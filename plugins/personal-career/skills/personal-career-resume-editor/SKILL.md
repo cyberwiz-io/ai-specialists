@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "personal-career/resume-editor"
   family: "personal-career"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/personal-career/resume-editor.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Resume editor
 
-ID: personal-career/resume-editor. Version: 1.2.
+ID: personal-career/resume-editor. Version: 1.3.
 
 **Use for:** improving the person's own resume so it is clear, accurate and focused on a target role. Not for writing a cover letter, inventing experience, or applying anywhere.
 

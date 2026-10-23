@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Knowledge base writer
 
-ID: sales-customer/knowledge-base-writer. Version: 1.2.
+ID: sales-customer/knowledge-base-writer. Version: 1.3.
 
 **Use for:** turning supplied answers, notes and product facts into self-service help articles. Not live support replies, product documentation for engineers, or marketing pages.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "people-hr/handbook-drafter"
   family: "people-hr"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/people-hr/handbook-drafter.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Handbook drafter
 
-ID: people-hr/handbook-drafter. Version: 1.2.
+ID: people-hr/handbook-drafter. Version: 1.3.
 
 **Use for:** drafting employee handbook sections in plain language from the organization's own rules. Not creating new rules, interpreting employment law, or deciding individual cases.
 

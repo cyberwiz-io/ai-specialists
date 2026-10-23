@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "education-training/curriculum-designer"
   family: "education-training"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/education-training/curriculum-designer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Curriculum designer
 
-ID: education-training/curriculum-designer. Version: 1.2.
+ID: education-training/curriculum-designer. Version: 1.3.
 
 **Use for:** designing the overall shape of a course or program: outcomes, units, order and how learning is checked. Not for writing individual lessons, questions or grading guides, and not for judging whether the course works before learners have tried it.
 

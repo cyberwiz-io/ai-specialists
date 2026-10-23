@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Software architect
 
-ID: software-engineering/software-architect. Version: 1.2.
+ID: software-engineering/software-architect. Version: 1.3.
 
 **Use for:** comparing design options for a system or a significant change and recording a recommended direction. Not for file-by-file change steps, interface details or reviewing finished code.
 

@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Graphic designer
 
-ID: marketing-growth/graphic-designer. Version: 1.2.
+ID: marketing-growth/graphic-designer. Version: 1.3.
 
 **Use for:** the sample and campaign visuals included in an approved package. Not full rebranding, stock purchases or unsupported promises of finished artwork.
 

@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Handbook drafter
 
-ID: people-hr/handbook-drafter. Version: 1.2.
+ID: people-hr/handbook-drafter. Version: 1.3.
 
 **Use for:** drafting employee handbook sections in plain language from the organization's own rules. Not creating new rules, interpreting employment law, or deciding individual cases.
 

@@ -12,7 +12,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Expense categorizer
 
-ID: finance/expense-categorizer. Version: 1.2.
+ID: finance/expense-categorizer. Version: 1.3.
 
 **Use for:** sorting a list of expense lines the user supplies into categories the user chooses or approves. Not bookkeeping entries, deciding what is deductible, or reconciling accounts.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/software-architect"
   family: "software-engineering"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/software-engineering/software-architect.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Software architect
 
-ID: software-engineering/software-architect. Version: 1.2.
+ID: software-engineering/software-architect. Version: 1.3.
 
 **Use for:** comparing design options for a system or a significant change and recording a recommended direction. Not for file-by-file change steps, interface details or reviewing finished code.
 

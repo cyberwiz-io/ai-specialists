@@ -63,6 +63,7 @@ def session(command, prompt, model, timeout):
     return reply, {'requested_model': model,
                    'reported_models': sorted(usage) if isinstance(usage, dict) else [],
                    'identity_source': 'CLI modelUsage' if isinstance(usage, dict) and usage else 'unobserved',
+                   'session_id': envelope.get('session_id'),
                    'input_sha256': digest(prompt.encode('utf-8')),
                    'response_sha256': digest(result.stdout),
                    'stderr_sha256': digest(result.stderr) if result.stderr else None}
@@ -82,7 +83,10 @@ def run(root, name, command=('claude',), timeout=300, parallel=1):
     previous = json.loads(receipt_path.read_text(encoding='utf-8')) if receipt_path.exists() else {}
 
     def one(fixture):
-        receipt = {'status': 'failed'}
+        old = previous.get('fixtures', {}).get(fixture['id'])
+        if old is not None and old.get('status') != 'complete':
+            return fixture['id'], old  # A failed or interrupted attempt is immutable; use a new run name.
+        receipt = dict(old or {}, status='failed')
         try:
             paths = {}
             for key in ('subject_prompt', 'grader_prompt', 'output', 'grade'):
@@ -98,8 +102,8 @@ def run(root, name, command=('claude',), timeout=300, parallel=1):
                 if actual != fixture.get(key + '_sha256'):
                     raise RunError('prompt-hash-mismatch')
                 receipt[key + '_sha256'] = actual
-            old = previous.get('fixtures', {}).get(fixture['id'], {})
-            if any(path.exists() for path in [paths['output'], paths['grade'], *raw_paths]):
+            old = old or {}
+            if old or any(path.exists() for path in [paths['output'], paths['grade'], *raw_paths]):
                 attempts = old.get('grader_attempts', [])
                 if (old.get('status') == 'complete'
                         and all(old.get(k + '_sha256') == receipt[k + '_sha256'] for k in ('subject', 'grader'))
@@ -159,16 +163,21 @@ def run(root, name, command=('claude',), timeout=300, parallel=1):
     if len(destinations) != len(set(destinations)):
         raise ValueError('fixtures must have distinct output and grade paths')
     results = {key: value for key, value in previous.get("fixtures", {}).items() if key in ids}
+    def checkpoint():
+        with tempfile.NamedTemporaryFile(mode='wb', dir=folder,
+                                         prefix='execution-', suffix='.tmp', delete=False) as saved:
+            saved.write((json.dumps({'schema': 1, 'fixtures': results}, indent=2) + '\n').encode('utf-8'))
+        os.replace(saved.name, receipt_path)
+    for fixture_id in ids:
+        results.setdefault(fixture_id, {'status': 'reserved'})
+    checkpoint()  # Reserve attempts before any call so interruption cannot silently reroll a subject.
     with ThreadPoolExecutor(max_workers=parallel) as executor:
         futures = [executor.submit(one, fixture) for fixture in record['fixtures']]
         for future in as_completed(futures):
             fixture_id, receipt = future.result()
             results[fixture_id] = receipt
             # Keep completed evidence if a later call or the batch is interrupted.
-            with tempfile.NamedTemporaryFile(mode='wb', dir=folder,
-                                             prefix='execution-', suffix='.tmp', delete=False) as checkpoint:
-                checkpoint.write((json.dumps({'schema': 1, 'fixtures': results}, indent=2) + '\n').encode('utf-8'))
-            os.replace(checkpoint.name, receipt_path)
+            checkpoint()
     return int(any(item['status'] != 'complete' for item in results.values()))
 
 

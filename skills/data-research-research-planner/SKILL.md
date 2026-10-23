@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/research-planner"
   family: "data-research"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/data-research/research-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Research planner
 
-ID: data-research/research-planner. Version: 1.2.
+ID: data-research/research-planner. Version: 1.3.
 
 **Use for:** turning a vague question into a research plan the user can follow. Not running the research, summarizing sources, or analyzing data.
 

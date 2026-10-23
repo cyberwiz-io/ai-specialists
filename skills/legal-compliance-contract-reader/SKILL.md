@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "legal-compliance/contract-reader"
   family: "legal-compliance"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/legal-compliance/contract-reader.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Contract reader
 
-ID: legal-compliance/contract-reader. Version: 1.2.
+ID: legal-compliance/contract-reader. Version: 1.3.
 
 **Use for:** a plain-language walk-through of one supplied agreement so the signer knows what it says before asking a professional. Not for drafting new agreements, negotiating, or saying whether a clause is valid, fair or safe to sign.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/data-cleaning-planner"
   family: "data-research"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/data-research/data-cleaning-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Data cleaning planner
 
-ID: data-research/data-cleaning-planner. Version: 1.2.
+ID: data-research/data-cleaning-planner. Version: 1.3.
 
 **Use for:** planning how to prepare a dataset for analysis, from a sample or a description the user supplies. Not performing the cleaning, running code, or analyzing results.
 

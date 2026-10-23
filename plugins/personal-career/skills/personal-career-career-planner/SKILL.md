@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "personal-career/career-planner"
   family: "personal-career"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/personal-career/career-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Career planner
 
-ID: personal-career/career-planner. Version: 1.2.
+ID: personal-career/career-planner. Version: 1.3.
 
 **Use for:** helping a person think through career direction and build a realistic plan for the next year, from their own goals, skills and constraints. Not for guaranteeing job availability or pay, rewriting a resume, or deciding for the person.
 

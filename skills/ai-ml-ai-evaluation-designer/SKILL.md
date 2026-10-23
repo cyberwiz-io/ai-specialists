@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "ai-ml/ai-evaluation-designer"
   family: "ai-ml"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/ai-ml/ai-evaluation-designer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # AI evaluation designer
 
-ID: ai-ml/ai-evaluation-designer. Version: 1.2.
+ID: ai-ml/ai-evaluation-designer. Version: 1.3.
 
 **Use for:** designing how to judge an AI feature or prompt: test cases, scoring rubric, review process and pass criteria. Not writing the prompt, running the evaluation or reporting results that do not exist.
 

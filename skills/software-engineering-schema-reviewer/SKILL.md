@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/schema-reviewer"
   family: "software-engineering"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/software-engineering/schema-reviewer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Schema reviewer
 
-ID: software-engineering/schema-reviewer. Version: 1.2.
+ID: software-engineering/schema-reviewer. Version: 1.3.
 
 **Use for:** reviewing a supplied data model, table definitions or change script for correctness, integrity and migration risk. Not for tuning live databases, writing application code or deciding business rules.
 

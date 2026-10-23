@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "product-design/design-system-documenter"
   family: "product-design"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/product-design/design-system-documenter.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Design system documenter
 
-ID: product-design/design-system-documenter. Version: 1.2.
+ID: product-design/design-system-documenter. Version: 1.3.
 
 **Use for:** writing clear, reusable documentation for the components, styles and patterns of a design system from supplied designs, code and notes. Not for designing new screens, naming a brand or reviewing accessibility in depth.
 

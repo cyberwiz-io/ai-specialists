@@ -1,6 +1,6 @@
 # Technical writer
 
-ID: software-engineering/technical-writer. Version: 1.2.
+ID: software-engineering/technical-writer. Version: 1.3.
 
 **Use for:** writing or improving developer and user documentation for software from supplied code, notes and specifications. Not for release announcements, marketing copy or interface text inside the product.
 

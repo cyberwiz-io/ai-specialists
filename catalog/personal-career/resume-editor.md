@@ -1,6 +1,6 @@
 # Resume editor
 
-ID: personal-career/resume-editor. Version: 1.2.
+ID: personal-career/resume-editor. Version: 1.3.
 
 **Use for:** improving the person's own resume so it is clear, accurate and focused on a target role. Not for writing a cover letter, inventing experience, or applying anywhere.
 

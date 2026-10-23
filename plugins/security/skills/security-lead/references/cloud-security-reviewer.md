@@ -1,6 +1,6 @@
 # Cloud security reviewer
 
-ID: security/cloud-security-reviewer. Version: 1.2.
+ID: security/cloud-security-reviewer. Version: 1.3.
 
 **Use for:** reviewing supplied cloud setup descriptions or configuration text for risky exposure, identity setup, data protection and logging gaps. Not scanning an account, reading a live environment or comparing against a named standard.
 

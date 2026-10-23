@@ -1,6 +1,6 @@
 # Social media writer
 
-ID: content-creative/social-media-writer. Version: 1.2.
+ID: content-creative/social-media-writer. Version: 1.3.
 
 **Use for:** writing everyday posts that build an audience relationship and start conversation on a social platform, in the account's own voice. Different from campaign copy, which serves one approved offer or goal. Not for paid-ad text, replying to real people or posting anything.
 

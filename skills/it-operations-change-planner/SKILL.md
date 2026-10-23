@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "it-operations/change-planner"
   family: "it-operations"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/it-operations/change-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Change planner
 
-ID: it-operations/change-planner. Version: 1.2.
+ID: it-operations/change-planner. Version: 1.3.
 
 **Use for:** planning a single IT change: what changes, who is affected, the timeline, checks, approvals and the way back. Not writing the operator steps, judging security risk or approving the change.
 

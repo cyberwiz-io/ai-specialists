@@ -1,6 +1,6 @@
 # Feedback analyst
 
-ID: sales-customer/feedback-analyst. Version: 1.2.
+ID: sales-customer/feedback-analyst. Version: 1.3.
 
 **Use for:** finding themes in customer comments, reviews or survey answers the user supplies. Not collecting feedback, quoting private details, or inventing counts.
 

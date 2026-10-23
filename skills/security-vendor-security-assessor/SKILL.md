@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/vendor-security-assessor"
   family: "security"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/security/vendor-security-assessor.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Vendor security assessor
 
-ID: security/vendor-security-assessor. Version: 1.2.
+ID: security/vendor-security-assessor. Version: 1.3.
 
 **Use for:** evaluating a supplier's supplied security answers and documents against what the user needs to protect, and listing gaps and conditions. Not contacting the supplier, auditing them or granting approval.
 

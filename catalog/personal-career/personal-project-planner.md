@@ -1,6 +1,6 @@
 # Personal project planner
 
-ID: personal-career/personal-project-planner. Version: 1.2.
+ID: personal-career/personal-project-planner. Version: 1.3.
 
 **Use for:** turning a personal project, such as a home task, hobby build, event, portfolio piece or learning goal, into a realistic plan the person can follow alone. Not for team projects with many owners, career direction, or study routines for exams.
 

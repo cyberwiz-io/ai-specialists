@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/graphic-designer"
   family: "marketing-growth"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/marketing-growth/graphic-designer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Graphic designer
 
-ID: marketing-growth/graphic-designer. Version: 1.2.
+ID: marketing-growth/graphic-designer. Version: 1.3.
 
 **Use for:** the sample and campaign visuals included in an approved package. Not full rebranding, stock purchases or unsupported promises of finished artwork.
 

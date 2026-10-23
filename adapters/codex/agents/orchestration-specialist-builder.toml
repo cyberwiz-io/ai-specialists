@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Specialist builder
 
-ID: orchestration/specialist-builder. Version: 1.2.
+ID: orchestration/specialist-builder. Version: 1.3.
 
 **Use for:** drafting and reviewing a custom role card at the user's request when no existing role fits. Not for adding tools or permissions, enabling the card, or building a role that only changes writing style on an existing role.
 

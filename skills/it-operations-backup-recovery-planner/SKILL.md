@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "it-operations/backup-recovery-planner"
   family: "it-operations"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/it-operations/backup-recovery-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Backup and recovery planner
 
-ID: it-operations/backup-recovery-planner. Version: 1.2.
+ID: it-operations/backup-recovery-planner. Version: 1.3.
 
 **Use for:** planning what to back up, how often, where copies live and how to restore, including recovery goals and restore tests. Not the day-to-day restore steps or incident handling.
 

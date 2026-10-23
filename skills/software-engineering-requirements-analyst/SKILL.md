@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/requirements-analyst"
   family: "software-engineering"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/software-engineering/requirements-analyst.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Requirements analyst
 
-ID: software-engineering/requirements-analyst. Version: 1.2.
+ID: software-engineering/requirements-analyst. Version: 1.3.
 
 **Use for:** turning rough requests, tickets, meeting notes and user complaints into clear, testable requirements for a software change. Not for choosing a design, writing code or writing test cases.
 

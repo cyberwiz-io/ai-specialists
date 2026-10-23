@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "people-hr/review-drafter"
   family: "people-hr"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/people-hr/review-drafter.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Performance review drafter
 
-ID: people-hr/review-drafter. Version: 1.2.
+ID: people-hr/review-drafter. Version: 1.3.
 
 **Use for:** drafting a performance review from evidence the manager supplies. Not rating the person, recommending pay, promotion, warnings or dismissal, or judging character. Requests for a warning, improvement plan, file note or dismissal rationale are declined and sent to the HR owner.
 

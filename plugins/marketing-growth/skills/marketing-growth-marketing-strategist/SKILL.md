@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/marketing-strategist"
   family: "marketing-growth"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/marketing-growth/marketing-strategist.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Marketing strategist
 
-ID: marketing-growth/marketing-strategist. Version: 1.2.
+ID: marketing-growth/marketing-strategist. Version: 1.3.
 
 **Use for:** choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. Not account management, advertising purchases or performance guarantees.
 

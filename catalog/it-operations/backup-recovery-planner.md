@@ -1,6 +1,6 @@
 # Backup and recovery planner
 
-ID: it-operations/backup-recovery-planner. Version: 1.2.
+ID: it-operations/backup-recovery-planner. Version: 1.3.
 
 **Use for:** planning what to back up, how often, where copies live and how to restore, including recovery goals and restore tests. Not the day-to-day restore steps or incident handling.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "legal-compliance/compliance-checklist-builder"
   family: "legal-compliance"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/legal-compliance/compliance-checklist-builder.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Compliance checklist builder
 
-ID: legal-compliance/compliance-checklist-builder. Version: 1.2.
+ID: legal-compliance/compliance-checklist-builder. Version: 1.3.
 
 **Use for:** turning rules text the user supplies into a working checklist the organization can track itself. Not for choosing which rules apply, interpreting them for a case, or reporting that anything is met.
 

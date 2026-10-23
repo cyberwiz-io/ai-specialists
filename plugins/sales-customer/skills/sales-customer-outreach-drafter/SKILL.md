@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "sales-customer/outreach-drafter"
   family: "sales-customer"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/sales-customer/outreach-drafter.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Outreach drafter
 
-ID: sales-customer/outreach-drafter. Version: 1.2.
+ID: sales-customer/outreach-drafter. Version: 1.3.
 
 **Use for:** drafting first-contact and follow-up messages to a defined prospect type from facts the user supplies. Not sending, finding contacts, or personalising with details the user did not provide.
 

@@ -1,6 +1,6 @@
 # Career planner
 
-ID: personal-career/career-planner. Version: 1.2.
+ID: personal-career/career-planner. Version: 1.3.
 
 **Use for:** helping a person think through career direction and build a realistic plan for the next year, from their own goals, skills and constraints. Not for guaranteeing job availability or pay, rewriting a resume, or deciding for the person.
 

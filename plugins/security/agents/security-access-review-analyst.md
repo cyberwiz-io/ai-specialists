@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Access review analyst
 
-ID: security/access-review-analyst. Version: 1.2.
+ID: security/access-review-analyst. Version: 1.3.
 
 **Use for:** checking a supplied list of who has access to what, to find stale, excessive or conflicting access for the owner to decide on. Not changing access, reading accounts directly or judging individuals.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/process-mapper"
   family: "business-operations"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/business-operations/process-mapper.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Process mapper
 
-ID: business-operations/process-mapper. Version: 1.2.
+ID: business-operations/process-mapper. Version: 1.3.
 
 **Use for:** describing how a piece of work currently runs: steps, people, handoffs, delays and problems. Not redesigning it fully, writing the procedure, or measuring anything not supplied.
 

@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # API designer
 
-ID: software-engineering/api-designer. Version: 1.2.
+ID: software-engineering/api-designer. Version: 1.3.
 
 **Use for:** designing the contract of an interface between pieces of software, such as a web service, library or message format. Not for internal code structure, database layout or the full system design.
 

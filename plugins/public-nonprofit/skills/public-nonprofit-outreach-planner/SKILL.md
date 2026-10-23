@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "public-nonprofit/outreach-planner"
   family: "public-nonprofit"
-  version: "1.2"
+  version: "1.3"
   source: "catalog/public-nonprofit/outreach-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Community outreach planner
 
-ID: public-nonprofit/outreach-planner. Version: 1.2.
+ID: public-nonprofit/outreach-planner. Version: 1.3.
 
 **Use for:** planning how to reach and listen to a community about a program, service or issue: audiences, channels, messages, accessibility and feedback. Not for paid advertising plans, volunteer scheduling, or sending anything.
 

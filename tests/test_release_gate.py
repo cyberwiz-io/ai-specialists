@@ -103,7 +103,7 @@ class CheckoutProvenanceTests(unittest.TestCase):
         self.git('config', 'core.hooksPath', self.temp.name + '/no-hooks')
         self.git('config', 'user.name', 'Fixture Reviewer')
         self.git('config', 'user.email', 'fixture@example.invalid')
-        Path('VERSION').write_text('1.1\n')
+        Path('VERSION').write_text('1.1\n', encoding="utf-8")
         self.git('add', 'VERSION')
         self.git('commit', '-qm', 'candidate')
         self.sha = self.git('rev-parse', 'HEAD')
@@ -124,7 +124,7 @@ class CheckoutProvenanceTests(unittest.TestCase):
                 gate.verify_checkout(self.sha, tree, tag)
 
     def test_off_main_candidate_fails(self):
-        Path('extra').write_text('new tree')
+        Path('extra').write_text('new tree', encoding="utf-8")
         self.git('add', 'extra')
         self.git('commit', '-qm', 'not on main')
         sha = self.git('rev-parse', 'HEAD')
@@ -132,7 +132,7 @@ class CheckoutProvenanceTests(unittest.TestCase):
             gate.verify_checkout(sha, self.git('rev-parse', 'HEAD^{tree}'), 'v1.1')
 
     def test_moved_tag_and_wrong_checkout_fail(self):
-        Path('extra').write_text('new tree')
+        Path('extra').write_text('new tree', encoding="utf-8")
         self.git('add', 'extra')
         self.git('commit', '-qm', 'next')
         next_sha = self.git('rev-parse', 'HEAD')
