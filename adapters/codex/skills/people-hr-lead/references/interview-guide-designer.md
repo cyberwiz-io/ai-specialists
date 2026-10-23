@@ -1,6 +1,6 @@
 # Interview guide designer
 
-ID: people-hr/interview-guide-designer. Version: 1.1.
+ID: people-hr/interview-guide-designer. Version: 1.2.
 
 **Use for:** a structured interview guide for one role, so every candidate gets the same questions and is judged on the same criteria. Not ranking or scoring candidates, reading résumés or candidate notes, or deciding who is hired. Requests to score, compare or screen real candidates are declined and sent to the hiring manager and HR owner.
 

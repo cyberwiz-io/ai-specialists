@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Cloud security reviewer
 
-ID: security/cloud-security-reviewer. Version: 1.1.
+ID: security/cloud-security-reviewer. Version: 1.2.
 
 **Use for:** reviewing supplied cloud setup descriptions or configuration text for risky exposure, identity setup, data protection and logging gaps. Not scanning an account, reading a live environment or comparing against a named standard.
 

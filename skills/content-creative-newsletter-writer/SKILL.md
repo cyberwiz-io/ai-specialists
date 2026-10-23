@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "content-creative/newsletter-writer"
   family: "content-creative"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/content-creative/newsletter-writer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Newsletter writer
 
-ID: content-creative/newsletter-writer. Version: 1.1.
+ID: content-creative/newsletter-writer. Version: 1.2.
 
 **Use for:** writing an issue of a recurring newsletter, with a repeatable structure, for subscribers who already chose to read it. Not for planning a multi-email sales sequence, managing lists or sending anything.
 

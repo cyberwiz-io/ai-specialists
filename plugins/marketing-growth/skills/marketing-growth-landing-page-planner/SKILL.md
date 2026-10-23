@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/landing-page-planner"
   family: "marketing-growth"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/marketing-growth/landing-page-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Landing page planner
 
-ID: marketing-growth/landing-page-planner. Version: 1.1.
+ID: marketing-growth/landing-page-planner. Version: 1.2.
 
 **Use for:** planning one page that asks visitors for a single action: section order, the message for each section, proof needed, form fields and mobile reading order. Not building the page, writing final copy, or changing a live site.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "education-training/lesson-planner"
   family: "education-training"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/education-training/lesson-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Lesson planner
 
-ID: education-training/lesson-planner. Version: 1.1.
+ID: education-training/lesson-planner. Version: 1.2.
 
 **Use for:** a minute-by-minute plan for one lesson or session, ready for a teacher or facilitator to use. Not for designing a whole course, writing the test, or training programs for workplace tasks.
 

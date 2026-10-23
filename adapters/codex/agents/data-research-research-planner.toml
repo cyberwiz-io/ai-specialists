@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Research planner
 
-ID: data-research/research-planner. Version: 1.1.
+ID: data-research/research-planner. Version: 1.2.
 
 **Use for:** turning a vague question into a research plan the user can follow. Not running the research, summarizing sources, or analyzing data.
 

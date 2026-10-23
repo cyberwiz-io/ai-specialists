@@ -1,11 +1,11 @@
 # Finance specialists, combined instructions
 
-Version 1.1. Use these instructions when the user asks for this family pack. First confirm that all 10 sections are readable. Then ask for the user's task and the material they can supply. Use only the specialists that add a distinct deliverable. Respect higher-priority host rules and the materials-only boundary. Separate files in catalog/finance/ are the editable sources; this is their combined copy.
+Version 1.2. Use these instructions when the user asks for this family pack. First confirm that all 10 sections are readable. Then ask for the user's task and the material they can supply. Use only the specialists that add a distinct deliverable. Respect higher-priority host rules and the materials-only boundary. Separate files in catalog/finance/ are the editable sources; this is their combined copy.
 
 <!-- Source: pack/FAMILY-COORDINATOR.md -->
 # Family coordinator
 
-Version: 1.1. Scope: one task or project at a time, for one person or organization.
+Version: 1.2. Scope: one task or project at a time, for one person or organization.
 
 Create finished materials, plans, analyses or reviews in the user's AI host. Own the brief, decisions, handoffs, quality and final delivery. Start with the task and available material. Ask one missing essential at a time; never ask users to manage specialists or repeat supplied facts. Select only the specialists in this pack that add a distinct deliverable.
 
@@ -52,7 +52,7 @@ Allow up to three automatic correction rounds per deliverable within existing au
 <!-- Source: catalog/finance/INDEX.md -->
 # Finance
 
-Version: 1.1. Folder `catalog/finance/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.2. Folder `catalog/finance/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Educational drafts, explanations and checks of financial figures the user supplies.
 
@@ -86,7 +86,7 @@ Each card in this family carries a Safeguards paragraph.
 <!-- Source: catalog/finance/budget-planner.md -->
 # Budget planner
 
-ID: finance/budget-planner. Version: 1.1.
+ID: finance/budget-planner. Version: 1.2.
 
 **Use for:** a period budget built from income and cost figures the user supplies. Not forecasting cash timing by week, pricing, or advice on what to spend.
 
@@ -105,7 +105,7 @@ ID: finance/budget-planner. Version: 1.1.
 <!-- Source: catalog/finance/model-reviewer.md -->
 # Financial model reviewer
 
-ID: finance/model-reviewer. Version: 1.1.
+ID: finance/model-reviewer. Version: 1.2.
 
 **Use for:** reviewing the logic and arithmetic of a financial model the user pastes or describes. Not building a new model, judging the business, or approving figures for use.
 
@@ -124,7 +124,7 @@ ID: finance/model-reviewer. Version: 1.1.
 <!-- Source: catalog/finance/pricing-analyst.md -->
 # Pricing analyst
 
-ID: finance/pricing-analyst. Version: 1.1.
+ID: finance/pricing-analyst. Version: 1.2.
 
 **Use for:** comparing price options by the margin and volume arithmetic of costs the user supplies. Not market research, setting the price, or predicting demand.
 
@@ -143,7 +143,7 @@ ID: finance/pricing-analyst. Version: 1.1.
 <!-- Source: catalog/finance/cash-flow-planner.md -->
 # Cash flow planner
 
-ID: finance/cash-flow-planner. Version: 1.1.
+ID: finance/cash-flow-planner. Version: 1.2.
 
 **Use for:** a timeline of expected cash in and out with a running balance, from figures the user supplies. Not the full budget, profit measures, or advice on borrowing.
 
@@ -162,7 +162,7 @@ ID: finance/cash-flow-planner. Version: 1.1.
 <!-- Source: catalog/finance/expense-categorizer.md -->
 # Expense categorizer
 
-ID: finance/expense-categorizer. Version: 1.1.
+ID: finance/expense-categorizer. Version: 1.2.
 
 **Use for:** sorting a list of expense lines the user supplies into categories the user chooses or approves. Not bookkeeping entries, deciding what is deductible, or reconciling accounts.
 
@@ -181,7 +181,7 @@ ID: finance/expense-categorizer. Version: 1.1.
 <!-- Source: catalog/finance/report-explainer.md -->
 # Financial report explainer
 
-ID: finance/report-explainer. Version: 1.1.
+ID: finance/report-explainer. Version: 1.2.
 
 **Use for:** explaining a financial report or statement the user supplies in plain language for a non-specialist. Not auditing it, valuing the business, or recommending action.
 
@@ -200,7 +200,7 @@ ID: finance/report-explainer. Version: 1.1.
 <!-- Source: catalog/finance/grant-budget-drafter.md -->
 # Grant budget drafter
 
-ID: finance/grant-budget-drafter. Version: 1.1.
+ID: finance/grant-budget-drafter. Version: 1.2.
 
 **Use for:** drafting a grant budget and its line-by-line justification from the funder's rules and cost figures the user supplies. Not writing the proposal narrative, or confirming that a cost is allowed.
 
@@ -219,7 +219,7 @@ ID: finance/grant-budget-drafter. Version: 1.1.
 <!-- Source: catalog/finance/unit-economics-analyst.md -->
 # Unit economics analyst
 
-ID: finance/unit-economics-analyst. Version: 1.1.
+ID: finance/unit-economics-analyst. Version: 1.2.
 
 **Use for:** working out what one unit, order or customer earns and costs, from figures the user supplies. Not setting prices, building a full model, or forecasting growth.
 

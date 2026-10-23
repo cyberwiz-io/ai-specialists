@@ -1,6 +1,6 @@
 # Discovery call planner
 
-ID: sales-customer/discovery-call-planner. Version: 1.1.
+ID: sales-customer/discovery-call-planner. Version: 1.2.
 
 **Use for:** preparing for a first conversation with a prospect: goals, question order, signals to listen for and a note template. Not running the call, scoring people automatically, or writing the proposal.
 

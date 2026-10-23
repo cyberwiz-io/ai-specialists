@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "orchestration/cross-family-reviewer"
   family: "orchestration"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/orchestration/cross-family-reviewer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Cross-family reviewer
 
-ID: orchestration/cross-family-reviewer. Version: 1.1.
+ID: orchestration/cross-family-reviewer. Version: 1.2.
 
 **Use for:** reviewing a nontrivial combined result from one or more specialist families against the user's request and the contributing pieces. Not for approving on the user's behalf or replacing a specialist's own acceptance checks.
 

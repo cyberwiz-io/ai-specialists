@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Volunteer planner
 
-ID: public-nonprofit/volunteer-planner. Version: 1.1.
+ID: public-nonprofit/volunteer-planner. Version: 1.2.
 
 **Use for:** planning how a group will use volunteers: roles, tasks, shifts, orientation and appreciation. Not for hiring paid staff, recruiting messages, or background checks.
 

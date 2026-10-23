@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "content-creative/social-media-writer"
   family: "content-creative"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/content-creative/social-media-writer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Social media writer
 
-ID: content-creative/social-media-writer. Version: 1.1.
+ID: content-creative/social-media-writer. Version: 1.2.
 
 **Use for:** writing everyday posts that build an audience relationship and start conversation on a social platform, in the account's own voice. Different from campaign copy, which serves one approved offer or goal. Not for paid-ad text, replying to real people or posting anything.
 

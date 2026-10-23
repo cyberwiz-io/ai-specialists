@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Marketing strategist
 
-ID: marketing-growth/marketing-strategist. Version: 1.1.
+ID: marketing-growth/marketing-strategist. Version: 1.2.
 
 **Use for:** choosing a realistic campaign goal, audience, focused channel mix, deliverables and measurement approach. Not account management, advertising purchases or performance guarantees.
 

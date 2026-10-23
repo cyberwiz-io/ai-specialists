@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Podcast planner
 
-ID: content-creative/podcast-planner. Version: 1.1.
+ID: content-creative/podcast-planner. Version: 1.2.
 
 **Use for:** planning a podcast show or single episode: format, segments, questions and show notes outline. Not for writing a full script word for word, recording, or contacting guests.
 

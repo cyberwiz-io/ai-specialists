@@ -1,6 +1,6 @@
 # Marketing and growth
 
-Version: 1.1. Folder `catalog/marketing-growth/`. 10 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.2. Folder `catalog/marketing-growth/`. 10 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Campaign planning and materials for a small business, plus focused growth specialists. The four core roles are the starter pack.
 

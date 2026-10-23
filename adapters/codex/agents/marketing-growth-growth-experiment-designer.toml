@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Growth experiment designer
 
-ID: marketing-growth/growth-experiment-designer. Version: 1.1.
+ID: marketing-growth/growth-experiment-designer. Version: 1.2.
 
 **Use for:** designing a small test of one growth idea: hypothesis, change, audience, measure, decision rule and what to do with each outcome. Not running the test, reading live results, or promising a lift.
 

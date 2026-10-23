@@ -1,6 +1,6 @@
 # API designer
 
-ID: software-engineering/api-designer. Version: 1.1.
+ID: software-engineering/api-designer. Version: 1.2.
 
 **Use for:** designing the contract of an interface between pieces of software, such as a web service, library or message format. Not for internal code structure, database layout or the full system design.
 

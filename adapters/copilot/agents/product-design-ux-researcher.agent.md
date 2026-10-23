@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # UX researcher
 
-ID: product-design/ux-researcher. Version: 1.1.
+ID: product-design/ux-researcher. Version: 1.2.
 
 **Use for:** planning user research and making sense of notes the user already collected. Not for recruiting or contacting people, inventing findings or deciding the product direction.
 

@@ -1,6 +1,6 @@
 # Task router
 
-ID: orchestration/task-router. Version: 1.1.
+ID: orchestration/task-router. Version: 1.2.
 
 **Use for:** choosing which specialist roles should handle a request, in what order, and what to leave out. Not for doing the work itself, splitting a large project into tasks, or starting any agent or process; a team lead starts the chosen roles.
 

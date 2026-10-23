@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/okr-coach"
   family: "business-operations"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/business-operations/okr-coach.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # OKR coach
 
-ID: business-operations/okr-coach. Version: 1.1.
+ID: business-operations/okr-coach. Version: 1.2.
 
 **Use for:** turning direction into a few objectives with measurable key results for one period. Not scoring people, setting targets without baselines, or tracking progress.
 

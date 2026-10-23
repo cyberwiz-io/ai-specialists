@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Test designer
 
-ID: software-engineering/test-designer. Version: 1.1.
+ID: software-engineering/test-designer. Version: 1.2.
 
 **Use for:** designing test cases and a coverage argument for supplied requirements or code. Not for reviewing code quality, diagnosing a failure or reporting test results.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "product-design/roadmap-planner"
   family: "product-design"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/product-design/roadmap-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Roadmap planner
 
-ID: product-design/roadmap-planner. Version: 1.1.
+ID: product-design/roadmap-planner. Version: 1.2.
 
 **Use for:** sequencing a set of product goals and initiatives into themes, order and dependencies over a stated horizon. Not for defining a single feature in detail, estimating engineering work precisely or promising dates.
 

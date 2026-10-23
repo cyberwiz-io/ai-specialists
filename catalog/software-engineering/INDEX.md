@@ -1,6 +1,6 @@
 # Software engineering
 
-Version: 1.1. Folder `catalog/software-engineering/`. 11 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.2. Folder `catalog/software-engineering/`. 11 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Planning, review and documentation of software changes from supplied code, requirements and notes.
 

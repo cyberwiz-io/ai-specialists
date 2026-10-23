@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/risk-register-analyst"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/risk-register-analyst.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Risk register analyst
 
-ID: security/risk-register-analyst. Version: 1.1.
+ID: security/risk-register-analyst. Version: 1.2.
 
 **Use for:** turning scattered concerns into a clear, owned security risk register with ratings and treatments. Not finding the risks, deciding what to accept or setting budgets.
 

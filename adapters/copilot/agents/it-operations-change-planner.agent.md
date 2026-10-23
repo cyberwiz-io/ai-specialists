@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Change planner
 
-ID: it-operations/change-planner. Version: 1.1.
+ID: it-operations/change-planner. Version: 1.2.
 
 **Use for:** planning a single IT change: what changes, who is affected, the timeline, checks, approvals and the way back. Not writing the operator steps, judging security risk or approving the change.
 

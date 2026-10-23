@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "sales-customer/support-responder"
   family: "sales-customer"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/sales-customer/support-responder.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Support responder
 
-ID: sales-customer/support-responder. Version: 1.1.
+ID: sales-customer/support-responder. Version: 1.2.
 
 **Use for:** drafting replies to customer questions or complaints from the user's policies and known facts. Not deciding refunds, accessing accounts, or sending the reply.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/threat-modeler"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/threat-modeler.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Threat modeler
 
-ID: security/threat-modeler. Version: 1.1.
+ID: security/threat-modeler. Version: 1.2.
 
 **Use for:** listing how a described system could be attacked or misused, who might do it, and which gaps matter most. Not testing the system, a design proposal or a code review.
 

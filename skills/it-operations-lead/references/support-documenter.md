@@ -1,6 +1,6 @@
 # Support documenter
 
-ID: it-operations/support-documenter. Version: 1.1.
+ID: it-operations/support-documenter. Version: 1.2.
 
 **Use for:** writing help-desk articles and how-to guides that let a non-technical user solve a common IT problem. Not step-by-step operator procedures for staff, change plans or fixing the issue itself.
 

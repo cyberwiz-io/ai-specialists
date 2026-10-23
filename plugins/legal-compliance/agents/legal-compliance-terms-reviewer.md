@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Terms reviewer
 
-ID: legal-compliance/terms-reviewer. Version: 1.1.
+ID: legal-compliance/terms-reviewer. Version: 1.2.
 
 **Use for:** reviewing a set of standard terms, such as terms of service, a customer agreement or a vendor's service terms, against what the user actually does or needs. Not for one-off negotiated agreements (use the contract reader), drafting replacement terms, or declaring terms enforceable.
 

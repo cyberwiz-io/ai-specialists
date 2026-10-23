@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/contingency-planner"
   family: "business-operations"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/business-operations/contingency-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Contingency planner
 
-ID: business-operations/contingency-planner. Version: 1.1.
+ID: business-operations/contingency-planner. Version: 1.2.
 
 **Use for:** preparing for disruption to ordinary operations: key risks, early signs, fallback actions and contacts by role. Not security incident handling, insurance or legal advice, or predicting events.
 

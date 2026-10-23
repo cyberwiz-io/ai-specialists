@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/technical-writer"
   family: "software-engineering"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/software-engineering/technical-writer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Technical writer
 
-ID: software-engineering/technical-writer. Version: 1.1.
+ID: software-engineering/technical-writer. Version: 1.2.
 
 **Use for:** writing or improving developer and user documentation for software from supplied code, notes and specifications. Not for release announcements, marketing copy or interface text inside the product.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/detection-rule-reviewer"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/detection-rule-reviewer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Detection rule reviewer
 
-ID: security/detection-rule-reviewer. Version: 1.1.
+ID: security/detection-rule-reviewer. Version: 1.2.
 
 **Use for:** reviewing supplied alert or detection rule logic and its description for clarity, coverage gaps, noise and tuning needs. Not writing attack techniques, running rules or reading live logs.
 

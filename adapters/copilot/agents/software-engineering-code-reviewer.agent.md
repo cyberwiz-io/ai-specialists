@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Code reviewer
 
-ID: software-engineering/code-reviewer. Version: 1.1.
+ID: software-engineering/code-reviewer. Version: 1.2.
 
 **Use for:** reviewing code or a change the user supplies for correctness, clarity, maintainability and risk. Not for planning new features, writing a full test plan or a security audit.
 

@@ -4,7 +4,7 @@ You do not have to paste a pack into a chat. Each family is also an installable 
 
 Nothing here adds a capability. A skill is advisory instructions, and the plugins are materials only: they do not publish, send, schedule, connect or run anything.
 
-The commands below describe candidate install paths. Current host acceptance for Claude Code and Codex on macOS and Windows is pending, and no 1.1 release has been published. The release download links are retained for the planned assets; working downloads require actual publication and post-publication verification. Older trials below are historical evidence only.
+The commands below describe candidate install paths. Current host acceptance for Claude Code and Codex on macOS and Windows is pending, and no 1.2 release has been published. The release download links are retained for the planned assets; working downloads require actual publication and post-publication verification. Older trials below are historical evidence only.
 
 ## What gets installed
 
@@ -32,13 +32,13 @@ Skills declare `allowed-tools` (`Read Grep Glob`, plus `Agent` for the leads), a
 
 Workers receive exactly the read tools `Read`, `Grep`, and `Glob`; they have no `Bash` or automatic skill tool. Approved methods are passed explicitly by leads in task handoffs. These are configured instructions, not proof that the host enforces a boundary. Verify actual tools and permissions during host acceptance.
 
-Partial candidate trials on macOS and Windows installed the business-operations plugin from the GitHub candidate branch and verified its cached commit. They traced real workers but exposed behavioral and review gaps; update and removal acceptance remains pending. See the exact source ref and limitations in [Validation](VALIDATION.md). These observations do not establish the default-branch commands above for the unpublished 1.1 candidate.
+Partial candidate trials on macOS and Windows installed the business-operations plugin from the GitHub candidate branch and verified its cached commit. They traced real workers but exposed behavioral and review gaps; update and removal acceptance remains pending. See the exact source ref and limitations in [Validation](VALIDATION.md). These observations do not establish the default-branch commands above for the unpublished 1.2 candidate.
 
 To try a plugin from a downloaded checkout without the marketplace, run `claude --plugin-dir plugins/security`. Details: [Claude Code adapter](../adapters/claude-code/README.md).
 
 ## Claude.ai and Claude Desktop
 
-After publication and download verification, get a family skill ZIP from the [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest). Planned files are named `ai-specialists-<version>-skill-<family>.zip`, each holding the lead skill folder `<family>-lead/` with its cards. In Settings, open Capabilities, then Skills, and upload the ZIP. The 1.1 candidate's ZIP is not currently available. To add a single role from a checkout, zip its folder `skills/<family>-<slug>/` and upload that.
+After publication and download verification, get a family skill ZIP from the [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest). Planned files are named `ai-specialists-<version>-skill-<family>.zip`, each holding the lead skill folder `<family>-lead/` with its cards. In Settings, open Capabilities, then Skills, and upload the ZIP. The 1.2 candidate's ZIP is not currently available. To add a single role from a checkout, zip its folder `skills/<family>-<slug>/` and upload that.
 
 Availability depends on your plan and on skills being enabled for your account or organization. This claude.ai path has no subagents here; the lead states that role perspectives ran inline and marks nontrivial output BLOCKED_REVIEW unless an authorized different-model review actually ran.
 
@@ -108,6 +108,6 @@ The lead skill for a family is `<family>-lead`, for example `security-lead`. Sec
 
 All the files above are generated from the cards by the build and checked for structure: names, description limits, links and freshness. `python3 -B scripts/pack.py stats` estimates the tokens each output and plugin adds.
 
-Current acceptance is pending for Claude Code and Codex on both required devices (macOS and Windows); see [host acceptance](HOST-ACCEPTANCE.md). Inventory versions are not test results. Historical 1.0 Claude Code marketplace installs, Claude Code 2.1.302 validation and local smoke tests, the Antigravity CLI plan-mode run, and earlier Codex attempts are described in [Validation](VALIDATION.md); none establishes current acceptance. No 1.1 release, release download, claude.ai upload, or unaided-user trial is recorded. Other hosts remain unaccepted. Report observed behavior with the exact host, version, device and source ref.
+Current acceptance is pending for Claude Code and Codex on both required devices (macOS and Windows); see [host acceptance](HOST-ACCEPTANCE.md). Inventory versions are not test results. Historical 1.0 Claude Code marketplace installs, Claude Code 2.1.302 validation and local smoke tests, the Antigravity CLI plan-mode run, and earlier Codex attempts are described in [Validation](VALIDATION.md); none establishes current acceptance. No 1.2 release, release download, claude.ai upload, or unaided-user trial is recorded. Other hosts remain unaccepted. Report observed behavior with the exact host, version, device and source ref.
 
 The files in `skills/`, `plugins/`, `adapters/` (except each README), `.claude-plugin/`, `.cursor-plugin/`, `.agents/plugins/` and `gemini-extension.json` are generated. To change a specialist, edit its card in `catalog/` and rebuild; see [Contributing](../CONTRIBUTING.md).

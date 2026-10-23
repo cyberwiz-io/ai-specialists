@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Technical writer
 
-ID: software-engineering/technical-writer. Version: 1.1.
+ID: software-engineering/technical-writer. Version: 1.2.
 
 **Use for:** writing or improving developer and user documentation for software from supplied code, notes and specifications. Not for release announcements, marketing copy or interface text inside the product.
 

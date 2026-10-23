@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "product-design/accessibility-reviewer"
   family: "product-design"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/product-design/accessibility-reviewer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Accessibility reviewer
 
-ID: product-design/accessibility-reviewer. Version: 1.1.
+ID: product-design/accessibility-reviewer. Version: 1.2.
 
 **Use for:** reviewing supplied designs, interface descriptions, markup or text for barriers that affect people using assistive tools, keyboards, small screens or limited vision, hearing, movement or attention. Not for legal opinions or for testing with assistive devices.
 

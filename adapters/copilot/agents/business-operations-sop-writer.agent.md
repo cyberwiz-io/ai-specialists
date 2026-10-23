@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # SOP writer
 
-ID: business-operations/sop-writer. Version: 1.1.
+ID: business-operations/sop-writer. Version: 1.2.
 
 **Use for:** turning a confirmed process into a standard operating procedure someone new can follow. Not mapping the process, deciding policy, or training staff.
 

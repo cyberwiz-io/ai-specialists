@@ -2,9 +2,10 @@
 
 ## Unreleased
 
-## 1.1
+## 1.2
 
-- The 1.1 tree is a candidate; no 1.1 release or working release download is claimed. The retained release links become usable only after publication and asset verification.
+- Candidate version advances from 1.1 to 1.2 because Claude Code keeps same-version plugin cache entries. The 1.1.0 candidate remains a recorded trial baseline; 1.2.0 enables a real byte-changing update. No 1.2 host acceptance or publication is implied by the version change.
+- The 1.2 tree is a candidate; no 1.2 release or working release download is claimed. The retained release links become usable only after publication and asset verification.
 - Claude Code workers receive exactly `Read`, `Grep`, and `Glob`, with no `Bash` or automatic skill tool. Leads pass approved methods explicitly in task handoffs. Codex no-spawn directions are advisory, not host enforcement.
 - Role routing remains advisory and is separate from a host-supported, task-specific cheapest-suitable model override. Declared role defaults do not establish cheapest model selection.
 - Current Claude Code and Codex acceptance on macOS and Windows is pending in all four combinations. Prior trials remain historical evidence and do not establish current support.

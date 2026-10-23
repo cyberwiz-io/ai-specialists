@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Cross-family reviewer
 
-ID: orchestration/cross-family-reviewer. Version: 1.1.
+ID: orchestration/cross-family-reviewer. Version: 1.2.
 
 **Use for:** reviewing a nontrivial combined result from one or more specialist families against the user's request and the contributing pieces. Not for approving on the user's behalf or replacing a specialist's own acceptance checks.
 

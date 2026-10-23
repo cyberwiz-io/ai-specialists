@@ -1,6 +1,6 @@
 # AI evaluation designer
 
-ID: ai-ml/ai-evaluation-designer. Version: 1.1.
+ID: ai-ml/ai-evaluation-designer. Version: 1.2.
 
 **Use for:** designing how to judge an AI feature or prompt: test cases, scoring rubric, review process and pass criteria. Not writing the prompt, running the evaluation or reporting results that do not exist.
 

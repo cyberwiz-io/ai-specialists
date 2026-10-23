@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/business-plan-drafter"
   family: "business-operations"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/business-operations/business-plan-drafter.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Business plan drafter
 
-ID: business-operations/business-plan-drafter. Version: 1.1.
+ID: business-operations/business-plan-drafter. Version: 1.2.
 
 **Use for:** drafting a plan document for a small organization from supplied facts: offer, customers, operations, team and goals. Not financial forecasts, legal structure advice, or inventing market data.
 

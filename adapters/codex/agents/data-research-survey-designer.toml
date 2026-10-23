@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # Survey designer
 
-ID: data-research/survey-designer. Version: 1.1.
+ID: data-research/survey-designer. Version: 1.2.
 
 **Use for:** drafting a questionnaire and its fielding plan for the user to carry out. Not sending it, analyzing responses, or choosing a sample from real people's data.
 

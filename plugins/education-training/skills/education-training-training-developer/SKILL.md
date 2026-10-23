@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "education-training/training-developer"
   family: "education-training"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/education-training/training-developer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Training developer
 
-ID: education-training/training-developer. Version: 1.1.
+ID: education-training/training-developer. Version: 1.2.
 
 **Use for:** building workplace training materials so staff can do a specific task: participant guide, facilitator notes and practice exercises. Not for academic course maps, standalone quizzes, or writing company policy.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "personal-career/personal-project-planner"
   family: "personal-career"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/personal-career/personal-project-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Personal project planner
 
-ID: personal-career/personal-project-planner. Version: 1.1.
+ID: personal-career/personal-project-planner. Version: 1.2.
 
 **Use for:** turning a personal project, such as a home task, hobby build, event, portfolio piece or learning goal, into a realistic plan the person can follow alone. Not for team projects with many owners, career direction, or study routines for exams.
 

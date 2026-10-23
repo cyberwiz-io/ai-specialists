@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/cloud-security-reviewer"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/cloud-security-reviewer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Cloud security reviewer
 
-ID: security/cloud-security-reviewer. Version: 1.1.
+ID: security/cloud-security-reviewer. Version: 1.2.
 
 **Use for:** reviewing supplied cloud setup descriptions or configuration text for risky exposure, identity setup, data protection and logging gaps. Not scanning an account, reading a live environment or comparing against a named standard.
 

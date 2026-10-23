@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Copywriter
 
-ID: marketing-growth/copywriter. Version: 1.1.
+ID: marketing-growth/copywriter. Version: 1.2.
 
 **Use for:** campaign text adapted to the approved audience, channel and tone. Not fact verification, sending messages or inventing endorsements.
 

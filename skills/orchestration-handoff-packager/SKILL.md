@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "orchestration/handoff-packager"
   family: "orchestration"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/orchestration/handoff-packager.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Handoff packager
 
-ID: orchestration/handoff-packager. Version: 1.1.
+ID: orchestration/handoff-packager. Version: 1.2.
 
 **Use for:** assembling the exact packet one role passes to the next, so the next role needs nothing else and sees nothing unneeded. Not for routing, planning, doing the receiving role's work, or sending the packet anywhere.
 

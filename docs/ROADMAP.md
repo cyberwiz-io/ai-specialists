@@ -1,6 +1,6 @@
 # Roadmap
 
-Version 1.1 builds on the 1.0 catalog of 124 specialists in 17 families: pasteable packs, Agent Skills, Claude Code plugins with team leads, claude.ai skill ZIPs and generated install files for Codex, Copilot, Gemini CLI and Cursor. It grew out of the 0.1 marketing instruction pack. All items below are planned work, not promises of implemented capabilities or release dates.
+Version 1.2 builds on the 1.0 catalog of 124 specialists in 17 families: pasteable packs, Agent Skills, Claude Code plugins with team leads, claude.ai skill ZIPs and generated install files for Codex, Copilot, Gemini CLI and Cursor. It grew out of the 0.1 marketing instruction pack. All items below are planned work, not promises of implemented capabilities or release dates.
 
 ## Validate the current release
 
@@ -23,7 +23,7 @@ Candidate next steps, after validation: a bounded developer feature-change workf
 
 Add host support only when a selected host needs it. Document the exact tested host/version, setup path, capabilities, limitations, and evidence. Native delegation, reliable persistence, and independent review require their own checks.
 
-Status: the build generates install files from the cards. Claude Code gets a marketplace, family leads and workers limited to `Read`, `Grep` and `Glob`. Leads supply approved methods in handoffs. Codex no-spawn directions depend on host controls. The root `skills/` folder and generated adapters provide other installation materials; local builds also produce upload-ready skill archives. No 1.1 release is published or verified. Historical Claude Code format validation, local smoke tests and a GitHub marketplace installation are recorded in [Validation](VALIDATION.md); they do not establish current support. Current Claude Code and Codex acceptance on macOS and Windows remains pending in all four combinations. The historical card evaluation baseline lacks the hashes needed for current regression comparisons. Complete the [release evaluation protocol](../evals/README.md), [native trials](HOST-ACCEPTANCE.md) and publication checks before updating these claims or submitting to a directory. The claude.ai upload, unaided user trials and current trials in other hosts remain unobserved.
+Status: the build generates install files from the cards. Claude Code gets a marketplace, family leads and workers limited to `Read`, `Grep` and `Glob`. Leads supply approved methods in handoffs. Codex no-spawn directions depend on host controls. The root `skills/` folder and generated adapters provide other installation materials; local builds also produce upload-ready skill archives. No 1.2 release is published or verified. Historical Claude Code format validation, local smoke tests and a GitHub marketplace installation are recorded in [Validation](VALIDATION.md); they do not establish current support. Current Claude Code and Codex acceptance on macOS and Windows remains pending in all four combinations. The historical card evaluation baseline lacks the hashes needed for current regression comparisons. Complete the [release evaluation protocol](../evals/README.md), [native trials](HOST-ACCEPTANCE.md) and publication checks before updating these claims or submitting to a directory. The claude.ai upload, unaided user trials and current trials in other hosts remain unobserved.
 
 ## External actions remain future work
 

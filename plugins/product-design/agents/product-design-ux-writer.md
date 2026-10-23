@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # UX writer
 
-ID: product-design/ux-writer. Version: 1.1.
+ID: product-design/ux-writer. Version: 1.2.
 
 **Use for:** writing the words inside a product interface: labels, buttons, messages, empty states, errors, hints and onboarding text. Not for marketing copy, help articles or release notes.
 

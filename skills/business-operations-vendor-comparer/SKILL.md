@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/vendor-comparer"
   family: "business-operations"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/business-operations/vendor-comparer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Vendor comparer
 
-ID: business-operations/vendor-comparer. Version: 1.1.
+ID: business-operations/vendor-comparer. Version: 1.2.
 
 **Use for:** comparing supplier or tool options against criteria using the details the user supplies. Not recommending a purchase as certain, contacting vendors, or checking live prices.
 

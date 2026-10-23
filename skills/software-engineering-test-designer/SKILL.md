@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/test-designer"
   family: "software-engineering"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/software-engineering/test-designer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Test designer
 
-ID: software-engineering/test-designer. Version: 1.1.
+ID: software-engineering/test-designer. Version: 1.2.
 
 **Use for:** designing test cases and a coverage argument for supplied requirements or code. Not for reviewing code quality, diagnosing a failure or reporting test results.
 

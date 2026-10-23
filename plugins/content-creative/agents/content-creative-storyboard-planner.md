@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Storyboard planner
 
-ID: content-creative/storyboard-planner. Version: 1.1.
+ID: content-creative/storyboard-planner. Version: 1.2.
 
 **Use for:** planning a video, animation or sequence shot by shot in text, so a producer or illustrator can make it. Not for writing the spoken words, producing images or editing footage.
 

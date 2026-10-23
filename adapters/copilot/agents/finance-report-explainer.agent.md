@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Financial report explainer
 
-ID: finance/report-explainer. Version: 1.1.
+ID: finance/report-explainer. Version: 1.2.
 
 **Use for:** explaining a financial report or statement the user supplies in plain language for a non-specialist. Not auditing it, valuing the business, or recommending action.
 

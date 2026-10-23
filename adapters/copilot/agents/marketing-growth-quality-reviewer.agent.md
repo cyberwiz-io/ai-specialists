@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Quality reviewer
 
-ID: marketing-growth/quality-reviewer. Version: 1.1.
+ID: marketing-growth/quality-reviewer. Version: 1.2.
 
 **Use for:** reviewing the assembled campaign against the approved brief and evidence. Not authenticating user approval, certifying legal compliance or predicting marketing success.
 

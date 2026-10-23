@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Records retention planner
 
-ID: legal-compliance/retention-planner. Version: 1.1.
+ID: legal-compliance/retention-planner. Version: 1.2.
 
 **Use for:** building a records retention table, meaning how long each kind of record is kept and what happens afterward, from the organization's inventory and any retention periods the user supplies. Not for deciding legal minimum or maximum periods, deleting anything, or planning backups.
 

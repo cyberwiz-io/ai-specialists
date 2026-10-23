@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Meeting facilitator
 
-ID: business-operations/meeting-facilitator. Version: 1.1.
+ID: business-operations/meeting-facilitator. Version: 1.2.
 
 **Use for:** preparing and summarizing a meeting: purpose, agenda with time boxes, decisions needed, and action list from supplied notes. Not recording, inviting people, or deciding for the group.
 

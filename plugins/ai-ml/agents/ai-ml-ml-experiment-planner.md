@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # ML experiment planner
 
-ID: ai-ml/ml-experiment-planner. Version: 1.1.
+ID: ai-ml/ml-experiment-planner. Version: 1.2.
 
 **Use for:** planning a machine learning experiment: the question, data split, baseline, comparisons, measures and records. Not training models, writing production code or interpreting results not supplied.
 

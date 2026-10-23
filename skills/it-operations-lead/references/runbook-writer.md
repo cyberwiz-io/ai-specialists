@@ -1,6 +1,6 @@
 # Runbook writer
 
-ID: it-operations/runbook-writer. Version: 1.1.
+ID: it-operations/runbook-writer. Version: 1.2.
 
 **Use for:** writing a precise operator procedure for a recurring or emergency IT task, with checks, rollback and escalation. Not end-user help, a change proposal or a recovery strategy.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/brand-voice-guide"
   family: "marketing-growth"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/marketing-growth/brand-voice-guide.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Brand voice guide
 
-ID: marketing-growth/brand-voice-guide. Version: 1.1.
+ID: marketing-growth/brand-voice-guide. Version: 1.2.
 
 **Use for:** turning supplied brand samples into a short voice guide: personality traits, word choices, do and do not examples, and tone shifts by situation. Not inventing a brand identity, copying another brand, or rewriting a full campaign.
 

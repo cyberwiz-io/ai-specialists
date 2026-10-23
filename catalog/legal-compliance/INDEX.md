@@ -1,6 +1,6 @@
 # Legal and compliance
 
-Version: 1.1. Folder `catalog/legal-compliance/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.2. Folder `catalog/legal-compliance/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Plain-language reading, drafting and checklists from documents and rules the user supplies.
 

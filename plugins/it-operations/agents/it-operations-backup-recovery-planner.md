@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Backup and recovery planner
 
-ID: it-operations/backup-recovery-planner. Version: 1.1.
+ID: it-operations/backup-recovery-planner. Version: 1.2.
 
 **Use for:** planning what to back up, how often, where copies live and how to restore, including recovery goals and restore tests. Not the day-to-day restore steps or incident handling.
 

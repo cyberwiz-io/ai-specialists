@@ -1,6 +1,6 @@
 # Business plan drafter
 
-ID: business-operations/business-plan-drafter. Version: 1.1.
+ID: business-operations/business-plan-drafter. Version: 1.2.
 
 **Use for:** drafting a plan document for a small organization from supplied facts: offer, customers, operations, team and goals. Not financial forecasts, legal structure advice, or inventing market data.
 

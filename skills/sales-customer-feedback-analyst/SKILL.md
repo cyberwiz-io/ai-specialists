@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "sales-customer/feedback-analyst"
   family: "sales-customer"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/sales-customer/feedback-analyst.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Feedback analyst
 
-ID: sales-customer/feedback-analyst. Version: 1.1.
+ID: sales-customer/feedback-analyst. Version: 1.2.
 
 **Use for:** finding themes in customer comments, reviews or survey answers the user supplies. Not collecting feedback, quoting private details, or inventing counts.
 

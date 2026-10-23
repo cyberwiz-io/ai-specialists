@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "ai-ml/ml-experiment-planner"
   family: "ai-ml"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/ai-ml/ml-experiment-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # ML experiment planner
 
-ID: ai-ml/ml-experiment-planner. Version: 1.1.
+ID: ai-ml/ml-experiment-planner. Version: 1.2.
 
 **Use for:** planning a machine learning experiment: the question, data split, baseline, comparisons, measures and records. Not training models, writing production code or interpreting results not supplied.
 

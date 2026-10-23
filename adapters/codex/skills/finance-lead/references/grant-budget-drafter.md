@@ -1,6 +1,6 @@
 # Grant budget drafter
 
-ID: finance/grant-budget-drafter. Version: 1.1.
+ID: finance/grant-budget-drafter. Version: 1.2.
 
 **Use for:** drafting a grant budget and its line-by-line justification from the funder's rules and cost figures the user supplies. Not writing the proposal narrative, or confirming that a cost is allowed.
 

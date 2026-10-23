@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/seo-strategist"
   family: "marketing-growth"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/marketing-growth/seo-strategist.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # SEO strategist
 
-ID: marketing-growth/seo-strategist. Version: 1.1.
+ID: marketing-growth/seo-strategist. Version: 1.2.
 
 **Use for:** a search visibility plan for a site or page set: topic and keyword groups, search intent, page-to-topic mapping and on-page recommendations. Not writing the final copy, changing the site, or predicting rankings or traffic.
 

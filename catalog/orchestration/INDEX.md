@@ -1,6 +1,6 @@
 # Orchestration and meta
 
-Version: 1.1. Folder `catalog/orchestration/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.2. Folder `catalog/orchestration/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Routing work to the right specialists, breaking down plans, packaging handoffs and reviewing across families. The Coordinator itself lives in the pack folder.
 

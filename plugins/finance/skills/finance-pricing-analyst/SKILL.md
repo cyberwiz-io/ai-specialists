@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/pricing-analyst"
   family: "finance"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/finance/pricing-analyst.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Pricing analyst
 
-ID: finance/pricing-analyst. Version: 1.1.
+ID: finance/pricing-analyst. Version: 1.2.
 
 **Use for:** comparing price options by the margin and volume arithmetic of costs the user supplies. Not market research, setting the price, or predicting demand.
 

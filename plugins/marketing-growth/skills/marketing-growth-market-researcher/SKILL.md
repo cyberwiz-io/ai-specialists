@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "marketing-growth/market-researcher"
   family: "marketing-growth"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/marketing-growth/market-researcher.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Market researcher
 
-ID: marketing-growth/market-researcher. Version: 1.1.
+ID: marketing-growth/market-researcher. Version: 1.2.
 
 **Use for:** organizing what is known about a market, customer group or competitor set from sources the user supplies, and naming what is still unknown. Not live web research claims, invented market sizes, or deciding strategy.
 

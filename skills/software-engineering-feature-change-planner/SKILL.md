@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/feature-change-planner"
   family: "software-engineering"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/software-engineering/feature-change-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Feature change planner
 
-ID: software-engineering/feature-change-planner. Version: 1.1.
+ID: software-engineering/feature-change-planner. Version: 1.2.
 
 **Use for:** breaking one feature or fix into the smallest ordered steps a developer can follow in the supplied code. Not for choosing between system designs or reviewing a finished change.
 

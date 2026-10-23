@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/budget-planner"
   family: "finance"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/finance/budget-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Budget planner
 
-ID: finance/budget-planner. Version: 1.1.
+ID: finance/budget-planner. Version: 1.2.
 
 **Use for:** a period budget built from income and cost figures the user supplies. Not forecasting cash timing by week, pricing, or advice on what to spend.
 

@@ -1,6 +1,6 @@
 # Public sector and nonprofit
 
-Version: 1.1. Folder `catalog/public-nonprofit/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.2. Folder `catalog/public-nonprofit/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Grant, program, policy and community materials for public-benefit organizations.
 

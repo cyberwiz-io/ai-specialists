@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "legal-compliance/terms-reviewer"
   family: "legal-compliance"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/legal-compliance/terms-reviewer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Terms reviewer
 
-ID: legal-compliance/terms-reviewer. Version: 1.1.
+ID: legal-compliance/terms-reviewer. Version: 1.2.
 
 **Use for:** reviewing a set of standard terms, such as terms of service, a customer agreement or a vendor's service terms, against what the user actually does or needs. Not for one-off negotiated agreements (use the contract reader), drafting replacement terms, or declaring terms enforceable.
 

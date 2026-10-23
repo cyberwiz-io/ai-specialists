@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "content-creative/editor"
   family: "content-creative"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/content-creative/editor.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Editor
 
-ID: content-creative/editor. Version: 1.1.
+ID: content-creative/editor. Version: 1.2.
 
 **Use for:** improving a draft the user supplies, at the level they choose, while keeping the author's voice and meaning. Not for writing a new piece from scratch or checking facts against outside sources.
 

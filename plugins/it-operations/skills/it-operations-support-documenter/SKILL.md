@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "it-operations/support-documenter"
   family: "it-operations"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/it-operations/support-documenter.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Support documenter
 
-ID: it-operations/support-documenter. Version: 1.1.
+ID: it-operations/support-documenter. Version: 1.2.
 
 **Use for:** writing help-desk articles and how-to guides that let a non-technical user solve a common IT problem. Not step-by-step operator procedures for staff, change plans or fixing the issue itself.
 

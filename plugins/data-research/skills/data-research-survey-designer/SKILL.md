@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/survey-designer"
   family: "data-research"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/data-research/survey-designer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Survey designer
 
-ID: data-research/survey-designer. Version: 1.1.
+ID: data-research/survey-designer. Version: 1.2.
 
 **Use for:** drafting a questionnaire and its fielding plan for the user to carry out. Not sending it, analyzing responses, or choosing a sample from real people's data.
 

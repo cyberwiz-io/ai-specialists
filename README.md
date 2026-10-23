@@ -2,7 +2,7 @@
 
 A library of 124 specialist instruction cards in 17 families, plus a coordinator, for the AI assistant you already have. Describe a task, and the coordinator guides the right specialist perspectives through it. The best-developed path is a small-business marketing campaign.
 
-**Version 1.1 candidate · Materials only · [Validation status](docs/VALIDATION.md)**
+**Version 1.2 candidate · Materials only · [Validation status](docs/VALIDATION.md)**
 
 ## Install options
 

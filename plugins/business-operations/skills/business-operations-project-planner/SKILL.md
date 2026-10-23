@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "business-operations/project-planner"
   family: "business-operations"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/business-operations/project-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Project planner
 
-ID: business-operations/project-planner. Version: 1.1.
+ID: business-operations/project-planner. Version: 1.2.
 
 **Use for:** breaking a defined goal into tasks, order, owners, effort ranges and risks. Not tracking progress, assigning real people without being told, or promising dates.
 

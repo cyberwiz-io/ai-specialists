@@ -14,7 +14,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Budget planner
 
-ID: finance/budget-planner. Version: 1.1.
+ID: finance/budget-planner. Version: 1.2.
 
 **Use for:** a period budget built from income and cost figures the user supplies. Not forecasting cash timing by week, pricing, or advice on what to spend.
 

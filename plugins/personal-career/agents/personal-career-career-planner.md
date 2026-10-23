@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Career planner
 
-ID: personal-career/career-planner. Version: 1.1.
+ID: personal-career/career-planner. Version: 1.2.
 
 **Use for:** helping a person think through career direction and build a realistic plan for the next year, from their own goals, skills and constraints. Not for guaranteeing job availability or pay, rewriting a resume, or deciding for the person.
 

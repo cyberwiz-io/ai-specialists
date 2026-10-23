@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/security-policy-writer"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/security-policy-writer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Security policy writer
 
-ID: security/security-policy-writer. Version: 1.1.
+ID: security/security-policy-writer. Version: 1.2.
 
 **Use for:** drafting plain-language security policies and standards for an organization: what is required, who it applies to and what happens on exceptions. Not legal wording, a risk assessment or a training course.
 

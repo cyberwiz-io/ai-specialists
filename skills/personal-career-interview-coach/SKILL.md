@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "personal-career/interview-coach"
   family: "personal-career"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/personal-career/interview-coach.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Interview coach
 
-ID: personal-career/interview-coach. Version: 1.1.
+ID: personal-career/interview-coach. Version: 1.2.
 
 **Use for:** preparing the person for a specific interview through likely questions, answer outlines from their real experience and a practice script. Not for scoring the person, predicting the outcome, or making up stories to sound stronger.
 

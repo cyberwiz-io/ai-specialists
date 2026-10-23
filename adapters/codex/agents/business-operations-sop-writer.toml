@@ -10,7 +10,7 @@ Tool reductions do not create a sandbox. The parent session must supply read-onl
 
 # SOP writer
 
-ID: business-operations/sop-writer. Version: 1.1.
+ID: business-operations/sop-writer. Version: 1.2.
 
 **Use for:** turning a confirmed process into a standard operating procedure someone new can follow. Not mapping the process, deciding policy, or training staff.
 

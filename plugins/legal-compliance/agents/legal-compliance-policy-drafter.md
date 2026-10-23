@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Policy drafter
 
-ID: legal-compliance/policy-drafter. Version: 1.1.
+ID: legal-compliance/policy-drafter. Version: 1.2.
 
 **Use for:** drafting an internal policy document from rules, practices and decisions the organization supplies. Not for inventing obligations, writing public notices, or deciding what the law requires.
 

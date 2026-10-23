@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "education-training/rubric-designer"
   family: "education-training"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/education-training/rubric-designer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Rubric designer
 
-ID: education-training/rubric-designer. Version: 1.1.
+ID: education-training/rubric-designer. Version: 1.2.
 
 **Use for:** a scoring rubric for open-ended work such as essays, projects, presentations or observed tasks, so judging is consistent. Not for writing quiz questions, designing the course, or deciding any learner's grade.
 

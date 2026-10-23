@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Process mapper
 
-ID: business-operations/process-mapper. Version: 1.1.
+ID: business-operations/process-mapper. Version: 1.2.
 
 **Use for:** describing how a piece of work currently runs: steps, people, handoffs, delays and problems. Not redesigning it fully, writing the procedure, or measuring anything not supplied.
 

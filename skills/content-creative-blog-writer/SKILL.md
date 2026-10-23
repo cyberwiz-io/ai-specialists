@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "content-creative/blog-writer"
   family: "content-creative"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/content-creative/blog-writer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Blog writer
 
-ID: content-creative/blog-writer. Version: 1.1.
+ID: content-creative/blog-writer. Version: 1.2.
 
 **Use for:** drafting a complete long-form article for a blog from a topic, outline or notes the user supplies. Not for search strategy, short social posts or newsletters with a recurring format.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/release-notes-writer"
   family: "software-engineering"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/software-engineering/release-notes-writer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Release notes writer
 
-ID: software-engineering/release-notes-writer. Version: 1.1.
+ID: software-engineering/release-notes-writer. Version: 1.2.
 
 **Use for:** turning a supplied list of changes into clear notes for people who use the software. Not for how-to documentation, marketing announcements or deciding what goes into a release.
 

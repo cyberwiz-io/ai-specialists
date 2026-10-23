@@ -1,6 +1,6 @@
 # Rubric designer
 
-ID: education-training/rubric-designer. Version: 1.1.
+ID: education-training/rubric-designer. Version: 1.2.
 
 **Use for:** a scoring rubric for open-ended work such as essays, projects, presentations or observed tasks, so judging is consistent. Not for writing quiz questions, designing the course, or deciding any learner's grade.
 

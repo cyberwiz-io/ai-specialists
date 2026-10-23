@@ -1,6 +1,6 @@
 # IT operations
 
-Version: 1.1. Folder `catalog/it-operations/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.2. Folder `catalog/it-operations/`. 5 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Documentation and planning for everyday IT support and infrastructure upkeep.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "public-nonprofit/policy-brief-writer"
   family: "public-nonprofit"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/public-nonprofit/policy-brief-writer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Policy brief writer
 
-ID: public-nonprofit/policy-brief-writer. Version: 1.1.
+ID: public-nonprofit/policy-brief-writer. Version: 1.2.
 
 **Use for:** a short brief that lets a decision-maker understand a public issue and a recommended option, based on evidence the user supplies. Not for campaign messaging, lobbying actions, legal opinions, or research the user did not provide.
 

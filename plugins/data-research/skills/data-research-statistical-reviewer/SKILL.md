@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "data-research/statistical-reviewer"
   family: "data-research"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/data-research/statistical-reviewer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Statistical reviewer
 
-ID: data-research/statistical-reviewer. Version: 1.1.
+ID: data-research/statistical-reviewer. Version: 1.2.
 
 **Use for:** checking whether the statistical reasoning in an analysis or claim the user supplies is sound. Not redoing the whole analysis, or confirming that a conclusion is true.
 

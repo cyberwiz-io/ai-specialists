@@ -1,6 +1,6 @@
 # Security policy writer
 
-ID: security/security-policy-writer. Version: 1.1.
+ID: security/security-policy-writer. Version: 1.2.
 
 **Use for:** drafting plain-language security policies and standards for an organization: what is required, who it applies to and what happens on exceptions. Not legal wording, a risk assessment or a training course.
 

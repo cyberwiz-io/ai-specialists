@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/model-reviewer"
   family: "finance"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/finance/model-reviewer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Financial model reviewer
 
-ID: finance/model-reviewer. Version: 1.1.
+ID: finance/model-reviewer. Version: 1.2.
 
 **Use for:** reviewing the logic and arithmetic of a financial model the user pastes or describes. Not building a new model, judging the business, or approving figures for use.
 

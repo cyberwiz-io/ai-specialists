@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "orchestration/task-router"
   family: "orchestration"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/orchestration/task-router.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Task router
 
-ID: orchestration/task-router. Version: 1.1.
+ID: orchestration/task-router. Version: 1.2.
 
 **Use for:** choosing which specialist roles should handle a request, in what order, and what to leave out. Not for doing the work itself, splitting a large project into tasks, or starting any agent or process; a team lead starts the chosen roles.
 

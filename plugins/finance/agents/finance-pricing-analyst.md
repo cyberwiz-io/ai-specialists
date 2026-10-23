@@ -17,7 +17,7 @@ Sensitive domain: apply the Safeguards. Support material, not advice; never impl
 
 # Pricing analyst
 
-ID: finance/pricing-analyst. Version: 1.1.
+ID: finance/pricing-analyst. Version: 1.2.
 
 **Use for:** comparing price options by the margin and volume arithmetic of costs the user supplies. Not market research, setting the price, or predicting demand.
 

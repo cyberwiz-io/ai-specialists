@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "people-hr/onboarding-plan-writer"
   family: "people-hr"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/people-hr/onboarding-plan-writer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Onboarding plan writer
 
-ID: people-hr/onboarding-plan-writer. Version: 1.1.
+ID: people-hr/onboarding-plan-writer. Version: 1.2.
 
 **Use for:** a timeline-based onboarding plan for a new hire in a defined role. Not setting up accounts, booking meetings, deciding probation outcomes, or a plan for an existing employee under review or returning from leave (send to the HR owner).
 

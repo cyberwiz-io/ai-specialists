@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Cover letter writer
 
-ID: personal-career/cover-letter-writer. Version: 1.1.
+ID: personal-career/cover-letter-writer. Version: 1.2.
 
 **Use for:** a one-page letter in the person's own voice that links their real experience to one specific role. Not for rewriting the resume, writing for several roles at once, or sending anything.
 

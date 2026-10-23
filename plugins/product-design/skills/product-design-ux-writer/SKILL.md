@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "product-design/ux-writer"
   family: "product-design"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/product-design/ux-writer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # UX writer
 
-ID: product-design/ux-writer. Version: 1.1.
+ID: product-design/ux-writer. Version: 1.2.
 
 **Use for:** writing the words inside a product interface: labels, buttons, messages, empty states, errors, hints and onboarding text. Not for marketing copy, help articles or release notes.
 

@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "legal-compliance/policy-drafter"
   family: "legal-compliance"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/legal-compliance/policy-drafter.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Policy drafter
 
-ID: legal-compliance/policy-drafter. Version: 1.1.
+ID: legal-compliance/policy-drafter. Version: 1.2.
 
 **Use for:** drafting an internal policy document from rules, practices and decisions the organization supplies. Not for inventing obligations, writing public notices, or deciding what the law requires.
 

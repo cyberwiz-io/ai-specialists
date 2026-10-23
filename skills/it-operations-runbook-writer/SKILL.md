@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "it-operations/runbook-writer"
   family: "it-operations"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/it-operations/runbook-writer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -21,7 +21,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Runbook writer
 
-ID: it-operations/runbook-writer. Version: 1.1.
+ID: it-operations/runbook-writer. Version: 1.2.
 
 **Use for:** writing a precise operator procedure for a recurring or emergency IT task, with checks, rollback and escalation. Not end-user help, a change proposal or a recovery strategy.
 

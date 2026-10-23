@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # OKR coach
 
-ID: business-operations/okr-coach. Version: 1.1.
+ID: business-operations/okr-coach. Version: 1.2.
 
 **Use for:** turning direction into a few objectives with measurable key results for one period. Not scoring people, setting targets without baselines, or tracking progress.
 

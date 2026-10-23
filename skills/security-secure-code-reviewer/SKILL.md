@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/secure-code-reviewer"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/secure-code-reviewer.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Secure code reviewer
 
-ID: security/secure-code-reviewer. Version: 1.1.
+ID: security/secure-code-reviewer. Version: 1.2.
 
 **Use for:** reading supplied code for insecure patterns, such as unchecked input, unsafe data handling, weak permission checks, secrets left in files and risky dependencies. Not general code quality, performance review, running the code, or code whose purpose is attack or evasion.
 

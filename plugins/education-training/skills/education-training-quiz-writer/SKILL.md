@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "education-training/quiz-writer"
   family: "education-training"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/education-training/quiz-writer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Quiz writer
 
-ID: education-training/quiz-writer. Version: 1.1.
+ID: education-training/quiz-writer. Version: 1.2.
 
 **Use for:** writing quiz or test questions with answer keys from content and outcomes the user supplies. Not for grading rubrics for open work, lesson planning, or setting pass marks.
 

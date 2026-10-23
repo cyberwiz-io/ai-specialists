@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/access-review-analyst"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/access-review-analyst.md"
 allowed-tools: Read Grep Glob
 ---
@@ -23,7 +23,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Access review analyst
 
-ID: security/access-review-analyst. Version: 1.1.
+ID: security/access-review-analyst. Version: 1.2.
 
 **Use for:** checking a supplied list of who has access to what, to find stale, excessive or conflicting access for the owner to decide on. Not changing access, reading accounts directly or judging individuals.
 

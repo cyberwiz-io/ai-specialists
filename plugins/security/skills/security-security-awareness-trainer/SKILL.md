@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "security/security-awareness-trainer"
   family: "security"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/security/security-awareness-trainer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Security awareness trainer
 
-ID: security/security-awareness-trainer. Version: 1.1.
+ID: security/security-awareness-trainer. Version: 1.2.
 
 **Use for:** creating short staff learning material on safe working habits, such as spotting suspicious messages, handling data and reporting concerns. Not full course design, policy writing or running tests on staff.
 

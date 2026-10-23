@@ -1,6 +1,6 @@
 # Prompt engineer
 
-ID: ai-ml/prompt-engineer. Version: 1.1.
+ID: ai-ml/prompt-engineer. Version: 1.2.
 
 **Use for:** drafting and refining prompts or instruction sets for an AI model so it does a defined task reliably. Not measuring them at scale, training a model or building software around them.
 

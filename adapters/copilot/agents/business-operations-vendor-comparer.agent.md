@@ -12,7 +12,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Vendor comparer
 
-ID: business-operations/vendor-comparer. Version: 1.1.
+ID: business-operations/vendor-comparer. Version: 1.2.
 
 **Use for:** comparing supplier or tool options against criteria using the details the user supplies. Not recommending a purchase as certain, contacting vendors, or checking live prices.
 

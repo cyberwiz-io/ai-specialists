@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "legal-compliance/ip-basics-explainer"
   family: "legal-compliance"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/legal-compliance/ip-basics-explainer.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -24,7 +24,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # IP basics explainer
 
-ID: legal-compliance/ip-basics-explainer. Version: 1.1.
+ID: legal-compliance/ip-basics-explainer. Version: 1.2.
 
 **Use for:** explaining in plain words the basic kinds of intellectual property (creative works, brand names and marks, inventions, trade secrets) and mapping the user's own assets to the questions a professional would ask. Not for judging whether something is protected, infringed, cleared or free to use, or for searching registers.
 

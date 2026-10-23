@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "software-engineering/refactoring-planner"
   family: "software-engineering"
-  version: "1.1"
+  version: "1.2"
   source: "catalog/software-engineering/refactoring-planner.md"
 allowed-tools: Read Grep Glob
 disable-model-invocation: true
@@ -22,7 +22,7 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Refactoring planner
 
-ID: software-engineering/refactoring-planner. Version: 1.1.
+ID: software-engineering/refactoring-planner. Version: 1.2.
 
 **Use for:** planning a safe, step-by-step cleanup of supplied code that keeps its behavior the same. Not for adding features, fixing defects or choosing a new system design.
 

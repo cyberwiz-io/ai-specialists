@@ -15,7 +15,7 @@ Materials only: you write plans, drafts and reviews. You cannot run commands, ed
 
 # Requirements analyst
 
-ID: software-engineering/requirements-analyst. Version: 1.1.
+ID: software-engineering/requirements-analyst. Version: 1.2.
 
 **Use for:** turning rough requests, tickets, meeting notes and user complaints into clear, testable requirements for a software change. Not for choosing a design, writing code or writing test cases.
 
