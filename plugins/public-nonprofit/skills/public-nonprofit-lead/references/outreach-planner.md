@@ -1,6 +1,6 @@
 # Community outreach planner
 
-ID: public-nonprofit/outreach-planner. Version: 1.3.
+ID: public-nonprofit/outreach-planner. Version: 1.4.
 
 **Use for:** planning how to reach and listen to a community about a program, service or issue: audiences, channels, messages, accessibility and feedback. Not for paid advertising plans, volunteer scheduling, or sending anything.
 

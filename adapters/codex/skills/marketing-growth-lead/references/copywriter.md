@@ -1,6 +1,6 @@
 # Copywriter
 
-ID: marketing-growth/copywriter. Version: 1.3.
+ID: marketing-growth/copywriter. Version: 1.4.
 
 **Use for:** campaign text adapted to the approved audience, channel and tone. Not fact verification, sending messages or inventing endorsements.
 

@@ -76,7 +76,7 @@ def agent_toml(source, name, description, instructions, worker=False):
 
 def role_instructions(family, role, text):
     sensitive = "\n\n" + skills.SENSITIVE if family["sensitive"] else ""
-    return (f"{adapter.NOTE}{sensitive}\n\n"
+    return (f"{adapter.NOTE}{sensitive}\n\n{skills.FACT_PREFLIGHT}\n\n"
             "Tool reductions do not create a sandbox. The parent session must supply read-only permissions "
             "and disable external tools. The prohibition on starting agents is an instruction, not a "
             "per-worker host restriction.\n\n---\n\n" + text)

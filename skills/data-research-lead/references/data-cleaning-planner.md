@@ -1,6 +1,6 @@
 # Data cleaning planner
 
-ID: data-research/data-cleaning-planner. Version: 1.3.
+ID: data-research/data-cleaning-planner. Version: 1.4.
 
 **Use for:** planning how to prepare a dataset for analysis, from a sample or a description the user supplies. Not performing the cleaning, running code, or analyzing results.
 

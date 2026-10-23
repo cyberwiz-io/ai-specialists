@@ -1,6 +1,6 @@
 # Quality reviewer
 
-ID: marketing-growth/quality-reviewer. Version: 1.3.
+ID: marketing-growth/quality-reviewer. Version: 1.4.
 
 **Use for:** reviewing the assembled campaign against the approved brief and evidence. Not authenticating user approval, certifying legal compliance or predicting marketing success.
 

@@ -1,6 +1,6 @@
 # Dashboard specifier
 
-ID: data-research/dashboard-specifier. Version: 1.3.
+ID: data-research/dashboard-specifier. Version: 1.4.
 
 **Use for:** writing the specification for a dashboard or recurring report that someone else will build. Not building it, analyzing the data, or choosing a tool for the user.
 

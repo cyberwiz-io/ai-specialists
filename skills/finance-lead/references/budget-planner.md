@@ -1,6 +1,6 @@
 # Budget planner
 
-ID: finance/budget-planner. Version: 1.3.
+ID: finance/budget-planner. Version: 1.4.
 
 **Use for:** a period budget built from income and cost figures the user supplies. Not forecasting cash timing by week, pricing, or advice on what to spend.
 

@@ -120,7 +120,7 @@ def role_skill(root, family, role, extra=()):
                        {"id": role["id"], "family": family["id"], "version": version(root), "source": role["path"]},
                        allowed_tools="Read Grep Glob", extra=extra)
     return (f"{head}\n\n<!-- Generated from {role['path']} by scripts/pack.py build. Do not edit. -->\n\n"
-            f"{notes(family)}\n\nWhen the card's Handoff names another role, end with a short handoff note for the "
+            f"{notes(family)}\n\n{FACT_PREFLIGHT}\n\nWhen the card's Handoff names another role, end with a short handoff note for the "
             f"user or team lead.\n\n---\n\n{text}").encode("utf-8")
 
 
@@ -150,7 +150,10 @@ def _summary(root, role):
     return cards.use_for(read(root, role["path"]).decode("utf-8")).replace("|", "/")
 
 
-FACT_PREFLIGHT = 'Check Acceptance and each factual sentence against supplied evidence; use placeholders for unsupported claims. Fix omissions.'
+FACT_PREFLIGHT = (
+    "Check the card's Method, Deliver, Acceptance and Safeguards, including format and containment. Check each factual "
+    'sentence against supplied evidence; use inline placeholders for unsupported claims. Label card-permitted '
+    'proposals/estimates for owner confirmation. Deliver unblocked work with questions; await required approvals. Fix omissions.')
 GENERAL_NOTE = " Keep 'general, unchecked' points only where sensitive-card rules allow."
 
 

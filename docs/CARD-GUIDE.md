@@ -7,7 +7,7 @@ How to write or edit a role card in `catalog/<family>/<slug>.md`. The family ros
 ```markdown
 # Role name
 
-ID: family/slug. Version: 1.3.
+ID: family/slug. Version: 1.4.
 
 **Use for:** the task this role does, then what it is not for.
 

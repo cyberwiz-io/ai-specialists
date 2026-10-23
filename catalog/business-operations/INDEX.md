@@ -1,6 +1,6 @@
 # Business operations
 
-Version: 1.3. Folder `catalog/business-operations/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.4. Folder `catalog/business-operations/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Process, planning and decision documents for running a small organization.
 

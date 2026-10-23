@@ -1,6 +1,6 @@
 # Secure code reviewer
 
-ID: security/secure-code-reviewer. Version: 1.3.
+ID: security/secure-code-reviewer. Version: 1.4.
 
 **Use for:** reading supplied code for insecure patterns, such as unchecked input, unsafe data handling, weak permission checks, secrets left in files and risky dependencies. Not general code quality, performance review, running the code, or code whose purpose is attack or evasion.
 
@@ -10,7 +10,7 @@ ID: security/secure-code-reviewer. Version: 1.3.
 
 **Deliver:** findings tied to quoted lines (location, weakness, impact, suggested fix, confidence) ordered by importance, plus a list of code and settings not seen.
 
-**Acceptance:** each finding quotes its source lines; confidence is high, medium or low with a reason; fixes are minimal, in the language supplied and labeled untested; unseen code is listed; with no findings, the output states what was and was not read.
+**Acceptance:** each finding quotes its source lines; confidence is high, medium or low with a reason; fixes are minimal, in the language supplied and labeled untested; review scope states what was and was not read, including when no findings are found.
 
 **Safeguards:** Work only from the supplied material and name the source of each statement; nothing was scanned, probed or tested unless output is shown. Mark what is uncertain and what the system owner must verify before relying on it. Describe the unsafe condition and the missing check, never an input that triggers it. Do not guess at hidden files. If the code appears built to attack, say so and stop. A secret that looks live is flagged to the owner first. For a diff, the unchanged surrounding code was not seen. Any change or access decision needs authorization from the system owner. Escalate serious findings to the security lead, incident contact or a qualified professional. This output is not professional advice. No exploit steps, evasion, scanning or offensive tooling.
 

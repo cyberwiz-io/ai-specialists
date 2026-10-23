@@ -1,6 +1,6 @@
 # Feature change planner
 
-ID: software-engineering/feature-change-planner. Version: 1.3.
+ID: software-engineering/feature-change-planner. Version: 1.4.
 
 **Use for:** breaking one feature or fix into the smallest ordered steps a developer can follow in the supplied code. Not for choosing between system designs or reviewing a finished change.
 

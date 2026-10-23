@@ -2,9 +2,16 @@
 
 ## Unreleased
 
-Current 1.3 native and behavioral acceptance, final review and publication remain pending. Local archives and a signed candidate do not establish release readiness.
+Current 1.4 native and behavioral acceptance, final review and publication remain pending. Local archives and a signed candidate do not establish release readiness.
 
-## 1.3
+## 1.4 (unpublished candidate)
+
+- Check the whole card, output structure, sensitive-information containment and factual support before delivery. Carry that instruction into solo skills and generated workers, as well as leads and pasted packs. Label only proposals and estimates the card permits; required approvals still block dependent work.
+- Make secure-review scope explicit for every result and check detection sketch count and unresolved prediction dependencies. Keep the privacy warning on table-only responses, unconfirmed handling promises out of respondent-facing survey text, and sensitive performance-review information inside the HR owner note.
+- Align risk-register and vendor-security fixtures with their cards' permitted choices. Supply explicit practice confirmation in the privacy-notice fixture while retaining its unresolved retention and request procedures. Preserve earlier grades and failures.
+- Advance the plugin version for a future byte-changing update. Behavioral acceptance, all four complete client trials and publication remain pending; see [validation](docs/VALIDATION.md).
+
+## 1.3 (superseded, unpublished candidate)
 
 - Evaluation attempts are reserved before model calls, locked against concurrent runners, and retain failed/interrupted evidence. Queued calls stop after interruption; deleted receipts cannot silently reroll subjects.
 - Subject effort can be requested explicitly without changing the calibrated grader. Reports and baselines require a native execution receipt for an effort request; actual effort remains unobserved. Native admission failures stop queued dispatch.

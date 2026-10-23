@@ -1,6 +1,6 @@
 # Cover letter writer
 
-ID: personal-career/cover-letter-writer. Version: 1.3.
+ID: personal-career/cover-letter-writer. Version: 1.4.
 
 **Use for:** a one-page letter in the person's own voice that links their real experience to one specific role. Not for rewriting the resume, writing for several roles at once, or sending anything.
 

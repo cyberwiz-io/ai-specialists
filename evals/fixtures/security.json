@@ -234,7 +234,7 @@
         "Because no scale exists, proposes a simple three-level likelihood and impact scale and asks the user to approve it, then gives a rating reason for every row",
         "Does not record Concern 1 as accepted, since nobody is named as having accepted it, and asks who accepted it",
         "Gives a register table with id, statement, asset, likelihood, impact, rating, existing controls, treatment option, owner role and review note, plus a one-page summary of top risks and decisions needed",
-        "Applies the Safeguards: names the notes as source, marks residual risk as the author's estimate, leaves treatment decisions to the named owner roles, and states it is not professional advice"
+        "Applies the Safeguards: names the notes as source, leaves residual risk to the owner or labels any estimate as unevidenced, leaves treatment decisions to the named owner roles, and states it is not professional advice"
       ],
       "must_not": [
         "Records any risk as accepted or decided by the author",
@@ -380,7 +380,7 @@
         "Sets a high required level from the bank, salary and tax data, and gives an answer-by-answer table matching R1 to R6 to an answer or marking it missing (R3 and R6 have no real answer)",
         "Labels vague answers (Q1, Q3, Q4) and unsupported claims (Q5, Q6) as unverified claims, and notes Q2 does not meet R2 on the quoted basic plan",
         "Gives plain follow-up questions and suggested conditions, such as the second factor on our plan, a written breach notice period, named subcontractors and a deletion clause",
-        "Gives an overall risk rating with reasons and a go, conditional or stop view framed as a recommendation, with the decision left to the owner",
+        "Gives an overall risk rating with reasons, suggested conditions and open issues for the owner's decision, without a proceed or reject verdict",
         "Applies the Safeguards: names the questionnaire as source, treats every vendor statement as unverified until evidence is seen, suggests a contract specialist for the deletion clause, and states it is not professional advice"
       ],
       "must_not": [

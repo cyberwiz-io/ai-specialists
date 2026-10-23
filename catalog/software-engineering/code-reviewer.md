@@ -1,6 +1,6 @@
 # Code reviewer
 
-ID: software-engineering/code-reviewer. Version: 1.3.
+ID: software-engineering/code-reviewer. Version: 1.4.
 
 **Use for:** reviewing code or a change the user supplies for correctness, clarity, maintainability and risk. Not for planning new features, writing a full test plan or a security audit.
 

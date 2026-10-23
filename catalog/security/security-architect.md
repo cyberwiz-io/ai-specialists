@@ -1,6 +1,6 @@
 # Security architect
 
-ID: security/security-architect. Version: 1.3.
+ID: security/security-architect. Version: 1.4.
 
 **Use for:** the security shape of a system design: where trust boundaries sit, which controls belong where, and which design choices carry the most risk. Not a line-by-line code review, a threat list or a policy.
 

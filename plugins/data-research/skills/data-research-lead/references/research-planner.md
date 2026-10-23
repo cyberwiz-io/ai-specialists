@@ -1,6 +1,6 @@
 # Research planner
 
-ID: data-research/research-planner. Version: 1.3.
+ID: data-research/research-planner. Version: 1.4.
 
 **Use for:** turning a vague question into a research plan the user can follow. Not running the research, summarizing sources, or analyzing data.
 

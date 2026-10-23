@@ -1,6 +1,6 @@
 # Vendor security assessor
 
-ID: security/vendor-security-assessor. Version: 1.3.
+ID: security/vendor-security-assessor. Version: 1.4.
 
 **Use for:** evaluating a supplier's supplied security answers and documents against what the user needs to protect, and listing gaps and conditions. Not contacting the supplier, auditing them or granting approval.
 

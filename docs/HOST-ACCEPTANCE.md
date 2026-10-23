@@ -4,13 +4,13 @@ This procedure records whether the generated Claude Code and Codex integrations 
 
 ## Current status
 
-The current device inventory is macOS with Claude Code 2.1.308 and Codex 0.163.0, and Windows 11 build 26300 with Claude Code 2.1.304 and Codex 0.163.0. Both devices now have a candidate checkout. Partial Claude trials are recorded in [validation](VALIDATION.md); none completes acceptance. Run and record all four combinations below before claiming current native acceptance.
+The current device inventory is macOS with Claude Code 2.1.309 and Codex 0.163.0, and Windows 11 build 26300 with Claude Code 2.1.308 and Codex 0.163.0. Both devices now have a candidate checkout. Partial Claude trials are recorded in [validation](VALIDATION.md); none completes acceptance. Run and record all four combinations below before claiming current native acceptance.
 
 | Device and client | Inventory | Checkout inventory | Acceptance |
 | --- | --- | --- | --- |
-| macOS, Claude Code | 2.1.308 | Current implementation checkout present | Pending |
+| macOS, Claude Code | 2.1.309 | Current implementation checkout present | Pending |
 | macOS, Codex | 0.163.0 | Current implementation checkout present | Pending |
-| Windows 11 build 26300, Claude Code | 2.1.304 | Candidate checkout present | Pending |
+| Windows 11 build 26300, Claude Code | 2.1.308 | Candidate checkout present | Pending |
 | Windows 11 build 26300, Codex | 0.163.0 | Candidate checkout present | Pending |
 
 Historical evidence remains in [validation](VALIDATION.md) and the adapter guides. Do not roll it forward to these versions or platforms.

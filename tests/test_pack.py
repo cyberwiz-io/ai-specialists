@@ -64,13 +64,13 @@ class BuildTests(FixtureCase):
         external = self.root.parent / "private"
         external.mkdir()
         (external / "SKILL.md").write_text("[private](missing.md)", encoding="utf-8")
-        installed = self.root / ".claude/skills/agent-architecture-audit"
+        installed = self.root / ".claude/skills/fictional-private-method"
         installed.symlink_to(external, target_is_directory=True)
         build.build(self.root)
         check.check(self.root)
         fixture = self.root.parent / "fixture"
         source.copy(self.root, fixture)
-        self.assertFalse((fixture / ".claude/skills/agent-architecture-audit").exists())
+        self.assertFalse((fixture / ".claude/skills/fictional-private-method").exists())
         check.check(fixture)
         subprocess.run(["git", "-C", str(self.root), "add", "-f", str(installed)],
                        check=True, capture_output=True)

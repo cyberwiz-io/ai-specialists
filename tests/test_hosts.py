@@ -90,6 +90,18 @@ class HostTests(FixtureCase):
     def outputs(self):
         return build.outputs(self.root)
 
+    def test_delivery_check_reaches_pasted_packs_solo_skills_and_workers(self):
+        families, generated = self.outputs()
+        for family in families:
+            for part in family['packs']:
+                self.assertIn(skills.FACT_PREFLIGHT.encode(), generated[f"dist/packs/{part['id']}.md"])
+            for role in family['roles']:
+                name = skills.role_name(role)
+                paths = (f'skills/{name}/SKILL.md', adapter.agent_path(role),
+                         codex.agent_path(name), copilot.agent_path(name))
+                for path in paths:
+                    self.assertIn(skills.FACT_PREFLIGHT.encode(), generated[path], path)
+
     def test_every_host_adapter_passes_its_own_checks(self):
         families, generated = self.outputs()
         for host in build.HOSTS:

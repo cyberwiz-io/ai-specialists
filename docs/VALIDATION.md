@@ -1,23 +1,31 @@
 # Validation status
 
-This repository ships advisory instruction materials. Structural checks and card evaluations do not establish that a host discovers, routes, delegates to, or safely runs them. The current 1.3 candidate has no published release. Current host acceptance for Claude Code and Codex on macOS and Windows is pending in all four combinations.
+This repository ships advisory instruction materials. Structural checks and card evaluations do not establish that a host discovers, routes, delegates to, or safely runs them. The current 1.4 candidate has no published release. Current host acceptance for Claude Code and Codex on macOS and Windows is pending in all four combinations.
 
 ## Current host acceptance
 
 | Device and client | Inventory | Acceptance |
 | --- | --- | --- |
-| macOS, Claude Code | 2.1.308 | Pending |
+| macOS, Claude Code | 2.1.309 | Pending |
 | macOS, Codex | 0.163.0 | Pending |
-| Windows 11 build 26300, Claude Code | 2.1.304 | Pending |
+| Windows 11 build 26300, Claude Code | 2.1.308 | Pending |
 | Windows 11 build 26300, Codex | 0.163.0 | Pending |
 
 These versions are inventory observations, not test results. Follow [the host acceptance procedure](HOST-ACCEPTANCE.md) for each row. Acceptance requires observed installation, discovery, lead invocation, worker identity and handoff, expected behavior, permission boundaries, actual model reporting, update, and owned-only removal. A missing device or unobservable criterion stays pending. Historical trials on other versions or devices do not establish current acceptance.
 
 The generated adapters express intended host configuration. Claude Code workers are configured with exactly `Read`, `Grep`, and `Glob`; they have no `Bash` or automatic skill tool. Leads pass approved methods explicitly in task handoffs. Codex's no-spawn direction is advisory; do not describe it as host enforcement. Role routing is advisory and separate from a task-specific cheapest-suitable model override that a host may support. Claude worker frontmatter retains role-specific model and effort defaults; the host applies these unless an explicit task override takes precedence. Codex workers inherit the parent model. Lead routing instructions are advisory, not a dynamic routing engine.
 
+### Failed full behavioral cohort and partial 1.3 observations
+
+The frozen 150-case run `release-13-d728-full-a` used commit `d72894ed2e77fc2cc4f10b5be15e3fb85142e82b`, a native `claude-opus-5-5` subject with requested high effort, and a native `claude-sonnet-5-5` grader at its default effort. It attempted 144 ordinary fixtures and six frozen challenges: 147 grades completed, with 79 PASS, 62 PARTIAL and 6 FAIL; three cases remained incomplete. This fails release acceptance. Original replies, grades, invalid attempts and execution receipts are retained; no earlier score was promoted. Independent diagnostics found both real omissions and fixture/card conflicts. Corrected targeted runs do not replace the failed cohort or satisfy the two full-run and stability requirements.
+
+Isolated Claude Code installations on both devices subsequently advanced from plugin 1.2.0 to 1.3.0 at that exact commit. All 29 business-operations plugin files on each device changed and matched the candidate. Mac Claude Code 2.1.309 also completed fresh public handoff trials with native workers, useful method application, review traces and unchanged markers. Only actual reads were observed; unavailable tools and prose refusals do not prove host-denial enforcement. Complete private-check, removal and current-candidate acceptance remain pending.
+
+Windows native login is complete. Its later trial stopped because the dispatch transport rejected an upload; an unknown held execution remains for owner review and has not been replayed. Codex acceptance remains pending: the Mac protected route did not expose sufficient worker/model execution proof, and the Windows managed launcher deferred execution as unsupported. Neither is counted as an accepted native trial. No 1.4 client acceptance, release, public asset or personal installation is implied by these earlier observations.
+
 ### Partial 1.2 update observations
 
-On 2026-10-22, isolated Claude Code installations on macOS and Windows advanced from the 1.1.0 candidate to plugin 1.2.0 at `81c2a350b12a5b3147bdddf8a6106904f1b66c18`. All 29 business-operations plugin files on each device matched that commit and changed from the earlier installation. An earlier same-version update had retained old Mac bytes. Installation and byte-changing update do not establish restart, repeated behavior, independent artifact review, removal, or acceptance of the current 1.3 candidate.
+On 2026-10-22, isolated Claude Code installations on macOS and Windows advanced from the 1.1.0 candidate to plugin 1.2.0 at `81c2a350b12a5b3147bdddf8a6106904f1b66c18`. All 29 business-operations plugin files on each device matched that commit and changed from the earlier installation. An earlier same-version update had retained old Mac bytes. Installation and byte-changing update do not establish restart, repeated behavior, independent artifact review, removal, or acceptance of the current 1.4 candidate.
 
 A further macOS Codex 0.163.0 trial enabled `multi_agent_v2` through the supported normal-home launcher. After an ephemeral empty-MCP override resolved a configuration parse failure, the native selector returned `unknown agent_type` for the exact installed project planner. No worker or probes ran. This is unavailable delegation, not a host permission denial. Windows managed Codex launch remains unsupported by the current ai-home launcher.
 
@@ -29,7 +37,7 @@ The reports in [evals/reports](../evals/reports/README.md) are historical, singl
 
 The [card evaluation harness](../evals/README.md) produces the reports this page asks for. The security, marketing-growth and orchestration fixtures and shared grading contract changed in this revision. Prior reports do not validate those changes. Every card has at least one fictional task fixture, and every family has a boundary fixture that asks for an external action. Claude Code runs each fixture in a fresh subagent, using the shipped combined pack. A separate fresh subagent then grades the reply against the card's own Acceptance line and the fixture's expected traits. `python3 -B scripts/evals.py report` writes a report with the tested version and commit, host and tools, models, inputs, outcomes and limits.
 
-Historical host observations are retained in adapter guides and earlier records: Claude Code 2.1.302 had strict plugin validation and local smoke evidence, and a GitHub marketplace install of the prior 1.0 layout was observed. An Antigravity CLI 1.4.2 plan-mode run loaded a lead from a clone but did not complete the requested task. A Codex attempt was blocked before installation by a local wrapper; another local-checkout install ran no model. These observations are not current acceptance. No complete current four-device acceptance run, claude.ai upload, or published 1.3 download is recorded.
+Historical host observations are retained in adapter guides and earlier records: Claude Code 2.1.302 had strict plugin validation and local smoke evidence, and a GitHub marketplace install of the prior 1.0 layout was observed. An Antigravity CLI 1.4.2 plan-mode run loaded a lead from a clone but did not complete the requested task. A Codex attempt was blocked before installation by a local wrapper; another local-checkout install ran no model. These observations are not current acceptance. No complete current four-device acceptance run, claude.ai upload, or published 1.4 download is recorded.
 
 ### Partial candidate observations, 2026-10-22
 
@@ -37,7 +45,7 @@ On the Mac and Windows versions above, isolated Claude configurations added the 
 
 Both trials traced a real project-planner worker applying the lead-supplied method and a separate reviewer. Native assistant metadata recorded `claude-haiku-5-5` and `claude-sonnet-5-5`. Windows additionally traced the explicit `business-operations:business-operations-lead` Skill call. Both marker hashes and the disposable project file set stayed unchanged. The workers used Read and reported no write, shell or nested-agent tool; those reports do not establish native denial events or a complete observed worker tool registry. No prohibited action was observed.
 
-These trials did not pass acceptance. The Mac output had planning omissions; Windows mislabeled a supplied fact as an assumption. Review findings were left unresolved, and artifact reviews lacked byte-hash bindings. The later 1.2 byte-changing update is recorded above; restarted-client repetition, disposable removal and current 1.3 acceptance remain outstanding. Private method evidence is retained separately and is not reproduced here.
+These trials did not pass acceptance. The Mac output had planning omissions; Windows mislabeled a supplied fact as an assumption. Review findings were left unresolved, and artifact reviews lacked byte-hash bindings. The later 1.2 byte-changing update is recorded above; restarted-client repetition, disposable removal and current 1.4 acceptance remain outstanding. Private method evidence is retained separately and is not reproduced here.
 
 A Mac Codex session launched through the approved normal-home ai-home route and completed a small response without redirecting `CODEX_HOME` or copying credentials. Two disposable-project sessions could not invoke the exact custom planner agent; no planner worker or boundary probes ran. This establishes launcher execution only. It does not establish custom-agent discovery, plugin installation or Codex acceptance on either device.
 
@@ -90,7 +98,7 @@ On 2026-10-17 four separate subagents with no shared context, one each for secur
 
 ## Pending evidence
 
-- Live installation of the Claude Code plugins and the claude.ai skill upload. Three local `--plugin-dir` runs are recorded: a 1.0 smoke test and a 1.1 security team run on Claude Code 2.1.302, plus the 2026-10-22 software-engineering smoke test on 2.1.308 described above. A marketplace install from GitHub of the 1.0 layout (marketing-growth and orchestration) and a headless card read from an installed plugin were observed on 2026-10-17; the original record predates this candidate. A published-tag 1.3 GitHub install, the `ai-specialists-all` bundle install, claude.ai upload, the other 16 leads and unaided users remain unobserved. Partial 1.1 branch installs are recorded above.
+- Live installation of the Claude Code plugins and the claude.ai skill upload. Three local `--plugin-dir` runs are recorded: a 1.0 smoke test and a 1.1 security team run on Claude Code 2.1.302, plus the 2026-10-22 software-engineering smoke test on 2.1.308 described above. A marketplace install from GitHub of the 1.0 layout (marketing-growth and orchestration) and a headless card read from an installed plugin were observed on 2026-10-17; the original record predates this candidate. A published-tag 1.4 GitHub install, the `ai-specialists-all` bundle install, claude.ai upload, the other 16 leads and unaided users remain unobserved. Partial 1.1 branch installs are recorded above.
 - Codex, Gemini CLI, GitHub Copilot, Cursor and `npx skills`: the generated files follow each tool's published format but none has been installed or run in that tool (Antigravity CLI is the only other host recorded; see Other host installs). Copilot and Cursor are not tested because the maintainer cannot test them. Whether Codex honors `shell_tool = false` per agent, and whether `effort` changes anything on `haiku`, is unverified.
 - Fresh-host execution and host-specific compatibility for the marketing workflow and for any other family. Every card has a recorded run, one fixture at a time (see Automated and historical evidence). Those historical sessions had only Read and Write and did not exercise the 1.0 code roles' command access. Current Claude Code workers have only Read, Grep and Glob, and the end-to-end marketing workflow has no recorded run. Team leads are recorded through `claude plugin eval` for security, finance, people-hr and legal-compliance only.
 - Actual image generation, export inspection, and profile persistence in a chosen host.

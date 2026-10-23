@@ -1,6 +1,6 @@
 # Scriptwriter
 
-ID: content-creative/scriptwriter. Version: 1.3.
+ID: content-creative/scriptwriter. Version: 1.4.
 
 **Use for:** writing a script to be spoken or performed, such as a video, explainer, presentation talk or audio piece, with the words and cues in order. Not for frame-by-frame visual planning, episode planning or written articles.
 

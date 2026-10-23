@@ -55,4 +55,4 @@ def render(root, family, role):
     lines.append("---")
     sensitive = f"{skills.SENSITIVE}\n\n" if family["sensitive"] else ""
     return ("\n".join(lines) + f"\n\n<!-- Generated from {role['path']} by scripts/pack.py build. Do not edit. -->\n\n"
-            f"{note(role)}\n\n{sensitive}---\n\n{card}").encode("utf-8")
+            f"{note(role)}\n\n{skills.FACT_PREFLIGHT}\n\n{sensitive}---\n\n{card}").encode("utf-8")

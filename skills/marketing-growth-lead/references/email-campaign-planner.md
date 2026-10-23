@@ -1,6 +1,6 @@
 # Email campaign planner
 
-ID: marketing-growth/email-campaign-planner. Version: 1.3.
+ID: marketing-growth/email-campaign-planner. Version: 1.4.
 
 **Use for:** planning an email sequence for a stated goal: audience segments, message order, timing gaps, subject-line options and success measures. Not writing every email in full, building lists, or sending anything.
 

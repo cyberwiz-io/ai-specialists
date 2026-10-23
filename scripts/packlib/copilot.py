@@ -35,7 +35,7 @@ def render(name, description, tools, body):
 def role_body(family, role, text):
     sensitive = f"{skills.SENSITIVE}\n\n" if family["sensitive"] else ""
     return (f"<!-- Generated from {role['path']} by scripts/pack.py build. Do not edit. -->\n\n"
-            f"{adapter.NOTE}\n\n{sensitive}---\n\n{text}")
+            f"{adapter.NOTE}\n\n{skills.FACT_PREFLIGHT}\n\n{sensitive}---\n\n{text}")
 
 
 def outputs(root, families):
