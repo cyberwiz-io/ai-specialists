@@ -6,7 +6,7 @@ A library of 124 specialist instruction cards in 17 families, plus a coordinator
 
 ## Install options
 
-These are candidate install instructions. Current Claude Code and Codex acceptance on macOS and Windows is pending, and no 1.1 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
+These are candidate install instructions. Current Claude Code and Codex acceptance on macOS and Windows is pending, and no 1.2 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
 
 | Tool | Command or step |
 | --- | --- |
@@ -34,7 +34,7 @@ These are editable instruction files: one card per specialist, a team lead per f
 2. Describe your task. For marketing: *Use this starter pack. My business is [short description]. My website is [optional]. Help me create a marketing campaign. First confirm that you can read all eight instruction sections.* For another family: *Use this pack. My task is [description]. Here is the material I can supply: [...]. First confirm that you can read all the sections.*
 3. Confirm the plan, review the materials, and accept or revise.
 
-Prefer a download? The planned [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) will contain a ZIP with every card, pack, skill and install file, attribution and licenses after publication and checksum verification. No current 1.1 download is available; open `pack/START-HERE.md` in this candidate checkout.
+Prefer a download? The planned [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) will contain a ZIP with every card, pack, skill and install file, attribution and licenses after publication and checksum verification. No current 1.2 download is available; open `pack/START-HERE.md` in this candidate checkout.
 
 ## Families
 
