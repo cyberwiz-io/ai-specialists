@@ -25,7 +25,8 @@ jobs:
           - {os: ubuntu-24.04, python: '3.9'}
           - {os: ubuntu-24.04, python: '3.12'}
           - {os: macos-14, python: '3.12'}
-          - {os: windows-2022, python: '3.12'}
+          - {os: windows-2022, python: '3.12', shard: 0}
+          - {os: windows-2022, python: '3.12', shard: 1}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -43,7 +44,10 @@ jobs:
       - name: Pack check
         run: python -B scripts/pack.py check
       - name: Tests
-        run: python -B -m unittest discover -s tests
+        env:
+          TEST_SHARD: ${{ matrix.shard || 0 }}
+          TEST_SHARDS: ${{ matrix.os == 'windows-2022' && 2 || 1 }}
+        run: python -B scripts/run_tests.py --shard-index ${{ env.TEST_SHARD }} --shard-count ${{ env.TEST_SHARDS }}
       - name: Candidate artifact integrity check
         shell: bash
         run: |

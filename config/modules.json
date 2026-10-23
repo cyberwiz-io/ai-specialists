@@ -101,7 +101,8 @@
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
-        "scripts/pack.py"
+        "scripts/pack.py",
+        "scripts/run_tests.py"
       ],
       "invariants": [
         "Pack tooling uses the standard library; separate engineering-policy lint requires pinned PyYAML. Every check has success and failure tests."
@@ -113,6 +114,7 @@
         ".github/workflows/*.yml",
         "config/modules.json",
         "scripts/pack.py",
+        "scripts/run_tests.py",
         "scripts/packlib/*.py",
         "tests/*.py",
         ".engineering/*",

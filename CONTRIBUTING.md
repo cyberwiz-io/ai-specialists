@@ -22,6 +22,8 @@ python3 -B scripts/pack.py check
 python3 -B -m unittest discover -s tests
 ```
 
+CI runs the same discovery through [scripts/run_tests.py](scripts/run_tests.py). Windows uses two jobs with `--shard-count 2` and `--shard-index 0` or `1`; both must succeed. The helper partitions discovered test cases without filtering files. Other platforms run the full suite in one job.
+
 To find a specialist, run `python3 -B scripts/pack.py find <words>`. To add or change a role, follow the [card guide](docs/CARD-GUIDE.md). The build computes every generated file before writing any of them. The check covers the roster, card shape and wording rules, safeguards for sensitive families, handoff IDs, size limits, generated-file freshness, local links, module coverage, and that no archive is committed. Each combined pack must stay under 32 KB (about 8,000 tokens); a larger family lists `packs` in `catalog/families.json` to split into parts. Tests exercise failures as well as the successful build. Generated archives are reproducible from the same file bytes.
 
 ## Evaluate cards

@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "ce2ec8899949300e648b0a00fabc0e49f9fc442a54f534e0e81ec5e2526c3224",
+      "digest": "75f3fe20c0599046ae9fce493057109e3b2e1ee0f9a311a0ad8579f5fabface8",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -139,12 +139,13 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "82655ea550e56744e9205fb112952d8bb648a3f50f731b99279389b5b8ca83a6",
-      "files": 51,
+      "digest": "fafe336cd89192f01e31704a3d77376b11d82a65179b14f0ba90ea570e0b2ae1",
+      "files": 53,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
-        "scripts/pack.py"
+        "scripts/pack.py",
+        "scripts/run_tests.py"
       ],
       "invariants": [
         "Pack tooling uses the standard library; separate engineering-policy lint requires pinned PyYAML. Every check has success and failure tests."
@@ -161,6 +162,7 @@
         "scripts/pack.py",
         "scripts/packlib/*.py",
         "scripts/release_gate.py",
+        "scripts/run_tests.py",
         "scripts/verify_release.py",
         "tests/*.py"
       ],
@@ -191,7 +193,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "d038edd27aee69c481afe6bbc248fcd9fff408c9342dee64add9cb8f34122ac5",
+      "digest": "c9eaa9ce4e7d93f5f61c7aa2a3ab5a2aeecf0cb85314977cbd1574dacdcc62c6",
       "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
