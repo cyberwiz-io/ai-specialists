@@ -299,6 +299,56 @@ print(json.dumps({'result': result, 'is_error': False, **({'modelUsage': {model:
         self.assertEqual(receipts['one']['error'], 'KeyboardInterrupt')
         self.assertTrue(all(r['status'] == 'reserved' for fid, r in receipts.items() if fid != 'one'))
 
+    def test_early_stop_retains_existing_receipts_without_calls(self):
+        from threading import Event
+        from unittest import mock
+        stopped = Event()
+        stopped.set()
+        old = {'status': 'failed', 'error': 'permission', 'subject_sha256': 'retained'}
+        (self.folder / 'execution.json').write_bytes(json.dumps({'fixtures': {'one': old}}).encode())
+        with mock.patch.object(evals_runner, 'Event', return_value=stopped), \
+                mock.patch.object(evals_runner, 'session') as native:
+            self.assertEqual(self.run_fake(), 1)
+            native.assert_not_called()
+        self.assertEqual(json.loads((self.folder / 'execution.json').read_bytes())['fixtures']['one'], old)
+
+    def test_main_thread_interrupt_preserves_active_and_prior_receipts(self):
+        from threading import Event
+        from unittest import mock
+        from concurrent.futures import ThreadPoolExecutor
+        active, release = Event(), Event()
+        prior = {'failed': {'status': 'failed', 'error': 'permission', 'subject_sha256': 'retained'},
+                 'complete': {'status': 'complete', 'output_sha256': 'retained'}}
+        for fid in prior:
+            other = dict(self.fixture, id=fid, key=fid)
+            for key in ('output', 'grade'):
+                other[key] += fid
+            self.record['fixtures'].append(other)
+        self.save()
+        (self.folder / 'execution.json').write_bytes(json.dumps({'fixtures': prior}).encode())
+        def session(*args, **kwargs):
+            active.set()
+            if not release.wait(5):
+                raise RuntimeError('test did not release active call')
+            return 'A reply', {'requested_model': 'subject-model'}
+        def interrupt(futures):
+            self.assertTrue(active.wait(5))
+            raise KeyboardInterrupt
+        class Executor(ThreadPoolExecutor):
+            def shutdown(self, *args, **kwargs):
+                release.set()  # Main thread has set stopped before releasing the in-flight subject.
+                return super().shutdown(*args, **kwargs)
+        with mock.patch.object(evals_runner, 'session', side_effect=session), \
+                mock.patch.object(evals_runner, 'as_completed', side_effect=interrupt), \
+                mock.patch.object(evals_runner, 'ThreadPoolExecutor', Executor):
+            with self.assertRaises(KeyboardInterrupt):
+                self.run_fake(parallel=1)
+        saved = json.loads((self.folder / 'execution.json').read_bytes())['fixtures']
+        self.assertEqual({fid: saved[fid] for fid in prior}, prior)
+        self.assertEqual(saved['one']['error'], 'interrupted')
+        self.assertTrue((self.root / self.fixture['output']).is_file())
+        self.assertFalse((self.folder / 'runner.lock').exists())
+
     def test_missing_receipt_does_not_erase_a_failed_attempt(self):
         from unittest import mock
         self.change_prompt('DENIED')

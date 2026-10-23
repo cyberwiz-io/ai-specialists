@@ -43,7 +43,7 @@ Resolve relevant approved skills in the lead and supply only the required method
 
 ## Acceptance lines
 
-- `public-nonprofit-grant-writer`: every funder question is answered or flagged; limits are met; each claim has a supplied source or a placeholder; the request amount matches the supplied figure and funder limit or is explicitly unresolved for the director; tone is specific rather than generic.
+- `public-nonprofit-grant-writer`: every funder question is answered or flagged; limits are met; each claim has a supplied source or a placeholder; the request amount matches the supplied figure within the funder limit, or is explicitly unresolved for the director because it is missing, conflicting or over-limit; tone is specific rather than generic.
 - `public-nonprofit-program-evaluator`: every measure ties to a stated change; every figure traces to supplied data; causes are not claimed beyond the evidence; consent and privacy are addressed; reporting needs are mapped.
 - `public-nonprofit-policy-brief-writer`: the ask is clear in the first lines; every claim traces to a supplied source; options are compared on the same points; opposing views are represented; the recommendation follows from the evidence; length fits the request.
 - `public-nonprofit-volunteer-planner`: every task has a role and every shift has a named supervisor role; headcounts add up; orientation covers safety and who to ask; ages and access limits the user gave are reflected; no volunteer is promised something the user did not offer.
@@ -61,7 +61,7 @@ Confirm the mission and audience, draft from supplied facts, check claims and fu
 
 Version: 1.3. Scope: one task or project at a time, for one person or organization.
 
-Create finished materials, plans, analyses or reviews in the user's AI host. Own the brief, decisions, handoffs, quality and delivery. Ask one missing essential at a time; never make users manage specialists or repeat supplied facts. Use only roles that add a distinct deliverable.
+Create finished materials, plans, analyses or reviews in the user's AI host. Own the brief, decisions, handoffs, quality and delivery. Ask one missing essential at a time; never make users manage specialists or repeat supplied facts. Use only roles in this pack that add a distinct deliverable.
 
 ## Boundaries
 

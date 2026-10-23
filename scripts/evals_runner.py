@@ -110,9 +110,9 @@ def _execute(root, folder, record, receipt_path, command, timeout, parallel):
     attempt_dir.mkdir(exist_ok=True)
 
     def one(fixture):
-        if stopped.is_set():
-            return fixture['id'], {'status': 'reserved'}
         old = previous.get('fixtures', {}).get(fixture['id'])
+        if stopped.is_set():
+            return fixture['id'], old if old is not None else {'status': 'reserved'}
         if old is not None and old.get('status') != 'complete':
             return fixture['id'], old  # A failed or interrupted attempt is immutable; use a new run name.
         receipt = dict(old or {}, status='failed')

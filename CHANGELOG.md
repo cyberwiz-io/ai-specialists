@@ -7,12 +7,12 @@ Current 1.3 native and behavioral acceptance, final review and publication remai
 ## 1.3
 
 - Evaluation attempts are reserved before model calls, locked against concurrent runners, and retain failed/interrupted evidence. Queued calls stop after interruption; deleted receipts cannot silently reroll subjects.
-- Subject effort can be requested explicitly without changing the calibrated grader. Receipts and baseline comparisons bind that request; actual effort remains unobserved. Native admission failures stop queued dispatch.
+- Subject effort can be requested explicitly without changing the calibrated grader. Reports and baselines require a native execution receipt for an effort request; actual effort remains unobserved. Native admission failures stop queued dispatch.
 - Conditional exclusions require a definite opening antecedent and one consequence clause. Excluded cases stay outside outright PASS counts; independent adjudication never rewrites original grades. Reports show native observed models.
 - Shared leads check each factual sentence against supplied evidence. The general, unchecked allowance remains limited to sensitive-card rules. Copywriting starts from a supplied fact list, and missing or conflicting grant amounts stay unresolved for the director.
 - Windows maintenance tests use explicit UTF-8 and portable symlink comparisons; CRLF coordinator headers remain discoverable. Manual grading preserves invalid attempts and permits only one invalid-grade retry; release runs use atomic native receipts.
 - Native update instructions require changed bytes and a higher plugin version. Codex updates separately copied agent TOMLs with verified source commits, collision checks and a retained ownership ledger.
-- Calibration retains historical labels and appends an anonymised missing-work case. Plugin traits require actual different-model review, and ordinary fixtures clarify existing prediction and email-body requirements. The conditional alt-text labelling guard is scored as a prohibition on unmarked alt text, so omitting unrequested alt text is not treated as missing required work.
+- Calibration retains historical labels and appends an anonymised missing-work case. Plugin traits require actual different-model review, and the detection card and fixture distinguish logically invariant conclusions from predictions dependent on unconfirmed rule details; the email-body fixture matches the requested deliverable. The conditional alt-text labelling guard is scored as a prohibition on unmarked alt text, so omitting unrequested alt text is not treated as missing required work.
 
 ## 1.2 (superseded, unpublished candidate)
 

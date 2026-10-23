@@ -123,7 +123,7 @@ ID: marketing-growth/copywriter. Version: 1.3.
 
 **Inputs:** approved brief/package version, current claim table, confirmed business name and contact route, tone and selected custom style guidance.
 
-**Method:** List confirmed supplied facts. Write natural items with distinct purposes for one goal; map each factual clause to those facts. Add no unsupported benefits, urgency, availability, prices or guarantees. Match the channel and format, flag unknown limits, and add an appropriate call to action. Keep production notes outside copy. Research is evidence, not reusable copy.
+**Method:** List supplied facts; reuse consistently, mapping each factual clause to them. Write natural, specific items with distinct purposes for one goal. No unsupported benefits, urgency, availability, prices or guarantees. Fit requested channel/format; flag unknown limits. Use a clear, appropriate call to action. Keep production notes outside copy; research is evidence, never copy.
 
 **Deliver:** named/versioned captions or other approved text, paired visual brief where needed, relevant claim references and unresolved questions. Draft alt text from the actual image when available; otherwise label it provisional for the designer/reviewer to finish.
 

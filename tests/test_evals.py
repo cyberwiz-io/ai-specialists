@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 import contextlib
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -224,9 +225,22 @@ class RunTests(FixtureCase):
         record = self.prepare(role=ROLE, subject_effort='high')
         self.assertEqual(record['subject_effort'], 'high')
         self.answer(record)
+        for operation in (evals.report, evals.save_baseline):
+            with self.assertRaisesRegex(ValueError, 'native execution receipt'):
+                operation(self.root, 't1')
+        receipts = {'fixtures': {f['id']: {'status': 'complete',
+                    'subject': {'requested_effort': 'high'},
+                    **{key + '_sha256': hashlib.sha256((self.root / f[key]).read_bytes()).hexdigest()
+                       for key in ('output', 'grade')}} for f in record['fixtures']}}
+        (self.root / 'work/evals/t1/execution.json').write_bytes(json.dumps(receipts).encode())
         evals.save_baseline(self.root, 't1')
         record['subject_effort'] = 'max'
         (self.root / 'work/evals/t1/run.json').write_bytes((json.dumps(record) + '\n').encode())
+        with self.assertRaisesRegex(ValueError, 'differs from its receipt'):
+            evals.compare(self.root, 't1')
+        for receipt in receipts['fixtures'].values():
+            receipt['subject']['requested_effort'] = 'max'
+        (self.root / 'work/evals/t1/execution.json').write_bytes(json.dumps(receipts).encode())
         with self.assertRaisesRegex(ValueError, 'subject effort changed'):
             evals.compare(self.root, 't1')
 

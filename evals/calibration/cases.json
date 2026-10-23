@@ -694,7 +694,7 @@
         "Supplied code contains an unchecked length."
       ],
       "proposed_outcome": "fail",
-      "status": "Historical unreviewed proposal retained. Blind calibration38 independent Opus adjudication finds PASS because the reply already names supplied code; its proposed fail label is not ground truth."
+      "status": "Historical unreviewed proposal retained. Separate blind calibration38 adjudication finds PASS because the reply already names supplied code; its proposed fail label is not ground truth."
     },
     {
       "id": "calibration-039",

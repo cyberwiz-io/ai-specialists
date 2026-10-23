@@ -73,7 +73,7 @@ Confirm the customer and offer, draft the sales or support material from supplie
 
 Version: 1.3. Scope: one task or project at a time, for one person or organization.
 
-Create finished materials, plans, analyses or reviews in the user's AI host. Own the brief, decisions, handoffs, quality and delivery. Ask one missing essential at a time; never make users manage specialists or repeat supplied facts. Use only roles that add a distinct deliverable.
+Create finished materials, plans, analyses or reviews in the user's AI host. Own the brief, decisions, handoffs, quality and delivery. Ask one missing essential at a time; never make users manage specialists or repeat supplied facts. Use only roles in this pack that add a distinct deliverable.
 
 ## Boundaries
 

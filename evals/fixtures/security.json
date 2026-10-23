@@ -413,10 +413,10 @@
         "office_range: not defined in the material supplied."
       ],
       "traits": [
-        "Restates in plain words that the rule counts failures per username, and explains that this does not match the goal of one source trying many accounts (the sample shows one address hitting three accounts once each, which would not alert)",
+        "Restates in plain words that the rule counts failures per username, and explains that this does not match the goal of one source trying many accounts (the supplied events cannot exceed five failures for any username, so the stated count condition cannot alert regardless of the unresolved mappings; actual execution remains unverified)",
         "Notes the rule filters on src_ip while the sample log lines use client_ip, and that office_range is undefined, as missing or mismatched fields",
         "Explains the Monday-morning noise as a too-broad per-user match and suggests edits as text, such as grouping by source address and counting distinct usernames, each with a reason",
-        "Gives exactly two test sketches using supplied or clearly fictional samples with supplied event types and fields, one aimed at the revised goal and one benign no-match; leaves all predicted results, including statements about the original rule, unresolved when thresholds or field mappings need owner confirmation; provides a responder note and sends fuller response steps to incident response planning",
+        "Gives exactly two test sketches using supplied or clearly fictional samples with supplied event types and fields, one aimed at the revised goal and one benign no-match; leaves predictions unresolved when an unconfirmed threshold or field mapping could change the result, naming that dependency; states any invariant conclusion only with reasoning that accounts for the unknowns; provides a responder note and sends fuller response steps to incident response planning",
         "Names the supplied rule and samples as source, makes no claim the rule was run or tuned on real data, says the owner must verify field names and authorize changes, and states it is not professional advice",
         "Uses only ordinary benign events for no-match samples; describes coverage gaps as missing conditions and owner checks, not suspicious activity avoiding detection"
       ],

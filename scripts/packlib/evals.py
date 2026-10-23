@@ -415,6 +415,8 @@ def _grades(root, record):
     failures, grades = [], {}
     receipt_path = safe_path(root, f"{EVAL_DIR}/{record['run']}/execution.json")
     receipts = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
+    if record.get('subject_effort') is not None and receipts is None:
+        raise ValueError('requested subject effort requires a native execution receipt')
     record['observed_models'] = {}
     for fixture in record["fixtures"]:
         if record.get("schema", 1) >= 2:
