@@ -18,6 +18,38 @@ from packlib import build, bundle, cards, check, config, manifest, skills  # noq
 COPY_SKIP = shutil.ignore_patterns(".git", "work", "__pycache__", "dist")
 
 
+def fixture_ignore(root):
+    tracked = config.client_index(root)
+
+    def ignore(directory, names):
+        skipped = set(COPY_SKIP(directory, names))
+        for name in names:
+            relative = (Path(directory) / name).relative_to(root)
+            if config.is_installed_client_path(relative):
+                path = relative.as_posix()
+                if not any(part == path or part.startswith(path + "/") for part in tracked()):
+                    skipped.add(name)
+        return skipped
+
+    return ignore
+
+
+class FixtureCopyTests(unittest.TestCase):
+    def test_local_client_install_is_not_copied_but_tracked_skill_is(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder) / "source"
+            tracked = root / ".claude/skills/tracked/SKILL.md"
+            tracked.parent.mkdir(parents=True)
+            tracked.write_text("tracked skill")
+            (tracked.parent.parent / "local").symlink_to(tracked.parent, target_is_directory=True)
+            destination = Path(folder) / "copy"
+            with mock.patch.object(config, "client_index", return_value=lambda: {".claude/skills/tracked/SKILL.md"}):
+                shutil.copytree(root, destination, ignore=fixture_ignore(root))
+            self.assertEqual((destination / ".claude/skills/tracked/SKILL.md").read_text(), "tracked skill")
+            self.assertFalse((destination / ".claude/skills/local").exists())
+            self.assertTrue((tracked.parent.parent / "local").is_symlink())
+
+
 class FixtureCase(unittest.TestCase):
     """Each test works on a private copy of the repository sources."""
 
@@ -25,7 +57,7 @@ class FixtureCase(unittest.TestCase):
         holder = tempfile.TemporaryDirectory()
         self.addCleanup(holder.cleanup)
         self.root = Path(holder.name) / "repo"
-        shutil.copytree(ROOT, self.root, ignore=COPY_SKIP)
+        shutil.copytree(ROOT, self.root, ignore=fixture_ignore(ROOT))
         build.build(self.root)
 
     def edit(self, name, change):
