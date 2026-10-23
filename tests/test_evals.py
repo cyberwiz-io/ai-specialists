@@ -74,6 +74,18 @@ class ConditionalGradeTests(unittest.TestCase):
         self.grade['acceptance'][0]['condition'] = 'If no findings are listed,'
         self.assertEqual(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'), [])
 
+    def test_quote_error_identifies_row_without_disclosing_criterion_text(self):
+        self.grade['acceptance'][1]['quote'] = 'invented quotation'
+        errors = evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code')
+        self.assertEqual(errors, [
+            'grade.json: acceptance[2] affirmative verdict needs an exact reply quote'])
+        self.assertNotIn('Names the source', errors[0])
+        self.grade['acceptance'][1]['verdict'] = 'Names the source'
+        errors = evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code')
+        self.assertEqual(len(errors), 1)
+        self.assertIn('acceptance[2]', errors[0])
+        self.assertNotIn('Names the source', errors[0])
+
     def test_report_lists_every_inapplicable_condition_and_missing_receipt_limit(self):
         fixture = dict(self.fixture, kind='task', family='security', role='security/reviewer',
                        pack='pack.md', subject_sha256='0' * 64)
@@ -341,7 +353,7 @@ class RunTests(FixtureCase):
         grade["acceptance"][0]["item"] = record["fixtures"][0]["acceptance"][0]
         grade["must_not"][0]["verdict"] = "pass"
         path.write_text(json.dumps(grade), encoding="utf-8")
-        with self.assertRaisesRegex(ValueError, "must_not verdict 'pass' is not one of clear, violated"):
+        with self.assertRaisesRegex(ValueError, r"must_not\[1\] verdict must be one of clear, violated"):
             evals.report(self.root, "t1")
         path.write_text("not json", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "invalid JSON"):

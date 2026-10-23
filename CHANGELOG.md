@@ -6,6 +6,8 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Preserve host-observed subject model identity for isolated grading. Give the existing single invalid-grade retry the unchanged response and indexed validation errors; keep exact quotes, thresholds and failed evidence intact. Repeat blind calibration for this changed harness.
+- Clarify source fidelity, per-rule cleaning effects, source-question tables, missing offer fields, manual posting steps, draft metadata and experimental factors. Repair ordinary fixture/card conflicts and supply versioned fictional owner clarifications for incomplete positive tasks. Earlier inputs and outcomes remain historical evidence, not scores for the revised fixtures.
 - Check the whole card, output structure, sensitive-information containment and factual support before delivery. Carry that instruction into solo skills and generated workers, as well as leads and pasted packs. Label only proposals and estimates the card permits; required approvals still block dependent work.
 - Make secure-review scope explicit for every result and check detection sketch count and unresolved prediction dependencies. Keep the privacy warning on table-only responses, unconfirmed handling promises out of respondent-facing survey text, and sensitive performance-review information inside the HR owner note.
 - Ask for missing performance-review dates and whether a supplied external cause explains a result. Explain protected-matter exclusion only in the HR note, keeping sensitive rows, counts and cross-references out of manager-facing material, chat framing, status and self-checks.

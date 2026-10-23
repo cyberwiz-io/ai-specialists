@@ -117,6 +117,10 @@ in a disposable empty directory, receives its prompt on standard input and has
 no tools. The subject receives no grader prompt, expected traits, or evaluation
 file paths. This limits accidental leakage; it is not an operating-system sandbox.
 Prepared files still support the manual subagent workflow described above.
+The native grader also receives the subject's requested and reported model IDs
+and identity source from its execution receipt. Its own model environment does
+not identify the subject. Missing observations remain unobserved; self-reported
+names and requested names do not establish actual identity.
 
 `execution.json` records requested models, model names reported by the CLI's
 `modelUsage` field (or `unobserved`), input/output hashes, completion and error
@@ -125,7 +129,9 @@ stderr hashes identify responses without copying raw diagnostic text that might
 contain private data. All attempts are reserved atomically before native calls. Started phases and each completed fixture checkpoint receipts atomically; an interrupted batch retains completed evidence and cannot certify missing fixtures. An incomplete run exits nonzero. Native authorization, billing, permission, unavailable-CLI and invalid-protocol failures stop queued dispatch. There are no automatic
 retries after authorization, billing, permission, or timeout failures. An invalid
 grader JSON/schema or non-verbatim affirmative quote gets one fresh grader retry
-on the unchanged reply. Both raw attempts and their validation errors are retained;
+on the unchanged reply. That retry receives the unchanged previous grader response
+and validation errors as untrusted data, with no required verdict. Errors identify
+the section and row without copying criterion text. Both raw attempts and their validation errors are retained;
 a valid failing grade is never retried. The subject reply is saved before grading,
 including when grading fails. The runner rechecks all six recorded harness source
 hashes before any model call and requires a new run after source changes.
@@ -140,6 +146,8 @@ New baselines retain fixture input and rubric hashes. Comparisons reject changed
 models, graders, fixture coverage, or rubrics as incomparable. The historical
 baseline remains evidence, but lacks these hashes and cannot certify a new run.
 Keep it until a separately reviewed candidate baseline is explicitly approved.
+
+When repairing an incomplete positive fixture, retain its original notes, label any fictional owner clarification with its new source version, and preserve the old run. Record changed fixture hashes and input incomparability; a revised fixture never changes an earlier outcome. Keep prohibited behavior, completion requirements and release thresholds intact.
 
 ## Release evaluation protocol
 

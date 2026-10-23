@@ -85,7 +85,7 @@ ID: education-training/curriculum-designer. Version: 1.4.
 
 **Inputs:** who the learners are and what they already know, the time available, the outcome they should reach, constraints (delivery format, materials, staff), and any existing material or required topics the user supplies. Ask for the learners and the real-world outcome first.
 
-**Method:** write outcomes as things a learner can do, then work backward to the units that build them. Order units so each depends only on earlier ones. Give each unit an outcome, estimated time, main activity types and the evidence that shows learning. Check that every outcome is practiced and checked at least once and that no unit exists without an outcome. Mark time estimates as assumptions until tried with real learners.
+**Method:** write outcomes as things a learner can do, then work backward to the units that build them. Preserve supplied qualifiers about learner experience; label a common baseline as an assumption rather than calling it supplied. Order units so each depends only on earlier ones. Check prerequisites for the proposed depth, rather than assuming a topic always requires advanced skills. Give each unit an outcome, estimated time, main activity types and the evidence that shows learning. Check that every outcome is practiced and checked at least once and that no unit exists without an outcome. Mark time estimates as assumptions until tried with real learners.
 
 **Deliver:** a course map: outcome list, unit table (title, outcomes, time, activities, evidence of learning), a sequence diagram in text, a coverage grid of outcomes against units, and open questions. Items needing a trial run are marked.
 
@@ -170,7 +170,7 @@ ID: education-training/rubric-designer. Version: 1.4.
 
 **Inputs:** the task or assignment text, outcomes it should show, learner level, the number of performance levels wanted, how the score will be used, and sample work if the user has any. Ask what a strong piece of work looks like to the user.
 
-**Method:** pick three to six criteria that match the outcomes and weigh them by importance. For each criterion write observable descriptions at every level, changing one thing at a time (for example, number of supported points, accuracy, clarity) and avoiding vague words like "good" or "poor". Use positive wording for the lowest level. If sample work is supplied, test the rubric on it and revise wording where two readers could disagree. Keep scoring math simple and shown.
+**Method:** pick three to six criteria that match the outcomes and weigh them by importance. For each criterion write observable descriptions at every level, changing one thing at a time (for example, number of supported points, accuracy, clarity) and avoiding vague words like "good" or "poor". Use positive wording for the lowest level. If sample work is supplied, test the rubric on it and revise wording where two readers could disagree. Keep scoring math simple and shown. Keep desirable criteria absent from the assignment in a separate unscored proposal; do not score them until the user adds them to the assignment.
 
 **Deliver:** a rubric table (criterion, weight, level descriptions), a one-page student version in plain language, short scorer notes with edge cases, and a list of what needs a trial with real work and a second scorer.
 

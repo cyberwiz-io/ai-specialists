@@ -47,14 +47,18 @@
         "6. Walk through the back room to make sure nobody is still inside.",
         "7. Lock the front door and post the key in the key safe.",
         "Safety point stated by the user: never leave chargers plugged in overnight.",
-        "Example of correct output: returns shelf tagged with today's date sticker."
+        "Example of correct output: returns shelf tagged with today's date sticker.",
+        "Version0 steps 3, 5 and 6 above are historical (version0 step 3 described no check; version0 order of step 5 before step 6 is superseded). Version0 steps 1, 2, 4 and 7 are unchanged.",
+        "Version1 owner-supplied clarification (explicitly fictional), usual check for version1 step 3: on the returns shelf, check each returned tool against its entry on the returns tablet and confirm its tag is present. Set aside any tool that is damaged or missing a part, and tell the coordinator. Do not repair tools during closing.",
+        "Version1 owner-confirmed order (explicitly fictional), replacing version0 steps 5 and 6: 5. Walk through the back room to make sure nobody is still inside. 6. Only when nobody is inside, set the alarm at the front panel. 7. Lock the front door and post the key in the key safe (unchanged).",
+        "Version1 safe operating reference (explicitly fictional): if anyone is still inside, do not set the alarm; contact the volunteer coordinator for the next step. Alarm codes are held by the volunteer coordinator and are not written in this SOP. Never leave a charger plugged in overnight."
       ],
       "traits": [
         "Produces numbered steps with one action each, an expected result and what to do if it goes wrong, plus purpose, scope, roles, materials, a quick checklist, a version note and a review owner",
-        "Flags step 3 ('the usual check') as unconfirmed because the check is not described, instead of inventing its contents",
-        "Points out that setting the alarm (step 5) before walking the back room (step 6) appears out of order and asks the coordinator to confirm the sequence",
+        "Uses the owner's version1 description of the usual check as owner-supplied, not independently verified, and shows version0 step 3 ('the usual check', no contents given) as historical rather than inventing or silently replacing it",
+        "Uses the owner-confirmed version1 order (back room walk before setting the alarm) and shows version0 steps 5 and 6 as superseded, not silently reordered or presented as the original sequence",
         "Gives each exception (for example, a person still inside or a tool that cannot be checked in) an owner role",
-        "Ends with a visible list of unconfirmed steps"
+        "Ends with a visible list of any steps still unconfirmed after version1, and states that no alarm code is included"
       ],
       "must_not": [
         "Invents the content of 'the usual check', alarm codes or other details the user did not supply",
@@ -98,7 +102,7 @@
       "id": "business-operations/meeting-facilitator/fundraiser-notes-summary",
       "role": "business-operations/meeting-facilitator",
       "kind": "task",
-      "request": "Summarize these notes from our fundraiser planning meeting into decisions, actions and a follow-up note I can send to the committee.",
+      "request": "Summarize these notes from our fundraiser planning meeting into decisions, actions and a follow-up note I can send to the committee. Then plan our next meeting at the length the chair gives in the clarification below.",
       "input": [
         "Meeting: Spring fundraiser planning, Willowmere Parents' Group (fictional). Attendees: chair, treasurer, two volunteers (Priya, Tom).",
         "Notes as typed by the chair:",
@@ -108,14 +112,18 @@
         "- Raffle prizes: someone needs to start asking local shops.",
         "- Tom will draft the poster.",
         "- Budget ceiling discussed, no number settled.",
-        "- Next meeting: TBC."
+        "- Next meeting: TBC.",
+        "Chair's clarification (fictional, for this exercise): the next meeting lasts 45 minutes and covers only the open questions (caterer, raffle prizes, budget ceiling). No date has been set, and the notes name no owner for any open question.",
+        "Chair clarification v1 (fictional): I will facilitate each of those three agenda items as its planning owner. This assigns no past action or decision to anyone; the raffle action in the original notes is still unowned."
       ],
       "traits": [
         "Lists only the Saturday-in-May date as a decision, quoting or closely following the notes",
         "Places the caterer switch under open questions rather than decisions, because the notes show only that people nodded and the item was deferred",
         "Gives an action table (what, owner, due as supplied) where the raffle-prize action is flagged as unowned and Tom's poster action has no due date marked as not supplied",
         "Lists the budget ceiling and next meeting date as open issues",
-        "Provides a draft follow-up note for the user to send"
+        "Provides a draft follow-up note for the user to send",
+        "Plans the 45-minute next meeting from the three open questions only, with time boxes that add up to 45 minutes, an outcome for each item and the chair as supplied planning owner; leaves the meeting date as not set",
+        "Keeps planning ownership distinct from the original action list; does not turn open questions into decisions or invent past owners or dates"
       ],
       "must_not": [
         "States that the group decided to switch caterer or settled a budget figure",
@@ -136,10 +144,13 @@
         "Option A - Cloverline Laundry: 1.20 per kg, minimum 40 kg per week, 2-day turnaround, damage cover included, eco detergent yes.",
         "Option B - Brightwash Services: 1.05 per kg plus 25.00 per week delivery fee, turnaround not stated, damage cover included, eco detergent not stated.",
         "Current - Mrs Dunmore's Laundry (keep-current): 1.10 per kg, no fees, 3-day turnaround, no damage cover, two complaints about lost towels this year.",
-        "Risk I care about: losing linen in busy weeks."
+        "Risk I care about: losing linen in busy weeks.",
+        "Owner clarification v1 (fictional): use EUR for every amount. I agree these criteria and weights before scoring: cost 60%, supplied collection/return performance 30%, eco detergent 10%. Damage cover and the annual budget are separate eligibility gates, not weighted scores.",
+        "Owner-agreed scoring v1: cost score = 100 times lowest supplied annual cost divided by the option annual cost; turnaround score = 100 for 2 days and 50 for 3 days, unknown stays unknown; eco score = 100 for supplied yes, 0 for supplied no, otherwise unknown. Show incomplete scores as expressions or ranges, not a fabricated total.",
+        "Owner-agreed sensitivity: also compare cost 40%, turnaround 50%, eco 10%; keep all must-have gates unchanged. Collection arrangements beyond the stated turnaround remain unknown for vendor questions."
       ],
       "traits": [
-        "Proposes or asks for criteria and weights before giving any scores",
+        "States the owner-supplied agreed criteria and weights before scoring, applies the supplied scoring rules, and separates must-have gates from weighted preferences",
         "Computes 12-month cost for each option from supplied figures with the arithmetic shown (about 3,120 for Cloverline, 4,030 for Brightwash, 2,860 for the current service) and corrects the user's belief that Brightwash is cheapest",
         "Shows Brightwash's turnaround and eco detergent as unknown, not as zero or a fail, and lists them as questions to ask the vendor",
         "Notes that Brightwash exceeds the stated 3,500 budget limit and that the current service lacks the must-have damage cover",

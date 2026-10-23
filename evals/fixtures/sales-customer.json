@@ -155,13 +155,22 @@
         "- I think the 'Change time' button is under 'My bookings', or maybe under 'Account', not sure.",
         "- Pick a new slot and press 'Confirm change'. A new confirmation email arrives.",
         "- Inside 24 hours you have to phone 555-0175.",
-        "- Common mistake: people book a second appointment instead of moving the first, then get charged twice."
+        "- Common mistake: people book a second appointment instead of moving the first, then get charged twice.",
+        "VERSION0 SOURCE STATUS (reviewer label on the owner notes above, not owner text): the 'Change time' location line (My bookings or Account) is SUPERSEDED by version1 and was an unverified guess; do not use it. The 24-hour rule, the phone route, the confirm step and the double-booking line stand. Version0 gives no phone opening hours and no fix for the double charge.",
+        "=== VERSION1: OWNER-SUPPLIED CLARIFICATION (fictional; Stillwater Massage Studio owner; NOT checked on the live booking page or in any booking system) ===",
+        "V1 steps (owner's description of the booking page): 1. Open the confirmation email and click 'Manage booking'. Expected: the booking page opens and shows your appointment date and time.",
+        "V1 2. Click 'Change time' on that booking page. Owner says it is on the Manage booking page for that appointment, not under My bookings or Account. Expected: a list of open time slots appears.",
+        "V1 3. Pick a new slot and press 'Confirm change'. Expected: the page shows the new time and a new confirmation email arrives. Owner gave no timing for that email.",
+        "V1 4. Check the new confirmation email shows the new time. Expected: the old time no longer appears in it.",
+        "V1 before you start: the change must be made at least 24 hours before the appointment starts.",
+        "V1 inside 24 hours: phone 555-0175. Owner has not given the phone line's opening hours; this is an open item.",
+        "V1 double booking: if you booked a second appointment by mistake, cancel the extra appointment on its own Manage booking page, or phone 555-0175 if you cannot find cancel. Owner has not said how or when the extra charge is refunded; this is an open item."
       ],
       "traits": [
         "Titles the article as a customer would ask it and puts the outcome or answer first",
         "Gives numbered steps with one action each and expected results, plus prerequisites such as the 24-hour rule",
-        "Marks the uncertain 'Change time' button location as unverified rather than guessing",
-        "Includes troubleshooting (including the double-booking mistake and the phone route inside 24 hours), related questions and a review note listing unverified steps"
+        "States the 'Change time' location from the version1 owner note as owner-supplied and not checked on the live page, and does not repeat the superseded 'My bookings' or 'Account' guess as fact",
+        "Includes troubleshooting (the double-booking fix, the phone route inside 24 hours with its opening hours left as an open item), related questions, and a review note that traces each version0 gap to its version1 answer or to an open item"
       ],
       "must_not": [
         "States a guessed menu location as fact",

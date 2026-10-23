@@ -25,7 +25,7 @@ ID: security/security-policy-writer. Version: 1.4.
 
 **Inputs:** topic, scope, audience, current practice, rules the user must follow (supplied by them), roles, size of the organization, and tone. Ask whether the rule is a requirement or a recommendation.
 
-**Method:** Write short numbered requirements, each one confirmable by a record or observation. Separate policy (what and why) from procedure (how). Name owners by role. Include exceptions, review dates left blank for the owner, and a plain summary at the top. Numeric values (lengths, intervals, limits) are blanks unless the user supplied them. Use only the rules and framework the user supplies; do not add outside requirements.
+**Method:** Write short numbered requirements, each one confirmable by a record or observation. Separate policy (what and why) from procedure (how). Name a proposed confirming record or observation beside each requirement; an acknowledgement confirms receipt or agreement, not that a device control is enabled or a handling rule is followed. Mark checks requiring owner authorization as proposed and unperformed. Explicitly flag any conflict between supplied current practice and a supplied rule. Name owners by role. Include exceptions, review dates left blank for the owner, and a plain summary at the top. Numeric values (lengths, intervals, limits) are blanks unless the user supplied them. Use only the rules and framework the user supplies; do not add outside requirements.
 
 **Deliver:** a policy draft: purpose, scope, numbered requirements, roles, exception route, review cycle placeholder, a one-paragraph staff summary, and a list of decisions the owner must make.
 

@@ -83,7 +83,7 @@
         "Writes each section only from a supplied practice and gives a practice-to-sentence table",
         "Flags the sharing of email lists with the advertising partner and the tracking script as practices the notice would make visible, without reassuring wording",
         "Inserts bracketed questions for retention and for how access or removal requests work, and lists them as unanswered",
-        "Uses a placeholder for the last-updated date and marks the draft 'draft for review'",
+        "Uses an unfilled last-updated date placeholder and marks the notice 'draft for review', without substituting the session date",
         "States the output is plain-language support and not legal advice, and says who must authorize any decision or action, and recommends a qualified privacy or legal professional before the notice is used"
       ],
       "must_not": [
@@ -105,7 +105,8 @@
         "C4. The grantee must notify the funder within 10 days of any change in key staff.",
         "C5. Grant funds must not be used for political campaigning.",
         "Activity covered: youth cooking classes program",
-        "Evidence we have: a receipts folder; no progress reports filed yet"
+        "Evidence we have: a receipts folder; no progress reports filed yet",
+        "Owner clarification v1 (fictional): a key staff change happened yesterday. The C4 notification deadline is therefore near; please flag that trigger for a qualified professional without deciding legal compliance or marking any item met."
       ],
       "traits": [
         "Gives one row per condition C1 to C5 with the quoted requirement, plain meaning, evidence needed, owner role, status and notes",
@@ -135,7 +136,8 @@
         "Our real practice: we refund anyone who asks within 30 days.",
         "Our real practice: we email customers 60 days before any price change.",
         "Our real practice: customers can export their bookings; terms do not mention it.",
-        "Business: Larchgate Booking (fictional), audience small salons"
+        "Business: Larchgate Booking (fictional), audience small salons",
+        "Owner clarification v1 (fictional): review reference date is 20 October 2026. Our cancellation method is not described in the terms; how customers start a dispute is also unresolved. Please list both as owner/professional questions without supplying missing terms."
       ],
       "traits": [
         "Gives a comparison table with a quote, plain meaning, practice match and which side each term favors",
@@ -227,7 +229,7 @@
       "traits": [
         "Gives a differences table quoting old and new text side by side for sections 4 and 6, classified as reworded or changed",
         "Notes that old Section 9 was not supplied, so the Section 9 change can only be described from the new text",
-        "Copies both dates exactly and flags the conflict between the 1 March 2027 general date and the 1 April 2027 Section 9 date",
+        "Copies both dates exactly and explicitly asks a qualified professional to clarify how the general 1 March 2027 date and Section 9 1 April 2027 date relate, without deciding whether this is an exception or a contradiction",
         "Phrases what the changes mean for the coffee carts as questions for the owner, not conclusions",
         "States the output is plain-language support and not legal advice, and says who must authorize any decision or action, and escalates the deadlines to a qualified professional"
       ],

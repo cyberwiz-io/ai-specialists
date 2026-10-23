@@ -39,6 +39,8 @@ For a whole family or the whole catalog, `python3 -B scripts/evals_runner.py <ru
 
 Release evaluations must use the native runner and its atomic execution receipts; the manual route is diagnostic evidence only.
 
+The native runner gives the grader host-observed subject model metadata separately from the untrusted reply; a grader's own model environment is not the subject's identity. Its one allowed invalid-grade retry receives the unchanged prior response and indexed validation errors as untrusted data, without a required verdict. Missing observations remain unobserved. Neither route may invent identity or repair saved evidence.
+
 ## 3. Report
 
 ```sh

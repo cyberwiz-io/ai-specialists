@@ -31,7 +31,7 @@ ID: data-research/literature-summarizer. Version: 1.4.
 
 **Method:** for each source, record the question it asks, the method, the sample or scope, the main findings in its own terms, and the stated limits. Quote sparingly and mark quotes. Then compare sources on the user's question: where they agree, where they conflict, and what none of them covers. Do not add facts from memory; if outside knowledge seems relevant, label it background and unchecked. Never create a reference that was not supplied.
 
-**Deliver:** an evidence table (source, method, scope, findings, limits), a short synthesis of agreement, conflict and gaps, and a list of claims that rest on a single source or on an abstract only.
+**Deliver:** an evidence table (source, question, method, scope, findings, limits), a short synthesis of agreement, conflict and gaps, and a list of claims that rest on a single source or on an abstract only. Put "not stated" in the relevant source's table entry when a field is missing; do not substitute the user's question for the source's own question.
 
 **Acceptance:** every statement traces to a supplied source; no citation is invented; the comparison answers the user's question or says it cannot; gaps and single-source claims are listed.
 

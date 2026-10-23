@@ -106,7 +106,7 @@ ID: data-research/literature-summarizer. Version: 1.4.
 
 **Method:** for each source, record the question it asks, the method, the sample or scope, the main findings in its own terms, and the stated limits. Quote sparingly and mark quotes. Then compare sources on the user's question: where they agree, where they conflict, and what none of them covers. Do not add facts from memory; if outside knowledge seems relevant, label it background and unchecked. Never create a reference that was not supplied.
 
-**Deliver:** an evidence table (source, method, scope, findings, limits), a short synthesis of agreement, conflict and gaps, and a list of claims that rest on a single source or on an abstract only.
+**Deliver:** an evidence table (source, question, method, scope, findings, limits), a short synthesis of agreement, conflict and gaps, and a list of claims that rest on a single source or on an abstract only. Put "not stated" in the relevant source's table entry when a field is missing; do not substitute the user's question for the source's own question.
 
 **Acceptance:** every statement traces to a supplied source; no citation is invented; the comparison answers the user's question or says it cannot; gaps and single-source claims are listed.
 
@@ -121,9 +121,9 @@ ID: data-research/data-cleaning-planner. Version: 1.4.
 
 **Inputs:** a sample of rows or a field list with types and meanings, the planned analysis, known problems, and the tool the user will use (spreadsheet, script, other). Ask whether personal data is present before looking at examples.
 
-**Method:** inventory problems field by field: missing values, duplicates, inconsistent spellings, impossible values, mixed units, date formats, outliers. For each, propose a rule (fix, flag, drop, ask the data owner) and the reason, and say what the rule could distort. Order the steps so earlier ones do not undo later ones. Prefer flagging over deleting. Add checks to run after each step, such as row counts and totals before and after. Write steps so a non-programmer could follow them in the stated tool.
+**Method:** inventory problems field by field: missing values, duplicates, inconsistent spellings, impossible values, mixed units, date formats, outliers. For each, propose a rule (fix, flag, drop, ask the data owner) and the reason, and say what the rule could distort. Distinguish the bad value's effect from the cleaning rule's possible side effect. Do not infer how common an issue is beyond the sample. Order the steps so earlier ones do not undo later ones. Prefer flagging over deleting. Add checks to run after each step, such as row counts and totals before and after. Write steps so a non-programmer could follow them in the stated tool.
 
-**Deliver:** an issue inventory, a numbered cleaning plan with a rule and a check per step, a decision log for choices the data owner must make, and a before and after checklist. Suspected issues beyond the sample are marked unverified.
+**Deliver:** an issue inventory, a numbered cleaning plan with the field, rule, reason, possible distortion and check per step, a decision log for choices the data owner must make, and a before and after checklist. Suspected issues beyond the sample are marked unverified.
 
 **Acceptance:** each rule names its field and reason; each step has a check; nothing is dropped without a recorded decision; the plan says the sample may not show every problem.
 
@@ -153,7 +153,7 @@ ID: data-research/dashboard-specifier. Version: 1.4.
 
 **Use for:** writing the specification for a dashboard or recurring report that someone else will build. Not building it, analyzing the data, or choosing a tool for the user.
 
-**Inputs:** the decisions the dashboard should support, the people who will read it, available data fields and their owners, how often it must update, and any tool the builder will use. Ask for the top three decisions before listing any metric.
+**Inputs:** the decisions the dashboard should support, the people who will read it, available data fields and their owners, how often it must update, and any tool the builder will use. Ask for up to three priority decisions before listing any metric; use fewer when the user has supplied the complete decision set.
 
 **Method:** start from decisions, not from available data. For each decision, define the metric: name, plain definition, formula, data fields used, time window, and who owns the definition. Choose a chart type that fits each comparison and explain why in one line. Specify filters, defaults, thresholds with their basis, and what to show when data is missing. Include reader needs such as readable labels and color-independent cues. Cut any metric that no decision uses.
 

@@ -42,7 +42,7 @@
         "Citation style wanted: author, year, title."
       ],
       "traits": [
-        "Gives an evidence table with question, method, sample or scope, findings in each source's own terms, and stated limits for A, B and C",
+        "Gives an evidence table with question, method, sample or scope, findings in each source's own terms, and stated limits for A, B and C; missing source questions are marked not stated in their table entries, not replaced by the user's question",
         "Identifies the conflict between A (a gain) and B (no measurable change) and notes differences that may explain it, without resolving it from memory",
         "Flags that B rests on an abstract only and that C covers pupils aged 13-15 with no comparison group, so it does not directly answer the question",
         "Lists claims resting on a single source or an abstract only, and says what none of the sources covers",
@@ -72,7 +72,7 @@
       ],
       "traits": [
         "Gives a field-by-field issue inventory covering the repeated M001 row, mixed and ambiguous date formats (06/07/2024), the impossible age 212, branch spellings (north, Sth), the 4000 fee that may be a unit or typing error, and missing email and age",
-        "Proposes a rule (fix, flag, drop or ask the data owner) with a reason for each issue and says what the rule could distort, preferring flagging over deleting",
+        "Proposes a rule (fix, flag, drop or ask the data owner) with a reason and possible distortion for every issue, including date and branch rules, preferring flagging over deleting",
         "Orders the steps sensibly (for example, standardizing dates before counting by month) and attaches a check to each, such as row counts and fee totals before and after",
         "Notes that names and emails are not needed for the planned analysis and suggests leaving them out",
         "Includes a decision log for the data owner and says the sample may not show every problem in the full export"
@@ -126,12 +126,13 @@
         "Metrics wanted: stock on hand per item; days of stock left; visits per distribution day; volunteers per shift; unique households served per month; social media followers; donations received by item; average visit length; volunteer hours per month.",
         "Available data: inventory_count by item (owner: warehouse lead, updated daily); visits_log with date and visit count, no household identifier (owner: front desk, typed up weekly); shift_rota with date, shift and volunteers signed up (owner: volunteer coordinator, weekly).",
         "Not available: visit start and end times; donation records are on paper.",
-        "Builder's tool: a spreadsheet with charts."
+        "Builder's tool: a spreadsheet with charts.",
+        "Owner clarification v1 (fictional): these two decisions are our complete current priority set. By include all metrics, I mean assess every requested metric and explain excluded or blocked ones; only decision-linked, supportable panels belong in the build specification."
       ],
       "traits": [
-        "Starts from the decisions and asks for a third decision, since only two were given",
+        "Starts from the two supplied priority decisions, using the owner clarification that this is the complete decision set rather than requiring a third",
         "Gives a metric dictionary in which each kept metric has a name, plain definition, formula, data fields, time window and owner",
-        "Cuts social media followers (no decision uses it) and flags unique households served, average visit length and donations by item as unavailable from the listed data rather than assuming them",
+        "Excludes social media followers from build panels because no supplied decision uses it; may retain it in a clearly excluded-request log. Flags unique households served, average visit length and donations by item as unavailable from the listed data rather than assuming them",
         "Notes that weekly visit data may lag the daily reorder decision and specifies refresh needs, thresholds with their basis, and what to show when data is missing",
         "Gives a text layout with a chart type and one-line reason per panel, filters and defaults, readable labels and color-independent cues, and questions for the builder and data owners"
       ],
@@ -210,7 +211,8 @@
         "Crux Hall (fictional): price page pasted by me on 2026-09-30: 'Monthly 60. Students 45 with valid card. Open 7am-11pm.' Beginner classes: not supplied.",
         "Ledge & Co Climbing (fictional): flyer from 2024-02: 'Monthly 50, intro classes every Saturday.' Student rate: a forum post on climbtalk.example (undated) says 'students get 20% off at Ledge'.",
         "Ledge & Co opening hours: not supplied.",
-        "Crux Hall member numbers: I don't have any."
+        "Crux Hall member numbers: I don't have any.",
+        "Owner source-date clarification v1 (fictional): our own Basecamp membership figure is my note dated 2026-10-20; this records when I supplied the figure, not independent verification or a price-page effective date."
       ],
       "traits": [
         "Gives a comparison matrix on the user's four dimensions where every cell has a source and date or reads 'not supplied'",

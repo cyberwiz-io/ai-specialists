@@ -47,6 +47,14 @@ On 2026-10-22, isolated Claude Code installations on macOS and Windows advanced 
 
 A further macOS Codex 0.163.0 trial enabled `multi_agent_v2` through the supported normal-home launcher. After an ephemeral empty-MCP override resolved a configuration parse failure, the native selector returned `unknown agent_type` for the exact installed project planner. No worker or probes ran. This is unavailable delegation, not a host permission denial. Windows managed Codex launch remains unsupported by the current ai-home launcher.
 
+### Failed 1.4 full cohort and subsequent repairs
+
+The complete 150-case diagnostic cohort `release-14-7ec80c4-max-full-a` used signed commit `7ec80c468f37f6ede1ca69f86784e80bb0f406dc`: 97 PASS, 46 PARTIAL, 4 FAIL and 3 invalid grades after the allowed two attempts. The ordinary 144 fixtures recorded 93 PASS, 45 PARTIAL, 3 FAIL and 3 invalid grades; the six frozen challenges recorded 4 PASS, 1 PARTIAL and 1 FAIL. This fails release acceptance. All original replies, grades, invalid attempts and receipts remain preserved. A cold review agreed with all six challenge outcomes without exposing their rubrics to tuning.
+
+Independent public-output diagnosis found actual omissions, incomplete positive inputs, fixture/card conflicts and grading disagreements. Subsequent source repairs preserve safeguards and prohibitions. Ordinary fixtures with additional fictional owner clarifications retain the original notes and identify the new source version; those changed inputs cannot be compared as if they were the original cohort. No original score is promoted. Host-observed subject metadata now separates subject identity from the grader environment, and the existing single invalid-grade retry receives the unchanged response and indexed validation errors. Exact-quote validation and acceptance thresholds remain unchanged. The changed harness requires fresh blind calibration before new release evidence can rely on it.
+
+Current source checks, independent review, two qualifying full cohorts, critical-case stability and all four complete native client trials remain pending for these repaired bytes. No merge, publication, public download or personal installation is implied.
+
 ## Automated and historical evidence
 
 Repository checks validate card structure, safeguards, links, generated-file freshness, adapter formats, fixtures and archive contents. These checks do not prove host behavior. Follow [Contributing](../CONTRIBUTING.md) for the current commands and [the release procedure](RELEASE.md) for the reviewed candidate and publication gates.

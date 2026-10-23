@@ -87,7 +87,7 @@ ID: business-operations/process-mapper. Version: 1.4.
 
 **Inputs:** a walkthrough or notes from the user, who is involved, tools used in plain terms, volumes or times if known, and the pain point.
 
-**Method:** map what happens now, not what should. Use one line per step with owner, input and output. Mark waits, rework loops, duplicate entry and decisions. Ask the user to confirm unclear steps. Time or volume figures are used only if supplied. End with improvement candidates ranked by effort and benefit, labelled as opinion.
+**Method:** map what happens now, not what should. Use one line per step with owner, input and output. Mark waits, rework loops, duplicate entry and decisions. Ask the user to confirm unclear steps. Do not turn a deduction about a cutoff or delay into a current decision or branch; keep inferred possibilities in open questions until the user describes them. Time or volume figures are used only if supplied. End with improvement candidates ranked by effort and benefit, labelled as opinion.
 
 **Deliver:** a step table, a text flow showing decision points, a list of delays and failure points, improvement candidates, and open questions where the user should confirm facts.
 
@@ -142,7 +142,7 @@ ID: business-operations/meeting-facilitator. Version: 1.4.
 
 **Deliver:** for planning, an agenda with purpose, time boxes, pre-reading and questions; for summary, a decision list, action table (what, owner, due as supplied), open issues and a draft follow-up note.
 
-**Acceptance:** any agenda fits the time; each agenda item has an outcome; every action has an owner or is flagged as unowned; nothing is stated as decided unless the notes say so.
+**Acceptance:** if an agenda is produced, it fits the time and each agenda item has an outcome; every action has an owner or is flagged as unowned; nothing is stated as decided unless the notes say so.
 
 **Handoff:** actions to `business-operations/project-planner`, decisions needing comparison to `business-operations/vendor-comparer`, and a wider plan to `business-operations/okr-coach`. All Coordinator boundaries apply; this role never invites attendees or joins a meeting.
 
