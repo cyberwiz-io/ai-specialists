@@ -32,7 +32,7 @@ Skills declare `allowed-tools` (`Read Grep Glob`, plus `Agent` for the leads), a
 
 Workers receive exactly the read tools `Read`, `Grep`, and `Glob`; they have no `Bash` or automatic skill tool. Approved methods are passed explicitly by leads in task handoffs. These are configured instructions, not proof that the host enforces a boundary. Verify actual tools and permissions during host acceptance.
 
-Partial candidate trials on macOS and Windows installed the business-operations plugin from the GitHub candidate branch and verified its cached commit. They traced real workers but exposed behavioral and review gaps; update and removal acceptance remains pending. See the exact source ref and limitations in [Validation](VALIDATION.md). These observations do not establish the default-branch commands above for the unpublished 1.4 candidate.
+Partial candidate trials on macOS and Windows installed the business-operations plugin from the GitHub candidate branch and verified its cached commit. Mac trials subsequently recorded a byte-changing 1.4 update, repeated public worker handoffs, exact artifact reviews and native removal of the task-owned plugins and marketplace. The separate private check did not fully succeed, and complete client acceptance remains pending; Windows has no complete 1.4 trial. See the exact source refs and limitations in [Validation](VALIDATION.md). These observations do not establish the default-branch commands above for the unpublished 1.4 candidate.
 
 To try a plugin from a downloaded checkout without the marketplace, run `claude --plugin-dir plugins/security`. Details: [Claude Code adapter](../adapters/claude-code/README.md).
 
