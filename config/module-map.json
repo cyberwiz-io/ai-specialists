@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "ef6e57a8f9507b3d8ab6ac51b447479c5ba34d29deb0a946768659bf61a3bbc9",
+      "digest": "dcd59c1d62f769379b1a7463c5be0e8ce4be2b2938af8130eb5c7a723e8fe346",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "1a2d1c5105e2c1666563df205b8b74108b4ee06c40aa1bb49f2fb63a3787ba72",
+      "digest": "fe438beee7b7af2d873578933d9684adeb59b09eebac36cd1de694a50aec3558",
       "files": 51,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -191,7 +191,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "df563a3b9287f60d0267a83f76bb3d3b47b6a1be484d9aea2c176c2c4486fffc",
+      "digest": "79fa00513a373d78da20bc144d5ab1c1ab7ea7d6cb3241d051df091ddeeaf852",
       "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
@@ -242,7 +242,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "f4d8f4cd384461b63ccc1e053a5a9447e731eb93b883e61279fc3cdc2cd5856a",
+      "digest": "8469079420bf5568fd0ee8fab46059d6d53e3099a15c473f1d9d42a3ba44240a",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -289,7 +289,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "94147ad53ee755381e2d73fcbef51298a3d18b27e4cf961cf1e88e524455ce50",
+      "digest": "fc225c93a2e851cc67a336d4ea43daccb8e6c6ab8ac41bb6ed259aa27014f422",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -328,7 +328,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "6861216c936306d620f0bb6ed2f2a889e030f515ed9119d4b5e1d3ca7d64c9a4",
+      "digest": "c518c99f6deedd93b7f99f6ff0022fe199dabf91347fa86530bbd52c3e4f6212",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -376,7 +376,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "e50cc9048c4d5198490824fe82332a6abec06999b1f105ceffabbbab3c70e0ab",
+      "digest": "63699ed303dd8149e124a3e1688145c9e481ca9d04424437559704341badb093",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",

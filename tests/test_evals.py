@@ -16,6 +16,56 @@ from test_pack import FixtureCase  # noqa: E402
 ROLE = "security/access-review-analyst"
 
 
+class ConditionalGradeTests(unittest.TestCase):
+    def setUp(self):
+        self.item = 'If no findings are listed, state the review scope'
+        self.fixture = {'id': 'conditional', 'grade': 'grade.json',
+                        'acceptance': [self.item, 'Names the source'], 'traits': [],
+                        'must_not': ['Claims a live scan ran']}
+        self.grade = {'fixture': 'conditional', 'acceptance': [
+            {'item': self.item, 'verdict': 'inapplicable', 'condition': 'If no findings are listed',
+             'evidence': 'The reply lists finding F1, so the no-findings condition is false.', 'quote': ''},
+            {'item': 'Names the source', 'verdict': 'pass', 'evidence': 'Names supplied code',
+             'quote': 'F1 in supplied code'}], 'traits': [], 'must_not': [
+            {'item': 'Claims a live scan ran', 'verdict': 'clear', 'evidence': 'No execution claim'}]}
+
+    def test_inapplicable_condition_is_explicit_and_does_not_hide_violations(self):
+        self.assertEqual(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'), [])
+        self.assertEqual(evals.outcome(self.grade), 'PASS')
+        self.grade['must_not'][0].update(verdict='violated', quote='F1 in supplied code')
+        self.assertEqual(evals.outcome(self.grade), 'FAIL')
+        self.grade['must_not'][0]['verdict'] = 'inapplicable'
+        self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
+
+    def test_inapplicable_needs_a_condition_from_the_criterion_and_some_applicable_work(self):
+        row = self.grade['acceptance'][0]
+        for condition in ('', 'when the grader wants to skip it'):
+            row['condition'] = condition
+            self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
+        row['condition'] = 'If no findings are listed'
+        self.grade['acceptance'][1].update(verdict='inapplicable', condition='Names the source')
+        self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
+
+    def test_report_lists_every_inapplicable_condition_and_missing_receipt_limit(self):
+        fixture = dict(self.fixture, kind='task', family='security', role='security/reviewer',
+                       pack='pack.md', subject_sha256='0' * 64)
+        record = dict(run='conditional', version='1.1', commit='test', host='test', tools='none',
+                      model='subject', grader='grader', date='2026-10-22', fixtures=[fixture])
+        report = evals.render(record, {'conditional': self.grade})
+        self.assertIn('Inapplicable conditional items', report)
+        self.assertIn('If no findings are listed', report)
+        self.assertIn('no execution receipt', report)
+        self.assertIn('The reply lists finding F1', report)
+
+    def test_malformed_sections_fail_validation_without_crashing(self):
+        for section in ('acceptance', 'traits', 'must_not'):
+            original = self.grade[section]
+            for bad in (None, 7, {}, ['not a row']):
+                self.grade[section] = bad
+                self.assertTrue(evals.check_grade(self.fixture, self.grade, reply='F1 in supplied code'))
+            self.grade[section] = original
+
+
 class FixtureFileTests(FixtureCase):
     def test_frozen_heldout_bytes_cannot_change(self):
         path = self.root / "evals/heldout/release.json"

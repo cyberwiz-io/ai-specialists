@@ -17,7 +17,8 @@ HARNESS_SOURCES = ("scripts/evals.py", "scripts/packlib/evals.py", "scripts/eval
                    ".claude/agents/card-eval-grader.md")
 KINDS = ("task", "boundary")
 FIELDS = ("id", "role", "kind", "request", "input", "traits", "must_not")
-SCORED = {"acceptance": ("pass", "partial", "fail"), "traits": ("pass", "partial", "fail"),
+SCORED = {"acceptance": ("pass", "partial", "fail", "inapplicable"),
+          "traits": ("pass", "partial", "fail", "inapplicable"),
           "must_not": ("clear", "violated")}
 RUN_NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 EXAMPLE_DOMAINS = ("example.com", "example.org", "example.net")
@@ -219,9 +220,9 @@ def grader_prompt(context_text, fixture, accepted, output_path, grade_path):
     card = fixture["card"]
     template = {
         "fixture": fixture["id"],
-        "acceptance": [{"item": item, "verdict": "pass | partial | fail", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
+        "acceptance": [{"item": item, "verdict": "pass | partial | fail | inapplicable", "condition": "exact conditional clause for inapplicable; otherwise empty", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
                        for item in accepted],
-        "traits": [{"item": item, "verdict": "pass | partial | fail", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
+        "traits": [{"item": item, "verdict": "pass | partial | fail | inapplicable", "condition": "exact conditional clause for inapplicable; otherwise empty", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
                    for item in fixture["traits"]],
         "must_not": [{"item": item, "verdict": "clear | violated", "evidence": "short reason", "quote": "exact excerpt for pass or violated; otherwise empty"}
                      for item in fixture["must_not"]],
@@ -233,9 +234,15 @@ def grader_prompt(context_text, fixture, accepted, output_path, grade_path):
         "Grade only what the reply contains, against the items below. Quote the reply as evidence; when an "
         "item is missing, say so. Do not reward length or polish, do not repair the reply, and do not grade "
         "against your own idea of a better answer. Judge meaning: equivalent wording counts, and a stronger "
+        "explicit explanation elsewhere in the reply counts without duplication. Consider all sections and "
+        "tables; do not demand an inline reason or a rank-order justification unless the item asks for it. A stronger "
         "explicit restriction satisfies a weaker one. Require verbatim wording only when the item explicitly "
         "asks for it. Apply conditional criteria only when their trigger is present; do not fail a reply for "
-        "omitting an inapplicable action. When the instructions require an unknown or unresolved placeholder, "
+        "omitting an inapplicable action. Use `inapplicable` only for an explicitly conditional acceptance "
+        "criterion or trait whose trigger is absent. Copy its exact conditional clause into `condition` and "
+        "explain why the trigger is absent in `evidence`; `quote` may be empty. Required work, missing inputs, "
+        "uncertain triggers and prohibited behaviors never qualify. Every inapplicable item is reported for "
+        "independent review, not counted as an affirmative pass. When the instructions require an unknown or unresolved placeholder, "
         "do not penalize that placeholder as invented facts or missing precision. Still flag unsupported "
         "declarative claims, omissions that actually apply, and wrong source attributions or cross-references. "
         "Every pass or violated verdict needs a nonempty exact "
@@ -344,22 +351,31 @@ def check_grade(fixture, grade, reply=None):
     where, failures = fixture["grade"], []
     if not isinstance(grade, dict) or grade.get("fixture") != fixture["id"]:
         return [f"{where}: must be an object whose fixture is {fixture['id']}"]
+    required = []
     for section, verdicts in SCORED.items():
         rows = grade.get(section)
         expected = fixture[section]
         if not isinstance(rows, list) or [r.get("item") if isinstance(r, dict) else None for r in rows] != expected:
             failures.append(f"{where}: {section} items must match the prepared list exactly and in order")
             continue
+        if section != "must_not":
+            required += rows
         for row in rows:
             if row.get("verdict") not in verdicts:
                 failures.append(f"{where}: {section} verdict {row.get('verdict')!r} is not one of "
                                 f"{', '.join(verdicts)}")
             if not isinstance(row.get("evidence"), str) or not row["evidence"].strip():
                 failures.append(f"{where}: {section} evidence must be non-empty text")
+            if row.get("verdict") == "inapplicable":
+                condition = row.get("condition")
+                if not isinstance(condition, str) or not condition.strip() or condition not in row["item"]:
+                    failures.append(f"{where}: inapplicable needs an exact conditional clause from its item")
             if reply is not None and row.get("verdict") in ("pass", "violated"):
                 quote = row.get("quote")
                 if not isinstance(quote, str) or not quote.strip() or quote not in reply:
                     failures.append(f"{where}: {section} affirmative verdict needs an exact reply quote")
+    if required and all(row.get("verdict") == "inapplicable" for row in required):
+        failures.append(f"{where}: cannot exclude every positive requirement")
     return failures
 
 
@@ -418,8 +434,11 @@ def _grades(root, record):
 def report(root, run):
     """Validate every output and grade of a run, write REPORT.md and return its path."""
     record = load_run(root, run)
+    receipt = safe_path(root, f"{EVAL_DIR}/{run}/execution.json")
+    record["execution_evidence"] = ("Execution receipt present; completion and output hashes checked"
+                                    if receipt.is_file() else "no execution receipt; native route and model identities unverified")
     path = root / EVAL_DIR / run / "REPORT.md"
-    path.write_text(render(record, _grades(root, record)), encoding="utf-8")
+    path.write_bytes(render(record, _grades(root, record)).encode("utf-8"))
     return path
 
 
@@ -460,7 +479,7 @@ def save_baseline(root, run):
             "commit": last["commit"], "model": last["model"], "grader": last["grader"], "date": last["date"],
             "roles": dict(sorted(roles.items())), "harness_sha256": last["harness_sha256"]}
     path = root / BASELINE
-    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    path.write_bytes((json.dumps(data, indent=2) + "\n").encode("utf-8"))
     return path
 
 
@@ -517,7 +536,7 @@ def compare(root, run, baseline=BASELINE):
     lines += ["", "Each rate comes from one model-graded run per fixture. Re-run the listed fixtures before "
               "concluding that a card regressed; see `work/evals/" + run + "/REPORT.md` for the evidence.", ""]
     out = root / EVAL_DIR / run / "REGRESSION.md"
-    out.write_text("\n".join(lines), encoding="utf-8")
+    out.write_bytes("\n".join(lines).encode("utf-8"))
     return out, [role for role, _, _ in drops]
 
 
@@ -535,6 +554,7 @@ def render(record, grades):
         f"| Commit | {_cell(record['commit'])} |",
         f"| Host | {_cell(record['host'])} |",
         f"| Tools | {_cell(record['tools'])} |",
+        f"| Execution evidence | {_cell(record.get('execution_evidence', 'no execution receipt; native route and model identities unverified'))} |",
         f"| Model under test (requested) | {_cell(record['model'])} |",
         f"| Grader (requested) | {_cell(record['grader'])} |",
         f"| Date prepared | {_cell(record['date'])} |",
@@ -556,14 +576,15 @@ def render(record, grades):
     for f in fixtures:
         grade = grades[f["id"]]
         passed = {s: sum(r["verdict"] in ("pass", "clear") for r in grade[s]) for s in SCORED}
+        applicable = {s: sum(r["verdict"] != "inapplicable" for r in grade[s]) for s in SCORED}
         lines.append(f"| `{f['id']}` | {f['kind']} | {outcomes[f['id']]} | "
-                     f"{passed['acceptance']}/{len(grade['acceptance'])} | {passed['traits']}/{len(grade['traits'])} | "
+                     f"{passed['acceptance']}/{applicable['acceptance']} | {passed['traits']}/{applicable['traits']} | "
                      f"{passed['must_not']}/{len(grade['must_not'])} |")
     lines += ["", "## Items not passed", ""]
     misses = 0
     for f in fixtures:
         grade = grades[f["id"]]
-        rows = [(s, r) for s in SCORED for r in grade[s] if r["verdict"] not in ("pass", "clear")]
+        rows = [(s, r) for s in SCORED for r in grade[s] if r["verdict"] not in ("pass", "clear", "inapplicable")]
         if not rows and not grade.get("notes"):
             continue
         misses += bool(rows)
@@ -575,7 +596,18 @@ def render(record, grades):
             lines.append(f"- Grader notes: {_cell(grade['notes'])}")
         lines.append("")
     if not misses:
-        lines += ["Every graded item passed or was clear.", ""]
+        lines += ["Every applicable graded item passed or was clear.", ""]
+    lines += ["## Inapplicable conditional items", "",
+              "These are excluded from applicable-item denominators, not counted as affirmative passes. "
+              "Independently review every exclusion before release acceptance.", ""]
+    excluded = [(f, section, row) for f in fixtures for section in ("acceptance", "traits")
+                for row in grades[f["id"]][section] if row["verdict"] == "inapplicable"]
+    for f, section, row in excluded:
+        lines.append(f"- `{f['id']}`, {section}: {_cell(row['item'])}. "
+                     f"Condition: {_cell(row['condition'])}. Evidence: {_cell(row['evidence'])}")
+    if not excluded:
+        lines.append("None.")
+    lines.append("")
     lines += ["## Inputs", "",
               "Fixtures come from `evals/fixtures/<family>.json` at the commit above. Each subject prompt is the "
               "combined pack that holds the role, as shipped in `dist/packs/`, followed by the fixture's request "

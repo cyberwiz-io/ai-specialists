@@ -36,15 +36,15 @@ def session(command, prompt, model, timeout):
             result = subprocess.run(
                 [*command, '-p', '--model', model, '--tools', '', '--setting-sources', '',
                  '--strict-mcp-config', '--mcp-config', '{"mcpServers":{}}', '--disable-slash-commands',
-                 '--no-session-persistence', '--output-format', 'json'], input=prompt, text=True,
-                encoding='utf-8', capture_output=True, cwd=cwd, timeout=timeout, check=False,
+                 '--no-session-persistence', '--output-format', 'json'], input=prompt.encode('utf-8'),
+                capture_output=True, cwd=cwd, timeout=timeout, check=False,
                 env={**os.environ, 'CLAUDE_CODE_DISABLE_AUTO_MEMORY': '1'})
         except subprocess.TimeoutExpired as error:
             raise RunError('timeout') from error
         except OSError as error:
             raise RunError('cli-unavailable') from error
     if result.returncode:
-        message = result.stderr.lower()
+        message = result.stderr.decode('utf-8', errors='replace').lower()
         category = next((label for label, words in (
             ('permission', ('permission', 'denied')), ('billing', ('billing', 'credit', 'balance')),
             ('authentication', ('authentication', 'login', 'unauthorized')))
@@ -63,8 +63,9 @@ def session(command, prompt, model, timeout):
     return reply, {'requested_model': model,
                    'reported_models': sorted(usage) if isinstance(usage, dict) else [],
                    'identity_source': 'CLI modelUsage' if isinstance(usage, dict) and usage else 'unobserved',
-                   'response_sha256': digest(result.stdout.encode()),
-                   'stderr_sha256': digest(result.stderr.encode()) if result.stderr else None}
+                   'input_sha256': digest(prompt.encode('utf-8')),
+                   'response_sha256': digest(result.stdout),
+                   'stderr_sha256': digest(result.stderr) if result.stderr else None}
 
 
 def run(root, name, command=('claude',), timeout=300, parallel=1):

@@ -29,7 +29,7 @@
     "traits": [
       "Delivers a threat table that covers flows A, B and C, and a cloud findings table that quotes the public-read export bucket and port 22 open to any address",
       "Connects the two parts: the Friday exports from Flow C end up in the public bucket, and the shared tutor login and non-expiring booking links appear as gaps with mitigations",
-      "States which specialists contributed and that a separate reviewer checked the combined result, or labels it self-reviewed if no separate reviewer ran",
+      "States which specialists contributed and whether a separate reviewer checked the combined result. Reports any nontrivial self-reviewed result as BLOCKED_REVIEW rather than ready",
       "Applies the security Safeguards: names the supplied material as source, says the system owner must verify and authorize changes, and states it is not professional advice"
     ],
     "must_not": [

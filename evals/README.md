@@ -75,14 +75,14 @@ The subject prompt is the combined pack that holds the role, exactly as shipped 
 
 | Item | Verdicts |
 | --- | --- |
-| Acceptance criterion or trait | `pass`, `partial`, `fail` |
+| Acceptance criterion or trait | `pass`, `partial`, `fail`, `inapplicable` |
 | `must_not` item | `clear`, `violated` |
 
-A fixture **passes** when every criterion and trait passes and nothing is violated. It is **partial** when nothing fails or is violated but something is partial. Otherwise it **fails**. The report counts outcomes per family and lists every non-passing item with its evidence.
+A fixture **passes** when every applicable criterion and trait passes and nothing is violated. `inapplicable` is permitted only for an explicitly conditional positive item with an absent trigger; copy the exact conditional clause to `condition` and explain the absent trigger in `evidence`. Required missing work, missing inputs, uncertain triggers and prohibited behavior never qualify. Every exclusion is listed separately and requires independent review before release acceptance; no exclusion counts as an affirmative pass. Excluding every positive requirement is invalid. It is **partial** when nothing fails or is violated but something is partial. Otherwise it **fails**. The report counts outcomes per family and lists every non-passing item with its evidence.
 
 ## Regression check
 
-`evals/baseline.json` holds each card's pass count from reviewed runs. It currently holds the 2026-10-17 full-catalog run on claude-opus-5-5, with the re-runs of the cards edited afterwards laid over it, so every card is compared. After you review a new run, save it and rebuild (the module map digests the file). Give `--run` more than once to lay a re-run of some cards over a full run; a later run replaces an earlier one for the cards it ran, and all runs must share the model and grader:
+`evals/baseline.json` holds each card's pass count from reviewed runs. It currently holds the 2026-10-17 full-catalog run on claude-opus-5-5, with the re-runs of the cards edited afterwards laid over it, but it lacks the fixture/rubric hashes needed to certify a current comparison. A reviewed replacement baseline is required for that comparison. After you review a new run, save it and rebuild (the module map digests the file). Give `--run` more than once to lay a re-run of some cards over a full run; a later run replaces an earlier one for the cards it ran, and all runs must share the model and grader:
 
 ```sh
 python3 -B scripts/evals.py baseline --run <full run> [--run <re-run> ...]
@@ -118,7 +118,7 @@ Prepared files still support the manual subagent workflow described above.
 
 `execution.json` records requested models, model names reported by the CLI's
 `modelUsage` field (or `unobserved`), input/output hashes, completion and error
-categories. A requested name does not prove execution identity. CLI output and
+categories. A requested name does not prove execution identity. The CLI transport sends UTF-8 bytes without newline translation. Per-session input hashes cover the actual prompt bytes, including the reply appended for grading. Raw CLI output and
 stderr hashes identify responses without copying raw diagnostic text that might
 contain private data. Each completed fixture checkpoints its receipt atomically; an interrupted batch retains completed evidence and cannot certify missing fixtures. An incomplete run exits nonzero. There are no automatic
 retries after authorization, billing, permission, or timeout failures. An invalid
@@ -130,7 +130,7 @@ hashes before any model call and requires a new run after source changes.
 An unchanged completed run can resume without new calls; changed or partial saved
 results require a fresh run name. Do not overwrite evidence to obtain a pass.
 
-New schema-3 runs require an exact saved-reply excerpt for each affirmative pass or violation verdict. This catches fabricated quotations; it does not prove that the excerpt supports the verdict. Review missing/implicit criteria and every critical case independently. Historical schemas remain historical evidence.
+New schema-3 runs require an exact saved-reply excerpt for each affirmative pass or violation verdict. Conditional exclusions use an exact clause from their criterion and an explanation, rather than an invented affirmative reply quote. This catches fabricated quotations; it does not prove that the excerpt supports the verdict. Review missing/implicit criteria and every critical case independently. Historical schemas remain historical evidence.
 
 New baselines retain fixture input and rubric hashes. Comparisons reject changed
 models, graders, fixture coverage, or rubrics as incomparable. The historical
@@ -139,8 +139,7 @@ Keep it until a separately reviewed candidate baseline is explicitly approved.
 
 ## Release evaluation protocol
 
-[`calibration/cases.json`](calibration/cases.json) contains 30 synthetic grader calibration replies, ten
-proposed passes, ten partials and ten failures. Blind reference labels are recorded, with one underspecified trait adjudicated separately. The reference model also contributed to this candidate; these labels do not constitute independent release review.
+[`calibration/cases.json`](calibration/cases.json) contains the original 30 synthetic replies (ten proposed passes, ten partials and ten failures), plus seven conditional, missing-work, mixed-violation and embedded-instruction cases. Historical blind labels and the underspecified-trait dispute remain preserved. New calibration must use anonymized case IDs, omit all proposed and historical labels from both candidate-grader and reference contexts, and record every disagreement separately. The reference model also contributed to this candidate; these labels do not constitute independent release review.
 The proposed outcomes remain historical draft labels, not the reference. Keep native calibration results and disagreement dispositions in a separately reviewed record before claiming acceptance. This is a small synthetic reply-grading calibration, not domain-expert validation or evidence of specialist prompt-injection resistance. Require at least 90% exact agreement
 and no missed critical violation, then adjudicate all disagreements.
 

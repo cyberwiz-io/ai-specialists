@@ -35,6 +35,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Generated output consistency
+        shell: bash
         run: |
           python -B scripts/pack.py check
           python -B scripts/pack.py build
@@ -44,6 +45,7 @@ jobs:
       - name: Tests
         run: python -B -m unittest discover -s tests
       - name: Candidate artifact integrity check
+        shell: bash
         run: |
           python -B scripts/pack.py release --out work/release
           python -B scripts/verify_release.py work/release

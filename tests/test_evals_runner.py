@@ -16,6 +16,22 @@ HARNESS_NAMES = ("scripts/evals.py", "scripts/packlib/evals.py", "scripts/evals_
 
 
 class RunnerTests(unittest.TestCase):
+    def test_native_transport_preserves_prompt_and_response_bytes(self):
+        import base64
+        self.fake.write_text('''import base64, json, sys
+data = sys.stdin.buffer.read()
+result = {'result': base64.b64encode(data).decode(), 'modelUsage': {'native-model': {}}}
+sys.stdout.buffer.write(json.dumps(result).encode() + b'\\r\\n')
+sys.stderr.buffer.write(b'diagnostic\\r\\n')
+''')
+        prompt = 'First line\nSecond line: café\n'
+        reply, receipt = evals_runner.session([sys.executable, str(self.fake)], prompt, 'native-model', 5)
+        self.assertEqual(base64.b64decode(reply), prompt.encode('utf-8'))
+        raw = json.dumps({'result': reply, 'modelUsage': {'native-model': {}}}).encode() + b'\r\n'
+        self.assertEqual(receipt['input_sha256'], hashlib.sha256(prompt.encode('utf-8')).hexdigest())
+        self.assertEqual(receipt['response_sha256'], hashlib.sha256(raw).hexdigest())
+        self.assertEqual(receipt['stderr_sha256'], hashlib.sha256(b'diagnostic\r\n').hexdigest())
+
     def test_affirmative_grade_requires_quote_from_reply(self):
         from packlib import evals
         fixture = {'id': 'one', 'grade': 'grade.json', 'acceptance': ['Useful'], 'traits': [], 'must_not': []}

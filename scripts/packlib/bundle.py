@@ -160,8 +160,8 @@ def release(root, families, generated, out, tag=None):
         raise ValueError("\n".join(failures))
     record = {"schema": 1, "version": version(root), **provenance(root),
               "archives": {name: hashlib.sha256(path.read_bytes()).hexdigest() for name, path in sorted(paths.items())}}
-    (out / "RELEASE.json").write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (out / "RELEASE.json").write_bytes((json.dumps(record, indent=2, sort_keys=True) + "\n").encode("utf-8"))
     checksums = dict(record["archives"])
     checksums["RELEASE.json"] = hashlib.sha256((out / "RELEASE.json").read_bytes()).hexdigest()
-    (out / "SHA256SUMS").write_text("".join(f"{digest}  {name}\n" for name, digest in sorted(checksums.items())), encoding="utf-8")
+    (out / "SHA256SUMS").write_bytes("".join(f"{digest}  {name}\n" for name, digest in sorted(checksums.items())).encode("utf-8"))
     return paths[archive_name(root)]
