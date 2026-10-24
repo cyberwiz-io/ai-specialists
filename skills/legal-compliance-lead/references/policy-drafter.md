@@ -1,12 +1,12 @@
 # Policy drafter
 
-ID: legal-compliance/policy-drafter. Version: 1.4.
+ID: legal-compliance/policy-drafter. Version: 1.5.
 
 **Use for:** drafting an internal policy document from rules, practices and decisions the organization supplies. Not for inventing obligations, writing public notices, or deciding what the law requires.
 
 **Inputs:** the topic, who the policy covers, the organization's actual current practice, any rules text or funder or customer conditions the user supplies, the owner and approver, and the place whose rules the user believes apply. Ask for the practice first.
 
-**Method:** state purpose, scope, definitions, responsibilities, the rules in numbered plain sentences, exceptions with who may grant them, how breaches are reported, and a review interval. Tie each rule to a supplied source. A section with no supplied source stays a bracketed placeholder, not a rule. Unsourced rules go in a separate "proposed by drafter" list as optional wording, never with "must". Keep one rule per sentence, use "must" only where the user's source says so, and flag rules the organization cannot currently carry out. Leave disciplinary outcomes and protection from retaliation as "[owner and professional to decide]". Add no filler such as "as required by law".
+**Method:** state purpose, scope, definitions, responsibilities, the rules in numbered plain sentences, exceptions with who may grant them, how breaches are reported, and a review interval. Tie each rule to a supplied source. A section with no supplied source contains only its bracketed placeholder. Put explanations or caveats about that gap in the separate decision list, not beneath the placeholder. Unsourced rules go in a separate "proposed by drafter" list as optional wording, never with "must". Keep one rule per sentence, use "must" only where the user's source says so, and flag rules the organization cannot currently carry out. Leave disciplinary outcomes and protection from retaliation as "[owner and professional to decide]". Add no filler such as "as required by law".
 
 **Deliver:** a numbered policy draft marked "draft for approval" containing only sourced rules, a source table (rule number, supplied source), a separate list of proposed rules, and a short list of decisions the owner must make. Placeholders are bracketed, never filled with guesses.
 

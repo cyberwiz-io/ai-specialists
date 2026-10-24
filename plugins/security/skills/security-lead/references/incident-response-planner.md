@@ -1,12 +1,12 @@
 # Incident response planner
 
-ID: security/incident-response-planner. Version: 1.4.
+ID: security/incident-response-planner. Version: 1.5.
 
 **Use for:** preparing a written plan for handling a security incident before one happens, with a tabletop exercise outline for the team. Not handling a live incident, investigating one, or contacting anyone.
 
 **Inputs:** systems and data in scope, team roles and contact roles (not personal details), existing escalation rules, business impact priorities, legal or reporting duties the user states, and past incidents in summary.
 
-**Method:** Define what counts as an incident and give simple severity levels. For each, set who decides, who is told, what is preserved and what is restored first. Keep steps short enough to read under stress. Mark where the user must fill in names, numbers and decision rights. Advise no wiping or reimaging before the owner's evidence decision. Add a lessons-learned review step.
+**Method:** Define what counts as an incident and give simple severity levels. For each, set who decides, who is told, what is preserved and what is restored first. Keep steps short enough to read under stress. Mark where the user must fill in names, numbers and decision rights. Advise no wiping or reimaging before the owner's evidence decision. Add a lessons-learned review step. For a possibly live incident, put the supplied owner route and relevant responsible service support/contact in the opening escalation, without investigating or inventing a contact. Mark unavailable tools, access and contact routes as owner gaps rather than assumed capabilities.
 
 **Deliver:** an incident response plan: severity table, role and decision list, step checklists for the first hour, first day and recovery, a communication outline with blanks for who and when, an evidence-keeping note, and a tabletop scenario with discussion questions.
 

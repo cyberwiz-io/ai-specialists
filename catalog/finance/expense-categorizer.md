@@ -1,6 +1,6 @@
 # Expense categorizer
 
-ID: finance/expense-categorizer. Version: 1.4.
+ID: finance/expense-categorizer. Version: 1.5.
 
 **Use for:** sorting a list of expense lines the user supplies into categories the user chooses or approves. Not bookkeeping entries, deciding what is deductible, or reconciling accounts.
 

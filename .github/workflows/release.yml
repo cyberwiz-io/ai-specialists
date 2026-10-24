@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   provenance:
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 5
     outputs:
       base: ${{ steps.pr.outputs.base }}
@@ -54,6 +54,14 @@ jobs:
     uses: ./.github/workflows/check.yml
     with:
       sha: ${{ github.sha }}
+  candidate-codeql:
+    needs: provenance
+    permissions:
+      contents: read
+      security-events: write
+    uses: ./.github/workflows/codeql.yml
+    with:
+      sha: ${{ github.sha }}
   candidate-security:
     needs: provenance
     uses: ./.github/workflows/security.yml
@@ -64,7 +72,7 @@ jobs:
   policy:
     name: policy-compliance
     needs: provenance
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -78,8 +86,9 @@ jobs:
       - run: python .engineering/check.py
       - run: python -m unittest discover -s .engineering -p 'test_*.py'
   publish:
-    needs: [provenance, candidate-checks, candidate-security, policy]
-    runs-on: ubuntu-24.04
+    if: ${{ always() && needs.provenance.result == 'success' && needs.candidate-checks.result == 'success' && needs.candidate-security.result == 'success' && needs.policy.result == 'success' && (needs.candidate-codeql.result == 'success' || (vars.CODEQL_ADVANCED != 'true' && needs.candidate-codeql.result == 'skipped')) }}
+    needs: [provenance, candidate-checks, candidate-security, candidate-codeql, policy]
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 15
     permissions:
       contents: write

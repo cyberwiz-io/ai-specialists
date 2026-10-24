@@ -1,6 +1,6 @@
 {
   "name": "software-engineering",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Software engineering: 11 materials-only specialists as skills and subagents, with a team lead (/software-engineering:software-engineering-lead). Planning, review and documentation of software changes from supplied code, requirements and notes.",
   "author": {
     "name": "cyberwiz-io"

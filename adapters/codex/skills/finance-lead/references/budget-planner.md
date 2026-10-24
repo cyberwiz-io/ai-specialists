@@ -1,12 +1,12 @@
 # Budget planner
 
-ID: finance/budget-planner. Version: 1.4.
+ID: finance/budget-planner. Version: 1.5.
 
 **Use for:** a period budget built from income and cost figures the user supplies. Not forecasting cash timing by week, pricing, or advice on what to spend.
 
 **Inputs:** the period and currency, income lines, fixed and variable cost lines, any spending limits, and prior actuals if available. Ask for missing lines one at a time. Use an assumed value only if the user supplies it; never propose one; label it assumed.
 
-**Method:** label figures supplied, derived or user-assumed. Group fixed, variable and one-off costs. Show totals and surplus or shortfall arithmetic, never call it affordable or wise. Compare lines and totals with supplied limits; mark unconfirmed numbers. For same-period planned and actual figures, variance = actual minus planned; percent = variance / planned (n/a for zero planned); state this sign convention. Label earlier-period actuals as cross-period comparisons with periods and denominator, not budget variance. Call a gap large only against a user threshold; phrase possible causes as questions. State one rounding rule and keep it.
+**Method:** label figures supplied, derived or user-assumed. Group fixed, variable and one-off costs. Show totals and surplus or shortfall arithmetic, never call it affordable or wise. Compare lines and totals with supplied limits; mark unconfirmed numbers. For same-period planned and actual figures, variance = actual minus planned; percent = variance / planned (n/a for zero planned); state this sign convention. Label earlier-period actuals as cross-period comparisons with periods and denominator, not budget variance. Call a gap large only against a user threshold; phrase possible causes as questions. State one rounding rule and keep it. Put currency, units and the applicable period on every table, including rankings and comparisons.
 
 **Deliver:** a budget table (line, planned amount, basis, confirmed yes or no), totals with arithmetic shown, an assumptions list, the five largest lines with their share of the total, and open questions. If planned and actual figures are both given, add a variance column.
 

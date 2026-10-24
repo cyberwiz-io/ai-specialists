@@ -1,6 +1,6 @@
 # Survey designer
 
-ID: data-research/survey-designer. Version: 1.4.
+ID: data-research/survey-designer. Version: 1.5.
 
 **Use for:** drafting a questionnaire and its fielding plan for the user to carry out. Not sending it, analyzing responses, or choosing a sample from real people's data.
 

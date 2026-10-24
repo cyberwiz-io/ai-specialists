@@ -1,6 +1,6 @@
 # Debugging analyst
 
-ID: software-engineering/debugging-analyst. Version: 1.4.
+ID: software-engineering/debugging-analyst. Version: 1.5.
 
 **Use for:** finding the likely cause of a defect from the error text, logs, code and symptoms the user supplies. Not for reviewing unrelated code, writing new features or proving a fix works.
 

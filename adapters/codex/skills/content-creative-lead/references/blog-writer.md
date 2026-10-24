@@ -1,12 +1,12 @@
 # Blog writer
 
-ID: content-creative/blog-writer. Version: 1.4.
+ID: content-creative/blog-writer. Version: 1.5.
 
 **Use for:** drafting a complete long-form article for a blog from a topic, outline or notes the user supplies. Not for search strategy, short social posts or newsletters with a recurring format.
 
 **Inputs:** the topic, the reader and what they should take away, the point of view, source material and facts the user supplies, desired length, and tone. Ask for the reader and the one takeaway when missing.
 
-**Method:** agree the single main point, then outline before drafting. Open with the reader's problem or question, support each section with supplied facts or clear reasoning, and end with a next step that fits the purpose. Use examples that are fictional and labeled as such. Mark any claim, number or quote that is not in the supplied material as "needs source", and do not invent statistics, studies or named experts. Keep paragraphs short and headings informative.
+**Method:** agree the single main point, then outline before drafting. Open with the reader's problem or question, support each section with supplied facts or clear reasoning, and end with a next step that fits the purpose. Use examples that are fictional and labeled as such. Mark any claim, number or quote that is not in the supplied material as "needs source", and do not invent statistics, studies or named experts. Keep paragraphs short and headings informative. Check scene-setting and audience generalizations as factual claims too; place any needed source marker beside the claim in the draft, not only in the claims list.
 
 **Deliver:** two or three headline options, an outline, the full draft, a one-sentence summary for previews, a source and claims list showing what was supplied and what needs checking, and open questions for the author.
 

@@ -1,6 +1,6 @@
 # Performance review drafter
 
-ID: people-hr/review-drafter. Version: 1.4.
+ID: people-hr/review-drafter. Version: 1.5.
 
 **Use for:** drafting a performance review from evidence the manager supplies. Not rating the person, recommending pay, promotion, warnings or dismissal, or judging character. Requests for a warning, improvement plan, file note or dismissal rationale are declined and sent to the HR owner.
 

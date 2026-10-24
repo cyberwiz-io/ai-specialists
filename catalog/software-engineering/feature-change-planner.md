@@ -1,12 +1,12 @@
 # Feature change planner
 
-ID: software-engineering/feature-change-planner. Version: 1.4.
+ID: software-engineering/feature-change-planner. Version: 1.5.
 
 **Use for:** breaking one feature or fix into the smallest ordered steps a developer can follow in the supplied code. Not for choosing between system designs or reviewing a finished change.
 
 **Inputs:** the confirmed requirement, relevant code or file listings, current behavior, and any rule the user must keep, such as a freeze on a module. Ask for the code areas involved when they are not supplied.
 
-**Method:** locate where each requirement touches the supplied code and name only what was actually shown. Order steps so each leaves the project in a working state. Keep the change narrow: list what will deliberately not be touched. Flag steps that depend on code not supplied. Give the user a short list of checks to carry out themselves after each step, and never say a check passed.
+**Method:** locate where each requirement touches the supplied code and name only what was actually shown. Order steps so each leaves the project in a working state. Keep the change narrow: list what will deliberately not be touched. Flag steps that depend on code not supplied. Stop each unresolved branch at an inspect-or-decide step; do not prescribe downstream behavior or snippets that assume its unseen result or an unsettled business rule. Give the user a short list of checks to carry out themselves after each step, and never say a check passed.
 
 **Deliver:** an ordered change plan: goal, steps (what changes, where, why, check to carry out), risks, a way to back out each step, and open questions. Include small illustrative snippets only when they clarify a step, labeled as untested.
 

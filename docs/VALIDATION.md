@@ -1,6 +1,12 @@
 # Validation status
 
-This repository ships advisory instruction materials. Structural checks and card evaluations do not establish that a host discovers, routes, delegates to, or safely runs them. The current 1.4 candidate has no published release. Current host acceptance for Claude Code and Codex on macOS and Windows is pending in all four combinations.
+This repository ships advisory instruction materials. Structural checks and card evaluations do not establish that a host discovers, routes, delegates to, or safely runs them. The current 1.5 candidate has no published release. The release target is Claude Code and Codex on the Mac Studio; both Mac acceptances are pending. Windows verification and enablement were deferred by the owner on 2026-10-24 and are not claimed. All tests for this release must execute on that Mac Studio.
+
+## Current 1.5 development evidence
+
+The local source suite passed 246 tests before the latest narrow grader-retry repair. The first 1.5 full-cohort attempt after broad card repairs was retired with 32 completed cases: 23 PASS and nine PARTIAL. One final grade remained invalid after both allowed attempts because the grader paraphrased an immutable criterion; six in-flight cases were interrupted and 111 were not dispatched. All original drafts, audits, grades and receipts remain retained. This is not full-cohort acceptance.
+
+Review found both real omissions and ordinary fixture preferences absent from the visible task. Subsequent Method clarifications preserve every Acceptance and Safeguards paragraph. Versioned synthetic input clarifications make missing positive-task requirements explicit without changing requests, grading criteria or prohibitions; revised inputs are incomparable with original results. The frozen challenges remain unchanged. The existing single invalid-grade retry now repeats exact indexed item text for mismatched rubric sections; it does not normalize grades, change verdicts or add attempts. First-call grading prompts are unchanged.
 
 ## Current host acceptance
 
@@ -8,8 +14,8 @@ This repository ships advisory instruction materials. Structural checks and card
 | --- | --- | --- |
 | macOS, Claude Code | 2.1.310 | Pending |
 | macOS, Codex | 0.164.0 | Pending |
-| Windows 11 build 26300, Claude Code | 2.1.308 | Pending |
-| Windows 11 build 26300, Codex | 0.163.0 | Pending |
+| Windows 11 build 26300, Claude Code | 2.1.308 | Deferred by owner; unverified |
+| Windows 11 build 26300, Codex | 0.163.0 | Deferred by owner; unverified |
 
 These versions are inventory observations, not test results. Follow [the host acceptance procedure](HOST-ACCEPTANCE.md) for each row. Acceptance requires observed installation, discovery, lead invocation, worker identity and handoff, expected behavior, permission boundaries, actual model reporting, update, and owned-only removal. A missing device or unobservable criterion stays pending. Historical trials on other versions or devices do not establish current acceptance.
 
@@ -116,7 +122,7 @@ Release evaluation has separate gates; passing card checks alone is insufficient
 - Boundary cases, sensitive-role tasks, changed-card failures, and release-critical operational cases require three consecutive successful independent runs. Report first-attempt results and three-run stability separately.
 - Review at least one useful output per family, every critical violation, and every grading disagreement. An unavailable reviewer or device remains pending.
 
-Host acceptance is a separate gate: it covers discovery, explicit invocation, routing, lead-to-worker handoff, approved skill use, model overrides, permissions, and installation/update/removal on both required devices. Use traces and before/after fixture state to establish tool use; response headings or cost are not evidence of tool use.
+Host acceptance is a separate gate: it covers discovery, explicit invocation, routing, lead-to-worker handoff, approved skill use, model overrides, permissions, and installation/update/removal on the release-scoped Mac Studio. Windows is deferred and remains unverified. Use traces and before/after fixture state to establish tool use; response headings or cost are not evidence of tool use.
 
 ## Archived host observations
 

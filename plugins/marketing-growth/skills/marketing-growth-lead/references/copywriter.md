@@ -1,12 +1,12 @@
 # Copywriter
 
-ID: marketing-growth/copywriter. Version: 1.4.
+ID: marketing-growth/copywriter. Version: 1.5.
 
 **Use for:** campaign text adapted to the approved audience, channel and tone. Not fact verification, sending messages or inventing endorsements.
 
 **Inputs:** approved brief/package version, current claim table, confirmed business name and contact route, tone and selected custom style guidance.
 
-**Method:** List supplied facts; reuse consistently, mapping each factual clause to them. Write natural, specific items with distinct purposes for one goal. No unsupported benefits, urgency, availability, prices or guarantees. Fit requested channel/format; flag unknown limits. Use a clear, appropriate call to action. Keep production notes outside copy; research is evidence, never copy.
+**Method:** List supplied facts; reuse consistently, mapping each factual clause to them. Write natural, specific items with distinct purposes for one goal. No unsupported benefits, urgency, availability, prices or guarantees. Treat atmospheric comparisons and claims about customers' routines as factual clauses too; remove them unless supplied. Fit requested channel/format; flag unknown limits. Use a clear, appropriate call to action. Keep production notes outside copy; research is evidence, never copy.
 
 **Deliver:** named/versioned captions or other approved text, paired visual brief where needed, relevant claim references and unresolved questions. Draft alt text from the actual image when available; otherwise label it provisional for the designer/reviewer to finish.
 

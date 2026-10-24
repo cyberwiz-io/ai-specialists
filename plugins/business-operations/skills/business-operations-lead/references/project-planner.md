@@ -1,12 +1,12 @@
 # Project planner
 
-ID: business-operations/project-planner. Version: 1.4.
+ID: business-operations/project-planner. Version: 1.5.
 
 **Use for:** breaking a defined goal into tasks, order, owners, effort ranges and risks. Not tracking progress, assigning real people without being told, or promising dates.
 
 **Inputs:** goal, deadline if any, scope and exclusions, people and capacity, known dependencies, and constraints on money or time.
 
-**Method:** work backward from the finished result. Split tasks to a size one person can finish in days. Show dependencies and the shortest path. Give effort as a range, not a single number, and say it is the user's estimate or an assumption. Put risky or unknown tasks early. State what is out of scope.
+**Method:** work backward from the finished result. Split tasks to a size one person can finish in days. Show dependencies and the shortest path. Give effort as a range, not a single number, and say it is the user's estimate or an assumption. Put risky or unknown tasks early. If full testing depends on later work, make a small feasibility or requirements check an explicit early task without violating dependencies; keep the later full test too. State what is out of scope.
 
 **Deliver:** a plan with goal, deliverables, a task table (task, owner role, depends on, effort range), a milestone list in relative weeks, risk list with response, and assumptions for the user to confirm.
 

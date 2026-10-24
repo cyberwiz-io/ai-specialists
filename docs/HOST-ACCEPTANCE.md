@@ -4,14 +4,14 @@ This procedure records whether the generated Claude Code and Codex integrations 
 
 ## Current status
 
-The current device inventory is macOS with Claude Code 2.1.310 and Codex 0.164.0, and Windows 11 build 26300 with Claude Code 2.1.308 and Codex 0.163.0. Both devices now have a candidate checkout. Partial Claude trials are recorded in [validation](VALIDATION.md); none completes acceptance. Run and record all four combinations below before claiming current native acceptance.
+The current device inventory is macOS with Claude Code 2.1.310 and Codex 0.164.0, and Windows 11 build 26300 with Claude Code 2.1.308 and Codex 0.163.0. Both devices now have a candidate checkout. Partial Claude trials are recorded in [validation](VALIDATION.md); none completes acceptance. For this release, the owner scoped acceptance and enablement to the Mac Studio on 2026-10-24. Complete both macOS rows before claiming Mac acceptance. Windows verification and enablement are deferred to the owner; do not run Windows tests or claim Windows support.
 
 | Device and client | Inventory | Checkout inventory | Acceptance |
 | --- | --- | --- | --- |
 | macOS, Claude Code | 2.1.310 | Current implementation checkout present | Pending |
 | macOS, Codex | 0.164.0 | Current implementation checkout present | Pending |
-| Windows 11 build 26300, Claude Code | 2.1.308 | Candidate checkout present | Pending |
-| Windows 11 build 26300, Codex | 0.163.0 | Candidate checkout present | Pending |
+| Windows 11 build 26300, Claude Code | 2.1.308 | Candidate checkout present | Deferred by owner; unverified |
+| Windows 11 build 26300, Codex | 0.163.0 | Candidate checkout present | Deferred by owner; unverified |
 
 Historical evidence remains in [validation](VALIDATION.md) and the adapter guides. Do not roll it forward to these versions or platforms.
 
@@ -41,7 +41,7 @@ After saving the initial evidence, update only the test marketplace and plugin u
 
 ## Private installed-skill runtime check
 
-Separately verify discovery and invocation of the intended private installed skill in its authorized client, when the host/device task requires it. Keep the full prompt, skill identifier, path, output, and screenshots in the approved private evidence location. This public repository may record only that the check was completed and whether it succeeded; do not copy or summarize private skill content here. This check is separate from the public integration result.
+Separately verify discovery and invocation of the intended private installed skill in its authorized client, when the host/device task requires it. Keep the full prompt, skill identifier, path, output, and screenshots in the approved private evidence location. This public repository may record only that the check was completed and whether it succeeded; do not copy or summarize private skill content here. This check is separate from the public integration result and is required only when the user requests that private integration. It is not a prerequisite for using the public AI Specialists pack. A prior denied private read must not be retried or bypassed to complete public acceptance.
 
 ## Evidence record
 
@@ -52,9 +52,9 @@ For each row in the status table, record:
 - discovered plugin, lead and worker identifiers, and the host trace proving actual worker invocation and handoff, including the lead-supplied safe method and how the worker applied it;
 - requested and observed model for each agent, or `unknown`;
 - parent permission/sandbox controls, actual worker tools, trace of allowed read and denied write/command/nested-agent probes, and marker pre/post hashes;
-- confirmation that the separate private installed-skill runtime check was recorded in the approved private evidence location, with no private content copied here;
+- when a private integration is explicitly in scope, confirmation that its separate runtime check was recorded privately, with no private content copied here;
 - behavior-check result, update result, removal result, limitations and any failed or unobservable criterion.
 
-Mark a host/device row accepted only when install, discovery, correct lead invocation, host-traced worker identity and handoff, visible use of the lead-supplied safe method, expected behavior, an allowed read, and outcomes for write/command/nested-agent probes are recorded along with model reporting, update and owned-only removal. Record whether each outcome came from host enforcement, an unavailable tool, or instruction-only behavior; do not describe instruction-only behavior as host enforcement. Complete and retain the separate private installed-skill runtime check privately. Otherwise retain `Pending` or state the specific failure. Do not claim a client is supported from a different OS, version, install scope, or historical smoke test.
+Mark a host/device row accepted only when install, discovery, correct lead invocation, host-traced worker identity and handoff, visible use of the lead-supplied safe method, expected behavior, an allowed read, and outcomes for write/command/nested-agent probes are recorded along with model reporting, update and owned-only removal. Record whether each outcome came from host enforcement, an unavailable tool, or instruction-only behavior; do not describe instruction-only behavior as host enforcement. For an explicitly requested private integration, separately record its private result without extending the public support claim. Otherwise retain `Pending` or state the specific failure. Do not claim a client is supported from a different OS, version, install scope, or historical smoke test.
 
 Official host references: [Claude Code subagents](https://code.claude.com/docs/en/sub-agents) and [Codex subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents).

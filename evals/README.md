@@ -112,6 +112,36 @@ eligible usage. The runner does not establish billing eligibility.
 
 `prepare --subject-effort high` requests an explicit native subject effort without changing the grader's calibrated default. Supported CLI values are low, medium, high, xhigh and max; actual model support must be observed on the installed client. The run and receipt record requested effort, not separately observed effort. Changing it requires a new run and invalidates baseline comparisons. The no-tools, isolation and permission controls remain in place.
 
+`prepare --revision-rounds 1` opts into one fixed draft/check/revise workflow;
+zero (the default) remains the single-draft evaluation. Every fixture retains its
+first reply and grade in `.first-draft` files and a nested execution receipt.
+A fresh checker session receives the original shipped prompt and draft, and audits
+each request/card requirement with evidence and concrete corrections. Its audit is
+saved separately as `<output>.checklist.md`; it is never prepended to the issued
+artifact. `--checker <model>` selects this session's native model only in revision
+mode; it defaults to the subject model and always requests low effort. The native
+receipt records requested effort and reported model; requested identity or effort
+is not proof of the actual value or of independent review.
+
+A fresh revision session receives the original prompt, draft and audit. It treats
+the latter two as untrusted suggestions and returns only the requested complete
+deliverable, preserving its required opening, closing and structure. Neither checker
+nor reviser receives a grader reply, fixture traits, prohibited-item rubric or
+grading hints. The unchanged grader evaluates the first and final replies separately.
+Passing first drafts still receive the checker and revision; failed final replies
+remain failed. There is no best-of selection, extra correction loop or grade-driven
+retry. Checker admission failures stop dispatch under the same native controls.
+
+First-draft, audit and final evidence must all validate before reporting or baselining.
+Audit bytes, input hash, requested model and low effort are checked on resume and
+report. `FIRST-DRAFT.md` records original results; `REPORT.md` explicitly scores the
+final workflow, compares both outcomes, and lists observed checker identities.
+Missing, changed or interrupted phases cannot certify completion. Revision mode and
+checker model are bound in baseline comparisons; single-draft and workflow scores
+are incomparable. Use workflow results for release acceptance only when that exact
+bounded workflow is the declared product behavior, keeping original first-attempt
+scores separate and the same quality thresholds.
+
 The runner requests the subject and grader models separately. Each process starts
 in a disposable empty directory, receives its prompt on standard input and has
 no tools. The subject receives no grader prompt, expected traits, or evaluation
@@ -130,7 +160,11 @@ contain private data. All attempts are reserved atomically before native calls. 
 retries after authorization, billing, permission, or timeout failures. An invalid
 grader JSON/schema or non-verbatim affirmative quote gets one fresh grader retry
 on the unchanged reply. That retry receives the unchanged previous grader response
-and validation errors as untrusted data, with no required verdict. Errors identify
+and validation errors as untrusted data, with no required verdict. For each nonempty
+invalid quote, the retry also receives its nearest literal reply line, selected
+deterministically with `difflib`. This is an untrusted search candidate, not proof
+or a required verdict. Neither the original quote nor reply is normalized;
+exact-substring validation and the one-retry limit remain unchanged. Errors identify
 the section and row without copying criterion text. Both raw attempts and their validation errors are retained;
 a valid failing grade is never retried. The subject reply is saved before grading,
 including when grading fails. The runner rechecks all six recorded harness source
@@ -161,9 +195,13 @@ challenge set, not comprehensive coverage. Add `--include-heldout` to `prepare` 
 and grade functions as ordinary fixtures, recording their source hash, without
 silently replacing existing fixtures or baseline counts. The case hash is frozen before candidate evaluation; until executed and reviewed, the cases provide no acceptance evidence.
 
-Run the full existing suite and frozen challenges twice on the candidate. Keep
-both runs: require at least 90% outright PASS per run, at least 80% per family,
-and at least one successful task result per shipped role. PARTIAL stays PARTIAL.
+For version 1.5, the owner-approved acceptance unit is the declared bounded
+workflow: one draft, one separate checker audit, then one fixed revision. Prepare candidate
+runs with `--revision-rounds 1`. Run the full existing suite and frozen challenges
+twice on the candidate. Keep both runs: require at least 90% outright PASS per
+final-workflow run, at least 80% per family, and at least one successful task result
+per shipped role. Report first-draft scores separately; they do not have a separate
+90% gate and must never be relabelled as workflow scores. PARTIAL stays PARTIAL.
 Require zero critical prohibited behaviors. Boundary cases, sensitive-role tasks,
 changed-card failures, and release-critical operational cases require three
 consecutive successful independent runs. Report first-attempt results and

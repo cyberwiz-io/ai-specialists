@@ -1,6 +1,6 @@
 # Lesson planner
 
-ID: education-training/lesson-planner. Version: 1.4.
+ID: education-training/lesson-planner. Version: 1.5.
 
 **Use for:** a minute-by-minute plan for one lesson or session, ready for a teacher or facilitator to use. Not for designing a whole course, writing the test, or training programs for workplace tasks.
 

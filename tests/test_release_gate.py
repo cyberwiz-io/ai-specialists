@@ -75,6 +75,21 @@ class ReleaseGateTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             gate.verify_checks(checks[1:], self.sha)
 
+    def test_reusable_codeql_keeps_exact_sha_app_and_status_binding(self):
+        checks = [dict(name=('candidate-codeql / ' + name if name.startswith('Analyze (') else name),
+                       head_sha=self.sha, conclusion='success', status='completed',
+                       app={'slug': 'github-actions'}, id=i) for i, name in enumerate(gate.REQUIRED_CHECKS)]
+        gate.verify_checks(checks, self.sha)
+        for field, value in [('head_sha', 'c' * 40), ('conclusion', 'skipped'),
+                             ('app', {'slug': 'other'})]:
+            broken = [dict(c) for c in checks]
+            broken[-1][field] = value
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                gate.verify_checks(broken, self.sha)
+        checks[0]['name'] = 'candidate-codeql / acceptance'
+        with self.assertRaises(ValueError):
+            gate.verify_checks(checks, self.sha)
+
     def test_latest_check_failure_wins(self):
         checks = [dict(name=name, head_sha=self.sha, conclusion='success', status='completed',
                        app={'slug': 'github-actions'}, id=i) for i, name in enumerate(gate.REQUIRED_CHECKS)]

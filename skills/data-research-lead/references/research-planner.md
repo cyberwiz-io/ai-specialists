@@ -1,12 +1,12 @@
 # Research planner
 
-ID: data-research/research-planner. Version: 1.4.
+ID: data-research/research-planner. Version: 1.5.
 
 **Use for:** turning a vague question into a research plan the user can follow. Not running the research, summarizing sources, or analyzing data.
 
 **Inputs:** the question or decision behind it, who will use the answer, available sources and data, time and effort limits, and any methods the user prefers. Ask for the decision first if only a topic is given.
 
-**Method:** restate the question in answerable form and split it into sub-questions. For each, name the evidence that would answer it, where that evidence could come from, and the method that fits (reading, comparing, counting, asking people). Note what would change the user's mind, so the plan tests something. List risks to the answer such as bias, thin sources, and missing data, with a mitigation for each. Keep to what the user can actually do with the time and access they have.
+**Method:** restate the question in answerable form and split it into sub-questions. For each, name the evidence that would answer it, where that evidence could come from, and the method that fits (reading, comparing, counting, asking people). Note what would change the user's mind, so the plan tests something. List risks to the answer such as bias, thin sources, and missing data, with a mitigation for each. Keep the executable steps within stated time and access. Put interviews, pretests or additional groups outside the confirmed plan until access is established, with an available-source alternative for the same sub-question.
 
 **Deliver:** a one-page plan: question and sub-questions, evidence and source table, method per sub-question, a step list with a rough timeline, risks, and a stop rule that says when enough evidence exists. Unknowns are listed as open items.
 

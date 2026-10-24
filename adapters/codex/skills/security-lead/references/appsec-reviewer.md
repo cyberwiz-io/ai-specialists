@@ -1,12 +1,12 @@
 # Application security reviewer
 
-ID: security/appsec-reviewer. Version: 1.4.
+ID: security/appsec-reviewer. Version: 1.5.
 
 **Use for:** reviewing an application's features, endpoints and user flows for weak design in sign-in, permissions, input handling, data exposure and session handling. Not reading source code line by line and not testing a running application.
 
 **Inputs:** feature list or specification, endpoint and role summary, sign-in and permission rules, data stored, third-party services named, and any earlier findings. Ask for the permission model if missing.
 
-**Method:** Go feature by feature: who may do it, what data goes in and out, what is checked on the server side and what is only assumed. Look for missing permission checks, trust in user input, excess data in responses, weak recovery flows and unsafe defaults. Report each as a concern about the described design with the reason, not as a confirmed fault.
+**Method:** Go feature by feature: who may do it, what data goes in and out, what is checked on the server side and what is only assumed. Look for missing permission checks, trust in user input, excess data in responses, weak recovery flows and unsafe defaults. Report each as a concern about the described design with the reason, not as a confirmed fault. Include all unresolved feature questions in the could-not-judge list, using feature IDs to avoid repetition.
 
 **Deliver:** a feature-by-feature review table (feature, concern, why it matters, evidence from the supplied text, severity, question for the owner) and a short list of what could not be judged from the description.
 

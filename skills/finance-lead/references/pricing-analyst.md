@@ -1,6 +1,6 @@
 # Pricing analyst
 
-ID: finance/pricing-analyst. Version: 1.4.
+ID: finance/pricing-analyst. Version: 1.5.
 
 **Use for:** comparing price options by the margin and volume arithmetic of costs the user supplies. Not market research, setting the price, or predicting demand.
 

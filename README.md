@@ -2,17 +2,17 @@
 
 A library of 124 specialist instruction cards in 17 families, plus a coordinator, for the AI assistant you already have. Describe a task, and the coordinator guides the right specialist perspectives through it. The best-developed path is a small-business marketing campaign.
 
-**Version 1.4 candidate · Materials only · [Validation status](docs/VALIDATION.md)**
+**Version 1.5 candidate · Materials only · [Validation status](docs/VALIDATION.md)**
 
 ## Install options
 
-These are candidate install instructions. Current Claude Code and Codex acceptance on macOS and Windows is pending, and no 1.4 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
+These are candidate install instructions. Current Mac Studio acceptance for Claude Code and Codex is pending; Windows verification and enablement are deferred by the owner, and no 1.5 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
 
 | Tool | Command or step |
 | --- | --- |
 | Claude Code (all families) | `/plugin install ai-specialists-all --marketplace cyberwiz-io/ai-specialists` |
 | Claude Code (one family) | `/plugin marketplace add cyberwiz-io/ai-specialists`, then `/plugin install security@ai-specialists` |
-| claude.ai and Claude Desktop | Planned: upload `ai-specialists-1.4-skill-<family>.zip` from the [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) in Settings, Capabilities, Skills (pending publication) |
+| claude.ai and Claude Desktop | Planned: upload `ai-specialists-1.5-skill-<family>.zip` from the [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) in Settings, Capabilities, Skills (pending publication) |
 | Any Agent Skills host | `npx skills add cyberwiz-io/ai-specialists` |
 | Codex | `codex plugin marketplace add cyberwiz-io/ai-specialists` |
 | Gemini CLI | `gemini extensions install https://github.com/cyberwiz-io/ai-specialists` |
@@ -34,7 +34,7 @@ These are editable instruction files: one card per specialist, a team lead per f
 2. Describe your task. For marketing: *Use this starter pack. My business is [short description]. My website is [optional]. Help me create a marketing campaign. First confirm that you can read all eight instruction sections.* For another family: *Use this pack. My task is [description]. Here is the material I can supply: [...]. First confirm that you can read all the sections.*
 3. Confirm the plan, review the materials, and accept or revise.
 
-Prefer a download? The planned [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) will contain a ZIP with every card, pack, skill and install file, attribution and licenses after publication and checksum verification. No current 1.4 download is available; open `pack/START-HERE.md` in this candidate checkout.
+Prefer a download? The planned [release downloads](https://github.com/cyberwiz-io/ai-specialists/releases/latest) will contain a ZIP with every card, pack, skill and install file, attribution and licenses after publication and checksum verification. No current 1.5 download is available; open `pack/START-HERE.md` in this candidate checkout.
 
 ## Families
 
@@ -42,12 +42,12 @@ Each family has a pasteable combined pack and an index of its specialists. Every
 
 | Family | Specialists | Index | Combined pack |
 | --- | --- | --- | --- |
-| Marketing and growth | 10 | [index](catalog/marketing-growth/INDEX.md) | [pack](dist/packs/marketing-growth.md) |
+| Marketing and growth | 10 | [index](catalog/marketing-growth/INDEX.md) | [core](dist/packs/marketing-growth-core.md), [specialists](dist/packs/marketing-growth-specialists.md) |
 | Content and creative | 8 | [index](catalog/content-creative/INDEX.md) | [pack](dist/packs/content-creative.md) |
 | Sales and customer | 8 | [index](catalog/sales-customer/INDEX.md) | [pack](dist/packs/sales-customer.md) |
 | Business operations | 8 | [index](catalog/business-operations/INDEX.md) | [pack](dist/packs/business-operations.md) |
 | Product and design | 7 | [index](catalog/product-design/INDEX.md) | [pack](dist/packs/product-design.md) |
-| Software engineering | 11 | [index](catalog/software-engineering/INDEX.md) | [pack](dist/packs/software-engineering.md) |
+| Software engineering | 11 | [index](catalog/software-engineering/INDEX.md) | [planning](dist/packs/software-engineering-planning.md), [reviews](dist/packs/software-engineering-reviews.md) |
 | AI and machine learning | 3 | [index](catalog/ai-ml/INDEX.md) | [pack](dist/packs/ai-ml.md) |
 | IT operations | 5 | [index](catalog/it-operations/INDEX.md) | [pack](dist/packs/it-operations.md) |
 | Data and research | 8 | [index](catalog/data-research/INDEX.md) | [pack](dist/packs/data-research.md) |
@@ -56,7 +56,7 @@ Each family has a pasteable combined pack and an index of its specialists. Every
 | Personal and career | 5 | [index](catalog/personal-career/INDEX.md) | [pack](dist/packs/personal-career.md) |
 | Orchestration and meta | 5 | [index](catalog/orchestration/INDEX.md) | [pack](dist/packs/orchestration.md) |
 | Security (sensitive) | 14 | [index](catalog/security/INDEX.md) | Three packs: [engineering](dist/packs/security-engineering.md) (5), [operations](dist/packs/security-operations.md) (3), [governance and privacy](dist/packs/security-governance.md) (6) |
-| Finance (sensitive) | 8 | [index](catalog/finance/INDEX.md) | [pack](dist/packs/finance.md) |
+| Finance (sensitive) | 8 | [index](catalog/finance/INDEX.md) | [planning](dist/packs/finance-planning.md), [reviews](dist/packs/finance-reviews.md) |
 | People and HR (sensitive) | 5 | [index](catalog/people-hr/INDEX.md) | [pack](dist/packs/people-hr.md) |
 | Legal and compliance (sensitive) | 8 | [index](catalog/legal-compliance/INDEX.md) | Two packs: [documents](dist/packs/legal-compliance-documents.md) (4), [rules and policies](dist/packs/legal-compliance-rules.md) (4) |
 
@@ -72,7 +72,7 @@ Humans and AI agents should begin with the [repository map](REPO-MAP.md), which 
 - Security, finance, people and HR, and legal and compliance cards are defensive or educational support for material you supply. They are not professional advice and make no claim of compliance or certification. Consult a qualified person for consequential decisions.
 - Research, image generation, file exports, memory, and separate review contexts depend on the host. Missing capabilities should produce a smaller agreed package, not pretend outputs.
 - Switching roles or starting a fresh context with the same actual model does not provide independent review. Nontrivial results need a different actual reviewer model and an exact artifact/version; otherwise report BLOCKED_REVIEW.
-- Current acceptance for Claude Code and Codex on macOS and Windows is pending. Older smoke tests, evaluations, and other-host observations are historical evidence only and do not establish current support. No release has been published for this candidate. See [Validation status](docs/VALIDATION.md).
+- Current Mac Studio acceptance for Claude Code and Codex is pending. Windows is deferred and unverified. Older smoke tests, evaluations, and other-host observations are historical evidence only and do not establish current support. No release has been published for this candidate. See [Validation status](docs/VALIDATION.md).
 - The project has no accounts, connectors, telemetry, or model service. Your chosen host may process information in the cloud and has its own usage limits and data policies. Never supply credentials or private customer data to this pack.
 
 ## License

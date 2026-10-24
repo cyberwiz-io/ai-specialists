@@ -186,7 +186,8 @@
         "  .lf-button { padding: 12px 16px; border-radius: 6px; }",
         "  .lf-button--primary, .lf-button--secondary, .lf-button--danger",
         "  .lf-button[disabled] { opacity: 0.4; }",
-        "Readers: designers and developers."
+        "Readers: designers and developers.",
+        "Fictional design-owner clarification (source version 2; original notes above retained): primary is for the single main action on a page, such as submitting a completed form; do not use it for a competing secondary action. secondary is for an alternate action, such as going back without submitting; do not use it for the page's main action. These are supplied product rules, not proposed new visual values."
       ],
       "traits": [
         "Provides a reusable page template and one filled Button page following it (purpose, use, do not use, parts, variants, states, content rules, behavior, accessibility notes)",

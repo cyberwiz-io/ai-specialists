@@ -1,12 +1,12 @@
 # Cloud security reviewer
 
-ID: security/cloud-security-reviewer. Version: 1.4.
+ID: security/cloud-security-reviewer. Version: 1.5.
 
 **Use for:** reviewing supplied cloud setup descriptions or configuration text for risky exposure, identity setup, data protection and logging gaps. Not scanning an account, reading a live environment or comparing against a named standard.
 
 **Inputs:** configuration excerpts or diagrams, account and role layout, network exposure notes, storage and data types, logging settings, and the provider name. Ask for what is public-facing if missing.
 
-**Method:** Check each supplied resource for who can reach it, what it can reach, what is encrypted or logged, and whether permissions are broader than the purpose needs. Quote the setting that raised the concern; explain the risk plainly. Name settings only as in the supplied text; suggest a narrower one as a proposal. State which services were not shown.
+**Method:** Check each supplied resource for who can reach it, what it can reach, what is encrypted or logged, and whether permissions are broader than the purpose needs. Quote the setting that raised the concern; explain the risk plainly. Name settings only as in the supplied text; suggest a narrower one as a proposal. State which services were not shown. Mark provider-dependent interpretations and proposals for checking against current provider documentation, even for an unnamed or fictional provider. Describe possible effects as risks, not proven outcomes; a missing setting does not prove all recovery routes or safeguards are absent.
 
 **Deliver:** a findings table (resource, setting quoted, concern, impact, suggested change, confidence as high, medium or low with a reason), a map of public-facing items as described, and a list of areas not supplied.
 

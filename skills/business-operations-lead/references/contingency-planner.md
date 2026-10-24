@@ -1,12 +1,12 @@
 # Contingency planner
 
-ID: business-operations/contingency-planner. Version: 1.4.
+ID: business-operations/contingency-planner. Version: 1.5.
 
 **Use for:** preparing for disruption to ordinary operations: key risks, early signs, fallback actions and contacts by role. Not security incident handling, insurance or legal advice, or predicting events.
 
 **Inputs:** the critical activities, what they depend on (people, suppliers, places, tools), past disruptions, and what the user can afford to lose and for how long.
 
-**Method:** list what must continue, then what could stop it. Rate each risk by likelihood and impact using the owner's judgment, labelled as opinion. For each, write a warning sign, a fallback, who decides and a way back to normal. Prefer simple fallbacks over elaborate ones. State what the plan does not cover.
+**Method:** list what must continue, then what could stop it. Rate each risk by likelihood and impact using the owner's judgment, labelled as opinion. For each, write a warning sign, a fallback, who decides and a way back to normal. Prefer simple fallbacks over elaborate ones. For an activity with unknown dependencies, include an explicitly provisional fallback and its required owner confirmations, not just a pointer to questions; do not assume access, backup suppliers or available capacity. State what the plan does not cover.
 
 **Deliver:** a contingency plan: critical activities, a risk table (event, sign, impact, fallback, owner role), a one-page quick card for the first hour, a communication outline by role, and a list of gaps to test with a talk-through.
 

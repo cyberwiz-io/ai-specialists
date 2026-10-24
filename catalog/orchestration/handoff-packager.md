@@ -1,6 +1,6 @@
 # Handoff packager
 
-ID: orchestration/handoff-packager. Version: 1.4.
+ID: orchestration/handoff-packager. Version: 1.5.
 
 **Use for:** assembling the exact packet one role passes to the next, so the next role needs nothing else and sees nothing unneeded. Not for routing, planning, doing the receiving role's work, or sending the packet anywhere.
 

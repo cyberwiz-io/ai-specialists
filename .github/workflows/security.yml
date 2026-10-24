@@ -26,14 +26,17 @@ concurrency:
 env:
   GITLEAKS_VERSION: 8.30.1
   GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+  GITLEAKS_DARWIN_SHA256: b40ab0ae55c505963e365f271a8d3846efbc170aa17f2607f13df610a9aeb6a5
   TRIVY_VERSION: 0.75.0
   TRIVY_SHA256: c6e65abddb348e25f10549df887045629cf28cc72453cd1c63acb717316b3f3f
+  TRIVY_DARWIN_SHA256: 4a77108cccf8e55c8d6823e1e759939a622277e66cd0daa3c1fc621ed69e4568
   # semgrep/semgrep:1.180.0, linux/amd64
   SEMGREP_IMAGE: semgrep/semgrep@sha256:dffc9caeecc924370d30f9187b6edf10949600d3ef5f69ef5c359074d8fc7d2d
 jobs:
   changes:
+    if: ${{ vars.LOCAL_RELEASE_RUNNER == '' || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     # Decides which scans the change needs, so edits to prose alone skip the code scans.
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 20
     outputs:
       code: ${{ steps.paths.outputs.code }}
@@ -54,12 +57,13 @@ jobs:
           code=false; sensitive=false
           grep -qvE '\.md$|^docs/|^LICENSES/' changed.txt && code=true
           grep -qE '^catalog/(security|finance|people-hr|legal-compliance)/|^catalog/families\.json$|^pack/FAMILY-COORDINATOR\.md$|^\.engineering/|^\.github/|^\.claude/|^scripts/|^config/|^VERSION$|^AGENTS\.md$|^CONTRIBUTING\.md$|^docs/(RELEASE|HOST-ACCEPTANCE)\.md$' changed.txt && sensitive=true
-          if [ "${{ github.event_name }}" != "pull_request" ]; then code=true; sensitive=true; fi
+          if [ "$GITHUB_EVENT_NAME" != "pull_request" ]; then code=true; sensitive=true; fi
           echo "code=$code" >> "$GITHUB_OUTPUT"
           echo "sensitive=$sensitive" >> "$GITHUB_OUTPUT"
   gitleaks:
+    if: ${{ vars.LOCAL_RELEASE_RUNNER == '' || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     # Secrets can land in any file, prose included, so this runs on every pull request.
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -69,15 +73,20 @@ jobs:
           persist-credentials: false
       - name: Install Gitleaks
         run: |
-          curl -sSfL -o gitleaks.tar.gz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          echo "${GITLEAKS_SHA256}  gitleaks.tar.gz" | sha256sum -c -
+          platform=linux_x64
+          if [ "$RUNNER_OS" = macOS ]; then
+            platform=darwin_arm64
+            GITLEAKS_SHA256="$GITLEAKS_DARWIN_SHA256"
+          fi
+          curl -sSfL -o gitleaks.tar.gz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_${platform}.tar.gz"
+          echo "${GITLEAKS_SHA256}  gitleaks.tar.gz" | shasum -a 256 -c -
           tar -xzf gitleaks.tar.gz gitleaks
       - name: Scan PR commits or the full release history for secrets
         env:
           BASE: ${{ inputs.base || github.event.pull_request.base.sha }}
           HEAD: ${{ inputs.sha || github.event.pull_request.head.sha }}
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
             range="$BASE..$HEAD"
           else
             # A PR base ref can advance after merge; scan all history reachable from the exact release candidate.
@@ -87,15 +96,32 @@ jobs:
   semgrep:
     # Semgrep Community Edition through its open-source CLI: no Semgrep account or token.
     needs: changes
-    if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-24.04
+    if: ${{ needs.changes.outputs.code == 'true' && (vars.LOCAL_RELEASE_RUNNER == '' || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: ${{ inputs.sha || github.event.pull_request.head.sha }}
           persist-credentials: false
-      - name: Scan scripts, tests and workflows
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: runner.os == 'macOS'
+        with:
+          python-version: '3.12'
+      - name: Install hash-locked native Semgrep
+        if: runner.os == 'macOS'
+        run: |
+          python -m venv "$RUNNER_TEMP/semgrep"
+          "$RUNNER_TEMP/semgrep/bin/python" -m pip --isolated install --disable-pip-version-check --require-hashes --only-binary=:all: -r config/semgrep-macos/requirements.txt
+      - name: Scan scripts, tests and workflows on macOS
+        if: runner.os == 'macOS'
+        run: |
+          "$RUNNER_TEMP/semgrep/bin/semgrep" scan --metrics=off --error \
+            --config p/python --config p/github-actions \
+            --exclude-rule python.lang.correctness.string-concat-in-list.string-concat-in-list \
+            scripts tests .github
+      - name: Scan scripts, tests and workflows on Linux
+        if: runner.os != 'macOS'
         run: |
           docker run --rm -v "$PWD:/src" -w /src "$SEMGREP_IMAGE" semgrep scan --metrics=off --error \
             --config p/python --config p/github-actions \
@@ -104,8 +130,8 @@ jobs:
   trivy:
     # Filesystem mode: known-vulnerable dependencies and infrastructure or configuration mistakes.
     needs: changes
-    if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-24.04
+    if: ${{ needs.changes.outputs.code == 'true' && (vars.LOCAL_RELEASE_RUNNER == '' || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -114,8 +140,13 @@ jobs:
           persist-credentials: false
       - name: Install Trivy
         run: |
-          curl -sSfL -o trivy.tar.gz "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
-          echo "${TRIVY_SHA256}  trivy.tar.gz" | sha256sum -c -
+          platform=Linux-64bit
+          if [ "$RUNNER_OS" = macOS ]; then
+            platform=macOS-ARM64
+            TRIVY_SHA256="$TRIVY_DARWIN_SHA256"
+          fi
+          curl -sSfL -o trivy.tar.gz "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_${platform}.tar.gz"
+          echo "${TRIVY_SHA256}  trivy.tar.gz" | shasum -a 256 -c -
           mkdir -p "$RUNNER_TEMP/trivy" && tar -xzf trivy.tar.gz -C "$RUNNER_TEMP/trivy" trivy
       - name: Scan dependencies and configuration
         run: |
@@ -126,12 +157,16 @@ jobs:
           report = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'trivy.json').read_text())
           if not report.get('Results'):
               raise SystemExit('Trivy found no supported targets; security coverage is unverified')
-          print('Trivy scanned targets:', [item['Target'] for item in report['Results']])
+          targets = {item['Target'] for item in report['Results']}
+          native_lock = 'config/semgrep-macos/requirements.txt'
+          if pathlib.Path(native_lock).exists() and native_lock not in targets:
+              raise SystemExit('Trivy did not scan the native Semgrep dependency lock')
+          print('Trivy scanned targets:', sorted(targets))
           PYSCAN
   independent-review:
     needs: changes
-    if: needs.changes.outputs.sensitive == 'true'
-    runs-on: ubuntu-24.04
+    if: ${{ needs.changes.outputs.sensitive == 'true' && (vars.LOCAL_RELEASE_RUNNER == '' || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 5
     permissions:
       contents: read
@@ -150,9 +185,10 @@ jobs:
           head=$(gh api "repos/$REPO/pulls/$PR" --jq .head.sha)
           python3 -B scripts/release_gate.py review --repo "$REPO" --pr "$PR" --sha "$head"
   security-acceptance:
+    # This inline gate executes no checkout and fails when protected jobs were skipped.
     if: ${{ always() }}
     needs: [changes, gitleaks, semgrep, trivy, independent-review]
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 5
     steps:
       - name: Require scans and applicable independent review

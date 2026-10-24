@@ -1,6 +1,6 @@
 # Volunteer planner
 
-ID: public-nonprofit/volunteer-planner. Version: 1.4.
+ID: public-nonprofit/volunteer-planner. Version: 1.5.
 
 **Use for:** planning how a group will use volunteers: roles, tasks, shifts, orientation and appreciation. Not for hiring paid staff, recruiting messages, or background checks.
 

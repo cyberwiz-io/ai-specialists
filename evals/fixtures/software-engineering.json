@@ -80,7 +80,8 @@
         "      tax = tax_for(subtotal, cart.region)  # from shop/tax.py",
         "      return subtotal + tax + shipping_cost(shipping_method)",
         "Current behavior: no discount support anywhere.",
-        "shop/tax.py was not pasted."
+        "shop/tax.py was not pasted.",
+        "Fictional owner clarification v2 (2026-10-24): The confirmed tax base is the subtotal after the valid percentage discount; apply that discount before passing subtotal to tax_for. This settles the caller ordering only: shop/tax.py remains unseen, including its implementation, numeric types and rounding."
       ],
       "traits": [
         "Gives ordered small steps, each naming what changes, where, why and a check for the user to carry out themselves",
@@ -142,7 +143,9 @@
         "  def test_cancel_unknown_lesson_returns_not_found(fake_clock, booking_repo):",
         "      result = cancel_lesson('s-01', 'missing', fake_clock.now())",
         "      assert result.status == 'not_found'",
-        "Past defect: a timezone change once let students cancel a started lesson."
+        "Past defect: a timezone change once let students cancel a started lesson.",
+        "Fictional owner clarification v2 (2026-10-24): A successful cancellation returns status 'cancelled' and sends one notice to the lesson's teacher. A started lesson returns 'already_started'; an unknown lesson returns 'not_found'. Both rejections charge 0 credits, leave stored bookings unchanged and send no notice.",
+        "Fictional owner clarification v2 (2026-10-24): If the messaging service raises an error, cancellation returns status 'notification_failed' and charged_credits 0, leaves the lesson booked, and delivers no notice. There is no automatic retry."
       ],
       "traits": [
         "Gives a test case table with name, level, setup, input, expected result and requirement covered, with at least one case for each of C1 to C4",

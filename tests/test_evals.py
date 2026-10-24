@@ -256,6 +256,19 @@ class RunTests(FixtureCase):
         with self.assertRaisesRegex(ValueError, 'subject effort changed'):
             evals.compare(self.root, 't1')
 
+    def test_revision_mode_requires_receipts_and_cannot_mix_baselines(self):
+        record = self.prepare(role=ROLE, revision_rounds='1', checker='test-checker')
+        self.assertEqual(record['revision_rounds'], 1)
+        self.assertEqual(record['checker'], 'test-checker')
+        self.answer(record)
+        for operation in (evals.report, evals.save_baseline):
+            with self.assertRaisesRegex(ValueError, 'native execution receipt'):
+                operation(self.root, 't1')
+        second = self.prepare(run='t2', role=ROLE)
+        self.answer(second)
+        with self.assertRaisesRegex(ValueError, 'cannot mix revision workflows'):
+            evals.save_baseline(self.root, ['t1', 't2'])
+
     def cli_fails(self, argv, pattern):
         stderr = io.StringIO()
         with contextlib.redirect_stderr(stderr), self.assertRaises(SystemExit):

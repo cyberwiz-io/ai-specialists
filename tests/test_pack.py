@@ -502,7 +502,7 @@ class ArchiveTests(FixtureCase):
         with ZipFile(self.release()) as bundled:
             names = bundled.namelist()
         prefix = f"ai-specialists-{config.version(self.root)}/"
-        for required in ("catalog/security/threat-modeler.md", "dist/packs/finance.md",
+        for required in ("catalog/security/threat-modeler.md", "dist/packs/finance-planning.md", "dist/packs/finance-reviews.md",
                          "dist/packs/security-engineering.md", "dist/packs/security-governance.md",
                          "dist/packs/security-operations.md", "pack/STARTER-PACK.md", "LICENSES/Apache-2.0.txt", "catalog/REGISTRY.jsonl"):
             self.assertIn(prefix + required, names)
@@ -532,9 +532,19 @@ class SplitPackTests(FixtureCase):
             self.assertIn("catalog/security/INDEX.md", text)
             self.assertIn("When a handoff names a role outside this pack", text)
 
+    def test_new_split_families_preserve_every_role_once(self):
+        families, generated = check.check(self.root)
+        for family in families:
+            if family['id'] not in ('finance', 'marketing-growth', 'software-engineering'):
+                continue
+            parts = [generated[f"dist/packs/{part['id']}.md"].decode('utf-8') for part in family['packs']]
+            for role in family['roles']:
+                self.assertEqual(sum(f"<!-- Source: {role['path']} -->" in text for text in parts), 1)
+            self.assertNotIn(f"dist/packs/{family['id']}.md", generated)
+
     def test_unsplit_family_keeps_single_pack(self):
         _, generated = check.check(self.root)
-        text = generated["dist/packs/finance.md"].decode("utf-8")
+        text = generated["dist/packs/personal-career.md"].decode("utf-8")
         self.assertIn("the user asks for this family pack", text)
         self.assertNotIn("outside this pack", text)
 

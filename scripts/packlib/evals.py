@@ -429,14 +429,19 @@ def _cell(text):
     return " ".join(str(text).split()).replace("|", "/")
 
 
-def _grades(root, record):
+def _grades(root, record, first_draft=False):
     """Validate every output and grade of a run and return the grades by fixture id."""
     failures, grades = [], {}
     receipt_path = safe_path(root, f"{EVAL_DIR}/{record['run']}/execution.json")
     receipts = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.exists() else None
+    if type(record.get('revision_rounds', 0)) is not int or record.get('revision_rounds', 0) not in (0, 1):
+        raise ValueError('revision rounds must be 0 or 1')
+    if record.get('revision_rounds', 0) and receipts is None:
+        raise ValueError('revision workflow requires a native execution receipt')
     if record.get('subject_effort') is not None and receipts is None:
         raise ValueError('requested subject effort requires a native execution receipt')
     record['observed_models'] = {}
+    record['observed_checkers'] = {}
     for fixture in record["fixtures"]:
         if record.get("schema", 1) >= 2:
             for key in ("subject", "grader"):
@@ -445,6 +450,34 @@ def _grades(root, record):
                     failures.append(f"{fixture['id']}: {key} prompt hash mismatch")
         if receipts is not None:
             receipt = receipts.get("fixtures", {}).get(fixture["id"], {})
+            if receipt.get('revision_rounds', 0) != record.get('revision_rounds', 0):
+                failures.append(f"{fixture['id']}: revision rounds differ from its receipt")
+            if record.get('revision_rounds', 0):
+                from evals_runner import valid_phase, valid_audit, revision_input
+                first_paths = {k: safe_path(root, fixture[k] + '.first-draft') for k in ('output', 'grade')}
+                raw_paths = [safe_path(root, fixture['grade'] + f'.first-draft.raw-{n}.txt') for n in (1, 2)]
+                first = receipt.get('first_draft', {})
+                record['observed_checkers'][fixture['id']] = receipt.get('checker', {}).get('reported_models', [])
+                if (receipt.get('subject', {}).get('requested_model') != record['model']
+                        or receipt.get('grader', {}).get('requested_model') != record['grader']):
+                    failures.append(f"{fixture['id']}: workflow model differs from its receipt")
+                if not valid_phase(root, first, first_paths, raw_paths, record):
+                    failures.append(f"{fixture['id']}: first draft evidence is missing or changed")
+                elif first.get('subject', {}).get('input_sha256') != fixture['subject_sha256']:
+                    failures.append(f"{fixture['id']}: first draft input hash mismatch")
+                else:
+                    original = safe_path(root, fixture['subject_prompt']).read_bytes().decode('utf-8')
+                    draft = first_paths['output'].read_bytes().decode('utf-8')
+                    audit_path = safe_path(root, fixture['output'] + '.checklist.md')
+                    if not valid_audit(receipt, original, draft, audit_path, record):
+                        failures.append(f"{fixture['id']}: checker audit missing, changed or mismatched")
+                    else:
+                        revision = revision_input(original, draft, audit_path.read_bytes().decode('utf-8'))
+                        if receipt.get('subject', {}).get('input_sha256') != _sha(revision):
+                            failures.append(f"{fixture['id']}: revision input hash mismatch")
+                if first_draft:
+                    receipt = first
+                    fixture = dict(fixture, **{k: str(p.relative_to(root)) for k, p in first_paths.items()})
             record['observed_models'][fixture['id']] = {
                 key: receipt.get(key, {}).get('reported_models', []) for key in ('subject', 'grader')}
             if receipt.get("status") != "complete":
@@ -484,7 +517,13 @@ def report(root, run):
     record["execution_evidence"] = ("Execution receipt present; completion and output hashes checked"
                                     if receipt.is_file() else "no execution receipt; native route and model identities unverified")
     path = root / EVAL_DIR / run / "REPORT.md"
-    path.write_bytes(render(record, _grades(root, record)).encode("utf-8"))
+    grades = _grades(root, record)
+    if record.get('revision_rounds', 0):
+        first = dict(record, result_phase='First draft')
+        first_grades = _grades(root, first, first_draft=True)
+        (path.parent / 'FIRST-DRAFT.md').write_bytes(render(first, first_grades).encode('utf-8'))
+        record['first_draft_outcomes'] = {key: outcome(grade) for key, grade in first_grades.items()}
+    path.write_bytes(render(record, grades).encode("utf-8"))
     return path
 
 
@@ -511,6 +550,10 @@ def save_baseline(root, run):
         if (record["model"], record["grader"]) != (records[0]["model"], records[0]["grader"]):
             raise ValueError(f"{record['run']}: model or grader differs from {records[0]['run']}; "
                              "a baseline holds one model and grader")
+        if record.get('revision_rounds', 0) != records[0].get('revision_rounds', 0):
+            raise ValueError('baseline cannot mix revision workflows')
+        if record.get('checker') != records[0].get('checker'):
+            raise ValueError('baseline cannot mix checker models')
         if record.get('subject_effort') != records[0].get('subject_effort'):
             raise ValueError('baseline cannot mix requested subject efforts')
         if record.get("harness_sha256") != records[0]["harness_sha256"]:
@@ -518,6 +561,8 @@ def save_baseline(root, run):
     roles, fixture_versions = {}, {}
     for record in records:
         grades = _grades(root, record)
+        if record.get('revision_rounds', 0):
+            _grades(root, dict(record), first_draft=True)
         if any(any(row['verdict'] == 'inapplicable'
                 for section in ('acceptance', 'traits') for row in grade[section])
                 for grade in grades.values()):
@@ -530,7 +575,8 @@ def save_baseline(root, run):
     last = records[-1]
     data = {"schema": 2, "fixtures": fixture_versions, "run": " + ".join(r["run"] for r in records), "version": last["version"],
             "commit": last["commit"], "model": last["model"], "grader": last["grader"], "date": last["date"],
-            "subject_effort": last.get('subject_effort'),
+            "subject_effort": last.get('subject_effort'), "revision_rounds": last.get('revision_rounds', 0),
+            "checker": last.get('checker'),
             "roles": dict(sorted(roles.items())), "harness_sha256": last["harness_sha256"]}
     path = root / BASELINE
     path.write_bytes((json.dumps(data, indent=2) + "\n").encode("utf-8"))
@@ -545,9 +591,15 @@ def compare(root, run, baseline=BASELINE):
         raise ValueError(f"{baseline} holds no baseline yet; review a run, then save it with the baseline command")
     record = load_run(root, run)
     grades = _grades(root, record)
+    if record.get('revision_rounds', 0):
+        _grades(root, dict(record), first_draft=True)
     now = role_scores(record, grades)
     if (old["model"], old["grader"]) != (record["model"], record["grader"]):
         raise ValueError("incomparable baseline: requested model or grader changed")
+    if old.get('revision_rounds', 0) != record.get('revision_rounds', 0):
+        raise ValueError('incomparable baseline: revision workflow changed')
+    if old.get('checker') != record.get('checker'):
+        raise ValueError('incomparable baseline: checker model changed')
     if old.get('subject_effort') != record.get('subject_effort'):
         raise ValueError('incomparable baseline: requested subject effort changed')
     if not old.get("fixtures"):
@@ -614,6 +666,8 @@ def render(record, grades):
         f"| Model under test (requested) | {_cell(record['model'])} |",
         f"| Subject effort (requested; actual effort unobserved) | {_cell(record.get('subject_effort', 'unspecified'))} |",
         f"| Grader (requested) | {_cell(record['grader'])} |",
+        f"| Revision rounds | {record.get('revision_rounds', 0)} |",
+        f"| Result phase | {record.get('result_phase', 'Final workflow' if record.get('revision_rounds', 0) else 'Single draft')} |",
         f"| Date prepared | {_cell(record['date'])} |",
         f"| Fixtures | {len(fixtures)} ({kinds['task']} task, {kinds['boundary']} boundary) in "
         f"{len(families)} families |", "",
@@ -637,6 +691,23 @@ def render(record, grades):
         lines.append(f"| `{f['id']}` | {f['kind']} | {outcomes[f['id']]} | "
                      f"{passed['acceptance']}/{applicable['acceptance']} | {passed['traits']}/{applicable['traits']} | "
                      f"{passed['must_not']}/{len(grade['must_not'])} |")
+    if record.get('first_draft_outcomes'):
+        lines += ['', '## First draft and fixed revision', '',
+                  'The summary above scores the final workflow only. First-draft grades are retained in FIRST-DRAFT.md; '
+                  'neither a passing draft nor its grade selects or skips the revision.', '',
+                  '| Fixture | First draft | Final workflow |', '| --- | --- | --- |']
+        for fixture in fixtures:
+            fid = fixture['id']
+            lines.append(f"| `{fid}` | {record['first_draft_outcomes'][fid]} | {outcomes[fid]} |")
+    if record.get('revision_rounds'):
+        lines += ['', '## Separate checker audit', '',
+                  f"Requested checker: {_cell(record.get('checker', record['model']))}; fixed requested effort: low.",
+                  'The audit is saved separately in each output.checklist.md; it is not the issued deliverable or a grade. '
+                  'A different requested model alone does not establish independent review.', '',
+                  '| Fixture | Checker (native) |', '| --- | --- |']
+        for fixture in fixtures:
+            observed = record.get('observed_checkers', {}).get(fixture['id'], [])
+            lines.append(f"| `{fixture['id']}` | {_cell(', '.join(observed) or 'unobserved')} |")
     lines += ["", "## Items not passed", ""]
     misses = 0
     for f in fixtures:
