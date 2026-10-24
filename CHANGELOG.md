@@ -6,6 +6,8 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Supply the secure-code fixture's missing fictional owner confirmation of database privileges. Keep the admin-account risk criterion and all thresholds unchanged; a username alone is not privilege evidence. Preserve earlier replies and grades for their original inputs.
+
 - Record the failed full behavioral attempt, separately observed Codex model/read trials, Windows native baseline installation and reviewed Windows Claude content correction. Keep all four complete client acceptances pending.
 
 - Align the SOP fixture with the visible task: retain its unconfirmed-items list and no-code statement without requiring the list to follow the coordinator's final status. Preserve the earlier PARTIAL grades; new evidence uses the corrected trait.

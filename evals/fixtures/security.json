@@ -99,6 +99,7 @@
       "request": "Can you check this search handler from our fictional garden shop site for security problems? It's Python with Flask.",
       "input": [
         "Purpose: public product search page; anyone on the internet can reach /search. Data: product table, plus an orders table in the same database.",
+        "Fictional owner confirmation: shop_admin has administrative read and write privileges over all tables in this database, including orders.",
         "from flask import Flask, request, render_template_string",
         "from shop.db import get_conn  # helper not supplied",
         "app = Flask(__name__)",
