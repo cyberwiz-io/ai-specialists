@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "c79b1c7b42c9675693e26737c838161ebc01eb6b944c89bc02baf512ca243704",
+      "digest": "f7dafc2bc1298ee0c010b36ded609373fba81224b8251dfccaef0088f62816c2",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "a14a4aae67ea640bd82b82e2adfb29c7ae2f6a7db55e6c671aa89e05695e3cd4",
+      "digest": "23b657524136e5f07b32c7370a45d20d218cddf07150369df1c9608b5d2b23cc",
       "files": 53,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -244,7 +244,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "76e4977203f58af804d14a65f58aa943c2feb29477a249be867f1a6fd3d2757d",
+      "digest": "1d959527406ec6bb96c273e9cd25dc648b6cc4507b36583d75f903a92b3270da",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -291,7 +291,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "0a5e1f93f0c02385efdb6efbb74a0f74ac0ddb4fb4e6ffb75575faaaf8685e79",
+      "digest": "ff254c07689cf6f88ab92557cda30a45cf6414aab576916867bf1d9fb2859233",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -330,7 +330,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "f3bad79cc2bb0c29afcd161741215fce48e0670c1f580021957bbe0413246c5c",
+      "digest": "c453b43b991194d0d6def42f6e88424bc302cc7a0f867c49c62b891842ed53a3",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -378,7 +378,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "e5f657273fcc6d41e27a6d8b56692928832e6e8a7a3bfb65abc35f97b1badba8",
+      "digest": "3afd208fc86b63b66644d731d109cad2404c061449c287d048a0c39af92f9784",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -415,7 +415,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "5bf13cdc3892a9a3767b7dbba09f0248c98f0061bc4c4af009962f422283642d",
+      "digest": "1ccee9139de276e323b78090f155cfea06a5aa5d6641b0bcae7d80a37ed0b8e9",
       "files": 6,
       "guide": "catalog/it-operations/INDEX.md",
       "id": "family-it-operations",
@@ -526,7 +526,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "f529cb125dbd87e4d745369ec4a18ff3be137c56bcc9242d9d681ef0b9772f8f",
+      "digest": "8401b024eed57f6df3383aa17f37620676d17dc11ec8c77ea91a2e846b87a3b8",
       "files": 8,
       "guide": "catalog/product-design/INDEX.md",
       "id": "family-product-design",

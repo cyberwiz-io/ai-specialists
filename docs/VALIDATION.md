@@ -6,8 +6,8 @@ This repository ships advisory instruction materials. Structural checks and card
 
 | Device and client | Inventory | Acceptance |
 | --- | --- | --- |
-| macOS, Claude Code | 2.1.309 | Pending |
-| macOS, Codex | 0.163.0 | Pending |
+| macOS, Claude Code | 2.1.310 | Pending |
+| macOS, Codex | 0.164.0 | Pending |
 | Windows 11 build 26300, Claude Code | 2.1.308 | Pending |
 | Windows 11 build 26300, Codex | 0.163.0 | Pending |
 
@@ -54,6 +54,14 @@ The complete 150-case diagnostic cohort `release-14-7ec80c4-max-full-a` used sig
 Independent public-output diagnosis found actual omissions, incomplete positive inputs, fixture/card conflicts and grading disagreements. Subsequent source repairs preserve safeguards and prohibitions. Ordinary fixtures with additional fictional owner clarifications retain the original notes and identify the new source version; those changed inputs cannot be compared as if they were the original cohort. No original score is promoted. Host-observed subject metadata now separates subject identity from the grader environment, and the existing single invalid-grade retry receives the unchanged response and indexed validation errors. Exact-quote validation and acceptance thresholds remain unchanged. The changed harness requires fresh blind calibration before new release evidence can rely on it.
 
 Current source checks, independent review, two qualifying full cohorts, critical-case stability and all four complete native client trials remain pending for these repaired bytes. No merge, publication, public download or personal installation is implied.
+
+### Source checkpoint and interrupted targeted run, 2026-10-24 UTC
+
+Signed checkpoint `5135e19d00dd7b63a361bc95723e60cd7a15308b` passed all five product jobs and the exact-head `acceptance`, `policy-compliance`, `security-acceptance`, `Analyze (python)`, `Analyze (actions)` and `CodeQL` checks. The observed CodeQL check came from the CodeQL application; a skipped optional workflow was not counted as execution. Source and local archive reviews were bound separately to that checkpoint. These results do not validate later changed bytes or establish behavioral or client acceptance.
+
+Its 48-case affected-role run was retired after a native executable changed from Claude Code 2.1.309 to 2.1.310: 14 grades were saved (12 raw PASS, two PARTIAL), two attempts were interrupted and 32 were not dispatched. An audit found that one raw PASS counted a record being named without confirming its policy obligation; the raw grade remains unchanged and disputed. Missing revision tracing and mishandling of supplied roadmap priorities were also examined. Subsequent instruction repairs leave acceptance criteria, safeguards, prohibitions and frozen challenges intact. Fresh blind calibration on the changed grader produced 39 valid candidate grades and 39 valid references, with 38/39 raw agreement (97.4%) and no missed reference prohibitions; this synthetic calibration is separate from specialist acceptance and needs its disagreement dispositions and independent record review.
+
+Later component trials at the checkpoint recorded real Sonnet 5.5 planner handoffs and Opus 5.5 reviews on Mac Claude Code 2.1.309 and Windows Claude Code 2.1.308, exact artifact hashes, allowed marker reads and unchanged projects. Earlier failed and timed-out trials remain retained. The actual child tool registry and write, command and nested-agent enforcement remained unobservable. A Windows 2.1.308 per-invocation full-model-ID attempt returned an input-validation error before the reviewer ran; it is not an accepted review or a permission denial. Separate private checks, full client acceptance, two qualifying full cohorts, critical-case stability, publication and personal installation remain pending. Later trials pin byte-identical native executables and disable updates only for their processes; personal installations and credentials are preserved.
 
 ## Automated and historical evidence
 

@@ -30,7 +30,7 @@ ID: product-design/roadmap-planner. Version: 1.4.
 
 **Inputs:** the initiatives or goals, what the business needs most, known dependencies, team capacity as the user states it, fixed external dates, and the planning horizon. Ask for the top outcome the next period must deliver when missing.
 
-**Method:** group work by outcome, not by feature list. Rank using criteria the user agrees to, such as value, effort, risk and learning, and show the scores or reasoning openly. Place dependencies first, keep room for unplanned work, and separate committed items from options still to be decided. Use near, middle and later bands instead of exact dates unless the user supplies dates. Mark every effort figure as the user's or as an assumption, and invent no numbers.
+**Method:** group work by outcome, not by feature list. Rank using criteria the user agrees to, such as value, effort, risk and learning, and show the scores or reasoning openly. A supplied order or set of bands can provide these criteria: identify what you preserve, and ask about changes rather than requiring new ranking choices for unchanged priorities. Place dependencies first, keep room for unplanned work, and separate committed items from options still to be decided. A fixed target date alone does not establish a commitment. Use near, middle and later bands instead of exact dates unless the user supplies dates. Mark every effort figure as the user's or as an assumption, and invent no numbers.
 
 **Deliver:** a roadmap table (theme, initiative, outcome sought, dependency, band, confidence), a short rationale for the order, trade-offs that were declined, assumptions, risks that could reorder it and a list of decisions the user must make.
 

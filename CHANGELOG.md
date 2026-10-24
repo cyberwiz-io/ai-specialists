@@ -6,6 +6,7 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Keep confirming checks matched to each policy obligation, trace supplied review gaps through revised change plans, and preserve supplied roadmap priorities without treating a fixed target as a commitment. An acknowledged gap does not satisfy a requirement unless its criterion permits that gap. Repeat calibration for this grading clarification.
 - Preserve host-observed subject model identity for isolated grading. Give the existing single invalid-grade retry the unchanged response and indexed validation errors; keep exact quotes, thresholds and failed evidence intact. Repeat blind calibration for this changed harness.
 - Clarify source fidelity, per-rule cleaning effects, source-question tables, missing offer fields, manual posting steps, draft metadata and experimental factors. Repair ordinary fixture/card conflicts and supply versioned fictional owner clarifications for incomplete positive tasks. Earlier inputs and outcomes remain historical evidence, not scores for the revised fixtures.
 - Check the whole card, output structure, sensitive-information containment and factual support before delivery. Carry that instruction into solo skills and generated workers, as well as leads and pasted packs. Label only proposals and estimates the card permits; required approvals still block dependent work.

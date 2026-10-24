@@ -262,6 +262,7 @@ def grader_prompt(context_text, fixture, accepted, output_path, grade_path):
         "excerpt from the reply in quote. Copy a short literal substring, preserving Markdown, whitespace "
         "and punctuation; do not append sentence punctuation. Other verdicts may leave quote empty and "
         "explain absence in evidence. "
+        "Acknowledging an unmet requirement does not satisfy it unless that item explicitly permits a gap. "
         "A wholly missing criterion fails; partial means some of the requirement is demonstrated or implicit. "
         "An empty or unreadable reply fails every acceptance "
         "criterion and trait.\n\n"

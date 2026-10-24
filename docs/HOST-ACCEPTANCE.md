@@ -4,12 +4,12 @@ This procedure records whether the generated Claude Code and Codex integrations 
 
 ## Current status
 
-The current device inventory is macOS with Claude Code 2.1.309 and Codex 0.163.0, and Windows 11 build 26300 with Claude Code 2.1.308 and Codex 0.163.0. Both devices now have a candidate checkout. Partial Claude trials are recorded in [validation](VALIDATION.md); none completes acceptance. Run and record all four combinations below before claiming current native acceptance.
+The current device inventory is macOS with Claude Code 2.1.310 and Codex 0.164.0, and Windows 11 build 26300 with Claude Code 2.1.308 and Codex 0.163.0. Both devices now have a candidate checkout. Partial Claude trials are recorded in [validation](VALIDATION.md); none completes acceptance. Run and record all four combinations below before claiming current native acceptance.
 
 | Device and client | Inventory | Checkout inventory | Acceptance |
 | --- | --- | --- | --- |
-| macOS, Claude Code | 2.1.309 | Current implementation checkout present | Pending |
-| macOS, Codex | 0.163.0 | Current implementation checkout present | Pending |
+| macOS, Claude Code | 2.1.310 | Current implementation checkout present | Pending |
+| macOS, Codex | 0.164.0 | Current implementation checkout present | Pending |
 | Windows 11 build 26300, Claude Code | 2.1.308 | Candidate checkout present | Pending |
 | Windows 11 build 26300, Codex | 0.163.0 | Candidate checkout present | Pending |
 
@@ -20,6 +20,8 @@ Historical evidence remains in [validation](VALIDATION.md) and the adapter guide
 For each client/device pair, create a new disposable test root and a new project directory. The adapter guides provide macOS and PowerShell commands. Use an exact reviewed release tag or candidate commit; stop if any destination already exists. Use clean host configuration for the run so pre-existing plugins, agents, skills, hooks, or settings do not mask discovery. Keep the test checkout, project, host configuration and marker fixture inside the disposable root. The public generated `skills/` directory may be used as shipped. Do not copy any private personal skills into the disposable project or public test evidence.
 
 Preserve governing host instructions and native admission controls. If the approved launcher rejects a redirected home, use its supported normal-home route with a disposable project; record remaining global discovery and isolation limits. Do not bypass the launcher or copy credential files to obtain a clean configuration. Use the client's supported login procedure when authentication is required.
+
+Record the native executable version and SHA-256 before and after each run. If the executable changes, stop new dispatches and retain interrupted receipts. For repeatable trials, use a task-owned byte-identical executable copy and the supported per-process `DISABLE_AUTOUPDATER=1` setting; preserve personal update settings and credentials. See [Claude Code environment variables](https://code.claude.com/docs/en/env-vars).
 
 Before invoking a model, record the client version, OS version, exact source ref, install scope, plugin and marketplace names, discovered lead and worker identities, and the root permission controls in effect. For Codex, configure the parent session with the host's read-only sandbox and approval policy; custom-agent TOML reductions do not create a sandbox. For Claude Code, use the host's supported permission controls and inspect the actual tools available to the worker.
 
