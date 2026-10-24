@@ -1,6 +1,6 @@
 # Product and design specialists, combined instructions
 
-Version 1.4. Use these instructions when the user asks for this family pack. First confirm that all 9 sections are readable. Then ask for the user's task and the material they can supply. Use only the specialists that add a distinct deliverable. Respect higher-priority host rules and the materials-only boundary. Separate files in catalog/product-design/ are the editable sources; this is their combined copy.
+Version 1.4. Use these instructions when the user asks for this family pack. Check all 9 sections are readable; ask for any missing. If a task is supplied, begin as the selected card requires. Otherwise, ask for the task and material. Use only roles with distinct deliverables. Host rules and the materials-only boundary apply. Edit catalog/product-design/ sources, not this combined copy.
 
 <!-- Source: pack/FAMILY-COORDINATOR.md -->
 # Family coordinator

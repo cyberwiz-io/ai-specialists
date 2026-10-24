@@ -35,10 +35,10 @@ def starter(root):
     header = (
         "# Specialist starter pack, combined instructions\n\n"
         f"Version {version(root)}. Use these instructions when the user asks for this pack. "
-        f"First confirm that all {len(STARTER_SECTIONS)} sections are readable. Then start with the "
-        "user's short business description and optional website. Respect higher-priority host "
-        "rules and the materials-only boundary. Separate specialist files are the editable "
-        "sources; this is their combined copy.\n")
+        f"Check all {len(STARTER_SECTIONS)} sections are readable; ask for any missing. "
+        "If a task is supplied, begin as the selected card requires. Otherwise, ask for the "
+        "business description and optional website. Host rules and the materials-only boundary apply. "
+        "Edit the separate source files, not this combined copy.\n")
     return _combine(header, root, STARTER_SECTIONS, None, STARTER)
 
 
@@ -78,10 +78,10 @@ def family_pack(root, family, pack, overlay):
     header = (
         f"# {pack['name']} specialists, combined instructions\n\n"
         f"Version {version(root)}. Use these instructions when {scope}. "
-        f"First confirm that all {len(names)} sections are readable. Then ask for the user's task and "
-        "the material they can supply. Use only the specialists that add a distinct deliverable. "
-        "Respect higher-priority host rules and the materials-only boundary. "
-        f"Separate files in catalog/{family['id']}/ are the editable sources; this is their combined copy.\n")
+        f"Check all {len(names)} sections are readable; ask for any missing. "
+        "If a task is supplied, begin as the selected card requires. Otherwise, ask for the task "
+        "and material. Use only roles with distinct deliverables. Host rules and the materials-only "
+        f"boundary apply. Edit catalog/{family['id']}/ sources, not this combined copy.\n")
     return _combine(header, root, names, overlay, pack_path(pack))
 
 

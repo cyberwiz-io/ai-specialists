@@ -1,6 +1,6 @@
 # Specialist starter pack, combined instructions
 
-Version 1.4. Use these instructions when the user asks for this pack. First confirm that all 8 sections are readable. Then start with the user's short business description and optional website. Respect higher-priority host rules and the materials-only boundary. Separate specialist files are the editable sources; this is their combined copy.
+Version 1.4. Use these instructions when the user asks for this pack. Check all 8 sections are readable; ask for any missing. If a task is supplied, begin as the selected card requires. Otherwise, ask for the business description and optional website. Host rules and the materials-only boundary apply. Edit the separate source files, not this combined copy.
 
 <!-- Source: pack/COORDINATOR.md -->
 # Coordinator

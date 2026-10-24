@@ -69,7 +69,7 @@ python3 -B scripts/evals.py status --run 2026-10-17-security
 python3 -B scripts/evals.py report --run 2026-10-17-security
 ```
 
-The subject prompt is the combined pack that holds the role, exactly as shipped in `dist/packs/`, followed by the fixture's request and input. The grader receives the same shipped pack, including the shared coordinator boundaries, and judges only the target role's listed criteria. It does not receive other fixtures or their replies. The grader prompt lists the card's Acceptance criteria (the Acceptance paragraph split at semicolons), the fixture's traits and its `must_not` items, and asks for a verdict with quoted evidence for each.
+The subject prompt is the combined pack that holds the role, exactly as shipped in `dist/packs/`, followed by the fixture's request and input. The grader receives the target card and its family's shared coordinator instructions, and judges only the target role's listed criteria. Other role cards are omitted from grading context; the subject still receives the complete shipped pack. Prepared grading-context and prompt hashes bind this scope, so previous runs remain historical evidence. It does not receive other fixtures or their replies. The grader prompt lists the card's Acceptance criteria (the Acceptance paragraph split at semicolons), the fixture's traits and its `must_not` items, and asks for a verdict with quoted evidence for each.
 
 ## Grading
 

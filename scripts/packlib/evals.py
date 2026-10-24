@@ -233,7 +233,9 @@ def grader_prompt(context_text, fixture, accepted, output_path, grade_path):
         f"Fixture `{fixture['id']}` ({fixture['kind']}) for `{card['id']}`. Read the reply at `{output_path}`. "
         "Grade only what the reply contains, against the items below. Quote the reply as evidence; when an "
         "item is missing, say so. Do not reward length or polish, do not repair the reply, and do not grade "
-        "against your own idea of a better answer. Judge meaning: equivalent wording counts, and a stronger "
+        "against your own idea of a better answer. Assess followability for the stated reader from the "
+        "stated prerequisites; prerequisite-installation instructions are required only when installing "
+        "them is part of the requested task. Judge meaning: equivalent wording counts, and a stronger "
         "explicit explanation elsewhere in the reply counts without duplication. Do not downgrade a plainly "
         "satisfied item merely because the reply is brief or minimal. Do not require extra specificity, "
         "rationale, steps, quantification or explicit labels unless that item asks for them. Still check "
@@ -322,7 +324,10 @@ def prepare(root, families, generated, fixtures, run, meta):
         output, grade = f"{EVAL_DIR}/{run}/outputs/{name}.md", f"{EVAL_DIR}/{run}/grades/{name}.json"
         accepted = criteria(card_text)
         subject = subject_prompt(pack_text, fixture)
-        grader = grader_prompt(pack_text, fixture, accepted, output, grade)
+        grader_context = "\n\n".join(
+            read(root, path).decode("utf-8").rstrip()
+            for path in [*fixture["family"]["coordinator"], fixture["card"]["path"]])
+        grader = grader_prompt(grader_context, fixture, accepted, output, grade)
         prompts[f"prompts/{name}.subject.md"] = subject
         prompts[f"prompts/{name}.grader.md"] = grader
         records.append({
@@ -332,7 +337,7 @@ def prepare(root, families, generated, fixtures, run, meta):
             "acceptance": accepted, "traits": fixture["traits"], "must_not": fixture["must_not"],
             "subject_sha256": _sha(subject), "grader_sha256": _sha(grader), "card_sha256": _sha(card_text),
             "input_sha256": _sha(json.dumps({k: fixture[k] for k in ("id", "role", "kind", "request", "input")}, sort_keys=True)),
-            "rubric_sha256": _sha(json.dumps({"instructions_sha256": _sha(pack_text),
+            "rubric_sha256": _sha(json.dumps({"instructions_sha256": _sha(grader_context),
                                              "acceptance": accepted, "traits": fixture["traits"],
                                              "must_not": fixture["must_not"]}, sort_keys=True))})
     record = dict(meta, schema=3, run=run, fixtures=records)

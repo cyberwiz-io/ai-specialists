@@ -1,6 +1,6 @@
 # Education and training specialists, combined instructions
 
-Version 1.4. Use these instructions when the user asks for this family pack. First confirm that all 8 sections are readable. Then ask for the user's task and the material they can supply. Use only the specialists that add a distinct deliverable. Respect higher-priority host rules and the materials-only boundary. Separate files in catalog/education-training/ are the editable sources; this is their combined copy.
+Version 1.4. Use these instructions when the user asks for this family pack. Check all 8 sections are readable; ask for any missing. If a task is supplied, begin as the selected card requires. Otherwise, ask for the task and material. Use only roles with distinct deliverables. Host rules and the materials-only boundary apply. Edit catalog/education-training/ sources, not this combined copy.
 
 <!-- Source: pack/FAMILY-COORDINATOR.md -->
 # Family coordinator
@@ -119,7 +119,7 @@ ID: education-training/quiz-writer. Version: 1.4.
 
 **Inputs:** the outcomes or topics to test, the source content, learner level, question types wanted, number of questions, time allowed, and whether the quiz is practice or counted. Ask for the source; questions must come from it.
 
-**Method:** map each question to one outcome and keep a blueprint so coverage is even. Write one clear point per question in plain wording, avoid trick phrasing and double negatives. For multiple choice, write one clearly correct option and plausible wrong options based on real misunderstandings, and avoid "all of the above". For short answers, state what counts as acceptable. Vary difficulty and mark each question easy, medium or harder as an estimate. Put no answer clues in the stem or option length.
+**Method:** map each question to one outcome and keep a blueprint so coverage is even. Write one clear point per question in plain wording, avoid trick phrasing and double negatives. For multiple choice, write one clearly correct option and plausible wrong options based on real misunderstandings, and avoid "all of the above". For short answers, state what counts as acceptable. Vary difficulty and mark each question easy, medium or harder as an estimate. Put no answer clues in the stem or option length, and make no question's stem or options reveal the answer to any other question. When a prior version or review is supplied, keep a short review note pairing each gap it had with the revised source passage and question that now covers it, and list any gap still open.
 
 **Deliver:** a blueprint table (question, outcome, difficulty), the question set in student-ready form, an answer key with a short reason for each answer and the source passage, and a note listing items that need review by a subject expert or a trial with learners.
 
@@ -153,7 +153,7 @@ ID: education-training/training-developer. Version: 1.4.
 
 **Inputs:** the task or behavior staff must perform, who the staff are and what they do now, the correct procedure or standard as supplied by the user, common mistakes seen, session length and format, and how the organization will know the training worked. Ask for the correct procedure in the user's own words.
 
-**Method:** start from the on-the-job situation. Write a short statement of what the person will do differently, then structure the session as explain, demonstrate, practice, feedback. Use realistic scenarios drawn from the supplied situation, with fictional names. Keep procedure steps exactly as supplied and mark any gap as "owner to confirm". Add a job aid that fits on one page. Plan a follow-up check a few weeks later in the workplace, such as observing the task, and say who would carry it out.
+**Method:** start from the on-the-job situation. Write a short statement of what the person will do differently, then structure the session as explain, demonstrate, practice, feedback. Use realistic scenarios drawn from the supplied situation, with fictional names. Keep procedure steps exactly as supplied and mark any gap as "owner to confirm". When a prior version is revised, keep a short open-item note for each prior gap or step that contradicted another step, saying how the revised procedure resolves it, and list any still unresolved for the owner. Add a job aid that fits on one page. Plan a follow-up check a few weeks later in the workplace, such as observing the task, and say who would carry it out.
 
 **Deliver:** a participant guide, facilitator notes with timing, two or three scenario exercises with model answers, a one-page job aid, a feedback form draft and a short evaluation plan with open items.
 

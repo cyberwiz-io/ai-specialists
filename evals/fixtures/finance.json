@@ -129,7 +129,8 @@
         "January: client invoice from Harbourline (fictional) 3,000 due 15 Jan; rent 1,800 on 1 Jan; wages 2,500 on 28 Jan",
         "February: client invoice from Northgate (fictional) 5,500 due 10 Feb - this client usually pays 30-45 days late; rent 1,800; wages 2,500; laptop replacement 1,200",
         "March: grant instalment 2,000, date not confirmed; rent 1,800; wages 2,500; quarterly tax payment, maybe around 1,500",
-        "No other receipts expected."
+        "No other receipts expected.",
+        "Owner timing status version2 (explicitly fictional, synthetic test input): rent, wages and the laptop replacement are fixed payments. Each is confirmed for the month listed; where the source gives no day, no day is confirmed. Grant instalment: March is an expected month, but neither the date nor the month is confirmed. Quarterly tax payment: the timing and the amount are estimates only; no date is confirmed."
       ],
       "traits": [
         "Gives a monthly table (opening, in, out, closing) where each closing balance equals the next opening balance and the base case places only dated items: January 2,900, February 2,900, March -1,400, with the arithmetic shown; the March grant instalment (2,000, no confirmed date) and the tax payment (about 1,500, no date) are listed apart as unplaced and are not added to any month",

@@ -43,7 +43,10 @@
         "Story: rebuilt the appointment schedule so no-shows dropped from 12 a week to 5",
         "Story: volunteered as a reading buddy at my local library for one year",
         "Spanish: basic, I'm taking an evening class",
-        "Recipient: not known"
+        "Recipient: not known",
+        "Owner clarification version2 (explicitly fictional, synthetic test input; extra supplied detail for the letter): The schedule rebuild happened at Mossbank Clinic over about six months. The clinic had four clinicians and one reception team, and appointment lengths did not match clinician availability. I met each clinician to list their booked slot lengths, moved the first reminder call to 48 hours before each appointment, and set up a same-day waiting list so cancelled slots were offered to people who were waiting.",
+        "Owner clarification version2 (explicitly fictional, synthetic test input; extra supplied detail for the letter): The reception team used the new schedule every week after it was set up. I wrote a one-page guide to it, and the team kept that guide at the front desk. Reading buddy detail: the library sessions were weekly, about 30 minutes each, with one child who was learning to read. I kept a short session log of the books we read and the words the child found hard, and the child's parent said the reading was easier to keep up at home.",
+        "Owner clarification version2 (explicitly fictional, synthetic test input; extra supplied detail for the letter): Spanish: I attend an evening Spanish class once a week. I can manage simple greetings and short, basic sentences, and I am not yet fluent. Voice: plain, direct and warm; short sentences; no buzzwords and no superlatives about any organization."
       ],
       "traits": [
         "Declines to invent a love of the mission and leaves a bracketed question asking the person why they want this role",
@@ -146,7 +149,9 @@
         "POSTING: Showroom Sales Associate, Fernhollow Tiles (fictional): help customers choose tiles, process orders",
         "ME: Lena Varga, 3 years as sales assistant at Brightwater Paints (fictional)",
         "Story: helped a contractor pick colours for a 20-room hotel refit; they came back for two more jobs",
-        "Why this role: I like helping people picture a finished room"
+        "Why this role: I like helping people picture a finished room",
+        "Owner clarification version2 (explicitly fictional, synthetic test input; extra supplied detail for the letter): As a sales assistant at Brightwater Paints for three years, I matched colours for customers by checking paint chips against the light in the room they described. I kept a notebook of colour matches that the team used for repeat customers. I entered customer orders, confirmed quantities and delivery dates, and followed up with customers when a delivery was late. I also trained two new sales assistants on the colour system during their first month.",
+        "Owner clarification version2 (explicitly fictional, synthetic test input; extra supplied detail for the letter): For the 20-room hotel refit, the contractor wanted one colour family across every room type. I made sample boards for each room type, checked each board at two times of day, and recorded which shades held their colour. The contractor placed the whole job's order from one list, which I prepared. Voice: plain, warm and practical; short sentences; no sales jargon."
       ],
       "traits": [
         "Delivers a finished letter of about 250 to 350 words using only the supplied facts",

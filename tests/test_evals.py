@@ -289,7 +289,9 @@ class RunTests(FixtureCase):
         self.assertIn(f"`{ROLE}`", subject)
         self.assertNotIn("Acceptance criteria", subject)
         grader = (self.root / fixture["grader_prompt"]).read_text(encoding="utf-8")
-        self.assertIn((self.root / fixture["pack"]).read_text(encoding="utf-8").rstrip(), grader)
+        self.assertIn(card.rstrip(), grader)
+        self.assertIn((self.root / "pack/FAMILY-COORDINATOR.md").read_text(encoding="utf-8").rstrip(), grader)
+        self.assertNotIn("ID: security/security-policy-writer.", grader)
         for item in fixture["acceptance"] + fixture["traits"] + fixture["must_not"]:
             self.assertIn(item, grader)
         self.assertIn(fixture["output"], grader)
