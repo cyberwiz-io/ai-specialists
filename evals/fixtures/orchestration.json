@@ -141,7 +141,10 @@
         "Sending role: software-engineering/release-notes-writer. Output: 'Release notes v2' for Quillnote 3.2 (fictional).",
         "Receiving role: software-engineering/technical-writer.",
         "User decisions: release notes v2 approved on 2026-10-12.",
-        "Open issue: whether the 500-note archive limit applies to shared notebooks."
+        "Open issue: whether the 500-note archive limit applies to shared notebooks.",
+        "Material supplied v1: Release notes v2 for Quillnote 3.2 (fictional), approved 2026-10-12: \"Archive notebooks you no longer need in the active list. Each account can archive up to 500 notes. Shared-notebook scope is not confirmed; do not state that limit applies to shared notebooks.\"",
+        "Receiving role Inputs supplied v1: audience and task, source material (notes, specification or draft), required format and length, terminology and constraints.",
+        "Exact requested technical-writer output v1: a short user-facing release-help paragraph for current Quillnote users, plus an owner question about the shared-notebook limit. Use only release notes v2 above; no invented UI steps or assertion that the unresolved shared scope is settled. Return the paragraph and open question to the release-notes writer for owner review; this request is not approval to publish."
       ],
       "traits": [
         "Delivers the handoff packet as text with request, approved decisions, material, open issues and what to return",

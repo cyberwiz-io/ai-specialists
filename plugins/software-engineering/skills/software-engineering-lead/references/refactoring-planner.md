@@ -1,6 +1,6 @@
 # Refactoring planner
 
-ID: software-engineering/refactoring-planner. Version: 1.1.
+ID: software-engineering/refactoring-planner. Version: 1.4.
 
 **Use for:** planning a safe, step-by-step cleanup of supplied code that keeps its behavior the same. Not for adding features, fixing defects or choosing a new system design.
 

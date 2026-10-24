@@ -47,4 +47,4 @@ In plain chat one assistant may apply specialist perspectives inline; this does 
 
 This is a portable instruction pack, not an enforced security boundary or a certified integration with every host. It has been reviewed locally; fresh-host trials, unaided user tests and subject-expert review of the other families remain to be done. No claim of better marketing performance is established. 
 
-Version 1.1, October 17, 2026. Instructional content is licensed under CC BY 4.0. See [attribution and license coverage](../NOTICE.md). This pack does not install itself or enable external actions.
+Version 1.4, October 22, 2026. Instructional content is licensed under CC BY 4.0. See [attribution and license coverage](../NOTICE.md). This pack does not install itself or enable external actions.

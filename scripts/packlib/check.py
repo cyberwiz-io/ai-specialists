@@ -4,9 +4,9 @@ from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit
 
-from . import bundle, cards, evals, manifest, modmap, plugin
+from . import bundle, cards, evals, manifest, modmap, plugin, source
 from .build import HOSTS, outputs, stale_files
-from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, client_index, is_untracked_client_install, read, safe_path, version
+from .config import PACK_DIR, PACK_MAX, REPO_MAP, SKIP_DIRS, STARTER, read, safe_path, version
 
 VERSION_MENTION = re.compile(r"\bVersion:?\s+([0-9]+\.[0-9]+)")
 LINK = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
@@ -55,13 +55,13 @@ def check_review_contract(root, families, generated):
                                 "prefer local only at equal known total cost", "Changed bytes void review.",
                                 "BLOCKED_MODEL/COST; do not claim ready or complete",
                                 "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
-                                "BLOCKED_REVIEW"),
+                                "BLOCKED_REVIEW", "each factual sentence against supplied evidence"),
         "pack/FAMILY-COORDINATOR.md": ("cheapest capable", "BLOCKED_MODEL/COST", "different actual model",
                                        "host-observed", "exact artifact/version", "byte hash", "from every author",
                                        "prefer local only at equal known total cost", "Changed bytes void review.",
                                        "BLOCKED_MODEL/COST; do not claim ready or complete",
                                        "or uncertain work is nontrivial", "mechanical formatting needs an exception reason",
-                                       "BLOCKED_REVIEW"),
+                                       "BLOCKED_REVIEW", "each factual sentence against supplied evidence"),
         "catalog/orchestration/cross-family-reviewer.md": (
             "host-observed", "different actual model", "exact artifact/version", "byte hash",
             "Changed bytes invalidate review", "from every author model",
@@ -77,6 +77,7 @@ def check_review_contract(root, families, generated):
             "mechanical formatting needs an exception reason", "BLOCKED_REVIEW"),
     }
     lead_terms = ("different actual model", "BLOCKED_REVIEW", "BLOCKED_MODEL/COST",
+                  "each factual sentence against supplied evidence",
                   "exact artifact/version", "untrusted task data", "general-purpose agent",
                   "edit or network tools", "host-observed model IDs", "manifest of the exact artifact/version, byte hash",
                   "changed bytes void review", "supported per-call model override",
@@ -96,7 +97,7 @@ def check_review_contract(root, families, generated):
     return failures
 
 
-def check_generated(root, generated, index=None):
+def check_generated(root, generated):
     failures = []
     for name, data in generated.items():
         path = root / name
@@ -107,33 +108,31 @@ def check_generated(root, generated, index=None):
                             else f"{name} differs from sources; run build")
         if name.startswith(PACK_DIR) and len(data) > PACK_MAX:
             failures.append(f"{name}: combined pack exceeds {PACK_MAX} bytes; split the family with \"packs\"")
-    failures += [f"{name}: stale generated file; run build" for name in stale_files(root, generated, index)]
+    failures += [f"{name}: stale generated file; run build" for name in stale_files(root, generated)]
     return failures
 
 
-def check_archives(root, owned, index=None):
+def check_archives(root, inventory=None):
     """Release archives are attached to GitHub Releases by CI, never committed."""
     failures = []
-    index = index or client_index(root)
-    for path in sorted(root.rglob("*.zip")):
-        relative = path.relative_to(root)
-        if is_untracked_client_install(root, relative, owned, index):
+    for name in source.files(root) if inventory is None else inventory:
+        relative = Path(name)
+        if relative.suffix != ".zip":
             continue
-        if not set(relative.parts) & SKIP_DIRS:
-            failures.append(f"{relative.as_posix()}: archives are not committed; "
-                            "run release, and let CI attach it to the GitHub Release")
+        failures.append(f"{relative.as_posix()}: archives are not committed; "
+                        "run release, and let CI attach it to the GitHub Release")
     return failures
 
 
-def check_links(root, owned, index=None):
+def check_links(root, inventory=None):
     failures = []
-    index = index or client_index(root)
     # shortcut: inline file links only; extend parsing if reference-style links are introduced.
-    for path in sorted(root.rglob("*.md")):
-        relative = path.relative_to(root)
-        if set(relative.parts) & (SKIP_DIRS | {"dist"}):  # dist/ copies are generated from checked sources
+    for name in source.files(root) if inventory is None else inventory:
+        relative = Path(name)
+        if relative.suffix != ".md":
             continue
-        if is_untracked_client_install(root, relative, owned, index):
+        path = root / relative
+        if set(relative.parts) & (SKIP_DIRS | {"dist"}):  # dist/ copies are generated from checked sources
             continue
         text = read(root, relative.as_posix()).decode("utf-8")
         for target in LINK.findall(text):
@@ -147,7 +146,7 @@ def check_links(root, owned, index=None):
     return failures
 
 
-def check_navigation(root, families, generated, index=None):
+def check_navigation(root, families, generated, inventory=None):
     failures = []
     if not (root / REPO_MAP).is_file():
         return [f"{REPO_MAP} is missing"]
@@ -156,7 +155,7 @@ def check_navigation(root, families, generated, index=None):
         if f"catalog/{family['id']}/INDEX.md" not in text:
             failures.append(f"{REPO_MAP}: does not link catalog/{family['id']}/INDEX.md")
     failures += [f"{name} is not covered by any module in config/modules.json"
-                 for name in modmap.uncovered(root, families, generated, index)]
+                 for name in modmap.uncovered(root, families, generated, inventory)]
     return failures
 
 
@@ -166,19 +165,22 @@ def check(root):
     failures = check_cards(root, families, current)
     if any("card file is missing" in failure for failure in failures):
         raise ValueError("\n".join(failures))
-    families, generated = outputs(root)
-    index = client_index(root)
+    inventory = source.files(root)
+    families, generated = outputs(root, inventory)
     failures += check_versions(root, generated, current)
     failures += check_review_contract(root, families, generated)
-    failures += check_generated(root, generated, index)
+    failures += check_generated(root, generated)
     failures += plugin.problems(root, families, generated)
     for host in HOSTS:
         failures += host.problems(root, families, generated)
-    owned = modmap.covered_paths(root, families, generated)
-    failures += check_links(root, owned, index)
-    failures += check_navigation(root, families, generated, index)
-    failures += check_archives(root, owned, index)
+    failures += check_links(root, inventory)
+    failures += check_navigation(root, families, generated, inventory)
+    failures += check_archives(root, inventory)
     failures += evals.problems(root, families)[1]
+    try:
+        evals.heldout(root, families)
+    except (ValueError, OSError) as error:
+        failures.append(str(error))
     try:
         bundle.members(root, families, generated)
     except OSError as error:

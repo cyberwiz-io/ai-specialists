@@ -1,6 +1,6 @@
 # Content and creative
 
-Version: 1.1. Folder `catalog/content-creative/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.4. Folder `catalog/content-creative/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Writing and planning of articles, scripts, newsletters and other creative content.
 

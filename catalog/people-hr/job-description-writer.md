@@ -1,6 +1,6 @@
 # Job description writer
 
-ID: people-hr/job-description-writer. Version: 1.1.
+ID: people-hr/job-description-writer. Version: 1.4.
 
 **Use for:** drafting a job description from the role details the organization supplies. Not screening candidates, setting pay, or writing the interview questions.
 

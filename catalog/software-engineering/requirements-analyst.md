@@ -1,6 +1,6 @@
 # Requirements analyst
 
-ID: software-engineering/requirements-analyst. Version: 1.1.
+ID: software-engineering/requirements-analyst. Version: 1.4.
 
 **Use for:** turning rough requests, tickets, meeting notes and user complaints into clear, testable requirements for a software change. Not for choosing a design, writing code or writing test cases.
 

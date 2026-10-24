@@ -1,6 +1,6 @@
 # Software architect
 
-ID: software-engineering/software-architect. Version: 1.1.
+ID: software-engineering/software-architect. Version: 1.4.
 
 **Use for:** comparing design options for a system or a significant change and recording a recommended direction. Not for file-by-file change steps, interface details or reviewing finished code.
 

@@ -32,7 +32,7 @@ class PluginTests(FixtureCase):
             role = roles.get(name) or self.roles()["orchestration/cross-family-reviewer"]
             self.assertEqual(front["name"] + ".md", name.rsplit("/", 1)[-1])
             self.assertRegex(front["name"], NAME)
-            self.assertEqual(front["tools"], adapter.COMMAND_TOOLS if role["commands"] else "Read, Grep, Glob", name)
+            self.assertEqual(front["tools"], "Read, Grep, Glob", name)
             self.assertNotIn("Agent", front["tools"].split(", "))
             self.assertEqual(front["disallowedTools"], "Agent", name)
             self.assertEqual(front["model"], role["model"], name)
@@ -64,26 +64,16 @@ class PluginTests(FixtureCase):
             if role["sensitive"]:
                 self.assertNotEqual(role["model"], "haiku", role["id"])
 
-    def test_only_code_roles_run_commands_and_only_from_the_allowlist(self):
-        runners = {role_id for role_id, role in self.roles().items() if role["commands"]}
-        self.assertEqual(runners, {"software-engineering/code-reviewer", "software-engineering/debugging-analyst",
-                                   "software-engineering/test-designer", "security/secure-code-reviewer"})
-        for pattern in adapter.COMMAND_PATTERNS:
-            self.assertRegex(pattern, r"^[a-z0-9 -]+:\*$|^python3 -m [a-z]+:\*$")
-        tools = adapter.COMMAND_TOOLS.split(", ")
-        self.assertEqual([tool for tool in tools if tool.startswith("Bash") and not tool.endswith(":*)")], [])
-        self.assertFalse({"Edit", "Write", "WebFetch", "Bash", "Agent"} & set(tools))
-
     def test_bad_manifest_values_fail(self):
-        for old, new, message in (('"commands": true', '"commands": "yes"', "commands must be true or false"),
+        for old, new, message in (('"model": "opus"', '"model": "opus", "commands": true', "unknown key commands"),
                                   ('"model": "opus"', '"model": "gpt"', "model must be one of"),
                                   ('"model": "opus"', '"model": "opus", "effort": "huge"', "effort must be one of"),
                                   ('"model": "opus"', '"model": "opus", "prefix": "core"', "unknown key prefix")):
-            original = (self.root / "catalog/families.json").read_text()
+            original = (self.root / "catalog/families.json").read_text(encoding="utf-8")
             self.edit("catalog/families.json", lambda text: text.replace(old, new, 1))
             with self.assertRaisesRegex(ValueError, message):
                 manifest.load(self.root)
-            (self.root / "catalog/families.json").write_text(original)
+            (self.root / "catalog/families.json").write_text(original, encoding="utf-8")
 
     def test_agent_body_ends_with_the_card(self):
         files = self.agents()
@@ -113,7 +103,7 @@ class PluginTests(FixtureCase):
                 self.assertIn(f"`{adapter.agent_name(role)}`", body)
                 card = (self.root / role["path"]).read_bytes()
                 self.assertEqual((lead.parent / "references" / f"{role['slug']}.md").read_bytes(), card)
-                front, _ = split((base / "skills" / skills.role_name(role) / "SKILL.md").read_text())
+                front, _ = split((base / "skills" / skills.role_name(role) / "SKILL.md").read_text(encoding="utf-8"))
                 self.assertEqual(front["disable-model-invocation"], "true")
             self.assertTrue((lead.parent / "references" / "cross-family-reviewer.md").is_file())
 
@@ -123,13 +113,13 @@ class PluginTests(FixtureCase):
             self.assertTrue((folder / name).is_file(), name)
 
     def test_marketplace_lists_every_family_plugin_and_the_bundle(self):
-        market = json.loads((self.root / config.MARKETPLACE).read_text())
+        market = json.loads((self.root / config.MARKETPLACE).read_text(encoding="utf-8"))
         families = manifest.load(self.root)
         self.assertEqual([entry["name"] for entry in market["plugins"]], [f["id"] for f in families] + [plugin.BUNDLE])
         for entry in market["plugins"][:-1]:
             self.assertEqual(entry["source"], "./plugins/" + entry["name"])
             manifest_file = self.root / "plugins" / entry["name"] / ".claude-plugin" / "plugin.json"
-            self.assertEqual(json.loads(manifest_file.read_text())["name"], entry["name"])
+            self.assertEqual(json.loads(manifest_file.read_text(encoding="utf-8"))["name"], entry["name"])
             self.assertRegex(entry["version"], r"^\d+\.\d+\.\d+$")
         bundle = market["plugins"][-1]
         self.assertEqual((bundle["source"], bundle["strict"]), ("./", False))
@@ -193,7 +183,7 @@ class PluginTests(FixtureCase):
                   self.root / config.ADAPTERS_DIR / "codex" / "agents" / "ghost.toml"]
         for ghost in ghosts:
             ghost.parent.mkdir(parents=True, exist_ok=True)
-            ghost.write_text("x")
+            ghost.write_text("x", encoding="utf-8")
         self.assertFails("ghost-role.md: stale generated file")
         self.assertFails("ghost-skill/SKILL.md: stale generated file")
         self.assertFails("ghost.toml: stale generated file")
@@ -243,3 +233,16 @@ class PluginTests(FixtureCase):
         self.assertIn("finance-lead/SKILL.md", names)
         self.assertTrue(all(name.startswith("finance-lead/") for name in names))
         self.assertEqual(len([n for n in names if "/references/" in n]), 9)
+
+
+class ReleaseWorkerTests(FixtureCase):
+    agents = PluginTests.agents
+    def test_all_workers_have_exact_inspection_tools(self):
+        for name, text in self.agents().items():
+            self.assertEqual(split(text)[0]["tools"], "Read, Grep, Glob", name)
+
+    def test_worker_checker_rejects_any_extra_tool(self):
+        name, text = next(iter(self.agents().items()))
+        for tool in ("Bash(git status:*)", "Skill", "mcp__example__read", "NotebookEdit"):
+            changed = text.replace("tools: Read, Grep, Glob", "tools: Read, Grep, Glob, " + tool)
+            self.assertTrue(plugin.agent_problems(name, changed), tool)

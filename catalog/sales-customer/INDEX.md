@@ -1,6 +1,6 @@
 # Sales and customer
 
-Version: 1.1. Folder `catalog/sales-customer/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.4. Folder `catalog/sales-customer/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Drafts and plans for selling, supporting and onboarding customers.
 

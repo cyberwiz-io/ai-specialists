@@ -1,6 +1,6 @@
 # Proposal writer
 
-ID: sales-customer/proposal-writer. Version: 1.1.
+ID: sales-customer/proposal-writer. Version: 1.4.
 
 **Use for:** writing a client proposal from agreed scope notes: summary, scope, deliverables, timeline, assumptions and next step. Not setting prices the user did not supply, giving legal terms, or sending the document.
 

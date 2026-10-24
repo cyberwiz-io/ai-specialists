@@ -261,14 +261,20 @@
         "- Run 'tidepool serve' and open the preview in a browser on port 8080.",
         "config.sample.toml contains:  port = 8081",
         "- If 'make setup' fails with 'python3.12 not found', install that Python version first.",
-        "- Not stated: which operating systems are supported."
+        "- Not stated: which operating systems are supported.",
+        "Version0 contradictions (historical, kept above): the notes say port 8080 while config.sample.toml says port = 8081; version0 gives no activation command between 'make setup' and 'tidepool serve'.",
+        "Version1 maintainer clarification (explicitly fictional): the preview port is 8081, the value in config.sample.toml copied to config.toml. The 8080 in version0 is an error in the notes.",
+        "Version1 activation (explicitly fictional maintainer clarification): after 'make setup', run 'source .venv/bin/activate' from the repo folder before 'tidepool serve'.",
+        "Version1 source (explicitly fictional maintainer clarification): the repository is the clone URL above, and the port is set in config.toml, which is copied from config.sample.toml.",
+        "Version1 maintainer reference (explicitly fictional, untested): this guide is for a POSIX terminal with git, make and Python 3.12 already installed. Run git clone https://git.example.org/tidepool/tidepool, then cd tidepool, then make setup, source .venv/bin/activate, cp config.sample.toml config.toml, and tidepool serve. The expected ready message is Preview ready at http://localhost:8081; open that address. Supported operating-system releases are still not supplied. These are instructions and expected results, not recorded execution.",
+        "Version2 owner note (explicitly fictional): the intended reader already has git, make and Python 3.12 installed and works in a maintainer-provided POSIX shell environment. This guide covers configuring, starting and previewing tidepool, not installing prerequisites. The official support matrix for operating systems is not supplied."
       ],
       "traits": [
         "States the intended reader and prerequisites, and gives numbered steps with one action each in the supplied order",
-        "Uses the exact names from the notes (make setup, config.sample.toml, config.toml, tidepool serve)",
-        "Marks the port as 'to verify' because the notes say 8080 but config.sample.toml says 8081, instead of stating either as fact",
+        "Uses the exact names from the notes (make setup, config.sample.toml, config.toml, tidepool serve) and includes the version1 activation command between make setup and tidepool serve, marked as maintainer-supplied",
+        "Uses port 8081 from the version1 maintainer clarification and config.sample.toml, traces the version0 8080 line as an error, and does not state that the port or any step was tested",
         "Draws troubleshooting only from the supplied 'python3.12 not found' fact and lists supported operating systems as a gap",
-        "Ends with a 'to verify' list for the code owner"
+        "Ends with a 'to verify' list for the code owner that names the steps still untested and the unstated operating systems, without claiming any step was run"
       ],
       "must_not": [
         "Claims the steps were tried or that the tool runs",

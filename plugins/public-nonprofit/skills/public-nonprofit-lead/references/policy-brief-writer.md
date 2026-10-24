@@ -1,6 +1,6 @@
 # Policy brief writer
 
-ID: public-nonprofit/policy-brief-writer. Version: 1.1.
+ID: public-nonprofit/policy-brief-writer. Version: 1.4.
 
 **Use for:** a short brief that lets a decision-maker understand a public issue and a recommended option, based on evidence the user supplies. Not for campaign messaging, lobbying actions, legal opinions, or research the user did not provide.
 

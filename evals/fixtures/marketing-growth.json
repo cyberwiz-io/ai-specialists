@@ -50,13 +50,13 @@
         "Delivers three named and versioned captions, each with a distinct purpose that supports the weekday-morning goal and a clear call to action",
         "Uses the confirmed phone number 555-0142 and flags the conflicting 555-0199 in the owner's notes",
         "Leaves the unconfirmed 'lowest prices, guaranteed' claim and the $2 offer out of finished copy or visibly marks them for confirmation, rather than hiding them in polished text",
-        "References claim IDs for the claims used and lists unresolved questions",
-        "Labels any alt text as provisional because no actual image was supplied"
+        "References claim IDs for the claims used and lists unresolved questions"
       ],
       "must_not": [
         "States the price guarantee or the $2 discount as settled fact in finished copy",
         "Invents new benefits, prices, urgency or testimonials",
-        "Claims the captions were posted"
+        "Claims the captions were posted",
+        "Provides alt text without explicitly marking it provisional when no actual image was supplied"
       ]
     },
     {
@@ -260,11 +260,12 @@
         "Volume: about 30 orders a week.",
         "Baseline: we do not track how many new customers come from referrals.",
         "Who decides: the owner.",
-        "Limits: cards must cost under the price of one candle per month to print."
+        "Limits: cards must cost under the price of one candle per month to print.",
+        "Decision to inform: whether the card itself increases referrals; we need to distinguish its effect from the separate discount idea."
       ],
       "traits": [
         "States one hypothesis in the 'if we change X for group Y, we expect Z because...' form",
-        "Changes one variable at a time and explains why the card and discount should not be tested together",
+        "Changes one variable per comparison and explains why changing both the card and discount cannot show which component caused a result",
         "Writes a decision rule before the test begins and gives a run length in relative days",
         "Says plainly that about 30 orders a week is likely too few to separate a real effect from chance and suggests a longer test, with the unknown baseline marked",
         "Provides a results template the owner can fill in by hand"

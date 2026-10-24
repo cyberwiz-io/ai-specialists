@@ -1,6 +1,6 @@
 # Data and research
 
-Version: 1.1. Folder `catalog/data-research/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.4. Folder `catalog/data-research/`. 8 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Planning and reviewing research, surveys and data analysis from supplied sources and data.
 

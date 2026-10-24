@@ -1,6 +1,6 @@
 # Product manager
 
-ID: product-design/product-manager. Version: 1.1.
+ID: product-design/product-manager. Version: 1.4.
 
 **Use for:** defining a product or feature as a one-page brief a team can build from: the problem, the users and what success means. Not for sequencing many initiatives over time, running research or designing screens.
 

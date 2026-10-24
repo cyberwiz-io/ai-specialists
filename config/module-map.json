@@ -47,8 +47,8 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "d73339f3e27ce99261ac7083eb4bed2d5246cd3f749eaa4aa8e97b628c056279",
-      "files": 20,
+      "digest": "c3ecf06dd8c0649e8a185705df049039aab4fff88e9c4ff366620c2985321d8d",
+      "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
       "interfaces": [
@@ -101,7 +101,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "58efa1224633f6a046fdd26609fd2cb9c46e340b27266aa3e4fdea945340a1fe",
+      "digest": "b5f178f7f9ba4845f38720618971de22f10de7b664c354ebb9d0b51b87a381a4",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -139,12 +139,13 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "84e89e3d7cb6d178c9d08ca699911c887a9b89038881af48d708f0479e574bdd",
-      "files": 42,
+      "digest": "8da0fa5f8007e6d879563728b43f753fcd269b08e22eed6ef3bb0de7796fe830",
+      "files": 53,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
       "interfaces": [
-        "scripts/pack.py"
+        "scripts/pack.py",
+        "scripts/run_tests.py"
       ],
       "invariants": [
         "Pack tooling uses the standard library; separate engineering-policy lint requires pinned PyYAML. Every check has success and failure tests."
@@ -157,8 +158,12 @@
         ".github/workflows/*.yml",
         "CLAUDE.md",
         "config/modules.json",
+        "config/requirements.txt",
         "scripts/pack.py",
         "scripts/packlib/*.py",
+        "scripts/release_gate.py",
+        "scripts/run_tests.py",
+        "scripts/verify_release.py",
         "tests/*.py"
       ],
       "purpose": "Build, check and search tooling, Claude Code maintainer commands and hook, and their failure-path tests."
@@ -188,8 +193,8 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "9f9fe0f05daa442921eb4e313f6c12e7312b16dd2675f88b20f6fce87d0ab411",
-      "files": 36,
+      "digest": "a2b1665e70d73cdee63be660470ebce26fb0f9f0665a00fc8db132d3e18b7997",
+      "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
       "interfaces": [
@@ -205,10 +210,14 @@
         ".claude/skills/card-evals/SKILL.md",
         "evals/*.md",
         "evals/baseline.json",
+        "evals/calibration/*.json",
         "evals/fixtures/*.json",
+        "evals/heldout/*.json",
         "evals/plugin/*.json",
         "evals/reports/*.md",
-        "scripts/evals.py"
+        "scripts/evals.py",
+        "scripts/evals_headless.sh",
+        "scripts/evals_runner.py"
       ],
       "purpose": "Fixture tasks and the Claude Code harness that runs each card in fresh subagents and grades it against its Acceptance line."
     },
@@ -235,7 +244,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "eb449720f75dffea4f208488c4212aaf6638b80c1393f28d5b998ba11d5c3962",
+      "digest": "d701d77c857da2e9bdf1984ec3f25567f048669d1c0350186d45aac93efe3bef",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -244,7 +253,7 @@
         "plugins/*/skills/*/SKILL.md"
       ],
       "invariants": [
-        "Generated from the cards and never edited by hand; worker subagents are read-only, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
+        "Generated from the cards and never edited by hand; worker subagents have only Read, Grep and Glob, never have the Agent tool, and only leads start subagents; host status stays honest until eval evidence exists."
       ],
       "paths": [
         ".claude-plugin/marketplace.json",
@@ -282,7 +291,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "4b5fcadb0229e3f4d67c3f9cd45e538e453ad92133a2841014b77a27de826bfd",
+      "digest": "6b6b2e36f64c4b5737131fd72c336928a4f325e18a87fcd9e35c0e243f3e9f51",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -321,7 +330,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "ed71c91abe6ba58d0e7cc1474df0cd460c826814cacfc930536faa9d93b2ca80",
+      "digest": "45018a4d0bc3d17ac6c7436801f0832a4bacb48c86a61ff33d45c3082ccc501e",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -369,7 +378,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "a43891bb843955ecf82da2712fe297352f15cc58faad0e97132f87f77780c86c",
+      "digest": "3afd208fc86b63b66644d731d109cad2404c061449c287d048a0c39af92f9784",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -406,7 +415,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "6f088643e9145aedfeba758324bb4063dcc6a7c332bcd29aaa59d4dd31b9ed8b",
+      "digest": "fade6d17246613181c7b4b26875b34ae95399f29a8ed8ea5c0e275d7e9674a49",
       "files": 6,
       "guide": "catalog/it-operations/INDEX.md",
       "id": "family-it-operations",
@@ -443,7 +452,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "34b92617c5071581bf33fe50516b507000b888c8bd5ff6f4822c783ebbecbad3",
+      "digest": "bc5a6e57370958b0cfc63794689e25738b869e2433c814b48d32269e624050be",
       "files": 12,
       "guide": "catalog/software-engineering/INDEX.md",
       "id": "family-software-engineering",
@@ -480,7 +489,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "251842f279719e96991dbe814fe6261bab40ccd44f1fbee8cdd57cd1dcf093b0",
+      "digest": "14a3b4a771c3b6957194f6ea79ad96049be0e53b57b926fc673c63b090d4f577",
       "files": 4,
       "guide": "catalog/ai-ml/INDEX.md",
       "id": "family-ai-ml",
@@ -517,7 +526,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "64bb9425162cfcf75d74a17cc0bc3991a54775307c144c491f2aa68385c0ff78",
+      "digest": "8401b024eed57f6df3383aa17f37620676d17dc11ec8c77ea91a2e846b87a3b8",
       "files": 8,
       "guide": "catalog/product-design/INDEX.md",
       "id": "family-product-design",
@@ -554,7 +563,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "4e8322181dc5e4e0ce2fb1e0e14f1ffb6806a3884cf82ba03e51a581f29c7fd6",
+      "digest": "645773f12a5bf6c4ce82b255bc48376fac0b78c8108b9efc73e0e306858904d2",
       "files": 9,
       "guide": "catalog/content-creative/INDEX.md",
       "id": "family-content-creative",
@@ -591,7 +600,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "de2f86b8b9b960852412d7694e64a16cd39f7e15b4acdd9f920b445e0f2c6d5d",
+      "digest": "f5d9b788be8a932cd1dc0bee088868af5397bbdcdab65d448af8eb7cd597f2dc",
       "files": 11,
       "guide": "catalog/marketing-growth/INDEX.md",
       "id": "family-marketing-growth",
@@ -628,7 +637,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "a5fa4daec9a9ca23a635ecd029306efbf477607c5d9b08cee82cf7229ecb8a85",
+      "digest": "343f825e788273441907dcb2b0fbd7bc8237b88a633dc79872235087e992d650",
       "files": 9,
       "guide": "catalog/sales-customer/INDEX.md",
       "id": "family-sales-customer",
@@ -665,7 +674,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "6159a3a0089b0b569f1c03f5ee1ae41b47e68fb0e9a56dd36058b361b2c38214",
+      "digest": "37ac08500befbe6f8179b40ab702c80b14bdf75119f300db370e227fbccd5e4c",
       "files": 9,
       "guide": "catalog/business-operations/INDEX.md",
       "id": "family-business-operations",
@@ -702,7 +711,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "b1483261211b0e2d3dd0eeb9f8417918a4efe1d1e603c64bed13cf4506c9e248",
+      "digest": "9b61e12d254b7c8a05603a0da4f8b4c48d57a97760f3377d3a7231199f9c52c6",
       "files": 9,
       "guide": "catalog/finance/INDEX.md",
       "id": "family-finance",
@@ -739,7 +748,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "60b868b32f5d3d52714004e0138f04e5fdb87076c4a63bb21a4ce77720c0158d",
+      "digest": "524fdd93dd3e82a9f3cb8bd0fc71df015fb3f9e1ddfccf4d2632b4f339bd6a70",
       "files": 9,
       "guide": "catalog/data-research/INDEX.md",
       "id": "family-data-research",
@@ -776,7 +785,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "d09dfb615dbc9283a88bbc0f74f996115b92d623692ca47b4603705668d4c680",
+      "digest": "501dd897d35ed26eff08e6013e84f79397f3aaa777a45fe354a3546f7326bd22",
       "files": 6,
       "guide": "catalog/people-hr/INDEX.md",
       "id": "family-people-hr",
@@ -813,7 +822,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "452c966c084bf767642e4e1bdc54eeca0eae0fab5ec17dc6c36b2bf59e393c48",
+      "digest": "b77365adfe6ce4b6e47de0d49ba518f93cb9cd5c7af525f6bd1da80771d2a5d5",
       "files": 9,
       "guide": "catalog/legal-compliance/INDEX.md",
       "id": "family-legal-compliance",
@@ -850,7 +859,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "6e82596f69a61ddb60dfbdf8281e37e15ca754bc323d3ac93961ce874028111a",
+      "digest": "04964ce5f4232502769de29cb737941a800450fd77c452aa77dc712f21e814df",
       "files": 7,
       "guide": "catalog/education-training/INDEX.md",
       "id": "family-education-training",
@@ -887,7 +896,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "d634b9845a57040aa8acca0d5ba44c4a80eb0dd3800744bbe2040dc0f9f2b41e",
+      "digest": "30d86ae10071318a946912a16aaf62ddbe2bc2192cc63e63aefd92dbfd19ab0c",
       "files": 6,
       "guide": "catalog/public-nonprofit/INDEX.md",
       "id": "family-public-nonprofit",
@@ -924,7 +933,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "d9f30b4bd2c961794fbdf3666a015cda7da7e003033e04f4548165360c0cd44e",
+      "digest": "614bc25766113b63aae5611609e4d82196975c55cd0ced1df4c30f4d83d48aa0",
       "files": 6,
       "guide": "catalog/personal-career/INDEX.md",
       "id": "family-personal-career",
@@ -961,7 +970,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "9d509b9b4b385fd62a31bed73dc6aac4cd565875e08543d49a7ae5683a28163e",
+      "digest": "d85bd5a48a289359ffa67e20558ca12ff0e7214fa21882a858487fb1180454f5",
       "files": 6,
       "guide": "catalog/orchestration/INDEX.md",
       "id": "family-orchestration",
@@ -978,5 +987,5 @@
     }
   ],
   "schema": 2,
-  "version": "1.1"
+  "version": "1.4"
 }

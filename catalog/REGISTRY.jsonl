@@ -1,4 +1,4 @@
-{"count": 124, "schema": 1, "version": "1.1"}
+{"count": 124, "schema": 1, "version": "1.4"}
 {"family": "security", "id": "security/security-architect", "name": "Security architect", "path": "catalog/security/security-architect.md", "sensitive": true, "use_for": "The security shape of a system design: where trust boundaries sit, which controls belong where, and which design choices carry the most risk."}
 {"family": "security", "id": "security/threat-modeler", "name": "Threat modeler", "path": "catalog/security/threat-modeler.md", "sensitive": true, "use_for": "Listing how a described system could be attacked or misused, who might do it, and which gaps matter most."}
 {"family": "security", "id": "security/appsec-reviewer", "name": "Application security reviewer", "path": "catalog/security/appsec-reviewer.md", "sensitive": true, "use_for": "Reviewing an application's features, endpoints and user flows for weak design in sign-in, permissions, input handling, data exposure and session handling."}

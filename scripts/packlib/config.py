@@ -2,44 +2,9 @@
 """Paths, limits and safe file helpers shared by the pack tools."""
 from pathlib import Path
 import re
-import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
 SKIP_DIRS = {".git", "work", ".venv", "profiles", "campaigns", "__pycache__"}
-INSTALLED_CLIENT_PREFIXES = ((".claude", "skills"), (".agents", "skills"), (".codex",))
-
-
-def is_installed_client_path(relative):
-    return any(relative.parts[:len(prefix)] == prefix for prefix in INSTALLED_CLIENT_PREFIXES)
-
-
-def client_index(root):
-    """Lazy tracked-client snapshot, shared within one build or check."""
-    tracked = None
-
-    def get():
-        nonlocal tracked
-        if tracked is None:
-            try:
-                raw = subprocess.check_output(
-                    ["git", "-C", str(root), "ls-files", "-z", "--", ".claude/skills", ".agents/skills", ".codex"],
-                    stderr=subprocess.DEVNULL, timeout=5)
-            except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
-                raise ValueError("Cannot classify installed client files without a Git index") from error
-            tracked = frozenset(part.decode("utf-8") for part in raw.split(b"\0") if part)
-        return tracked
-
-    return get
-
-
-def is_untracked_client_install(root, relative, owned, get_tracked=None):
-    """Ignore only undeclared local installs; a tracked client file remains source."""
-    if not is_installed_client_path(relative) or relative.as_posix() in owned:
-        return False
-    name = relative.as_posix()
-    tracked = (get_tracked or client_index(root))()
-    return not any(name == part or name.startswith(part + "/") for part in tracked)
-
 
 MANIFEST = "catalog/families.json"
 REGISTRY = "catalog/REGISTRY.jsonl"
@@ -82,7 +47,10 @@ ARCHIVE_PREFIX = "ai-specialists-"
 
 def safe_path(root, name):
     path = root / name
-    if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):
+    relative = Path(name)
+    if relative.is_absolute() or ".." in relative.parts or any(
+            (root / Path(*relative.parts[:i])).is_symlink() for i in range(1, len(relative.parts) + 1)) \
+            or not path.resolve().is_relative_to(root.resolve()):
         raise ValueError(f"Unsafe source path: {name}")
     return path
 

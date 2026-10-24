@@ -90,6 +90,18 @@ class HostTests(FixtureCase):
     def outputs(self):
         return build.outputs(self.root)
 
+    def test_delivery_check_reaches_pasted_packs_solo_skills_and_workers(self):
+        families, generated = self.outputs()
+        for family in families:
+            for part in family['packs']:
+                self.assertIn(skills.FACT_PREFLIGHT.encode(), generated[f"dist/packs/{part['id']}.md"])
+            for role in family['roles']:
+                name = skills.role_name(role)
+                paths = (f'skills/{name}/SKILL.md', adapter.agent_path(role),
+                         codex.agent_path(name), copilot.agent_path(name))
+                for path in paths:
+                    self.assertIn(skills.FACT_PREFLIGHT.encode(), generated[path], path)
+
     def test_every_host_adapter_passes_its_own_checks(self):
         families, generated = self.outputs()
         for host in build.HOSTS:
@@ -183,9 +195,9 @@ class StatsAndEvalTests(FixtureCase):
     def test_security_plugin_eval_suite_has_tasks_a_boundary_and_a_team_case(self):
         cases = sorted((self.root / "plugins/security/evals").glob("*/case.yaml"))
         self.assertEqual(len(cases), 7)
-        kinds = [json.loads(path.read_text())["tags"][0] for path in cases]
+        kinds = [json.loads(path.read_text(encoding="utf-8"))["tags"][0] for path in cases]
         self.assertEqual(sorted(kinds), ["boundary"] + ["task"] * 5 + ["team"])
-        team = json.loads((self.root / "plugins/security/evals/tutoring-app-launch/case.yaml").read_text())
+        team = json.loads((self.root / "plugins/security/evals/tutoring-app-launch/case.yaml").read_text(encoding="utf-8"))
         self.assertIn("tool_used", [grader["type"] for grader in team["graders"]])
 
     def test_eval_suite_naming_an_unknown_fixture_fails_build(self):
@@ -193,3 +205,27 @@ class StatsAndEvalTests(FixtureCase):
             "security/threat-modeler/library-lending-app", "security/threat-modeler/no-such-fixture"))
         with self.assertRaisesRegex(ValueError, "no-such-fixture is not a security fixture"):
             plugin_evals.outputs(self.root, manifest.load(self.root))
+
+
+class ReleaseCodexTests(FixtureCase):
+    def test_workers_reduce_capabilities_without_overriding_user_model(self):
+        families, generated = build.outputs(self.root)
+        for name, data in generated.items():
+            if name.startswith("adapters/codex/agents/"):
+                self.assertNotIn(b"model_reasoning_effort =", data, name)
+                self.assertNotIn(b"model =", data, name)
+                if not name.endswith("-lead.toml") and not name.endswith("/specialists.toml"):
+                    for feature in ("shell_tool", "apps", "plugins", "memories", "request_permissions_tool"):
+                        self.assertIn((feature + " = false").encode(), data, name)
+
+    def test_worker_checker_rejects_reenabled_capabilities(self):
+        families, generated = build.outputs(self.root)
+        name = "adapters/codex/agents/security-threat-modeler.toml"
+        for feature in codex.WORKER_FEATURES:
+            changed = generated[name].replace((feature + " = false").encode(), (feature + " = true").encode())
+            self.assertTrue(codex._agent_problems(name, changed), feature)
+
+    def test_leads_retain_plugin_discovery(self):
+        families, generated = build.outputs(self.root)
+        data = generated["adapters/codex/agents/security-lead.toml"]
+        self.assertNotIn(b"plugins = false", data)

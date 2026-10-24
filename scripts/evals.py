@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Prepare, track and report card evaluation runs. Claude Code runs the subagents; see the card-evals skill."""
 import argparse
+import hashlib
 from datetime import date
 from pathlib import Path
 import subprocess
@@ -8,16 +9,17 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from packlib import check as checker, config, evals  # noqa: E402
+from evals_runner import EFFORTS  # noqa: E402
 
-DEFAULT_TOOLS = ("Claude Code; each fixture ran in a fresh subject subagent and was graded by a separate fresh "
-                 "grader subagent, both limited to Read and Write for the harness files")
+DEFAULT_TOOLS = ("Text-only harness. Native runner requests no tools; manual subagent route uses Read and Write "
+                 "for harness files only. See execution receipts for the route actually run.")
 
 
 def commit(root):
     """Current commit, marked when the working tree has uncommitted changes."""
     try:
         head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True)
-        dirty = subprocess.run(["git", "status", "--porcelain", "--", "catalog", "pack", "evals", "dist"],
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", "catalog", "pack", "evals", "dist", "scripts", ".claude/agents"],
                                cwd=root, capture_output=True, text=True, check=True)
     except (OSError, subprocess.CalledProcessError):
         return "unknown (not a Git checkout)"
@@ -26,9 +28,17 @@ def commit(root):
 
 def prepare(root, args, today=None):
     families, generated = checker.check(root)
-    fixtures = evals.select(evals.load(root, families), args.family, args.role, args.kind)
+    fixtures = evals.load(root, families)
+    if args.include_heldout:
+        fixtures += evals.heldout(root, families)
+    fixtures = evals.select(fixtures, args.family, args.role, args.kind)
     meta = {"version": config.version(root), "commit": commit(root), "host": args.host, "tools": args.tools,
             "model": args.model, "grader": args.grader or args.model, "date": (today or date.today()).isoformat()}
+    meta["harness_sha256"] = evals.harness_hashes(root)
+    if args.subject_effort is not None:
+        meta['subject_effort'] = args.subject_effort
+    if args.include_heldout:
+        meta["heldout_sha256"] = hashlib.sha256((root / "evals/heldout/release.json").read_bytes()).hexdigest()
     folder = evals.prepare(root, families, generated, fixtures, args.run, meta)
     return folder, len(fixtures)
 
@@ -39,10 +49,13 @@ def main(argv=None, root=None):
     commands = parser.add_subparsers(dest="command", required=True)
     first = commands.add_parser("prepare", help="write prompts for a new run under work/evals/<run>/")
     first.add_argument("--run", required=True, help="new run name, a slug such as 2026-10-17-security")
-    first.add_argument("--host", required=True, help="host that runs the subagents, such as 'Claude Code (cloud)'")
+    first.add_argument("--host", required=True, help="host that runs the subagents, such as 'Claude Code <version> on macOS'")
     first.add_argument("--model", required=True, help="model under test, as the host reports it")
     first.add_argument("--grader", help="grader model, if different from --model")
+    first.add_argument('--subject-effort', choices=EFFORTS,
+                       help='explicit native subject effort; grader keeps its calibrated default')
     first.add_argument("--tools", default=DEFAULT_TOOLS, help="tools available to the subagents")
+    first.add_argument("--include-heldout", action="store_true", help="also include frozen release challenges")
     first.add_argument("--family", help="only this family")
     first.add_argument("--role", help="only this role ID")
     first.add_argument("--kind", choices=evals.KINDS, help="only task or boundary fixtures")

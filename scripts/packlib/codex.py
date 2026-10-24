@@ -24,9 +24,7 @@ BASE = f"{ADAPTERS_DIR}/codex"
 PLUGIN_JSON = f"{BASE}/.codex-plugin/plugin.json"
 MARKETPLACE = ".agents/plugins/marketplace.json"
 NAME = "ai-specialists"
-LEAD_EFFORT = "medium"
-# Codex has no "max" reasoning effort; its highest is "xhigh".
-EFFORT = {"max": "xhigh"}
+WORKER_FEATURES = ("shell_tool", "apps", "plugins", "memories", "request_permissions_tool")
 DESCRIPTION_MAX = 1024
 # Codex plugin directory limit for interface.displayName and interface.shortDescription.
 INTERFACE_MAX = 30
@@ -67,20 +65,21 @@ def toml_multiline(text):
     return f'"""\n{text}{tail}"""'
 
 
-def agent_toml(source, name, description, instructions, effort=None):
+def agent_toml(source, name, description, instructions, worker=False):
     lines = [f"# Generated from {source} by scripts/pack.py build. Do not edit.",
              f"name = {json.dumps(name)}", f"description = {json.dumps(description)}"]
-    if effort:
-        lines.append(f"model_reasoning_effort = {json.dumps(EFFORT.get(effort, effort))}")
     lines.append(f"developer_instructions = {toml_multiline(instructions)}")
-    # Codex cannot limit the shell to an allowlist, so every agent, code roles included, runs without it.
-    lines += ["", "[features]", "shell_tool = false"]
+    lines += ["", "[features]"]
+    lines += [f"{feature} = false" for feature in (WORKER_FEATURES if worker else ("shell_tool",))]
     return ("\n".join(lines) + "\n").encode("utf-8")
 
 
 def role_instructions(family, role, text):
     sensitive = "\n\n" + skills.SENSITIVE if family["sensitive"] else ""
-    return f"{adapter.NOTE}{sensitive}\n\n---\n\n{text}"
+    return (f"{adapter.NOTE}{sensitive}\n\n{skills.FACT_PREFLIGHT}\n\n"
+            "Tool reductions do not create a sandbox. The parent session must supply read-only permissions "
+            "and disable external tools. The prohibition on starting agents is an instruction, not a "
+            "per-worker host restriction.\n\n---\n\n" + text)
 
 
 def agent_path(name):
@@ -95,16 +94,15 @@ def outputs(root, families):
                                    skills.lead_skill(root, family, families)))
         files[agent_path(name)] = agent_toml(
             f"catalog/{family['id']}/", name, skills.lead_description(family),
-            skills.lead_body(root, family, families, references=False), LEAD_EFFORT)
+            skills.lead_body(root, family, families, references=False))
         for role in family["roles"]:
             text = skills.card_text(root, role)
             files[agent_path(skills.role_name(role))] = agent_toml(
                 role["path"], skills.role_name(role), skills.description(role, text),
-                role_instructions(family, role, text), role["effort"])
+                role_instructions(family, role, text), worker=True)
     files[f"{BASE}/skills/{skills.SPECIALISTS}/SKILL.md"] = skills.specialists_skill(root, families)
     files[agent_path(skills.SPECIALISTS)] = agent_toml(
-        "catalog/", skills.SPECIALISTS, skills.SPECIALISTS_DESCRIPTION, skills.specialists_body(root, families),
-        LEAD_EFFORT)
+        "catalog/", skills.SPECIALISTS, skills.SPECIALISTS_DESCRIPTION, skills.specialists_body(root, families))
     return files
 
 
@@ -117,7 +115,7 @@ def _parse(text):
         if sep and re.fullmatch(r"[a-z_]+", key):
             fields[key] = json.loads(value) if value.startswith('"') and not value.startswith('"""') else value
     if "shell_tool = false" in text:
-        fields["features"] = {"shell_tool": False}
+        fields["features"] = {key: False for key in WORKER_FEATURES if f"{key} = false" in text}
     return fields
 
 
@@ -136,10 +134,15 @@ def _agent_problems(path, data):
     if not fields.get("developer_instructions"):
         failures.append(f"{path}: missing developer_instructions")
     tables = [fields] + [value for value in fields.values() if isinstance(value, dict)]
-    if any("sandbox_mode" in table or "model" in table for table in tables):
-        failures.append(f"{path}: must not set model or sandbox_mode")
+    forbidden = {"sandbox_mode", "model", "model_reasoning_effort", "approval_policy", "mcp_servers"}
+    if any(forbidden.intersection(table) for table in tables):
+        failures.append(f"{path}: must not override model, effort or parent permissions")
     if fields.get("features", {}).get("shell_tool") is not False:
         failures.append(f"{path}: every agent needs [features] shell_tool = false")
+    if not stem.endswith("-lead") and stem != skills.SPECIALISTS:
+        for feature in WORKER_FEATURES:
+            if fields.get("features", {}).get(feature) is not False:
+                failures.append(f"{path}: worker needs features.{feature} = false")
     if adapter.COMMAND_NOTE in str(fields.get("developer_instructions", "")):
         failures.append(f"{path}: promises commands that Codex agents cannot run")
     if not text.startswith("# Generated from "):

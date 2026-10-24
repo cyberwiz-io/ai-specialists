@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 """Produce the generated text files: indexes, registry, combined packs and the starter pack."""
 import json
+import posixpath
+import re
+from urllib.parse import urlsplit
 
 from . import cards
 from .config import (PACK_DIR, REGISTRY, STARTER, STARTER_SECTIONS, read, version)
@@ -10,10 +13,21 @@ def _text(root, name, overlay=None):
     return read(root, name, overlay).decode("utf-8").rstrip() + "\n"
 
 
-def _combine(header, root, names, overlay):
+def _combine(header, root, names, overlay, destination):
     text = header
     for name in names:
-        text += f"\n<!-- Source: {name} -->\n" + _text(root, name, overlay)
+        def rebase(match):
+            target = match.group(2)
+            parsed = urlsplit(target)
+            if parsed.scheme or not parsed.path:
+                return match.group(0)
+            path = posixpath.normpath(posixpath.join(posixpath.dirname(name), parsed.path))
+            relative = posixpath.relpath(path, posixpath.dirname(destination))
+            if parsed.fragment:
+                relative += "#" + parsed.fragment
+            return match.group(1) + relative + ")"
+        body = re.sub(r"(!?\[[^\]\n]*\]\()([^)\n]+)\)", rebase, _text(root, name, overlay))
+        text += f"\n<!-- Source: {name} -->\n" + body
     return text.encode("utf-8")
 
 
@@ -21,11 +35,11 @@ def starter(root):
     header = (
         "# Specialist starter pack, combined instructions\n\n"
         f"Version {version(root)}. Use these instructions when the user asks for this pack. "
-        f"First confirm that all {len(STARTER_SECTIONS)} sections are readable. Then start with the "
-        "user's short business description and optional website. Respect higher-priority host "
-        "rules and the materials-only boundary. Separate specialist files are the editable "
-        "sources; this is their combined copy.\n")
-    return _combine(header, root, STARTER_SECTIONS, None)
+        f"Check all {len(STARTER_SECTIONS)} sections are readable; ask for any missing. "
+        "If a task is supplied, begin as the selected card requires. Otherwise, ask for the "
+        "business description and optional website. Host rules and the materials-only boundary apply. "
+        "Edit the separate source files, not this combined copy.\n")
+    return _combine(header, root, STARTER_SECTIONS, None, STARTER)
 
 
 def index(root, family):
@@ -64,11 +78,11 @@ def family_pack(root, family, pack, overlay):
     header = (
         f"# {pack['name']} specialists, combined instructions\n\n"
         f"Version {version(root)}. Use these instructions when {scope}. "
-        f"First confirm that all {len(names)} sections are readable. Then ask for the user's task and "
-        "the material they can supply. Use only the specialists that add a distinct deliverable. "
-        "Respect higher-priority host rules and the materials-only boundary. "
-        f"Separate files in catalog/{family['id']}/ are the editable sources; this is their combined copy.\n")
-    return _combine(header, root, names, overlay)
+        f"Check all {len(names)} sections are readable; ask for any missing. "
+        "If a task is supplied, begin as the selected card requires. Otherwise, ask for the task "
+        "and material. Use only roles with distinct deliverables. Host rules and the materials-only "
+        f"boundary apply. Edit catalog/{family['id']}/ sources, not this combined copy.\n")
+    return _combine(header, root, names, overlay, pack_path(pack))
 
 
 def registry(root, families):

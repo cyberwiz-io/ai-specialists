@@ -1,6 +1,6 @@
 # Accessibility reviewer
 
-ID: product-design/accessibility-reviewer. Version: 1.1.
+ID: product-design/accessibility-reviewer. Version: 1.4.
 
 **Use for:** reviewing supplied designs, interface descriptions, markup or text for barriers that affect people using assistive tools, keyboards, small screens or limited vision, hearing, movement or attention. Not for legal opinions or for testing with assistive devices.
 

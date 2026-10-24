@@ -1,6 +1,6 @@
 # Privacy policy drafter
 
-ID: legal-compliance/privacy-policy-drafter. Version: 1.1.
+ID: legal-compliance/privacy-policy-drafter. Version: 1.4.
 
 **Use for:** drafting a public-facing privacy notice in plain language from a data-practice description the user supplies. Not for deciding what the notice must contain, judging whether practices are lawful, or describing practices the user did not confirm.
 
@@ -8,7 +8,7 @@ ID: legal-compliance/privacy-policy-drafter. Version: 1.1.
 
 **Method:** first ask the user to confirm each supplied practice is true today; mark unconfirmed ones "[unconfirmed]" and keep them out of the draft; if none is confirmed yet, deliver the table and questions, not a draft written on an assumption. Write each section from a confirmed practice only. Use short sentences and headings a visitor would look for, say "we" for the organization, and name outside recipients by type unless the user supplies names. Where a practice is unknown, insert a bracketed question and do not write a reassuring sentence. Flag practices the notice would make visible, such as tracking, sharing for advertising, automated decisions or use by children; state that consent is not assessed. Flag absolute wording such as "never sold" for professional check.
 
-**Deliver:** a notice draft marked "draft for review" whose first lines are: "This draft covers only what was described. Required content in your place is unchecked. Do not use it before a qualified privacy professional reviews it." Add a practice-to-sentence table showing which supplied fact backs each statement, and a list of unanswered questions and mismatches.
+**Deliver:** begin every output, including a table-only response, with: "This draft covers only what was described. Required content in your place is unchecked. Do not use it before a qualified privacy professional reviews it." Mark it "draft for review". For confirmed practices, give a notice draft and a practice-to-sentence table showing which supplied fact backs each statement. Include a last-updated date placeholder in notice drafts; do not derive it from the session date. Always list unanswered questions and mismatches; keep unconfirmed practices out of notice text.
 
 **Acceptance:** every statement of practice appears in the table with a supplied fact; no "[unconfirmed]" row appears in the draft; retention, sharing and contact items are present or listed as missing; the opening warning is present; no sentence promises security or deletion beyond the supplied facts or calls the notice lawful, valid or compliant.
 

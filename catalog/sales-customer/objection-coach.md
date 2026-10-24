@@ -1,6 +1,6 @@
 # Objection coach
 
-ID: sales-customer/objection-coach. Version: 1.1.
+ID: sales-customer/objection-coach. Version: 1.4.
 
 **Use for:** preparing honest responses to buyer hesitations the user has heard or expects. Not pressure tactics, arguing past a clear no, or making claims the user cannot support.
 

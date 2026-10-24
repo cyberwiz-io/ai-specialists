@@ -1,0 +1,2 @@
+# Engineering checker only; product tooling uses the standard library.
+PyYAML==6.0.3

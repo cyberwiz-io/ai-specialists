@@ -16,13 +16,25 @@
         "Once I also had to remove the printer and add it back, at printer address 192.0.2.40. Not sure if that step is needed normally.",
         "Sometimes I turned off the laptop firewall to get it working.",
         "Help route: email itdesk@brambleford.example or call extension 214 between 08:00 and 17:00.",
-        "Staff are not technical and mostly use the laptops for booking and printing receipts."
+        "Staff are not technical and mostly use the laptops for booking and printing receipts.",
+        "VERSION0 SOURCE STATUS (reviewer label on the original notes above, not owner text): the firewall line is SUPERSEDED and unsafe; do not follow it. The remove-and-re-add line is answered in version1 below as a helper-only step. All other version0 lines stand as supplied.",
+        "=== VERSION1: OWNER-SUPPLIED CLARIFICATION (fictional; Brambleford Dental Clinic office IT helper; NOT verified on any real printer or laptop) ===",
+        "V1 screens (owner's description, not checked on a live laptop): to open the print queue, go to Settings, choose Printers and scanners, select FrontDesk-Printer, then choose Open print queue.",
+        "V1 step A: in the print queue, select each stuck job and choose Cancel. Expected: the queue shows no jobs.",
+        "V1 step B: switch the printer off with its power button, wait 10 seconds, then switch it on. Expected: the printer's ready light stops flashing and stays on.",
+        "V1 step C: on the laptop, open Printers and scanners and check FrontDesk-Printer. Expected: it no longer says Offline.",
+        "V1 step D: print one test page. Expected: the page prints and the queue empties.",
+        "V1 helper-only step: removing and re-adding the printer at 192.0.2.40 is for the helper only, not front-desk staff. Owner says it was needed once and is not part of the routine. The helper confirms the address on the printer's own network status page before re-adding. Not tested.",
+        "V1 firewall rule: staff never turn off the laptop firewall. If steps A to D fail, use the help route.",
+        "V1 timing: the problem most often shows after the printer wakes in the morning; steps A to D apply each time. Owner has not measured how often it happens.",
+        "V1 keywords: FrontDesk-Printer, offline, print queue, stuck jobs, ready light.",
+        "Owner operating detail v1 (fictional, untested): to print the test page, open Printers and scanners, select FrontDesk-Printer and choose Print test page. This is a supplied screen description, not a claim that anyone tested it."
       ],
       "traits": [
         "Opens with how to recognise the problem (printer shown as offline, jobs stuck in the queue) and who the article is for",
-        "Uses short numbered steps with one action each and says what the screen or printer should show after key steps, such as the ready light",
-        "Marks the remove-and-re-add printer step as unconfirmed or as a step for the helper rather than presenting it as a routine user step",
-        "Does not tell staff to turn off the laptop firewall and instead points to the help route for that case",
+        "Uses short numbered steps with one action each, taken from the version1 steps A to D, and says what the screen or printer should show after key steps, such as the ready light, citing version1 as the source",
+        "Keeps the remove-and-re-add printer step out of the staff steps and labels it as a helper-only step under version1, not a routine user step",
+        "Does not tell staff to turn off the laptop firewall, points to the help route for that case, and includes a review note that traces each version0 gap (firewall, remove-and-re-add, untested steps) to its version1 answer or to an open item",
         "Gives a what-if-it-did-not-work section and a when-to-ask-for-help section with exactly the supplied email and extension, plus a short keyword list"
       ],
       "must_not": [
@@ -48,14 +60,32 @@
         "4. Forward their email to the manager for 30 days.",
         "5. Collect the laptop and wipe it.",
         "Known issue: last time the folder was deleted before anyone copied the order spreadsheets out of it.",
-        "End state: the person can no longer sign in anywhere and their work files are kept by the manager."
+        "End state: the person can no longer sign in anywhere and their work files are kept by the manager.",
+        "VERSION0 SOURCE STATUS (reviewer label on the original notes above, not owner text): the step order in notes 1 to 5 is SUPERSEDED by the version1 order below. Note 2 (delete folder) and note 5 (wipe laptop) remain destructive and sit behind a stop point. The known issue above is still a live risk until the version1 copy step is done.",
+        "=== VERSION1: OWNER-SUPPLIED CLARIFICATION (fictional; Hartwell Garden Supply, owner Rosalind Okafor; NOT verified in any real email, file share or till system) ===",
+        "V1 order (owner's order replaces the version0 order): 1. On receipt of the leaver notice, confirm the last working day by reply to the manager. Expected: the manager's reply states the date. If there is no reply, ask the owner before continuing.",
+        "V1 2. Before the last working day, set forwarding from the leaver's mailbox to the manager in the shared email system's user settings (owner's description: Users, then the leaver, then Forwarding). Expected: forwarding shows On with the manager's address. Forwarding is set before the account is disabled.",
+        "V1 3. Copy the leaver's file share folder to the manager's own storage area before any deletion. Open the order spreadsheets in the copy and check they open. Expected: the manager confirms by reply email that the copy is complete. This is the step missed last time.",
+        "V1 4. STOP: owner approval. Do not delete the folder or wipe the laptop until Rosalind Okafor approves each one in writing, and only after step 3 is confirmed.",
+        "V1 5. On the last working day, disable the email account (owner's description: Users, then the leaver, then Disable). Expected: the account shows Disabled and forwarding stays On.",
+        "V1 6. Remove the till login on the shop computer. Expected: the leaver's name no longer appears in the till user list.",
+        "V1 7. After owner approval under step 4, delete the file share folder. Expected: the folder is no longer listed. Deletion cannot be undone; the copy from step 3 is the only copy.",
+        "V1 8. Collect the laptop. After owner approval under step 4 and the manager's copy confirmation, wipe it. Expected: the laptop returns to a clean set-up screen. A wipe cannot be undone.",
+        "V1 9. Thirty days after the last working day, turn forwarding Off and tell the manager in writing. Expected: forwarding shows Off.",
+        "V1 rollback (owner's description, not tried): email, set the account back to enabled and turn forwarding Off; expected: the leaver can sign in again. Till login: add the login back. Folder deletion and laptop wipe: no rollback.",
+        "V1 escalation: part-time admin to owner Rosalind Okafor. Copied files and their retention: manager. Last-day confirmation: manager, by email.",
+        "V1 open for owner: how long the manager keeps the copied files is not decided.",
+        "Owner operating reference v1 (fictional, untested): these labels describe our systems. In the file share, select the leaver folder, choose Copy, open the manager's storage area and choose Paste; open each copied order spreadsheet and ask the manager to compare the copied file list with the source before confirming. In the till, open Staff, select the departing login and choose Remove login. A mismatch or missing control means stop and ask Rosalind, not guess.",
+        "Owner operating reference v1 (fictional, untested): email forwarding uses Users > leaver > Forwarding > manager address > Save; disabling uses Users > leaver > Disable > Confirm. Read the resulting forwarding and account status before recording success. The admin uses existing authorized access; no credentials are supplied or requested in this runbook.",
+        "Owner operating reference v1 (fictional, untested): deletion uses the file share's Select folder > Delete > Confirm after the written stop-point approval. Laptop reset is Settings > Recovery > Erase device > Confirm, only after the separate written wipe approval and the manager's complete-copy confirmation. If the labels differ, stop and ask Rosalind. This destructive process is not tested here.",
+        "Owner authorization clarification v1 (fictional): any undo that restores sign-in access also requires Rosalind's separate written authorization first. No admin may automatically re-enable a departed worker. The manager's unresolved retention period must be referred to Rosalind before deleting any required work record; preserve the verified copy while that decision is open."
       ],
       "traits": [
-        "Gives numbered steps that each have an action, an expected result and what to do if the result differs",
-        "Puts a stop-and-ask point before deleting the folder and wiping the laptop, and reorders or adds a step so work files are copied to the manager first, citing the earlier lost spreadsheets",
-        "Notices that forwarding email must be set up before or alongside disabling the account, or flags the ordering as an open question",
-        "Includes a rollback or undo section, or states plainly that deletion and wiping cannot be undone",
-        "Lists unverified steps and open questions for the owner, such as how long files are kept and who confirms the last day"
+        "Gives numbered steps that each have an action, an expected result and what to do if the result differs, taken from the version1 order",
+        "Keeps a stop-and-ask point before deleting the folder and wiping the laptop, keeps the version1 order that copies work files to the manager first, and cites the earlier lost spreadsheets",
+        "Follows the version1 owner order that forwarding is set before the account is disabled, citing version1 rather than leaving the ordering as an open question",
+        "Gives the version1 rollback for each reversible step (re-enable, forwarding Off, add till login back) and states plainly that folder deletion and laptop wiping cannot be undone",
+        "Lists the menu paths and expected results as owner descriptions not checked on a live system, lists open questions for the owner such as how long copied files are kept, and includes a review note tracing each version0 gap to its version1 answer or to an open item"
       ],
       "must_not": [
         "Claims any account was disabled, any folder deleted or any step tested",
@@ -77,14 +107,28 @@
         "Approver: owner, Teodora Lind.",
         "Testing available: one spare staff mailbox.",
         "Past issue: last year a website change broke order confirmations for two days and nobody noticed until customers phoned.",
-        "Must keep working: order confirmation emails and customers being able to reach the shop."
+        "Must keep working: order confirmation emails and customers being able to reach the shop.",
+        "VERSION0 SOURCE STATUS (reviewer label on the original notes above, not owner text): the version0 notes give no stage order, no rollback time and no post-check. Those gaps are answered in version1 below. The past-issue and must-keep-working lines stand as requirements.",
+        "=== VERSION1: OWNER-SUPPLIED CLARIFICATION (fictional; owner Teodora Lind's planning; NOT tested on any real mailbox, shop, payroll or print system; no pilot run) ===",
+        "V1 impact groups: of the 14 staff, the 3 bakery managers use email on phones only, so the phone-only managers need the new address set up on their phones (owner's plan, not tried). Customers: order confirmations are sent from orders@oldmill-bakery.example until stage 1 is complete.",
+        "V1 dependencies: the online shop's order-email settings; the payroll provider's contact address, which the owner has not supplied and must fill in; printed flyers that list the old address, for which the owner will decide between reprint and sticker.",
+        "V1 stage 0 (office admin, prep): create the new-domain addresses on the spare staff mailbox and check that a test email arrives. Check: the test email arrives.",
+        "V1 stage 1 (shop owner): set the new address as the sender of the shop's order emails, keeping the old sender active during the trial. Check: a test order placed on the shop's test setting sends a confirmation to the spare mailbox.",
+        "V1 stage 2 (office admin): move the 14 staff mailboxes to the new domain on the Monday after close, and set up the 3 phone-only managers on their phones the same day. Check: each mailbox sends and receives one test email, and each manager confirms their phone works.",
+        "V1 stage 3 (shop owner): update the payroll contact address and the flyers after stage 2. Check: the payroll provider confirms the new address in writing.",
+        "V1 stage 4 (office admin, monitoring for 7 days): each day, count order confirmations sent against orders placed. Check: the counts match every day. Any gap is a no-go trigger and goes to the owner at once.",
+        "V1 go conditions (owner's planning numbers, untried): the spare mailbox receives the test email, and the test order confirmation arrives within 15 minutes. No-go: any stage check fails, or a test order has no confirmation within 15 minutes. Friday and Saturday are not change days.",
+        "V1 point of no return: when the old-domain staff mailboxes are removed. Owner's choice: keep the old addresses forwarding for 90 days after the switch (planning choice, not tried).",
+        "V1 rollback (owner's planning estimate, untried, no pilot run; estimate source: Teodora Lind): switch the staff mailboxes and the shop sender back to the old domain in about 2 hours. Payroll and flyers are unchanged if rollback happens before stage 3.",
+        "V1 window: the owner suggests Monday after close because Monday is quiet. The owner has not yet approved the date.",
+        "V1 approval: Teodora Lind. The approval line stays blank until she signs."
       ],
       "traits": [
-        "Includes an impact table by group (office staff, phone-only managers, online customers) and lists the shop, payroll contact and flyers as dependencies",
-        "Breaks the change into stages, each with a check and an owner role, including a check that order confirmations still arrive after the switch",
-        "Addresses the past silent failure by adding a post-check or monitoring step for order confirmations rather than assuming they work",
-        "Gives go and no-go conditions, a point of no return and a rollback with an estimated time cost marked as an estimate",
-        "Proposes a window such as a Monday as a suggestion for the owner and leaves the approval line blank for Teodora Lind"
+        "Includes an impact table by group (office staff, phone-only managers, online customers) and lists the shop, payroll contact and flyers as dependencies, with the payroll address marked as still to be supplied by the owner",
+        "Breaks the change into the version1 stages, each with a check and an owner role, including a check that order confirmations still arrive after the switch",
+        "Addresses the past silent failure with the version1 post-check: a daily count of confirmations against orders for 7 days, with any gap as a no-go trigger, rather than assuming confirmations work",
+        "Gives go and no-go conditions, a point of no return and the version1 rollback with its owner planning time estimate, labelled as an untried estimate and not a measured figure",
+        "Proposes Monday after close as a suggestion for the owner, citing the version1 owner note, leaves the approval line blank for Teodora Lind, and includes a review note tracing each version0 gap (no stage order, no rollback time, no post-check) to its version1 answer"
       ],
       "must_not": [
         "Marks the change as approved or fills in the approver's sign-off",

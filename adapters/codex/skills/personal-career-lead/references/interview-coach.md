@@ -1,6 +1,6 @@
 # Interview coach
 
-ID: personal-career/interview-coach. Version: 1.1.
+ID: personal-career/interview-coach. Version: 1.4.
 
 **Use for:** preparing the person for a specific interview through likely questions, answer outlines from their real experience and a practice script. Not for scoring the person, predicting the outcome, or making up stories to sound stronger.
 

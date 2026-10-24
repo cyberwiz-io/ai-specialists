@@ -1,6 +1,6 @@
 # Handbook drafter
 
-ID: people-hr/handbook-drafter. Version: 1.1.
+ID: people-hr/handbook-drafter. Version: 1.4.
 
 **Use for:** drafting employee handbook sections in plain language from the organization's own rules. Not creating new rules, interpreting employment law, or deciding individual cases.
 

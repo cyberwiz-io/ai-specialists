@@ -155,10 +155,11 @@
         "- Loyalty points redesign (team estimate: medium).",
         "- Holiday menu, must be live before 2026-11-20 (fixed external date).",
         "Capacity: one product squad of four people, as stated by the user.",
-        "Ranking criteria the user agreed to: value to the top outcome, effort, risk."
+        "Ranking criteria the user agreed to: value to the top outcome, effort, risk.",
+        "Owner clarification v1 (fictional): outcome sought for loyalty redesign is more repeat orders; outcome sought for the holiday menu is customers being able to choose the seasonal range before the supplied fixed date. These are intended outcomes, with no measured gain or numerical target supplied. Fewer missed deliveries remains the top ranking outcome."
       ],
       "traits": [
-        "Gives a roadmap table with theme, initiative, outcome sought, dependency, near/middle/later band and confidence",
+        "Gives a roadmap table with theme, initiative, outcome sought, dependency, near/middle/later band and confidence, linking each initiative to its supplied intended outcome without inventing measured results",
         "Places address cleanup before route optimization and openly notes the conflict with the owner's wish for route optimization in the first quarter",
         "Marks the missing estimate for address cleanup as unknown or an assumption rather than inventing a figure",
         "Shows the ranking reasoning against the agreed criteria and keeps the holiday menu tied to its fixed date",

@@ -1,6 +1,6 @@
 # Security awareness trainer
 
-ID: security/security-awareness-trainer. Version: 1.1.
+ID: security/security-awareness-trainer. Version: 1.4.
 
 **Use for:** creating short staff learning material on safe working habits, such as spotting suspicious messages, handling data and reporting concerns. Not full course design, policy writing or running tests on staff.
 

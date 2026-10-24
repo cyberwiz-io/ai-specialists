@@ -11,7 +11,7 @@ EFFORTS = ("low", "medium", "high", "xhigh", "max")
 # Default reasoning effort for each model tier; a role may set "effort" to override it. "inherit" leaves it to the host.
 TIER_EFFORT = {"haiku": "low", "sonnet": "medium", "opus": "high", "inherit": None}
 DEFAULT_MODEL = "sonnet"
-ROLE_KEYS = {"slug", "name", "model", "effort", "commands"}
+ROLE_KEYS = {"slug", "name", "model", "effort"}
 
 
 def _require(condition, message):
@@ -50,13 +50,12 @@ def load(root):
             _require(role_model in MODELS, f"{fid}/{slug}: model must be one of {', '.join(MODELS)}")
             effort = role.get("effort", TIER_EFFORT[role_model])
             _require(effort is None or effort in EFFORTS, f"{fid}/{slug}: effort must be one of {', '.join(EFFORTS)}")
-            _require(isinstance(role.get("commands", False), bool), f"{fid}/{slug}: commands must be true or false")
             role_id = f"{fid}/{slug}"
             _require(role_id not in seen_ids, f"duplicate role id {role_id}")
             seen_ids.add(role_id)
             roles.append({"id": role_id, "slug": slug, "name": role["name"], "family": fid,
                           "family_name": family["name"], "sensitive": family["sensitive"],
-                          "model": role_model, "effort": effort, "commands": role.get("commands", False),
+                          "model": role_model, "effort": effort,
                           "path": f"catalog/{fid}/{slug}.md"})
         _require(roles, f"{fid}: no roles")
         packs = _packs(fid, family, roles, seen_packs)

@@ -1,6 +1,6 @@
 # Data analyst
 
-ID: data-research/data-analyst. Version: 1.1.
+ID: data-research/data-analyst. Version: 1.4.
 
 **Use for:** answering a stated question from data the user supplies, with the working shown. Not cleaning planning, dashboard layouts, or reviewing someone else's statistics.
 
