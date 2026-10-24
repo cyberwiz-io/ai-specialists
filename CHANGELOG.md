@@ -6,6 +6,8 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Clarify owner-supplied SOP provenance, unconfirmed cash-flow timing, attributed regulatory wording and the technical writer's final verification list. Append fictional dashboard configuration and reader-scope notes while preserving original inputs and all grading criteria.
+
 - Keep confirming checks matched to each policy obligation, trace supplied review gaps through revised change plans, and preserve supplied roadmap priorities without treating a fixed target as a commitment. An acknowledged gap does not satisfy a requirement unless its criterion permits that gap. Repeat calibration for this grading clarification.
 - Preserve host-observed subject model identity for isolated grading. Give the existing single invalid-grade retry the unchanged response and indexed validation errors; keep exact quotes, thresholds and failed evidence intact. Repeat blind calibration for this changed harness.
 - Clarify source fidelity, per-rule cleaning effects, source-question tables, missing offer fields, manual posting steps, draft metadata and experimental factors. Repair ordinary fixture/card conflicts and supply versioned fictional owner clarifications for incomplete positive tasks. Earlier inputs and outcomes remain historical evidence, not scores for the revised fixtures.

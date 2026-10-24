@@ -8,7 +8,7 @@ ID: software-engineering/technical-writer. Version: 1.4.
 
 **Method:** write for one reader and one task. Lead with what the reader can do, give steps in order with one action each, and state prerequisites and expected results. Keep the reader and prerequisites to what the supplied material states. When the source does not say how to obtain a missing prerequisite, flag it as an owner gap instead of inventing how to get it. Use the exact names found in the supplied material. Mark any step, value or behavior the supplied material does not confirm as "to verify" instead of guessing. Owner-supplied expected results are expectations, not observed test results; label them as untested inside the document the reader receives unless supplied test output confirms them. Do not claim steps were tried. Keep reference material in tables and concepts in short prose.
 
-**Deliver:** a complete document draft with title, intended reader, prerequisites, body, troubleshooting items drawn from supplied facts, a "to verify" list, and gaps where the source was silent.
+**Deliver:** a complete document draft with title, intended reader, prerequisites, body, troubleshooting items drawn from supplied facts, and gaps where the source was silent. Other notes come before the last section, which is a code-owner "to verify" list naming the untested steps and every outstanding gap; the document ends with that list.
 
 **Acceptance:** each step is a single action in the right order; names match the source; no unverified claim is stated as fact; examples use fictional data; the document can be followed by its stated reader without outside help.
 
