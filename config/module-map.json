@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "53d9c4649a2ba7db77405018ebfae35e5bceef91b478687fab03b36c6c502f33",
+      "digest": "e143cefe911e15759a484010fb1577af3b6b4367e636d3df8073746b92043b30",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -193,7 +193,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "e283e96888c96a4d0a48f9c7dd745ed611a37cc45c848e19db51558ef8c32700",
+      "digest": "c2232e00abdc60173c3bcf18d6f9e0149eafaea87412b8ea57e96a2af31a4f03",
       "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
@@ -244,7 +244,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "36a9540f4fc12b31d8835f8026780b4bc42c04d477106839807fd7871eeb684f",
+      "digest": "6086827b0a8d5b0e27a7c65d94fb613ecb5f1364dbc56b0b61252ddd43048077",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -291,7 +291,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "4dc277d35d6da2f8cbddd8c981ae67af0830ff686b7444d21c9f468b527f9887",
+      "digest": "581c80ed7f4dc0a5a248366a5b6aab068fbf561235604632f0319e11536555d3",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -330,7 +330,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "7ec1d6c1e79f7cf945add1b7394b825f0f6d1ab5da234b703ddf125a4ffb18b9",
+      "digest": "42a18ac1ee2207ce8f504716b64e0ead89404c885e49d2f0bcec8d1e90c103fa",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -452,7 +452,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "1a3820dcbbc22844edfb30104bc5ec2e5f9b64182f0b7a7b6c237a60c71053b9",
+      "digest": "bc5a6e57370958b0cfc63794689e25738b869e2433c814b48d32269e624050be",
       "files": 12,
       "guide": "catalog/software-engineering/INDEX.md",
       "id": "family-software-engineering",
@@ -489,7 +489,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "e6a6a1b7eb5252e3b6f39d2a4cba87f45fa30fbb6a6bfc540a8d059fcb6ae735",
+      "digest": "14a3b4a771c3b6957194f6ea79ad96049be0e53b57b926fc673c63b090d4f577",
       "files": 4,
       "guide": "catalog/ai-ml/INDEX.md",
       "id": "family-ai-ml",
@@ -896,7 +896,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "9bb2b7e1fbc4859964e5f66f92605325b68f8bc8dc0789a479e05ad237a2674c",
+      "digest": "2f9830dd1eb86215a0d62bc8878ed9cf8dd628d488b9ab78647bf5d06a968b4f",
       "files": 6,
       "guide": "catalog/public-nonprofit/INDEX.md",
       "id": "family-public-nonprofit",

@@ -6,6 +6,8 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Keep unsupplied operational terms out of prompt examples and variants. Trace revised documentation steps to their source, limit troubleshooting to stated failures, retain unresolved resource placeholders and specify fictional dashboard comparison and window rules.
+
 - Clarify owner-supplied SOP provenance, unconfirmed cash-flow timing, attributed regulatory wording and the technical writer's final verification list. Append fictional dashboard configuration and reader-scope notes while preserving original inputs and all grading criteria.
 
 - Keep confirming checks matched to each policy obligation, trace supplied review gaps through revised change plans, and preserve supplied roadmap priorities without treating a fixed target as a commitment. An acknowledged gap does not satisfy a requirement unless its criterion permits that gap. Repeat calibration for this grading clarification.
