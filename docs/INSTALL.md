@@ -58,7 +58,7 @@ Or copy one `skills/<name>/` folder into your host's skills folder. Not yet test
 codex plugin marketplace add cyberwiz-io/ai-specialists
 ```
 
-Then enable the `ai-specialists` plugin. It carries the 17 leads and `specialists`. For worker agents, copy the TOML files from a clone into your project: `cp adapters/codex/agents/*.toml .codex/agents/`. Not tested: the local attempt was blocked before the install ran. Details: [Codex adapter](../adapters/codex/README.md).
+Then enable the `ai-specialists` plugin. It carries the 17 leads and `specialists`. For worker agents, copy the TOML files from a clone into your project: `cp adapters/codex/agents/*.toml .codex/agents/`. On macOS Codex 0.164.0, installation from exact GitHub commit `ce0ceb576c75bfeb80b237f58eb114c4dc3beec9` and native lead discovery were observed through Orca's supported entrypoint. Full acceptance remains pending. Details: [Codex adapter](../adapters/codex/README.md).
 
 ## Gemini CLI
 

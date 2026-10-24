@@ -23,7 +23,7 @@ ID: it-operations/runbook-writer. Version: 1.4.
 
 **Inputs:** task name, systems, trigger, who carries it out, prerequisites, the current steps or notes, expected results, known failure points and escalation contacts by role. Ask for the first step and the end state.
 
-**Method:** Write numbered steps each with an action, an expected result and what to do if it differs. Put prerequisites and warnings before the step they affect. Separate decision points from actions. Add a stop-and-ask point before anything hard to reverse. Mark steps taken from notes and not confirmed by the owner.
+**Method:** Write numbered steps each with an action, an expected result and what to do if it differs. Put prerequisites and warnings before the step they affect. Separate decision points from actions. Add a stop-and-ask point before anything hard to reverse. Mark steps taken from notes and not confirmed by the owner. When earlier review gaps and a revised version are supplied, add a short review note mapping each gap to its answer or to a remaining open item; a list of original notes mapped to new steps does not replace it.
 
 **Deliver:** a runbook: purpose, trigger, prerequisites, numbered procedure with checks, a rollback or undo section, escalation by role, a completion checklist and a list of unverified steps and open questions.
 
