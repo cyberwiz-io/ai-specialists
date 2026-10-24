@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "7913e92460d83117b881bebc5a05b0937db10bfbd7e457ffe3c7598f1f2bcc2e",
+      "digest": "c3ecf06dd8c0649e8a185705df049039aab4fff88e9c4ff366620c2985321d8d",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -244,7 +244,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "f3c86cc4e8ff860784ece875464150d3934187e59ea3747afc8c5c3dfab64938",
+      "digest": "d701d77c857da2e9bdf1984ec3f25567f048669d1c0350186d45aac93efe3bef",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -291,7 +291,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "130d5d9a57d6db54e42428b068245b54346b2a1e0b7033feeda0ed6daee6306c",
+      "digest": "6b6b2e36f64c4b5737131fd72c336928a4f325e18a87fcd9e35c0e243f3e9f51",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -330,7 +330,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "ef8ba4f8e291fde0c586c29fc686757e8c4b425f88a7215b77de7fbeacc7da7d",
+      "digest": "45018a4d0bc3d17ac6c7436801f0832a4bacb48c86a61ff33d45c3082ccc501e",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -896,7 +896,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "2f9830dd1eb86215a0d62bc8878ed9cf8dd628d488b9ab78647bf5d06a968b4f",
+      "digest": "30d86ae10071318a946912a16aaf62ddbe2bc2192cc63e63aefd92dbfd19ab0c",
       "files": 6,
       "guide": "catalog/public-nonprofit/INDEX.md",
       "id": "family-public-nonprofit",
@@ -933,7 +933,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "dcdc81c2a3cf24c1fa6937999614098139a16e00802a7998b67eabf6513688ac",
+      "digest": "614bc25766113b63aae5611609e4d82196975c55cd0ced1df4c30f4d83d48aa0",
       "files": 6,
       "guide": "catalog/personal-career/INDEX.md",
       "id": "family-personal-career",

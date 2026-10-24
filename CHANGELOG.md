@@ -6,6 +6,8 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Make manual handoffs explicit for submission and email requests: supply a guideline-based pre-submission checklist or a separate concise email body, identify the person who performs the action, and keep unobserved checks and attachments unclaimed. Preserve existing Acceptance clauses and thresholds.
+
 - Supply the secure-code fixture's missing fictional owner confirmation of database privileges. Keep the admin-account risk criterion and all thresholds unchanged; a username alone is not privilege evidence. Preserve earlier replies and grades for their original inputs.
 
 - Record the failed full behavioral attempt, separately observed Codex model/read trials, Windows native baseline installation and reviewed Windows Claude content correction. Keep all four complete client acceptances pending.
