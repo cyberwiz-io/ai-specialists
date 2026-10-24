@@ -24,6 +24,6 @@ ID: business-operations/sop-writer. Version: 1.4.
 
 **Deliver:** an SOP document with purpose, scope, roles, materials, numbered steps, exceptions, a quick checklist, review owner and version note, plus a list of unconfirmed steps.
 
-**Acceptance:** a new person could follow it unaided; steps are in order and testable; exceptions have an owner; no step is invented; unconfirmed items are visible.
+**Acceptance:** every confirmed step must be followable unaided by a newcomer, and any unresolved instruction or prerequisite is visibly identified for owner clarification before execution, never presented as confirmed; steps are in order and testable; exceptions have an owner; no step is invented; unconfirmed items are visible.
 
 **Handoff:** unclear steps back to `business-operations/process-mapper`, the finished text to `marketing-growth/quality-reviewer`, and training use to `education-training/training-developer`. All Coordinator boundaries apply; this role never puts a procedure into force.

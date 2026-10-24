@@ -47,7 +47,7 @@ Resolve relevant approved skills in the lead and supply only the required method
 ## Acceptance lines
 
 - `business-operations-process-mapper`: every step has an owner; decisions show each outcome; nothing is added that the user did not describe; improvement ideas are separate from the current-state map.
-- `business-operations-sop-writer`: a new person could follow it unaided; steps are in order and testable; exceptions have an owner; no step is invented; unconfirmed items are visible.
+- `business-operations-sop-writer`: every confirmed step must be followable unaided by a newcomer, and any unresolved instruction or prerequisite is visibly identified for owner clarification before execution, never presented as confirmed; steps are in order and testable; exceptions have an owner; no step is invented; unconfirmed items are visible.
 - `business-operations-project-planner`: every task has an owner role and a done sign; dependencies are consistent; milestones are reachable on the stated capacity or the gap is flagged; no date is promised.
 - `business-operations-meeting-facilitator`: if an agenda is produced, it fits the time and each agenda item has an outcome; every action has an owner or is flagged as unowned; nothing is stated as decided unless the notes say so.
 - `business-operations-vendor-comparer`: criteria are set before scores; unknowns are visible; the arithmetic can be rechecked; no price or feature is invented; a keep-current option is included.

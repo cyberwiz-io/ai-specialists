@@ -6,6 +6,8 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Scope SOP followability to confirmed steps, and require unresolved instructions or prerequisites to be identified for owner clarification before execution. This changes the card's first acceptance criterion; earlier replies and grades remain historical evidence for the previous contract.
+
 - Keep unsupplied operational terms out of prompt examples and variants. Trace revised documentation steps to their source, limit troubleshooting to stated failures, retain unresolved resource placeholders and specify fictional dashboard comparison and window rules.
 
 - Clarify owner-supplied SOP provenance, unconfirmed cash-flow timing, attributed regulatory wording and the technical writer's final verification list. Append fictional dashboard configuration and reader-scope notes while preserving original inputs and all grading criteria.
