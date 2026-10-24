@@ -156,7 +156,8 @@ FACT_PREFLIGHT = (
     'card, coordinator and draft. Check Method, Deliver, Acceptance, Safeguards and each factual sentence '
     'against supplied evidence; use placeholders for unsupported claims. Label card-permitted '
     'proposals/estimates for owner confirmation. Deliver unblocked work with questions; await required '
-    'approvals. Fix omissions.')
+    'approvals. Fix omissions.'
+    ' Preserve satisfied text, source copy and safeguards verbatim except for evidenced corrections. Reject unsupported auditor facts; leave them unknown.')
 GENERAL_NOTE = " Keep 'general, unchecked' points only where sensitive-card rules allow."
 
 

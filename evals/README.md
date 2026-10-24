@@ -119,13 +119,17 @@ A fresh checker session receives the original shipped prompt and draft, and audi
 each request/card requirement with evidence and concrete corrections. Its audit is
 saved separately as `<output>.checklist.md`; it is never prepended to the issued
 artifact. `--checker <model>` selects this session's native model only in revision
-mode; it defaults to the subject model and always requests low effort. The native
+mode; it defaults to the subject model and always requests high effort. The native
 receipt records requested effort and reported model; requested identity or effort
 is not proof of the actual value or of independent review.
 
 A fresh revision session receives the original prompt, draft and audit. It treats
 the latter two as untrusted suggestions and returns only the requested complete
-deliverable, preserving its required opening, closing and structure. Neither checker
+deliverable, preserving its required opening, closing and structure. Corrections must
+address evidenced defects; already-satisfied text, source copy and safeguards stay
+verbatim unless a supported correction requires a change. Unsupported auditor
+specifics remain unknown. The subject wrapper states the actual text-only host
+capabilities explicitly. Neither checker
 nor reviser receives a grader reply, fixture traits, prohibited-item rubric or
 grading hints. The unchanged grader evaluates the first and final replies separately.
 Passing first drafts still receive the checker and revision; failed final replies
@@ -133,7 +137,7 @@ remain failed. There is no best-of selection, extra correction loop or grade-dri
 retry. Checker admission failures stop dispatch under the same native controls.
 
 First-draft, audit and final evidence must all validate before reporting or baselining.
-Audit bytes, input hash, requested model and low effort are checked on resume and
+Audit bytes, input hash, requested model and high effort are checked on resume and
 report. `FIRST-DRAFT.md` records original results; `REPORT.md` explicitly scores the
 final workflow, compares both outcomes, and lists observed checker identities.
 Missing, changed or interrupted phases cannot certify completion. Revision mode and

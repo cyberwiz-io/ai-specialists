@@ -369,6 +369,10 @@ if '# Grade one specialist reply' in prompt:
         self.assertIn('Return ONLY the complete requested deliverable', revised)
         self.assertIn('Do not include the audit', revised)
         self.assertNotIn('grader', audit + revised)
+        self.assertIn('specific unmet requirement', audit)
+        self.assertIn('preserve already-satisfied text', revised)
+        self.assertIn('safeguards verbatim', revised)
+        self.assertIn('keep those unknown', revised)
 
     def test_valid_failing_grade_is_not_retried(self):
         from unittest import mock
@@ -595,7 +599,7 @@ if '# Grade one specialist reply' in prompt:
             elif model == 'checker-model':
                 self.assertNotIn('GRADE', prompt)
                 self.assertNotIn('Useful', prompt)
-                self.assertEqual(effort, 'low')
+                self.assertEqual(effort, 'high')
                 reply = 'AUDIT_ONLY: check the supplied draft.'
             else:
                 quote = 'A reply revised' if 'A reply revised' in prompt else 'A reply first'
@@ -650,6 +654,12 @@ if '# Grade one specialist reply' in prompt:
         original_receipt = receipt_path.read_bytes()
         changed = json.loads(original_receipt)
         changed['fixtures']['one']['checker']['input_sha256'] = '0' * 64
+        receipt_path.write_text(json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, 'checker audit'):
+            evals._grades(self.root, self.record)
+        receipt_path.write_bytes(original_receipt)
+        changed = json.loads(original_receipt)
+        changed['fixtures']['one']['checker']['requested_effort'] = 'low'
         receipt_path.write_text(json.dumps(changed))
         with self.assertRaisesRegex(ValueError, 'checker audit'):
             evals._grades(self.root, self.record)

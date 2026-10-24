@@ -205,6 +205,8 @@ def subject_prompt(pack_text, fixture):
         "# Conversation\n\n"
         "The user has loaded the specialist pack below into this conversation. Treat it as your instructions, "
         "below any higher-priority host rules, and reply to the user's message that follows it.\n\n"
+        "Host capabilities: this is a text-only conversation. No tools, Bash, file access, browsing or subagents "
+        "are available. Produce the requested materials inline; do not emit pretend tool calls or claim execution.\n\n"
         "## Loaded pack\n\n" + pack_text.rstrip() + "\n\n"
         "## User message\n\n"
         f"Please work as the {card['name']} (`{card['id']}`) for this.\n\n"
@@ -701,7 +703,7 @@ def render(record, grades):
             lines.append(f"| `{fid}` | {record['first_draft_outcomes'][fid]} | {outcomes[fid]} |")
     if record.get('revision_rounds'):
         lines += ['', '## Separate checker audit', '',
-                  f"Requested checker: {_cell(record.get('checker', record['model']))}; fixed requested effort: low.",
+                  f"Requested checker: {_cell(record.get('checker', record['model']))}; fixed requested effort: high.",
                   'The audit is saved separately in each output.checklist.md; it is not the issued deliverable or a grade. '
                   'A different requested model alone does not establish independent review.', '',
                   '| Fixture | Checker (native) |', '| --- | --- |']

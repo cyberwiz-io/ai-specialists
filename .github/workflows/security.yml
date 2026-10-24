@@ -105,9 +105,17 @@ jobs:
           ref: ${{ inputs.sha || github.event.pull_request.head.sha }}
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        if: runner.os == 'macOS'
+        if: vars.LOCAL_RELEASE_RUNNER == '' && runner.os == 'macOS'
         with:
           python-version: '3.12'
+      - name: Use task-local Python on Mac Studio
+        if: vars.LOCAL_RELEASE_RUNNER != ''
+        shell: bash
+        run: |
+          python3.12 -c "import platform, sys; assert sys.version_info[:2] == (3, 12) and platform.system() == 'Darwin' and platform.machine() == 'arm64', 'Native Mac ARM64 Python 3.12 required'"
+          python_env="$(mktemp -d "$RUNNER_TEMP/python-3.12.XXXXXX")"
+          python3.12 -m venv "$python_env"
+          echo "$python_env/bin" >> "$GITHUB_PATH"
       - name: Install hash-locked native Semgrep
         if: runner.os == 'macOS'
         run: |
