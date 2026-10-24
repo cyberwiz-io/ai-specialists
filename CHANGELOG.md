@@ -6,6 +6,10 @@ Current 1.4 native and behavioral acceptance, final review and publication remai
 
 ## 1.4 (unpublished candidate)
 
+- Record the failed full behavioral attempt, separately observed Codex model/read trials, Windows native baseline installation and reviewed Windows Claude content correction. Keep all four complete client acceptances pending.
+
+- Align the SOP fixture with the visible task: retain its unconfirmed-items list and no-code statement without requiring the list to follow the coordinator's final status. Preserve the earlier PARTIAL grades; new evidence uses the corrected trait.
+
 - Scope SOP followability to confirmed steps, and require unresolved instructions or prerequisites to be identified for owner clarification before execution. This changes the card's first acceptance criterion; earlier replies and grades remain historical evidence for the previous contract.
 
 - Keep unsupplied operational terms out of prompt examples and variants. Trace revised documentation steps to their source, limit troubleshooting to stated failures, retain unresolved resource placeholders and specify fictional dashboard comparison and window rules.

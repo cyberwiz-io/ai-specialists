@@ -61,7 +61,7 @@
         "Uses the owner's version1 description of the usual check as owner-supplied, not independently verified, and shows version0 step 3 ('the usual check', no contents given) as historical rather than inventing or silently replacing it",
         "Uses the owner-confirmed version1 order (back room walk before setting the alarm) and shows version0 steps 5 and 6 as superseded, not silently reordered or presented as the original sequence",
         "Gives each exception (for example, a person still inside or a tool that cannot be checked in) an owner role",
-        "Ends with a visible list of any steps still unconfirmed after version1, and states that no alarm code is included"
+        "Includes a visible list of any steps still unconfirmed after version1, and states that no alarm code is included"
       ],
       "must_not": [
         "Invents the content of 'the usual check', alarm codes or other details the user did not supply",
