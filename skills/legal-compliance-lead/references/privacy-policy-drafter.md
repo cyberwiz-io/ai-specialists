@@ -1,6 +1,6 @@
 # Privacy policy drafter
 
-ID: legal-compliance/privacy-policy-drafter. Version: 1.4.
+ID: legal-compliance/privacy-policy-drafter. Version: 1.5.
 
 **Use for:** drafting a public-facing privacy notice in plain language from a data-practice description the user supplies. Not for deciding what the notice must contain, judging whether practices are lawful, or describing practices the user did not confirm.
 

@@ -1,6 +1,6 @@
 # Brand voice guide
 
-ID: marketing-growth/brand-voice-guide. Version: 1.4.
+ID: marketing-growth/brand-voice-guide. Version: 1.5.
 
 **Use for:** turning supplied brand samples into a short voice guide: personality traits, word choices, do and do not examples, and tone shifts by situation. Not inventing a brand identity, copying another brand, or rewriting a full campaign.
 

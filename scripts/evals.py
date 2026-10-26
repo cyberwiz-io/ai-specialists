@@ -27,6 +27,8 @@ def commit(root):
 
 
 def prepare(root, args, today=None):
+    if args.checker is not None and not args.revision_rounds:
+        raise ValueError('--checker requires --revision-rounds 1')
     families, generated = checker.check(root)
     fixtures = evals.load(root, families)
     if args.include_heldout:
@@ -35,6 +37,9 @@ def prepare(root, args, today=None):
     meta = {"version": config.version(root), "commit": commit(root), "host": args.host, "tools": args.tools,
             "model": args.model, "grader": args.grader or args.model, "date": (today or date.today()).isoformat()}
     meta["harness_sha256"] = evals.harness_hashes(root)
+    meta["revision_rounds"] = args.revision_rounds
+    if args.revision_rounds:
+        meta['checker'] = args.checker or args.model
     if args.subject_effort is not None:
         meta['subject_effort'] = args.subject_effort
     if args.include_heldout:
@@ -54,6 +59,9 @@ def main(argv=None, root=None):
     first.add_argument("--grader", help="grader model, if different from --model")
     first.add_argument('--subject-effort', choices=EFFORTS,
                        help='explicit native subject effort; grader keeps its calibrated default')
+    first.add_argument('--checker', help='native checker model for revision1; defaults to subject, fixed low effort')
+    first.add_argument("--revision-rounds", type=int, choices=(0, 1), default=0,
+                       help="one fixed self-check/revision; retain and grade the first draft separately")
     first.add_argument("--tools", default=DEFAULT_TOOLS, help="tools available to the subagents")
     first.add_argument("--include-heldout", action="store_true", help="also include frozen release challenges")
     first.add_argument("--family", help="only this family")

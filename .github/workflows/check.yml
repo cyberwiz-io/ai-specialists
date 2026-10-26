@@ -16,25 +16,31 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ${{ matrix.os }}
+    if: ${{ vars.LOCAL_RELEASE_RUNNER == '' || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || matrix.os }}
     timeout-minutes: 45
     strategy:
       max-parallel: 2
       matrix:
-        include:
-          - {os: ubuntu-24.04, python: '3.9'}
-          - {os: ubuntu-24.04, python: '3.12'}
-          - {os: macos-14, python: '3.12'}
-          - {os: windows-2022, python: '3.12', shard: 0}
-          - {os: windows-2022, python: '3.12', shard: 1}
+        # Owner-authorized local release coverage; normal CI keeps its full matrix.
+        include: ${{ fromJSON(vars.LOCAL_RELEASE_RUNNER != '' && '[{"os":"macos-local","python":"3.12"}]' || '[{"os":"ubuntu-24.04","python":"3.9"},{"os":"ubuntu-24.04","python":"3.12"},{"os":"macos-14","python":"3.12"},{"os":"windows-2022","python":"3.12","shard":0},{"os":"windows-2022","python":"3.12","shard":1}]') }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: ${{ inputs.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        if: vars.LOCAL_RELEASE_RUNNER == ''
         with:
           python-version: ${{ matrix.python }}
+      - name: Use task-local Python on Mac Studio
+        if: vars.LOCAL_RELEASE_RUNNER != ''
+        shell: bash
+        run: |
+          python3.12 -c "import platform, sys; assert sys.version_info[:2] == (3, 12) and platform.system() == 'Darwin' and platform.machine() == 'arm64', 'Native Mac ARM64 Python 3.12 required'"
+          python_env="$(mktemp -d "$RUNNER_TEMP/python-3.12.XXXXXX")"
+          python3.12 -m venv "$python_env"
+          echo "$python_env/bin" >> "$GITHUB_PATH"
       - name: Generated output consistency
         shell: bash
         run: |
@@ -44,10 +50,11 @@ jobs:
       - name: Pack check
         run: python -B scripts/pack.py check
       - name: Tests
+        shell: bash
         env:
           TEST_SHARD: ${{ matrix.shard || 0 }}
           TEST_SHARDS: ${{ matrix.os == 'windows-2022' && 2 || 1 }}
-        run: python -B scripts/run_tests.py --shard-index ${{ env.TEST_SHARD }} --shard-count ${{ env.TEST_SHARDS }}
+        run: python -B scripts/run_tests.py --shard-index "$TEST_SHARD" --shard-count "$TEST_SHARDS"
       - name: Candidate artifact integrity check
         shell: bash
         run: |
@@ -56,7 +63,8 @@ jobs:
   validate:
     # Claude Code's own validator for the marketplace, every plugin and the skill folders. The CLI version is pinned
     # so a new release cannot change the verdict silently; it needs no account to validate.
-    runs-on: ubuntu-latest
+    if: ${{ vars.LOCAL_RELEASE_RUNNER == '' || github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -68,9 +76,15 @@ jobs:
           # @anthropic-ai/claude-code-linux-x64, the native build that the claude-code npm package installs
           CLAUDE_CODE_VERSION: 2.1.302
           CLAUDE_CODE_SHA256: 3bc5817207175089cbe0a02a989bdf35b228497f8f76d3c3ba13d568dc8f25e2
+          CLAUDE_CODE_DARWIN_SHA256: fb216fa683cb2e4c0d65bfb3393a5c0d47a942efb3e0ddc9b1c4c660b3b86554
         run: |
-          curl -sSfL -o claude.tgz "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-${CLAUDE_CODE_VERSION}.tgz"
-          echo "${CLAUDE_CODE_SHA256}  claude.tgz" | sha256sum -c -
+          platform=linux-x64
+          if [ "$RUNNER_OS" = macOS ]; then
+            platform=darwin-arm64
+            CLAUDE_CODE_SHA256="$CLAUDE_CODE_DARWIN_SHA256"
+          fi
+          curl -sSfL -o claude.tgz "https://registry.npmjs.org/@anthropic-ai/claude-code-${platform}/-/claude-code-${platform}-${CLAUDE_CODE_VERSION}.tgz"
+          echo "${CLAUDE_CODE_SHA256}  claude.tgz" | shasum -a 256 -c -
           mkdir -p "$RUNNER_TEMP/claude" && tar -xzf claude.tgz -C "$RUNNER_TEMP/claude" package/claude
       - name: claude plugin validate --strict
         run: |
@@ -81,9 +95,10 @@ jobs:
 
   acceptance:
     name: acceptance
+    # This inline gate executes no checkout and fails when protected jobs were skipped.
     if: ${{ always() }}
     needs: [check, validate]
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 5
     steps:
       - name: Require every acceptance job

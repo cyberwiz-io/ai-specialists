@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "c3ecf06dd8c0649e8a185705df049039aab4fff88e9c4ff366620c2985321d8d",
+      "digest": "78b94bdba52d8f7d9364d8606417df95d6e1e7dbb284532018c4a9cb4f446ce0",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -101,7 +101,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "b5f178f7f9ba4845f38720618971de22f10de7b664c354ebb9d0b51b87a381a4",
+      "digest": "3ae0d84b3daa012f304c8f57e0a0ff6281cf767c0a8c4cd4d3488e272204a866",
       "files": 1,
       "guide": "docs/CARD-GUIDE.md",
       "id": "catalog-manifest",
@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "8da0fa5f8007e6d879563728b43f753fcd269b08e22eed6ef3bb0de7796fe830",
+      "digest": "4008d7fb00cb091ca1bdb4071a8414355491e28390a86c422e33c39edf5dd305",
       "files": 53,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -193,7 +193,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "a2b1665e70d73cdee63be660470ebce26fb0f9f0665a00fc8db132d3e18b7997",
+      "digest": "7636bdbccf2615fc091b4c59a4b6433a36791e2f5f752ecbce10c2228b84b17c",
       "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
@@ -244,7 +244,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "d701d77c857da2e9bdf1984ec3f25567f048669d1c0350186d45aac93efe3bef",
+      "digest": "22b2a3a0461099c1a4ae52e24f64c8bd5eeaca1e14b1f1500ca1620a7651b6bb",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -291,7 +291,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "6b6b2e36f64c4b5737131fd72c336928a4f325e18a87fcd9e35c0e243f3e9f51",
+      "digest": "546b37cf8eb7e5b9eda6f3dbdd72be5ea0f16e4bec39daada2a36d949a76fcdb",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -330,7 +330,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "45018a4d0bc3d17ac6c7436801f0832a4bacb48c86a61ff33d45c3082ccc501e",
+      "digest": "de84313b393a5e9ac8a2d538dcafa719225b98f070c9a65f71619adbcc77ec5b",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -378,7 +378,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "3afd208fc86b63b66644d731d109cad2404c061449c287d048a0c39af92f9784",
+      "digest": "1a132a0ac6708657dd4cc96537c97ef7bf24bf148317e2b4cb2aafa9eb563c18",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -415,7 +415,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "fade6d17246613181c7b4b26875b34ae95399f29a8ed8ea5c0e275d7e9674a49",
+      "digest": "ed4920e50c5cf86a0bf181276b4f17af8aacbe74f41a43b2e761efbb67e8686e",
       "files": 6,
       "guide": "catalog/it-operations/INDEX.md",
       "id": "family-it-operations",
@@ -452,7 +452,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "bc5a6e57370958b0cfc63794689e25738b869e2433c814b48d32269e624050be",
+      "digest": "07fa519a98eb3cf1debbec6ab4d8748f9f4dd6e281977dcb92d0b1f95263fc23",
       "files": 12,
       "guide": "catalog/software-engineering/INDEX.md",
       "id": "family-software-engineering",
@@ -489,7 +489,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "14a3b4a771c3b6957194f6ea79ad96049be0e53b57b926fc673c63b090d4f577",
+      "digest": "ff5d8753c195e9c1c841be4445b9d64175d08387cb5ee0f40e0886388bb51695",
       "files": 4,
       "guide": "catalog/ai-ml/INDEX.md",
       "id": "family-ai-ml",
@@ -526,7 +526,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "8401b024eed57f6df3383aa17f37620676d17dc11ec8c77ea91a2e846b87a3b8",
+      "digest": "4db70ba28b55361afa9586b31be8dd0125d75bd2d1b88858b2c665c051b6e27e",
       "files": 8,
       "guide": "catalog/product-design/INDEX.md",
       "id": "family-product-design",
@@ -563,7 +563,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "645773f12a5bf6c4ce82b255bc48376fac0b78c8108b9efc73e0e306858904d2",
+      "digest": "e0e3f3f3806d9516118f7106d81ede2ff1fad87dc9dd8014f83138881469ed7c",
       "files": 9,
       "guide": "catalog/content-creative/INDEX.md",
       "id": "family-content-creative",
@@ -600,7 +600,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "f5d9b788be8a932cd1dc0bee088868af5397bbdcdab65d448af8eb7cd597f2dc",
+      "digest": "0cf7f3654deaebbf83111b897a4abfbf37c0444e16034ba6514958ef856a2671",
       "files": 11,
       "guide": "catalog/marketing-growth/INDEX.md",
       "id": "family-marketing-growth",
@@ -637,7 +637,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "343f825e788273441907dcb2b0fbd7bc8237b88a633dc79872235087e992d650",
+      "digest": "40b14f14a21c4a0767b9b7d84c7b700a6083c68fafa9e6826662d2648069d84d",
       "files": 9,
       "guide": "catalog/sales-customer/INDEX.md",
       "id": "family-sales-customer",
@@ -674,7 +674,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "37ac08500befbe6f8179b40ab702c80b14bdf75119f300db370e227fbccd5e4c",
+      "digest": "c3d50d4e900ac3b85561850b2e7a71961b4be15981cb95bffe951c33047b6e28",
       "files": 9,
       "guide": "catalog/business-operations/INDEX.md",
       "id": "family-business-operations",
@@ -711,7 +711,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "9b61e12d254b7c8a05603a0da4f8b4c48d57a97760f3377d3a7231199f9c52c6",
+      "digest": "b5f75099c148c78508616a80c2408343138ee5795edccee1762c8aec6ced8c8e",
       "files": 9,
       "guide": "catalog/finance/INDEX.md",
       "id": "family-finance",
@@ -748,7 +748,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "524fdd93dd3e82a9f3cb8bd0fc71df015fb3f9e1ddfccf4d2632b4f339bd6a70",
+      "digest": "c5fe8b61b6271e595afde44b99e4208ced6e77447dcf080352b5d29a865cdd93",
       "files": 9,
       "guide": "catalog/data-research/INDEX.md",
       "id": "family-data-research",
@@ -785,7 +785,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "501dd897d35ed26eff08e6013e84f79397f3aaa777a45fe354a3546f7326bd22",
+      "digest": "b65cb63e30056d7f814af37f7d66af19a0858539d540398007c37afe14acc207",
       "files": 6,
       "guide": "catalog/people-hr/INDEX.md",
       "id": "family-people-hr",
@@ -822,7 +822,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "b77365adfe6ce4b6e47de0d49ba518f93cb9cd5c7af525f6bd1da80771d2a5d5",
+      "digest": "ea43d80ae7ca92a8223796304224c145f0fb980c18ebba36ee5718eef673a58c",
       "files": 9,
       "guide": "catalog/legal-compliance/INDEX.md",
       "id": "family-legal-compliance",
@@ -859,7 +859,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "04964ce5f4232502769de29cb737941a800450fd77c452aa77dc712f21e814df",
+      "digest": "1a3e2ef7e41041797a3057d6ab6b550e7280ab9eeb7841c8dae87910ee1632f2",
       "files": 7,
       "guide": "catalog/education-training/INDEX.md",
       "id": "family-education-training",
@@ -896,7 +896,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "30d86ae10071318a946912a16aaf62ddbe2bc2192cc63e63aefd92dbfd19ab0c",
+      "digest": "decc92126a3054dee4984bb96e83b8084e669905cbb394d7c08457716ae70ca5",
       "files": 6,
       "guide": "catalog/public-nonprofit/INDEX.md",
       "id": "family-public-nonprofit",
@@ -933,7 +933,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "614bc25766113b63aae5611609e4d82196975c55cd0ced1df4c30f4d83d48aa0",
+      "digest": "6a3ec225da01f3beab8c5884f80b02416b13a92cbd8d33379f0ac5ec0a9c2f68",
       "files": 6,
       "guide": "catalog/personal-career/INDEX.md",
       "id": "family-personal-career",
@@ -970,7 +970,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "d85bd5a48a289359ffa67e20558ca12ff0e7214fa21882a858487fb1180454f5",
+      "digest": "ebd16e0a98a72a559380980ac20190fbb2da53f22adaa1cdf1b98e4ca61e634d",
       "files": 6,
       "guide": "catalog/orchestration/INDEX.md",
       "id": "family-orchestration",
@@ -987,5 +987,5 @@
     }
   ],
   "schema": 2,
-  "version": "1.4"
+  "version": "1.5"
 }

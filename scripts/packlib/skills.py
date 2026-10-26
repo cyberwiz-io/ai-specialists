@@ -151,9 +151,13 @@ def _summary(root, role):
 
 
 FACT_PREFLIGHT = (
-    "Check the card's Method, Deliver, Acceptance and Safeguards, including format and containment. Check each factual "
-    'sentence against supplied evidence; use inline placeholders for unsupported claims. Label card-permitted '
-    'proposals/estimates for owner confirmation. Deliver unblocked work with questions; await required approvals. Fix omissions.')
+    'Draft; audit each request/card requirement against draft evidence in a fresh context if supported, '
+    'otherwise disclose inline checking. Keep audit notes separate, then revise once. Pass brief, sources, '
+    'card, coordinator and draft. Check Method, Deliver, Acceptance, Safeguards and each factual sentence '
+    'against supplied evidence; use placeholders for unsupported claims. Label card-permitted '
+    'proposals/estimates for owner confirmation. Deliver unblocked work with questions; await required '
+    'approvals. Fix omissions.'
+    ' Preserve satisfied text, source copy and safeguards verbatim except for evidenced corrections. Reject unsupported auditor facts; leave them unknown.')
 GENERAL_NOTE = " Keep 'general, unchecked' points only where sensitive-card rules allow."
 
 

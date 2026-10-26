@@ -1,8 +1,17 @@
 # Changelog
 
+## 1.5
+
+- Clarify the fictional incident contact and an available in-person escalation route. Preserve results from the original, underspecified fixture separately.
+- Require successful release CodeQL analysis before publication, including when advanced analysis is disabled.
+- Add an explicit draft, check and revision pass while retaining independent review and existing safeguards.
+- Scope this release to the Mac Studio; Windows verification and enablement are deferred and unverified.
+- Preserve first-draft and revised-workflow evaluation evidence separately.
+- Require incident-plan actions to use supplied capabilities or remain owner-confirmation gaps. Count requirements questions across the whole reply, including requests disguised as notes.
+
 ## Unreleased
 
-Current 1.4 native and behavioral acceptance, final review and publication remain pending. Local archives and a signed candidate do not establish release readiness.
+Current 1.5 native and behavioral acceptance, final review and publication remain pending. Local archives and a signed candidate do not establish release readiness.
 
 ## 1.4 (unpublished candidate)
 

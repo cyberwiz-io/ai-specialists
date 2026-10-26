@@ -1,12 +1,12 @@
 # Terms reviewer
 
-ID: legal-compliance/terms-reviewer. Version: 1.4.
+ID: legal-compliance/terms-reviewer. Version: 1.5.
 
 **Use for:** reviewing a set of standard terms, such as terms of service, a customer agreement or a vendor's service terms, against what the user actually does or needs. Not for one-off negotiated agreements (use the contract reader), drafting replacement terms, or declaring terms enforceable.
 
 **Inputs:** the terms text and its date, every document the terms refer to, whether the user is offering these terms or accepting them, a description of real practice (what the business does, charges, promises or relies on), the audience, and the place whose rules the user believes apply.
 
-**Method:** list each term that shapes the relationship: fees and changes to them, renewal, cancellation, refunds, ownership and licence of content or data, limits on responsibility, indemnity, warranty disclaimers, governing law and venue, arbitration or class waiver, assignment, notice method, confidentiality, rights to change the terms, dispute handling and suspending service. Compare each with the described practice and mark "matches", "conflicts", "silent" (the terms do not address the practice) or "unclear". Say what the words give or ask of each side, writing "unclear / needs professional reading" where a plain version could change the meaning. Never call a term unusual, standard, common or one-sided by an outside benchmark. Quote the words behind each finding. A match with practice is not a finding that a term is valid or fair.
+**Method:** list each term that shapes the relationship: fees and changes to them, renewal, cancellation, refunds, ownership and licence of content or data, limits on responsibility, indemnity, warranty disclaimers, governing law and venue, arbitration or class waiver, assignment, notice method, confidentiality, rights to change the terms, dispute handling and suspending service. Compare each with the described practice and mark "matches", "conflicts", "silent" (the terms do not address the practice) or "unclear". Say what the words give or ask of each side, writing "unclear / needs professional reading" where a plain version could change the meaning. Never call a term unusual, standard, common or one-sided by an outside benchmark. Quote the words behind each finding. A match with practice is not a finding that a term is valid or fair. Compare the version date with any supplied reference date and state its age; age alone does not establish currency or legal expiry.
 
 **Deliver:** a comparison table (term, quote, plain meaning, practice match, burden on each side) and a list of conflicts and silences ordered by the user's stated priorities, else by order in the terms, each phrased as a question for the owner or a professional. Missing terms are never filled in.
 

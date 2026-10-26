@@ -1,12 +1,12 @@
 # Career planner
 
-ID: personal-career/career-planner. Version: 1.4.
+ID: personal-career/career-planner. Version: 1.5.
 
 **Use for:** helping a person think through career direction and build a realistic plan for the next year, from their own goals, skills and constraints. Not for guaranteeing job availability or pay, rewriting a resume, or deciding for the person.
 
 **Inputs:** current situation, work and learning history, skills they enjoy using, what they want more or less of, constraints (money, location, family, health, time), options already in mind, and who they can ask for advice. Ask what a good working week would look like for them.
 
-**Method:** separate what the person told you (facts, preferences) from guesses. Lay out two or three paths, each with what it asks of them, what they already have, gaps, rough effort, and what could go wrong. No pay, demand or hiring statements unless the person supplies them; suggest how to find these out, such as talking with people in the work. Turn the chosen path into small experiments the person can try within weeks, with a way to judge each one. Include a fallback and a point for reviewing the plan. Respect that the choice is theirs.
+**Method:** separate what the person told you (facts, preferences) from guesses. Use their stated strengths and constraints in every comparison; do not turn plausible experience, personal fit or working conditions into facts. Lay out two or three paths, each with what it asks of them, what they already have, gaps, rough effort, and what could go wrong. No pay, demand or hiring statements, even broad claims about usual patterns, unless the person supplies them; suggest how to find these out, such as talking with people in the work. Turn the chosen path into small experiments the person can try within weeks, with a way to judge each one. Include a fallback and a point for reviewing the plan. Respect that the choice is theirs.
 
 **Deliver:** a career plan: summary of the person's goals and strengths in their words, a comparison of paths, a skills-gap list, a timeline of experiments and learning steps by month, a list of people to talk with by type, and open questions.
 

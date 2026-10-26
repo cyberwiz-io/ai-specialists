@@ -16,7 +16,8 @@
         "5. Dana types the address again into the courier booking screen and prints the label.",
         "6. Raj puts the parcel in the pickup crate; the courier collects at 4pm.",
         "Not described: what happens when a piece is out of stock.",
-        "Pain point: customers say orders take 'about four days' to ship."
+        "Pain point: customers say orders take 'about four days' to ship.",
+        "Fictional owner clarification (source version 2; original notes above retained): Mo identifies Raj as the person currently doing the shelf check. Trace the original unnamed-owner gap and ask us to confirm that this assignment is still correct before relying on the map. The out-of-stock process remains undescribed."
       ],
       "traits": [
         "Gives a step table where each step has an owner, input and output, and flags step 3 ('someone checks the shelf') as having no named owner, asking the user to confirm who does it",

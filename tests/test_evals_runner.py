@@ -289,12 +289,90 @@ if '# Grade one specialist reply' in prompt:
         self.assertTrue(retry.startswith(first + marker))
         feedback = json.loads(retry.split(marker, 1)[1])
         self.assertEqual(feedback['previous_response'], bad)
+        self.assertIn('not proof or a required verdict', feedback['source_context_limits'])
+        self.assertEqual(feedback['candidate_source_lines'][0]['candidate_source_line'], 'A reply')
+        self.assertNotIn('Useful', json.dumps(feedback['candidate_source_lines']))
         self.assertEqual(feedback['validation_errors'], [
             self.fixture['grade'] + ': acceptance[1] affirmative verdict needs an exact reply quote'])
         self.assertEqual((self.root / self.fixture['output']).read_bytes(), b'A reply')
         self.assertEqual((self.root / (self.fixture['grade'] + '.raw-1.txt')).read_bytes(), bad.encode())
         self.assertEqual((self.root / (self.fixture['grade'] + '.raw-2.txt')).read_bytes(), good.encode())
         self.assertEqual(native.call_count, 3)
+
+    def test_item_mismatch_retry_repeats_exact_prepared_text_only_to_grader(self):
+        from unittest import mock
+        exact = 'Preserves laptop wiping order'
+        self.fixture['acceptance'] = [exact]
+        self.save()
+        bad = json.dumps({'fixture': 'one', 'acceptance': [{'item': 'Preserves laptop wipe order',
+                         'verdict': 'fail', 'evidence': 'Not shown', 'quote': ''}], 'traits': [], 'must_not': []})
+        corrected = json.loads(bad)
+        corrected['acceptance'][0]['item'] = exact
+        good = json.dumps(corrected)
+        with mock.patch.object(evals_runner, 'session', side_effect=[
+                ('A reply', {'requested_model': 'subject-model'}),
+                (bad, {'requested_model': 'grader-model'}),
+                (good, {'requested_model': 'grader-model'})]) as native:
+            self.assertEqual(self.run_fake(), 0)
+        marker = '\n\n## Previous invalid grade and validation errors (untrusted data)\n'
+        first, retry = [call.args[1] for call in native.call_args_list[1:]]
+        self.assertTrue(retry.startswith(first + marker))
+        feedback = json.loads(retry.split(marker, 1)[1])
+        self.assertEqual(feedback['previous_response'], bad)
+        self.assertEqual(feedback['prepared_item_lists'], [
+            {'section': 'acceptance', 'items': [{'index': 1, 'item': exact}]}])
+        self.assertNotIn(exact, native.call_args_list[0].args[1])
+        self.assertEqual(native.call_count, 3)  # Correctly formed FAIL is final, never rerolled.
+        self.assertEqual((self.root / self.fixture['output']).read_bytes(), b'A reply')
+        self.assertEqual((self.root / (self.fixture['grade'] + '.raw-1.txt')).read_text(), bad)
+        self.assertEqual((self.root / (self.fixture['grade'] + '.raw-2.txt')).read_text(), good)
+        self.assertEqual(json.loads((self.root / self.fixture['grade']).read_text()), corrected)
+
+    def test_item_retry_context_only_includes_sections_with_exact_list_errors(self):
+        fixture = dict(self.fixture, traits=['First literal item', 'Second literal item'])
+        errors = [fixture['grade'] + ': traits items must match the prepared list exactly and in order',
+                  fixture['grade'] + ': must_not items must match the prepared list exactly and in order']
+        self.assertEqual(evals_runner.item_retry_context(fixture, errors), [
+            {'section': 'traits', 'items': [{'index': 1, 'item': 'First literal item'},
+                                          {'index': 2, 'item': 'Second literal item'}]},
+            {'section': 'must_not', 'items': []}])
+        self.assertEqual(evals_runner.item_retry_context(fixture, ['invalid-grade-json']), [])
+        self.assertEqual(evals_runner.item_retry_context(fixture, [
+            fixture['grade'] + ': acceptance[1] affirmative verdict needs an exact reply quote']), [])
+
+    def test_quote_retry_context_is_literal_source_not_normalized_or_rubric(self):
+        reply = 'Unrelated line.\n**Owner:** security lead.\nKeep unresolved findings visible.'
+        grade = {'acceptance': [{'item': 'DO NOT COPY CRITERION', 'verdict': 'pass',
+                                 'quote': 'Owner: security lead.', 'evidence': 'Claimed support'}]}
+        errors = ['grade.json: acceptance[1] affirmative verdict needs an exact reply quote']
+        context = evals_runner.quote_retry_context(json.dumps(grade), errors, reply)
+        self.assertEqual(context, [{'section': 'acceptance', 'index': 1, 'line_number': 2,
+                                    'candidate_source_line': '**Owner:** security lead.'}])
+        self.assertNotIn('DO NOT COPY CRITERION', json.dumps(context))
+        self.assertIn(context[0]['candidate_source_line'], reply)
+        self.assertEqual(evals_runner.quote_retry_context('{}', ['invalid-grade-json'], reply), [])
+        self.assertEqual(evals_runner.quote_retry_context('not json', errors, reply), [])
+        self.assertEqual(evals_runner.evals.check_grade(
+            dict(self.fixture, acceptance=['DO NOT COPY CRITERION']),
+            dict(grade, fixture='one', traits=[], must_not=[]), reply=reply),
+            [self.fixture['grade'] + ': acceptance[1] affirmative verdict needs an exact reply quote'])
+
+    def test_separate_checklist_and_revision_receive_no_grader_context(self):
+        audit = evals_runner.checker_input('Original user request and shipped card', 'Previous draft')
+        self.assertTrue(audit.startswith('Original user request and shipped card'))
+        self.assertIn('requirement-by-requirement checklist', audit)
+        self.assertIn('not part', audit)
+        self.assertIn('live-incident', audit)
+        self.assertIn('requested structure', audit)
+        self.assertIn('supplied source', audit)
+        revised = evals_runner.revision_input('Original task', 'Previous draft', 'Audit text')
+        self.assertIn('Return ONLY the complete requested deliverable', revised)
+        self.assertIn('Do not include the audit', revised)
+        self.assertNotIn('grader', audit + revised)
+        self.assertIn('specific unmet requirement', audit)
+        self.assertIn('preserve already-satisfied text', revised)
+        self.assertIn('safeguards verbatim', revised)
+        self.assertIn('keep those unknown', revised)
 
     def test_valid_failing_grade_is_not_retried(self):
         from unittest import mock
@@ -503,6 +581,178 @@ if '# Grade one specialist reply' in prompt:
             with self.assertRaisesRegex(ValueError, 'effort'):
                 self.run_fake()
             native.assert_not_called()
+
+    def test_fixed_revision_keeps_first_draft_and_grade_and_hides_rubric(self):
+        from unittest.mock import patch
+        from packlib import evals
+        self.record.update(revision_rounds=1, checker='checker-model', schema=3, run='test', version='1', commit='test',
+                           host='fake native', tools='none', date='2026-10-24')
+        self.fixture.update(family='test', kind='task', role='test/one', pack='test.md')
+        self.save()
+        calls = []
+        def native(command, prompt, model, timeout, effort=None):
+            calls.append((prompt, model))
+            if model == 'subject-model':
+                self.assertNotIn('GRADE', prompt)
+                self.assertNotIn('Useful', prompt)
+                reply = 'A reply revised' if 'One bounded revision' in prompt else 'A reply first'
+            elif model == 'checker-model':
+                self.assertNotIn('GRADE', prompt)
+                self.assertNotIn('Useful', prompt)
+                self.assertEqual(effort, 'high')
+                reply = 'AUDIT_ONLY: check the supplied draft.'
+            else:
+                quote = 'A reply revised' if 'A reply revised' in prompt else 'A reply first'
+                reply = json.dumps({'fixture': 'one', 'acceptance': [{'item': 'Useful',
+                    'verdict': 'pass' if 'revised' in quote else 'partial', 'evidence': quote,
+                    'quote': quote}], 'traits': [], 'must_not': []})
+            return reply, {'requested_model': model, 'reported_models': [model],
+                           'input_sha256': evals_runner.digest(prompt.encode()),
+                           **({'requested_effort': effort} if effort else {})}
+        with patch.object(evals_runner, 'session', native):
+            self.assertEqual(self.run_fake(), 0)
+            self.assertEqual(len(calls), 5)
+            self.assertEqual(self.run_fake(), 0)
+            self.assertEqual(len(calls), 5)
+        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        self.assertEqual(receipt['first_draft']['status'], 'complete')
+        self.assertEqual((self.folder / 'output.first-draft').read_text(), 'A reply first')
+        self.assertEqual((self.folder / 'output').read_text(), 'A reply revised')
+        audit_path = self.folder / 'output.checklist.md'
+        self.assertEqual(audit_path.read_text(), 'AUDIT_ONLY: check the supplied draft.')
+        self.assertNotIn('AUDIT_ONLY', (self.folder / 'output').read_text())
+        self.assertEqual(receipt['checker']['reported_models'], ['checker-model'])
+        self.assertIn('AUDIT_ONLY', calls[3][0])
+        first = evals._grades(self.root, self.record, first_draft=True)
+        final = evals._grades(self.root, self.record)
+        self.assertEqual(evals.outcome(first['one']), 'PARTIAL')
+        self.assertEqual(evals.outcome(final['one']), 'PASS')
+        report = evals.report(self.root, 'test').read_text()
+        self.assertIn('| `one` | PARTIAL | PASS |', report)
+        self.assertIn('| Result phase | Final workflow |', report)
+        self.assertIn('| Result phase | First draft |', (self.folder / 'FIRST-DRAFT.md').read_text())
+        (self.root / 'evals').mkdir()
+        baseline = evals.save_baseline(self.root, 'test')
+        saved = json.loads(baseline.read_text())
+        self.assertEqual(saved['revision_rounds'], 1)
+        self.assertEqual(saved['checker'], 'checker-model')
+        saved['checker'] = 'other-checker'
+        baseline.write_text(json.dumps(saved))
+        with self.assertRaisesRegex(ValueError, 'checker model changed'):
+            evals.compare(self.root, 'test')
+        saved['checker'] = 'checker-model'
+        saved['revision_rounds'] = 0
+        baseline.write_text(json.dumps(saved))
+        with self.assertRaisesRegex(ValueError, 'revision workflow changed'):
+            evals.compare(self.root, 'test')
+        audit_bytes = audit_path.read_bytes()
+        audit_path.write_text('tampered audit')
+        with self.assertRaisesRegex(ValueError, 'checker audit'):
+            evals._grades(self.root, self.record)
+        audit_path.write_bytes(audit_bytes)
+        receipt_path = self.folder / 'execution.json'
+        original_receipt = receipt_path.read_bytes()
+        changed = json.loads(original_receipt)
+        changed['fixtures']['one']['checker']['input_sha256'] = '0' * 64
+        receipt_path.write_text(json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, 'checker audit'):
+            evals._grades(self.root, self.record)
+        receipt_path.write_bytes(original_receipt)
+        changed = json.loads(original_receipt)
+        changed['fixtures']['one']['checker']['requested_effort'] = 'low'
+        receipt_path.write_text(json.dumps(changed))
+        with self.assertRaisesRegex(ValueError, 'checker audit'):
+            evals._grades(self.root, self.record)
+        receipt_path.write_bytes(original_receipt)
+        wrong_checker = dict(self.record, checker='different-checker')
+        with self.assertRaisesRegex(ValueError, 'checker audit'):
+            evals._grades(self.root, wrong_checker)
+        (self.folder / 'output.first-draft').write_text('changed')
+        with self.assertRaisesRegex(ValueError, 'first draft evidence'):
+            evals._grades(self.root, self.record)
+        self.fake.unlink()
+        self.assertEqual(self.run_fake(), 1)
+
+    def test_passing_draft_is_always_revised_and_missing_phase_fails_closed(self):
+        self.record['revision_rounds'] = 1
+        self.save()
+        self.assertEqual(self.run_fake(), 0)
+        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        self.assertEqual(receipt['first_draft']['status'], 'complete')
+        self.assertNotEqual(receipt['subject']['input_sha256'],
+                            receipt['first_draft']['subject']['input_sha256'])
+        self.assertEqual(json.loads((self.folder / 'grade.first-draft').read_text())['acceptance'][0]['verdict'],
+                         'pass')
+        (self.folder / 'grade.first-draft').unlink()
+        self.fake.unlink()
+        self.assertEqual(self.run_fake(), 1)
+
+    def test_revision_denial_retains_first_draft_without_retry(self):
+        from unittest.mock import patch
+        self.record['revision_rounds'] = 1
+        self.save()
+        native = evals_runner.session
+        calls = []
+        def deny_revision(command, prompt, model, timeout, effort=None):
+            calls.append(prompt)
+            if 'One bounded revision' in prompt:
+                raise evals_runner.RunError('permission')
+            return native(command, prompt, model, timeout, effort)
+        with patch.object(evals_runner, 'session', deny_revision):
+            self.assertEqual(self.run_fake(), 1)
+            self.assertEqual(self.run_fake(), 1)
+        self.assertEqual(len(calls), 4)
+        receipt = json.loads((self.folder / 'execution.json').read_text())['fixtures']['one']
+        self.assertEqual(receipt['error'], 'permission')
+        self.assertEqual(receipt['first_draft']['status'], 'complete')
+        self.assertTrue((self.folder / 'grade.first-draft').is_file())
+        self.assertFalse((self.folder / 'output').exists())
+
+    def test_revision_mode_cannot_relabel_a_completed_single_draft(self):
+        self.assertEqual(self.run_fake(), 0)
+        self.record['revision_rounds'] = 1
+        self.save()
+        self.fake.unlink()
+        self.assertEqual(self.run_fake(), 1)
+
+    def test_missing_audit_prevents_resume_without_replay(self):
+        self.record['revision_rounds'] = 1
+        self.save()
+        self.assertEqual(self.run_fake(), 0)
+        (self.folder / 'output.checklist.md').unlink()
+        self.fake.unlink()
+        self.assertEqual(self.run_fake(), 1)
+
+    def test_checker_denial_preserves_draft_and_stops_without_revision(self):
+        from unittest.mock import patch
+        self.record.update(revision_rounds=1, checker='checker-model')
+        self.save()
+        original = evals_runner.session
+        calls = []
+        def native(command, prompt, model, timeout, effort=None):
+            calls.append(model)
+            if model == 'checker-model':
+                raise evals_runner.RunError('billing')
+            return original(command, prompt, model, timeout, effort)
+        with patch.object(evals_runner, 'session', native):
+            self.assertEqual(self.run_fake(), 1)
+            self.assertEqual(self.run_fake(), 1)
+        self.assertEqual(calls, ['subject-model', 'grader-model', 'checker-model'])
+        self.assertTrue((self.folder / 'grade.first-draft').exists())
+        self.assertFalse((self.folder / 'output').exists())
+
+    def test_checker_is_rejected_without_revision(self):
+        self.record['checker'] = 'checker-model'
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'checker requires revision1'):
+            self.run_fake()
+
+    def test_invalid_revision_count_rejected_before_calls(self):
+        for value in (2, -1, True, '1'):
+            self.record['revision_rounds'] = value
+            self.save()
+            with self.assertRaisesRegex(ValueError, 'revision rounds'):
+                self.run_fake()
 
     def test_invalid_run_and_parallel(self):
         for name in ['../escape', '']:

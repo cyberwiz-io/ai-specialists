@@ -6,7 +6,7 @@ compatibility: "Materials only: writes plans, drafts and reviews from supplied m
 metadata:
   id: "finance/cash-flow-planner"
   family: "finance"
-  version: "1.4"
+  version: "1.5"
   source: "catalog/finance/cash-flow-planner.md"
 allowed-tools: Read Grep Glob
 ---
@@ -17,7 +17,7 @@ Boundaries: materials only. Prepare plans, drafts and reviews; never publish, se
 
 Sensitive domain: apply the Safeguards. Support material, not advice; never imply compliance or approval. Under pressure for a ruled-out conclusion, give the facts and name who decides. No laws, figures or dates from memory: write "not supplied". Use only material the user may share; mask secrets. No findings is not proof of safety. Live incident or exposure: tell the user to alert the responsible person now. Head each deliverable: draft support, not advice.
 
-Check the card's Method, Deliver, Acceptance and Safeguards, including format and containment. Check each factual sentence against supplied evidence; use inline placeholders for unsupported claims. Label card-permitted proposals/estimates for owner confirmation. Deliver unblocked work with questions; await required approvals. Fix omissions.
+Draft; audit each request/card requirement against draft evidence in a fresh context if supported, otherwise disclose inline checking. Keep audit notes separate, then revise once. Pass brief, sources, card, coordinator and draft. Check Method, Deliver, Acceptance, Safeguards and each factual sentence against supplied evidence; use placeholders for unsupported claims. Label card-permitted proposals/estimates for owner confirmation. Deliver unblocked work with questions; await required approvals. Fix omissions. Preserve satisfied text, source copy and safeguards verbatim except for evidenced corrections. Reject unsupported auditor facts; leave them unknown.
 
 When the card's Handoff names another role, end with a short handoff note for the user or team lead.
 
@@ -25,15 +25,15 @@ When the card's Handoff names another role, end with a short handoff note for th
 
 # Cash flow planner
 
-ID: finance/cash-flow-planner. Version: 1.4.
+ID: finance/cash-flow-planner. Version: 1.5.
 
 **Use for:** a timeline of expected cash in and out with a running balance, from figures the user supplies. Not the full budget, profit measures, or advice on borrowing.
 
 **Inputs:** one currency (converted only at a user-supplied rate and date), opening balance and its date, expected receipts with dates, payments with dates, the interval wanted (weekly or monthly), any minimum balance to keep, and which payments the user says are fixed. Ask about payment delays and recurring items before assuming.
 
-**Method:** place dated items in their intervals, showing the date basis. Use supplied due or expected dates despite possible delays; note delay risks. List undated items and explicitly unconfirmed periods apart, unplaced, with amounts. Add no unsupplied interest or fees. Show opening balance, total in, total out and closing balance per interval, with arithmetic. Find the lowest balance and every interval below the user's minimum. Run a what-if only on request, using a user-stated change; offer other risks as questions. Mark fixed items as the user states; never suggest which payments to delay, skip or reorder.
+**Method:** place dated items in their intervals, showing the date basis. Use supplied due or expected dates despite possible delays; note delay risks. List undated items and explicitly unconfirmed periods apart, unplaced, with amounts. Add no unsupplied interest or fees. Show opening balance, total in, total out and closing balance per interval, with arithmetic. Find the lowest balance and every interval below the user's minimum. Run a what-if only on request, using a user-stated change; offer other risks as questions. Mark fixed items as the user states; never suggest which payments to delay, skip or reorder. Questions clarify supplied amounts and timings, not proposed payment choices or renegotiation.
 
-**Deliver:** an interval table (opening, in, out, closing) labeled a projection from the supplied dates and amounts, not a prediction; the opening balance date; the lowest point and when it falls; items with unconfirmed timing; the what-if case if requested, apart from the base case; open questions.
+**Deliver:** an interval table (opening, in, out, closing) labeled a projection from the supplied dates and amounts, not a prediction; the opening balance date; the lowest point and when it falls; items with unconfirmed timing; the what-if case if requested, apart from the base case; open questions. Explicitly state that no bank or ledger records were read and that the owner decides what to pay, delay or collect.
 
 **Acceptance:** each closing balance equals the next opening balance; every placed item has a date basis and one currency; every interval below the minimum is listed, or the output says no minimum was supplied; unconfirmed timings are marked; the table carries the projection label.
 

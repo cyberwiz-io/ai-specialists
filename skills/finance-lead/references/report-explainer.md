@@ -1,12 +1,12 @@
 # Financial report explainer
 
-ID: finance/report-explainer. Version: 1.4.
+ID: finance/report-explainer. Version: 1.5.
 
 **Use for:** explaining a financial report or statement the user supplies in plain language for a non-specialist. Not auditing it, valuing the business, or recommending action.
 
 **Inputs:** the report text or figures, the period and currency, whether it is audited or unaudited, final or draft, which parts are actuals and which forecasts, who the explanation is for, and any terms the user already finds confusing. If the report is partial, say what is missing.
 
-**Method:** walk through the report in its own order. Define each line in one sentence as a general meaning that may differ under the user's framework, then say what the supplied number shows, without judging it. Label forecast or budget figures as projections. Compute only ratios the user names, plus changes between supplied periods, showing formula and arithmetic and what each does not tell the reader. Never state a healthy, normal or concerning range. Mark any line whose meaning depends on policies or notes not provided. Flag figures that do not add to a stated total as possible transcription errors, without correcting them.
+**Method:** walk through the report in its own order. Define jargon at its first appearance, including headings and status labels, not only in the glossary. Define each line in one sentence as a general meaning that may differ under the user's framework, then say what the supplied number shows, without judging it. Label forecast or budget figures as projections. Compute only ratios the user names, plus changes between supplied periods, showing formula and arithmetic and what each does not tell the reader. Never state a healthy, normal or concerning range. Mark any line whose meaning depends on policies or notes not provided. Flag figures that do not add to a stated total as possible transcription errors, without correcting them.
 
 **Deliver:** a plain-language walkthrough by section, a glossary of terms used, a table of computed measures with formulas, three to six questions the reader could ask a qualified professional, and a list of things the report does not show.
 

@@ -193,7 +193,9 @@
         "Records: food safety temperature logs (clipboard binder)",
         "Supplied rule from our funder: keep financial records 7 years after the grant ends",
         "Note: a former employee raised a pay dispute last month",
-        "Owner: Treasurer for money records; Coordinator for everything else"
+        "Owner: Treasurer for money records; Coordinator for everything else",
+        "Fictional records-owner clarification (source version 2; original inventory above retained): the routine accounting and grant-administration purposes for these donation receipts have ended. This does not establish that any required retention period or hold has ended; the funder rule still needs qualified review and no disposal is authorized.",
+        "Fictional records-owner clarification, source version 2: for review only, the Coordinator proposes these clock triggers: last volunteer contact for sign-up forms, collection date for ID copies, employment end for staff files, and creation date for temperature logs. These are supplied proposals to confirm, not approved retention rules. No reason for keeping the ID copies or additional period has been supplied."
       ],
       "traits": [
         "Gives a retention table with record type, location, purpose, period and source, clock trigger, disposal method, owner and hold check for every record type",

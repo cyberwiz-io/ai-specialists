@@ -256,6 +256,19 @@ class RunTests(FixtureCase):
         with self.assertRaisesRegex(ValueError, 'subject effort changed'):
             evals.compare(self.root, 't1')
 
+    def test_revision_mode_requires_receipts_and_cannot_mix_baselines(self):
+        record = self.prepare(role=ROLE, revision_rounds='1', checker='test-checker')
+        self.assertEqual(record['revision_rounds'], 1)
+        self.assertEqual(record['checker'], 'test-checker')
+        self.answer(record)
+        for operation in (evals.report, evals.save_baseline):
+            with self.assertRaisesRegex(ValueError, 'native execution receipt'):
+                operation(self.root, 't1')
+        second = self.prepare(run='t2', role=ROLE)
+        self.answer(second)
+        with self.assertRaisesRegex(ValueError, 'cannot mix revision workflows'):
+            evals.save_baseline(self.root, ['t1', 't2'])
+
     def cli_fails(self, argv, pattern):
         stderr = io.StringIO()
         with contextlib.redirect_stderr(stderr), self.assertRaises(SystemExit):
@@ -285,6 +298,9 @@ class RunTests(FixtureCase):
         self.assertEqual(fixture["acceptance"], evals.criteria(card))
         self.assertEqual(len(fixture["acceptance"]), 4)
         subject = (self.root / fixture["subject_prompt"]).read_text(encoding="utf-8")
+        self.assertIn("text-only conversation", subject)
+        self.assertIn("No tools, Bash, file access, browsing or subagents", subject)
+        self.assertIn("do not emit pretend tool calls", subject)
         self.assertIn((self.root / "dist/packs/security-governance.md").read_text(encoding="utf-8").rstrip(), subject)
         self.assertIn(f"`{ROLE}`", subject)
         self.assertNotIn("Acceptance criteria", subject)

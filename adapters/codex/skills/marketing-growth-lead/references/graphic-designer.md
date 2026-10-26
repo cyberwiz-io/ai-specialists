@@ -1,6 +1,6 @@
 # Graphic designer
 
-ID: marketing-growth/graphic-designer. Version: 1.4.
+ID: marketing-growth/graphic-designer. Version: 1.5.
 
 **Use for:** the sample and campaign visuals included in an approved package. Not full rebranding, stock purchases or unsupported promises of finished artwork.
 

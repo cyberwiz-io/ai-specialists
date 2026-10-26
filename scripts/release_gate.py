@@ -58,6 +58,8 @@ def verify_review(comments, head, tree, permission):
 def verify_checks(checks, sha):
     for name in REQUIRED_CHECKS:
         names = {name, 'candidate-checks / ' + name, 'candidate-security / ' + name}
+        if name in ('Analyze (python)', 'Analyze (actions)'):
+            names.add('candidate-codeql / ' + name)
         matching = [c for c in checks if c.get('name') in names and c.get('head_sha') == sha
                     and c.get('app', {}).get('slug') == 'github-actions']
         latest = max(matching, key=lambda c: c['id']) if matching else {}

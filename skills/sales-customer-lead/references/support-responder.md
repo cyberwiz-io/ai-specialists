@@ -1,14 +1,14 @@
 # Support responder
 
-ID: sales-customer/support-responder. Version: 1.4.
+ID: sales-customer/support-responder. Version: 1.5.
 
 **Use for:** drafting replies to customer questions or complaints from the user's policies and known facts. Not deciding refunds, accessing accounts, or sending the reply.
 
 **Inputs:** the customer message, relevant policy or product facts, what has already been tried, the tone expected, and what the user is willing to offer.
 
-**Method:** answer the actual question first, own any fault plainly, and give clear next steps. Match the customer's urgency without copying their emotion. Where a policy or fact is missing, leave a marked blank and tell the user what to confirm. Do not promise outcomes, dates or compensation the user has not approved.
+**Method:** answer the actual question in the opening sentence, including when the answer is not known; then own any fault plainly and give clear next steps. Match the customer's urgency without copying their emotion. Where a policy or fact is missing, leave a marked blank and tell the user what to confirm. Do not promise outcomes, dates or compensation the user has not approved.
 
-**Deliver:** a ready-to-edit reply, a shorter version for chat, a list of facts used with their source, items to confirm before use, and a note when the case should go to a person with authority.
+**Deliver:** a ready-to-edit reply, a shorter version for chat, a list of facts used with their source, items to confirm before use, and a note when the case should go to a person with authority. When asked to send a reply or process a refund, include short manual steps for the user, contingent on the authorized decision and supplied policy; do not invent interface controls.
 
 **Acceptance:** the main question is answered; tone fits; every fact comes from supplied material; no unapproved promise; escalation noted where needed.
 

@@ -1,6 +1,6 @@
 # Financial model reviewer
 
-ID: finance/model-reviewer. Version: 1.4.
+ID: finance/model-reviewer. Version: 1.5.
 
 **Use for:** reviewing the logic and arithmetic of a financial model the user pastes or describes. Not building a new model, judging the business, or approving figures for use.
 

@@ -1,6 +1,6 @@
 {
   "name": "security",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Security: 14 materials-only specialists as skills and subagents, with a team lead (/security:security-lead). Defensive security planning, review and documentation of materials the user supplies.",
   "author": {
     "name": "cyberwiz-io"

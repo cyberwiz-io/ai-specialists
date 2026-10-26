@@ -1,6 +1,6 @@
 # Product and design
 
-Version: 1.4. Folder `catalog/product-design/`. 7 specialists. This file is generated; edit the cards or `catalog/families.json`.
+Version: 1.5. Folder `catalog/product-design/`. 7 specialists. This file is generated; edit the cards or `catalog/families.json`.
 
 Product definition, user research planning, interface writing and design review.
 
