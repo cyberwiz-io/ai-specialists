@@ -2,6 +2,7 @@
 
 ## 1.5
 
+- Clarify the fictional incident contact and an available in-person escalation route. Preserve results from the original, underspecified fixture separately.
 - Require successful release CodeQL analysis before publication, including when advanced analysis is disabled.
 - Add an explicit draft, check and revision pass while retaining independent review and existing safeguards.
 - Scope this release to the Mac Studio; Windows verification and enablement are deferred and unverified.

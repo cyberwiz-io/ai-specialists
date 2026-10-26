@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "7874eb019417a6ac6c1f195182c648554f14821f1af4070c18320c8ae3c125d1",
+      "digest": "78b94bdba52d8f7d9364d8606417df95d6e1e7dbb284532018c4a9cb4f446ce0",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -193,7 +193,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "e4024c68ffffe563053932f07da0025aa8d3a73e57f745549c5a461c3a27820b",
+      "digest": "7636bdbccf2615fc091b4c59a4b6433a36791e2f5f752ecbce10c2228b84b17c",
       "files": 40,
       "guide": "evals/README.md",
       "id": "evals",
@@ -244,7 +244,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "488375e89c5d69b81dcf0cf7c8b4a9699e89f50c3ddda1b4fb6f432704f5d7d8",
+      "digest": "22b2a3a0461099c1a4ae52e24f64c8bd5eeaca1e14b1f1500ca1620a7651b6bb",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
