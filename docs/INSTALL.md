@@ -4,7 +4,7 @@ You do not have to paste a pack into a chat. Each family is also an installable 
 
 Nothing here adds a capability. A skill is advisory instructions, and the plugins are materials only: they do not publish, send, schedule, connect or run anything.
 
-The commands below describe candidate install paths. Current Mac Studio acceptance for Claude Code and Codex is pending; Windows verification and enablement are deferred by the owner, and no 1.5 release has been published. The release download links are retained for the planned assets; working downloads require actual publication and post-publication verification. Older trials below are historical evidence only.
+The commands below describe candidate install paths. Current Mac Studio acceptance for Claude Code and Codex is pending; Windows installation and discovery are observed for the current candidate (see [Windows](WINDOWS.md)), and no 1.5 release has been published. The release download links are retained for the planned assets; working downloads require actual publication and post-publication verification. Older trials below are historical evidence only.
 
 ## What gets installed
 
@@ -108,6 +108,6 @@ The lead skill for a family is `<family>-lead`, for example `security-lead`. Sec
 
 All the files above are generated from the cards by the build and checked for structure: names, description limits, links and freshness. `python3 -B scripts/pack.py stats` estimates the tokens each output and plugin adds.
 
-Current acceptance is pending for Claude Code and Codex on the Mac Studio; Windows is deferred and unverified; see [host acceptance](HOST-ACCEPTANCE.md). Inventory versions are not test results. Historical 1.0 Claude Code marketplace installs, Claude Code 2.1.302 validation and local smoke tests, the Antigravity CLI plan-mode run, and earlier Codex attempts are described in [Validation](VALIDATION.md); none establishes current acceptance. No 1.5 release, release download, claude.ai upload, or unaided-user trial is recorded. Other hosts remain unaccepted. Report observed behavior with the exact host, version, device and source ref.
+Current acceptance is pending for Claude Code and Codex on the Mac Studio; Windows installation and catalog discovery are observed, with full behavioral acceptance still pending; see [host acceptance](HOST-ACCEPTANCE.md). Inventory versions are not test results. Historical 1.0 Claude Code marketplace installs, Claude Code 2.1.302 validation and local smoke tests, the Antigravity CLI plan-mode run, and earlier Codex attempts are described in [Validation](VALIDATION.md); none establishes current acceptance. No 1.5 release, release download, claude.ai upload, or unaided-user trial is recorded. Other hosts remain unaccepted. Report observed behavior with the exact host, version, device and source ref.
 
 The files in `skills/`, `plugins/`, `adapters/` (except each README), `.claude-plugin/`, `.cursor-plugin/`, `.agents/plugins/` and `gemini-extension.json` are generated. To change a specialist, edit its card in `catalog/` and rebuild; see [Contributing](../CONTRIBUTING.md).

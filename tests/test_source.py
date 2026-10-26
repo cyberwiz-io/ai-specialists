@@ -22,7 +22,7 @@ class SourceTests(unittest.TestCase):
         self.root = Path(self.tmp.name) / "repo"
         self.root.mkdir()
         self.write("config/modules.json", json.dumps({"local_material": {
-            "directories": [".claude/skills", ".agents/skills", ".codex/agents"],
+            "directories": [".claude/skills", ".agents/skills", ".codex/agents", ".venv-policy"],
             "files": [".codex/hooks.json"],
             "sources": [".claude/skills/card-evals"]}}))
         self.write(".claude/skills/card-evals/SKILL.md", "owned")
@@ -109,3 +109,18 @@ class SourceTests(unittest.TestCase):
         for name in ("../outside", "/tmp/outside", "docs/../README.md"):
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Unsafe source path"):
                 config.safe_path(self.root, name)
+
+    def test_policy_environment_is_local_but_tracked_files_remain_checked(self):
+        self.write(".venv-policy/Lib/site-packages/example.py", "local dependency")
+        self.assertNotIn(".venv-policy/Lib/site-packages/example.py", source.files(self.root))
+        self.write(".venv-policy/tracked.zip", "fixture")
+        self.git("add", ".venv-policy/tracked.zip")
+        self.assertIn(".venv-policy/tracked.zip", source.files(self.root))
+        self.assertTrue(check.check_archives(self.root))
+
+    def test_policy_environment_without_git_is_not_silently_hidden(self):
+        self.write(".venv-policy/unknown.py", "unknown source")
+        from unittest.mock import patch
+        with patch.object(source, "tracked_files", return_value=None):
+            with self.assertRaisesRegex(ValueError, "Unclassified local material"):
+                source.files(self.root)
