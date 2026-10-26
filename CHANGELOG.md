@@ -2,9 +2,11 @@
 
 ## 1.5
 
+- Require successful release CodeQL analysis before publication, including when advanced analysis is disabled.
 - Add an explicit draft, check and revision pass while retaining independent review and existing safeguards.
 - Scope this release to the Mac Studio; Windows verification and enablement are deferred and unverified.
 - Preserve first-draft and revised-workflow evaluation evidence separately.
+- Require incident-plan actions to use supplied capabilities or remain owner-confirmation gaps. Count requirements questions across the whole reply, including requests disguised as notes.
 
 ## Unreleased
 

@@ -47,7 +47,7 @@
         "maintenance"
       ],
       "dependencies": [],
-      "digest": "8b9c203ce8514cc9d627ae091d39b416db1140b7707a36817e89d734840fe1d2",
+      "digest": "7874eb019417a6ac6c1f195182c648554f14821f1af4070c18320c8ae3c125d1",
       "files": 22,
       "guide": "pack/START-HERE.md",
       "id": "instructions",
@@ -139,7 +139,7 @@
         "instructions",
         "catalog-manifest"
       ],
-      "digest": "ba0ee56b40dfcf019fdb94270f70cd4b74601e846bfc372d2381898a8f7d0b65",
+      "digest": "4008d7fb00cb091ca1bdb4071a8414355491e28390a86c422e33c39edf5dd305",
       "files": 53,
       "guide": "CONTRIBUTING.md",
       "id": "maintenance",
@@ -244,7 +244,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "600901e5008a6876606ed0d8aa358caed47a50873ff06854e40ab1042d0dafad",
+      "digest": "488375e89c5d69b81dcf0cf7c8b4a9699e89f50c3ddda1b4fb6f432704f5d7d8",
       "files": 459,
       "guide": "docs/INSTALL.md",
       "id": "claude-plugins",
@@ -291,7 +291,7 @@
         "catalog-manifest",
         "maintenance"
       ],
-      "digest": "ed10c87fb0b26f961a6f06e15188ee16123dc17d9986400546aee72d289b7bbb",
+      "digest": "546b37cf8eb7e5b9eda6f3dbdd72be5ea0f16e4bec39daada2a36d949a76fcdb",
       "files": 285,
       "guide": "docs/INSTALL.md",
       "id": "skills",
@@ -330,7 +330,7 @@
         "skills",
         "maintenance"
       ],
-      "digest": "349619b1dd44a7ef66006b5335976de1b753452633484a110ae3bd1a1afb9c42",
+      "digest": "de84313b393a5e9ac8a2d538dcafa719225b98f070c9a65f71619adbcc77ec5b",
       "files": 471,
       "guide": "adapters/claude-code/README.md",
       "id": "host-adapters",
@@ -378,7 +378,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "9897311553131d2350bdc94496503674d6931aa70a3ca4b825633f143f1e1474",
+      "digest": "1a132a0ac6708657dd4cc96537c97ef7bf24bf148317e2b4cb2aafa9eb563c18",
       "files": 15,
       "guide": "catalog/security/INDEX.md",
       "id": "family-security",
@@ -452,7 +452,7 @@
       "dependencies": [
         "instructions"
       ],
-      "digest": "755859ee3c9849931cfaf2e6eb9838ffa57865e4c959131a8fec4b453205d6fe",
+      "digest": "07fa519a98eb3cf1debbec6ab4d8748f9f4dd6e281977dcb92d0b1f95263fc23",
       "files": 12,
       "guide": "catalog/software-engineering/INDEX.md",
       "id": "family-software-engineering",

@@ -95,7 +95,7 @@ jobs:
       - run: python .engineering/check.py
       - run: python -m unittest discover -s .engineering -p 'test_*.py'
   publish:
-    if: ${{ always() && needs.provenance.result == 'success' && needs.candidate-checks.result == 'success' && needs.candidate-security.result == 'success' && needs.policy.result == 'success' && (needs.candidate-codeql.result == 'success' || (vars.CODEQL_ADVANCED != 'true' && needs.candidate-codeql.result == 'skipped')) }}
+    if: ${{ always() && needs.provenance.result == 'success' && needs.candidate-checks.result == 'success' && needs.candidate-security.result == 'success' && needs.policy.result == 'success' && needs.candidate-codeql.result == 'success' }}
     needs: [provenance, candidate-checks, candidate-security, candidate-codeql, policy]
     runs-on: ${{ vars.LOCAL_RELEASE_RUNNER != '' && fromJSON(format('["self-hosted","macOS","ARM64","{0}"]', vars.LOCAL_RELEASE_RUNNER)) || 'ubuntu-24.04' }}
     timeout-minutes: 15
