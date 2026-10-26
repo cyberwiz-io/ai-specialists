@@ -23,6 +23,11 @@ MAINTENANCE_PATHS = {
 BOOTSTRAP_PATHS = {'.github/workflows/check.yml', 'scripts/run_tests.py', 'tests/test_run_tests.py'}
 BOOTSTRAP_HOOK_PATHS = {'.claude/settings.json', '.claude/CLAUDE.md'}
 MAINTENANCE_TESTS = ('test_source.py', 'test_run_tests.py')
+SESSION_CHECK_OLD = ('cd "$CLAUDE_PROJECT_DIR" && (python3 -B scripts/pack.py check 2>&1 || echo '
+                     '"pack.py check FAILED: the repo is not green. Tell the user and fix or report this before other work.")')
+SESSION_CHECK_NEW = ('cd "$CLAUDE_PROJECT_DIR" && (python_cmd=$(command -v python || command -v python3) '
+                     '&& "$python_cmd" -B scripts/pack.py check 2>&1 || echo '
+                     '"pack.py check FAILED: the repo is not green. Tell the user and fix or report this before other work.")')
 
 
 def git(*args):
@@ -49,9 +54,18 @@ def focused_patterns(base):
         for name in names & BOOTSTRAP_HOOK_PATHS:
             before = git('show', base + ':' + name)
             after = git('show', 'HEAD:' + name)
-            old = b'python3 -B scripts/pack.py check'
-            if before.count(old) != 1 or after != before.replace(old, b'python -B scripts/pack.py check', 1):
-                return None
+            if name == '.claude/settings.json':
+                expected = json.loads(before)
+                hook = expected['hooks']['SessionStart'][0]['hooks'][0]
+                if hook['command'] != SESSION_CHECK_OLD:
+                    return None
+                hook['command'] = SESSION_CHECK_NEW
+                if json.loads(after) != expected:
+                    return None
+            else:
+                old = b'python3 -B scripts/pack.py check'
+                if before.count(old) != 1 or after != before.replace(old, b'python -B scripts/pack.py check', 1):
+                    return None
         if '.gitignore' in names:
             before = git('show', base + ':.gitignore')
             after = git('show', 'HEAD:.gitignore')
@@ -68,7 +82,7 @@ def focused_patterns(base):
                 return None
         return MAINTENANCE_TESTS
     except (OSError, subprocess.CalledProcessError, UnicodeError, ValueError,
-            KeyError, TypeError, AttributeError) as error:
+            KeyError, IndexError, TypeError, AttributeError) as error:
         print('Test scope unavailable; retaining complete coverage: ' + type(error).__name__,
               file=sys.stderr)
         return None

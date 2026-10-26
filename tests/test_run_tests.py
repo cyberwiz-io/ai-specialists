@@ -77,7 +77,7 @@ class TestMaintenanceScope(unittest.TestCase):
     def test_hook_python_replacement_is_exact_and_bootstrap_only(self):
         before = b'prefix python3 -B scripts/pack.py check suffix\n'
         expected = before.replace(b'python3 -B scripts/pack.py check', b'python -B scripts/pack.py check')
-        for name in run_tests.BOOTSTRAP_HOOK_PATHS:
+        for name in ('.claude/CLAUDE.md',):
             with self.subTest(name=name), mock.patch.object(run_tests, 'git', side_effect=[
                     (name + '\0').encode(), before, expected]):
                 self.assertEqual(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE),
@@ -92,8 +92,37 @@ class TestMaintenanceScope(unittest.TestCase):
     def test_hook_replacement_requires_exactly_one_old_command(self):
         for before in (b'no check command', b'python3 -B scripts/pack.py check\n' * 2):
             with self.subTest(before=before), mock.patch.object(run_tests, 'git', side_effect=[
-                    b'.claude/settings.json\0', before,
+                    b'.claude/CLAUDE.md\0', before,
                     before.replace(b'python3 -B scripts/pack.py check', b'python -B scripts/pack.py check')]):
+                self.assertIsNone(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE))
+
+    def settings_fixture(self, command):
+        return {'hooks': {'SessionStart': [{'hooks': [{'type': 'command', 'command': command,
+                                                      'timeout': 60}]}]},
+                'permissions': {'allow': ['unchanged permission']}}
+
+    def test_settings_focus_only_exact_portable_hook_command_change(self):
+        before = self.settings_fixture(run_tests.SESSION_CHECK_OLD)
+        after = self.settings_fixture(
+            'cd "$CLAUDE_PROJECT_DIR" && (python_cmd=$(command -v python || command -v python3) '
+            '&& "$python_cmd" -B scripts/pack.py check 2>&1 || echo '
+            '"pack.py check FAILED: the repo is not green. Tell the user and fix or report this before other work.")')
+        with mock.patch.object(run_tests, 'git', side_effect=[b'.claude/settings.json\0',
+                json.dumps(before).encode(), json.dumps(after).encode()]):
+            self.assertEqual(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE), run_tests.MAINTENANCE_TESTS)
+        with mock.patch.object(run_tests, 'git', return_value=b'.claude/settings.json\0'):
+            self.assertIsNone(run_tests.focused_patterns(self.BASE))
+        for extra in ({'permissions': {'allow': ['changed permission']}}, {'unexpected': True}):
+            invalid = dict(after, **extra)
+            with self.subTest(extra=extra), mock.patch.object(run_tests, 'git', side_effect=[
+                    b'.claude/settings.json\0', json.dumps(before).encode(), json.dumps(invalid).encode()]):
+                self.assertIsNone(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE))
+
+    def test_settings_old_command_or_structure_mismatch_keeps_full_coverage(self):
+        for before in (self.settings_fixture('unexpected old command'), {}, {'hooks': {'SessionStart': []}}):
+            with self.subTest(before=before), mock.patch.object(run_tests, 'git', side_effect=[
+                    b'.claude/settings.json\0', json.dumps(before).encode(), b'{}']), \
+                    contextlib.redirect_stderr(io.StringIO()):
                 self.assertIsNone(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE))
 
     def test_unknown_product_and_card_paths_keep_complete_coverage(self):
