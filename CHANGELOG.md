@@ -1,5 +1,7 @@
 # Changelog
 
+Windows maintenance: reserve the untracked policy validation environment as local material while retaining checks on tracked files; document native Windows candidate installation, updates and platform limits. Focus PR verification for this maintenance scope without removing explicit full-suite execution.
+
 ## 1.5
 
 - Clarify the fictional incident contact and an available in-person escalation route. Preserve results from the original, underspecified fixture separately.
