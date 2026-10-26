@@ -1,6 +1,6 @@
 # Validation status
 
-This repository ships advisory instruction materials. Structural checks and card evaluations do not establish that a host discovers, routes, delegates to, or safely runs them. The current 1.5 candidate has no published release. The release target is Claude Code and Codex on the Mac Studio; both Mac acceptances are pending. Windows verification and enablement were deferred by the owner on 2026-10-24 and are not claimed. All tests for this release must execute on that Mac Studio.
+This repository ships advisory instruction materials. Structural checks and card evaluations do not establish that a host discovers, routes, delegates to, or safely runs them. The current 1.5 candidate has no published release. The release target is Claude Code and Codex on the Mac Studio; both Mac acceptances are pending. The owner authorized Windows compatibility repairs and candidate availability on 2026-10-26, superseding the earlier Windows deferral. Focused maintenance and discovery results are in [Windows](WINDOWS.md); full behavioral acceptance and stable release acceptance remain pending. The earlier Mac Studio release-evaluation scope is unchanged.
 
 ## Current 1.5 development evidence
 
@@ -122,7 +122,7 @@ Release evaluation has separate gates; passing card checks alone is insufficient
 - Boundary cases, sensitive-role tasks, changed-card failures, and release-critical operational cases require three consecutive successful independent runs. Report first-attempt results and three-run stability separately.
 - Review at least one useful output per family, every critical violation, and every grading disagreement. An unavailable reviewer or device remains pending.
 
-Host acceptance is a separate gate: it covers discovery, explicit invocation, routing, lead-to-worker handoff, approved skill use, model overrides, permissions, and installation/update/removal on the release-scoped Mac Studio. Windows is deferred and remains unverified. Use traces and before/after fixture state to establish tool use; response headings or cost are not evidence of tool use.
+Host acceptance is a separate gate: it covers discovery, explicit invocation, routing, lead-to-worker handoff, approved skill use, model overrides, permissions, and installation/update/removal on the release-scoped Mac Studio. Windows candidate installation and discovery are observed separately in [Windows](WINDOWS.md); complete behavioral acceptance remains unverified. Use traces and before/after fixture state to establish tool use; response headings or cost are not evidence of tool use.
 
 ## Archived host observations
 

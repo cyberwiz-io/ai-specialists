@@ -74,6 +74,28 @@ class TestMaintenanceScope(unittest.TestCase):
                     b'.gitignore\0', before, after]):
                 self.assertEqual(run_tests.focused_patterns(self.BASE), expected)
 
+    def test_hook_python_replacement_is_exact_and_bootstrap_only(self):
+        before = b'prefix python3 -B scripts/pack.py check suffix\n'
+        expected = before.replace(b'python3 -B scripts/pack.py check', b'python -B scripts/pack.py check')
+        for name in run_tests.BOOTSTRAP_HOOK_PATHS:
+            with self.subTest(name=name), mock.patch.object(run_tests, 'git', side_effect=[
+                    (name + '\0').encode(), before, expected]):
+                self.assertEqual(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE),
+                                 run_tests.MAINTENANCE_TESTS)
+            with self.subTest(name=name), mock.patch.object(run_tests, 'git', return_value=(name + '\0').encode()):
+                self.assertIsNone(run_tests.focused_patterns(self.BASE))
+            for invalid in (before, expected + b'other change\n', expected.replace(b'suffix', b'altered')):
+                with self.subTest(name=name, invalid=invalid), mock.patch.object(run_tests, 'git', side_effect=[
+                        (name + '\0').encode(), before, invalid]):
+                    self.assertIsNone(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE))
+
+    def test_hook_replacement_requires_exactly_one_old_command(self):
+        for before in (b'no check command', b'python3 -B scripts/pack.py check\n' * 2):
+            with self.subTest(before=before), mock.patch.object(run_tests, 'git', side_effect=[
+                    b'.claude/settings.json\0', before,
+                    before.replace(b'python3 -B scripts/pack.py check', b'python -B scripts/pack.py check')]):
+                self.assertIsNone(run_tests.focused_patterns(run_tests.BOOTSTRAP_BASE))
+
     def test_unknown_product_and_card_paths_keep_complete_coverage(self):
         for name in ('catalog/security/threat-modeler.md', 'scripts/packlib/config.py',
                      'scripts/packlib/source.py',

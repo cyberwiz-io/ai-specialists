@@ -16,11 +16,12 @@ MAINTENANCE_SCOPE_API = 1
 BOOTSTRAP_BASE = 'c24b434e0e0c867e95956c475ed5c64bd6be64ae'
 MAINTENANCE_PATHS = {
     '.gitignore', 'CHANGELOG.md', 'CONTRIBUTING.md',
-    'docs/INSTALL.md', 'docs/VALIDATION.md', 'docs/WINDOWS.md', 'README.md',
+    'docs/INSTALL.md', 'docs/VALIDATION.md', 'docs/WINDOWS.md', 'docs/HOST-ACCEPTANCE.md', 'README.md',
     'adapters/codex/README.md', 'config/modules.json',
     'config/module-map.json', 'tests/test_source.py',
 }
 BOOTSTRAP_PATHS = {'.github/workflows/check.yml', 'scripts/run_tests.py', 'tests/test_run_tests.py'}
+BOOTSTRAP_HOOK_PATHS = {'.claude/settings.json', '.claude/CLAUDE.md'}
 MAINTENANCE_TESTS = ('test_source.py', 'test_run_tests.py')
 
 
@@ -41,9 +42,16 @@ def focused_patterns(base):
             raise ValueError('base must be a full commit SHA')
         names = set(git('diff', '--name-only', '--no-renames', '-z', base, 'HEAD')
                     .decode('utf-8').rstrip('\0').split('\0')) - {''}
-        allowed = MAINTENANCE_PATHS | (BOOTSTRAP_PATHS if base == BOOTSTRAP_BASE else set())
+        allowed = MAINTENANCE_PATHS | (BOOTSTRAP_PATHS | BOOTSTRAP_HOOK_PATHS
+                                      if base == BOOTSTRAP_BASE else set())
         if not names or not names <= allowed:
             return None
+        for name in names & BOOTSTRAP_HOOK_PATHS:
+            before = git('show', base + ':' + name)
+            after = git('show', 'HEAD:' + name)
+            old = b'python3 -B scripts/pack.py check'
+            if before.count(old) != 1 or after != before.replace(old, b'python -B scripts/pack.py check', 1):
+                return None
         if '.gitignore' in names:
             before = git('show', base + ':.gitignore')
             after = git('show', 'HEAD:.gitignore')
