@@ -6,7 +6,7 @@ A library of 124 specialist instruction cards in 17 families, plus a coordinator
 
 ## Install options
 
-These are candidate install instructions. Current Mac Studio acceptance for Claude Code and Codex is pending; Windows verification and enablement are deferred by the owner, and no 1.5 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
+These are candidate install instructions. Current Mac Studio acceptance for Claude Code and Codex is pending; Windows candidate installation and discovery are observed (see [Windows](docs/WINDOWS.md)), and no 1.5 release has been published. The download links below are kept for the planned release; usable release downloads will exist only after publication and verification.
 
 | Tool | Command or step |
 | --- | --- |
@@ -72,7 +72,7 @@ Humans and AI agents should begin with the [repository map](REPO-MAP.md), which 
 - Security, finance, people and HR, and legal and compliance cards are defensive or educational support for material you supply. They are not professional advice and make no claim of compliance or certification. Consult a qualified person for consequential decisions.
 - Research, image generation, file exports, memory, and separate review contexts depend on the host. Missing capabilities should produce a smaller agreed package, not pretend outputs.
 - Switching roles or starting a fresh context with the same actual model does not provide independent review. Nontrivial results need a different actual reviewer model and an exact artifact/version; otherwise report BLOCKED_REVIEW.
-- Current Mac Studio acceptance for Claude Code and Codex is pending. Windows is deferred and unverified. Older smoke tests, evaluations, and other-host observations are historical evidence only and do not establish current support. No release has been published for this candidate. See [Validation status](docs/VALIDATION.md).
+- Current Mac Studio acceptance for Claude Code and Codex is pending. Windows candidate installation and discovery are observed; complete behavioral acceptance remains pending. Older smoke tests, evaluations, and other-host observations are historical evidence only and do not establish current support. No release has been published for this candidate. See [Validation status](docs/VALIDATION.md).
 - The project has no accounts, connectors, telemetry, or model service. Your chosen host may process information in the cloud and has its own usage limits and data policies. Never supply credentials or private customer data to this pack.
 
 ## License
