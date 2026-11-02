@@ -240,7 +240,8 @@
     "directories": [
       ".claude/skills",
       ".agents/skills",
-      ".codex"
+      ".codex",
+      ".venv-policy"
     ],
     "files": [
       ".claude/settings.local.json",

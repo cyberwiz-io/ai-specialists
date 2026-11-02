@@ -58,6 +58,9 @@ By contributing, you agree to license your changes under the license applying to
 
 ## Engineering policy validation
 Pack build/test tooling remains standard-library only. Before delivery, create a
-separate venv with Python 3.9+ and install PyYAML==6.0.3. Use that environment to run
+task-scoped venv outside the checkout (under the native temporary directory)
+with Python 3.9+ and install PyYAML==6.0.3. Record its exact path and remove
+only that environment after its last use, subject to native permissions. An
+existing cleanup denial must be reported, never bypassed. See [Windows](docs/WINDOWS.md). Use that environment to run
 python .engineering/check.py and python -m unittest discover -s .engineering -p 'test_*.py'.
 Do not commit the environment. GitHub's Engineering policy workflow performs both.

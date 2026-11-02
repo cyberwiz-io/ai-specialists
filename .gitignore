@@ -9,3 +9,4 @@ campaigns/
 profiles/
 .claude/settings.local.json
 plugins/*/evals/results/
+.venv-policy/
